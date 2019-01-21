@@ -21,9 +21,11 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    "no-tabs":"off",
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "indent": ["error", 4, {"SwitchCase": 1}],
   }
 }
