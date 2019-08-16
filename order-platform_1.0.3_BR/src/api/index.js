@@ -1,7 +1,7 @@
 
 import Env from './env';
 import axios from 'axios'
-
+import Qs from 'qs'
 axios.defaults.withCredentials = true;
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';//配置请求头
@@ -39,7 +39,11 @@ export const POST = (url, params) => {
 
   return axios.post(`${url}`, params).then(res => res.data)
 }
-
+export const POSTS = (url, params) => {
+  
+    return axios.post(`${url}`, Qs.stringify(params)).then(res => res.data)
+  }
+  
 export const GET = (url, params) => {
   return axios.get(`${url}`, {params: params}).then(res => res.data)
 }

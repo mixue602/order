@@ -4,6 +4,9 @@
             <el-col :span="12" data-before="退换货单号：" class="si__base__inner">
                 {{returnExchangeDetail.returnRequestBaseInfoDto.returnRequestId}}
             </el-col>
+            <el-col :span="12" data-before="原店名称：" class="si__base__inner" v-if="showclosed && returnExchangeDetail.addressInfo.storeClosedFlag ==1">
+                {{returnExchangeDetail.addressInfo.originalStoreName}}（已闭店）
+            </el-col>
             <el-col :span="12" data-before="退换货方式：" class="si__base__inner">
                 {{returnExchangeDetail.returnRequestBaseInfoDto.returnRequestMethod}}
             </el-col>
@@ -41,6 +44,18 @@
                 {{returnExchangeDetail.addressInfo.pickupDateTime}}
             </el-col>
             <!--换货增加 start-->
+            <el-col :span="12" data-before="新货安装方式：" class="si__base__inner"
+                    v-if="returnExchangeDetail.dtoArchiveInstall && returnExchangeDetail.dtoArchiveInstall.installMethodDesc">
+                {{returnExchangeDetail.dtoArchiveInstall.installMethodDesc}}
+            </el-col>
+            <el-col :span="12" data-before="新货安装时间：" class="si__base__inner"
+                    v-if="returnExchangeDetail.dtoArchiveInstall && returnExchangeDetail.dtoArchiveInstall.installDetailDateTime">
+                {{returnExchangeDetail.dtoArchiveInstall.installDetailDateTime}}
+            </el-col>
+            <el-col :span="12" data-before="不安装原因：" class="si__base__inner"
+                    v-if="returnExchangeDetail.dtoArchiveInstall && returnExchangeDetail.dtoArchiveInstall.notInstallReasonName">
+                {{returnExchangeDetail.dtoArchiveInstall.notInstallReasonName}}
+            </el-col>
             <el-col :span="12" data-before="换货配送地址：" class="si__base__inner"
                     v-if="returnExchangeDetail.returnRequestBaseInfoDto.returnType == 2 && returnExchangeDetail.returnRequestBaseInfoDto.returnRequestMethodCode == 1">
                 {{returnExchangeDetail.addressInfo.replaceShipDetailAddress}}
@@ -62,7 +77,8 @@
     import API from '@/api/order-service/applyService';
     export default {
         props: {
-            "returnExchangeDetail": {}
+            "returnExchangeDetail": {},
+            "showclosed":false,
         },
         data () {
             return {

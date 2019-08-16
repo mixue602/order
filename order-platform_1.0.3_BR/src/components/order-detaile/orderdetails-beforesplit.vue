@@ -57,6 +57,9 @@
                                             <th class="is-center" width="90">
                                                 <div class="cell">价格</div>
                                             </th>
+                                            <th class="is-center" width="90">
+                                                <div class="cell">支付金额</div>
+                                            </th>
                                             <th class="is-center" width="60">
                                                 <div class="cell">数量</div>
                                             </th>
@@ -98,11 +101,12 @@
                                     <tbody class="el-table__body" v-for="(prdItem,index) in shippingItem.commerceItemList" :key="prdItem.id">
                                         <tr class="el-table__row">
                                             <td class="is-center">
-                                                <i v-if='prdItem.salesPromotionList.length !=0' class="shippingbtn_icon" @click="prdItem.show=!prdItem.show" v-bind:class="prdItem.show ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline'"></i>
+                                                <i v-if='prdItem.salesPromotionList.length !=0 || prdItem.remark || prdItem.storeEmpId || (prdItem.cardList && prdItem.cardList.length !=0)' class="shippingbtn_icon" @click="prdItem.show=!prdItem.show" v-bind:class="prdItem.show ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline'"></i>
                                             </td>
                                             <td class="is-center">
                                                 <div class="cell ellipsis" :title="prdItem.displayName">
                                                     <div>
+                                                    <el-tag type="danger" v-if="response.fullDepositFlag ==1" size="mini">全额订金</el-tag>
                                                     <el-tag type="danger" v-if="prdItem.type ==2" size="mini">赠品</el-tag>
                                                     <el-tag type="danger" v-if="prdItem.isBarterGoods ==1" size="mini">换购</el-tag>
                                                     <el-tag  v-if="prdItem.packageTab ==1" size="mini">套装</el-tag>
@@ -119,9 +123,18 @@
                                                     <div>售价：{{prdItem.salePrice}}</div>
                                                     <div>换购价：{{prdItem.promPrice}}</div>
                                                 </div>
+                                                <!-- 节能补贴 -->
+                                                <div class="cell" v-else-if="prdItem.itemAllowanceRatio">
+                                                    <div>{{prdItem.salePrice}}</div>
+                                                    <div>节能补贴比例：{{prdItem.itemAllowanceRatio}}</div>
+                                                </div>
+                                                <!-- 节能补贴end -->
                                                 <div class="cell" v-else>
                                                     {{prdItem.salePrice}}
                                                 </div> 
+                                            </td>
+                                            <td class="is-center">
+                                                <div class="cell">{{prdItem.realPayAmount}}</div>
                                             </td>
                                             <td class="is-center">
                                                 <div class="cell">{{prdItem.quantity}}</div>
@@ -160,11 +173,38 @@
                                                 <div class="cell">{{prdItem.supplier}}</div>
                                             </td>
                                         </tr>
-                                        <tr class="el-table__row" style="background:#EBEEF5;" v-if='prdItem.show && prdItem.salesPromotionList.length !=0'>
-                                            <td colspan="13">
-                                                <div class="ml40">
-                                                    <div class="paymentmesg" v-for="salesItem in prdItem.salesPromotionList" :key="salesItem.id"><span class="mr20">{{salesItem.promotionName}}：{{salesItem.promotionDesc}}</span></div>
+                                        <tr class="el-table__row" style="background:#EBEEF5;" v-if='(prdItem.show && prdItem.salesPromotionList.length !=0) || (prdItem.show && prdItem.remark) || (prdItem.show && prdItem.storeEmpId) || (prdItem.show && prdItem.cardList && prdItem.cardList.length !=0)'>
+                                            <td colspan="17">
+                                                <div class="ml40" v-if='prdItem.show && prdItem.salesPromotionList.length !=0'>
+                                                    <div class="paymentmesg" v-for="salesItem in prdItem.salesPromotionList" :key="salesItem.id">
+                                                        <div class="mr20" v-if="salesItem.promotionCouponType">{{salesItem.promotionName}}：赠{{salesItem.promotionDesc}}元<span v-if="salesItem.promotionCouponType =='78'">营销券</span><span v-else>美券</span>
+                                                        <span v-if="salesItem.giftCouponItemNum">x {{salesItem.giftCouponItemNum}}</span>
+                                                        </div>
+                                                        <div v-else class="mr20">{{salesItem.promotionName}}：{{salesItem.promotionDesc}} <span v-if="salesItem.giftCouponItemNum">x {{salesItem.giftCouponItemNum}}</span></div>
+                                                        
+                                                    </div>
                                                     <div class="gifttipsmesg">赠美豆在订单收款后发放至顾客的会员账户</div>
+                                                </div>
+                                                <!-- 运营商 -->
+                                                <div class="ml40" v-if="prdItem.cardList && prdItem.cardList.length >0 ">  
+                                                    <div class="paymentmesg1">
+                                                        <span class="title" style="flex:0 0 40px;text-align:left">赠卡：</span>
+                                                        <div>
+                                                            <p v-for="(carditem,index) in (prdItem.cardList)" :key="carditem.id">
+                                                                <span v-if="carditem.cardType == '0'" class="mr20">蓝卡</span>
+                                                                <span v-else class="mr20">机价补贴卡</span>
+                                                                <span class="mr20">价值：{{carditem.cardAmount}}</span> 
+                                                                <span class="mr20">关联卡号：{{carditem.cardMobileNo}}</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>                         
+                                                </div>
+                                                <!-- 运营商 end-->
+                                                <div class="ml40" v-if="prdItem.remark">
+                                                    <div class="paymentmesg"><span class="mr20">备注：{{prdItem.remark}}</span></div>
+                                                </div>
+                                                <div class="ml40" v-if="prdItem.storeEmpId">
+                                                    <div class="paymentmesg"><span class="mr20">带单导购员：{{prdItem.storeEmpId}}</span></div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -326,6 +366,7 @@
                 </div>   
             </el-collapse-item>
             <el-collapse-item title="发票信息" name="3" v-if="response.storeFlag!=1">
+                <!-- storeFlag：1是联营 0是自营 -->
                 <!-- 发票信息 -->
                 <div class="ordercont_box">
                     <div class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition el-table--small" style="overflow-x:auto;">                          
@@ -429,6 +470,25 @@
                     <div class="ordercont_box" v-if="!response.orderHistoryList">暂无信息</div>
                 </div>                
             </el-collapse-item>
+            <el-collapse-item title="运营商使用卡信息" name="5" v-if="response.useCardList != null && response.useCardList.length">
+                <!-- 运营商使用卡信息 -->    
+                <div class="ordercont_box" v-if="response.useCardList != null && response.useCardList.length">
+                    <el-table :data="response.useCardList" border :show-header="true" size="small">
+                        <el-table-column prop="cardMobileNo" label="关联手机号" align="center"></el-table-column>
+                        <el-table-column prop="cardName" label="卡类型" align="center">
+                            <!-- <template slot-scope="scope">
+                                <span v-if="scope.row.cardType == '0'">运营商蓝卡</span>
+                                <span v-else>运营商机价补贴卡</span>
+                            </template> -->
+                        </el-table-column>
+                        <el-table-column prop="cardAmount" label="价值" align="center">
+                            <template slot-scope="scope">
+                                 <span class="fontM">￥{{scope.row.cardAmount}}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </el-collapse-item>
         </el-collapse>
 
     </div>
@@ -477,18 +537,34 @@
                 <span class="label">商品总价：</span> 
                 <div class="info-rcol">¥{{response.orderAmount}}</div> 
             </div>
+            <div class="item mb10" v-if="response.storeJoinDisAmount">
+                <span class="label">新零售店折扣券：</span> 
+                <div class="info-rcol">¥{{response.storeJoinDisAmount}}</div> 
+            </div>
             <div class="item mb10" v-if="response.discountAmount">
                 <span class="label">折扣优惠：</span> 
                 <div class="info-rcol">- ¥{{response.discountAmount}}</div> 
             </div>
             <div class="item" v-if="response.gomeCouponAmount">
-                <span class="label">使用美券：</span> 
+                <span class="label">使用券：</span> 
                 <div class="info-rcol">- ¥{{response.gomeCouponAmount}}</div> 
             </div>
             <div class="item mb10" v-if="response.gomeBeansAmount">
                 <span class="label">美豆金额：</span> 
                 <div class="info-rcol">- ¥{{response.gomeBeansAmount}}</div> 
             </div>
+            <!-- 订金翻倍 -->
+            <div class="item mb10" v-if="response.useDepositAmount && response.useDepositAmount != '0.00'">
+                <span class="label">使用订金：</span> 
+                <div class="info-rcol">- ¥{{response.useDepositAmount}}</div> 
+            </div>
+            <!-- 订金翻倍end -->
+            <!-- 节能补贴 -->
+            <div class="item mb10" v-if="response.allowanceRatioAmount && response.allowanceRatioAmount != '0.00'">
+                <span class="label">节能补贴：</span> 
+                <div class="info-rcol">- ¥{{response.allowanceRatioAmount}}</div> 
+            </div>
+            <!-- 节能补贴end -->
             <div v-if="response.depositExpandAmount">
                 <div class="item" v-if="response.depositAmount">
                     <span class="label">定金金额：</span> 
@@ -509,6 +585,16 @@
                     <div class="info-rcol">¥{{response.balanceAmount}}</div> 
                 </div>
             </div>
+            <!-- 运营商 -->
+            <div class="item mb10" v-if="response.useBuleCardAmount && response.useBuleCardAmount !='0.00'">
+                <span class="label">使用蓝卡：</span> 
+                <div class="info-rcol">- ¥{{response.useBuleCardAmount}}</div> 
+            </div>
+            <div class="item mb10" v-if="response.useAllowanceCardAmount && response.useAllowanceCardAmount !='0.00'">
+                <span class="label">使用补贴卡：</span> 
+                <div class="info-rcol">- ¥{{response.useAllowanceCardAmount}}</div> 
+            </div>
+             <!-- 运营商 end-->
             <div class="item" v-for="(item, index) in response.paymentGroupList" :key="item.id">
                 <span class="label">{{item.paymentMethodName}}：</span> 
                 <div class="info-rcol">¥{{item.payAmount}}</div> 
@@ -524,17 +610,18 @@
             <el-button type="primary" size="small"  @click="selectedtype" v-if="LOGINDATA.orderplatform_orderBeforesplit_select && response.canSelectBizType ==1">选择机型</el-button>
             <!-- 一码付 -->
             <div class="inline" v-if="response.storeFlag==1">
-                <el-button type="info" size="small" disabled @click="payFor" v-if="LOGINDATA.orderplatform_orderBeforesplit_receivables && response.payFlag==1">立即收款</el-button>   
+                <el-button type="info" size="small" disabled @click="payFor" v-if="LOGINDATA.orderplatform_orderBeforesplit_receivables && response.payFlag==1 && response.payType !='门店付款'">立即收款</el-button>   
                 <el-button type="info" size="small" disabled  @click="payFor" v-else-if="LOGINDATA.orderplatform_orderBeforesplit_deposit && response.payFlag==2">收定金</el-button>
                 <el-button type="info" size="small" disabled  @click="payFor" v-else-if="LOGINDATA.orderplatform_orderBeforesplit_finalpayment && response.payFlag==3">收尾款</el-button>
                 <p class="red line32" v-if="(LOGINDATA.orderplatform_orderBeforesplit_receivables && response.payFlag==1) || (LOGINDATA.orderplatform_orderBeforesplit_deposit && response.payFlag==2) || (LOGINDATA.orderplatform_orderBeforesplit_finalpayment && response.payFlag==3)">请前往收银台去支付！</p>
+                
             </div>
             <div class="inline" v-else>
-                <el-button type="primary" size="small" @click="payFor" v-if="LOGINDATA.orderplatform_orderBeforesplit_receivables && response.payFlag==1">立即收款</el-button>   
+                <el-button type="primary" size="small" @click="payFor" v-if="LOGINDATA.orderplatform_orderBeforesplit_receivables && response.payFlag==1 && response.payType !='门店付款'">立即收款</el-button>   
                 <el-button type="primary" size="small"  @click="payFor" v-else-if="LOGINDATA.orderplatform_orderBeforesplit_deposit && response.payFlag==2">收定金</el-button>
                 <el-button type="primary" size="small"  @click="payFor" v-else-if="LOGINDATA.orderplatform_orderBeforesplit_finalpayment && response.payFlag==3">收尾款</el-button>
             </div>
-            
+            <p class="red line32" v-if="(LOGINDATA.orderplatform_orderBeforesplit_receivables && response.payFlag==1) && response.payType =='门店付款' && (response.useDepositAmount && response.useDepositAmount != '0.00')">因订金是门店款台付款，请前往门店款台付款！</p>
         </div>
     </div>
     <!-- 选择机型弹层 -->
@@ -646,11 +733,13 @@
             </el-form-item>
             <el-form-item label="发票抬头：" class="is-required">
                 <span class="span-info self-select-box"  @click="selectHead('0')" :class="headType!='1'?'active':''"  nstyle="margin-right:12px;">个人<em data-v-5cd5f4e7="" class="select-icon"></em></span>
-                <span class="span-info self-select-box" @click="selectHead('1')" :class="headType=='1'?'active':''" >单位<em data-v-5cd5f4e7="" class="select-icon"></em></span>
+                
+                <span class="span-info self-select-box" style="cursor:no-drop" v-if="allowance">单位<em data-v-5cd5f4e7="" class="select-icon"></em></span>
+                <span class="span-info self-select-box" v-else @click="selectHead('1')" :class="headType=='1'?'active':''" >单位<em data-v-5cd5f4e7="" class="select-icon"></em></span>
             </el-form-item>
             <!-- ''表示还没有填过发票信息，'0'表示默认发票信息是个人 '1'表示默认发票是单位 -->
             <div v-show="headType!='1'">
-                <invoicePersonel @getInvoice="getInvoice" :invoiceInfo="invoicePersonel.invoice"  :invoiceInfo2="invoicePersoneloriginal" :originaltel="originaltel" ref="clear"></invoicePersonel>
+                <invoicePersonel :cardFlag="response.cardFlag" @getInvoice="getInvoice" :invoiceInfo="invoicePersonel.invoice" :allowance="allowance"  :invoiceInfo2="invoicePersoneloriginal" :originaltel="originaltel" ref="clear"></invoicePersonel>
             </div>
             <div  v-show="headType=='1'">
                 <invoiceUnit @getInvoice="getInvoice" :invoiceInfo="invoiceUnit.invoice" :invoiceInfo2="invoiceUnitoriginal" :originaltel="originaltel" ref="clear1"></invoiceUnit>
@@ -673,8 +762,10 @@
     export default{
         data(){
             return {
+                allowance:false,//节能补贴标示
                 orderId: this.$route.query.orderId,
                 storeCode: this.$route.query.storeCode,
+                directorSearchType:this.$route.query.directorSearchType,
                 openstate:false,
                 dialogVisible: false,//取消配送单弹层变量
                 delateorderVisible:false,//删除订单弹层变量
@@ -764,10 +855,14 @@
             },
             manageInit() {//获取页面数据的请求
                 var _this = this;
-                API.orderdetailsbeforesplit({
+                var parms={
                     orderId: this.orderId,
-                    storeCode: this.storeCode
-                }).then(function(data) {
+                    storeCode: this.storeCode,
+                };
+                if(this.directorSearchType){
+                    parms.directorSearchType=this.directorSearchType
+                };
+                API.orderdetailsbeforesplit(parms).then(function(data) {
                     if(data.success && data.response !=null){
                         data.response.shippingGroupList.forEach(function(item){
                             item.showbtn=false;//查看收货人电话
@@ -800,11 +895,24 @@
                                 _this.invoicePersonel.invoice={};
                                 _this.invoiceUnitoriginal = JSON.parse(JSON.stringify(data.response.invoiceInfoList[0]));
                                 _this.invoicePersoneloriginal={};
+                                //如果是单位，把会员姓名赋值给个人
+
+                                if(data.response.cardFlag =='0'){//非临时卡将会员姓名展示到个人发票抬头上
+                                    _this.invoicePersonel.invoice.invoiceHead = data.response.invoiceInfoList[0].memberName;
+                                }  
                             }; 
                             _this.invoiceOriginal = JSON.parse(JSON.stringify(data.response.invoiceInfoList));
                             _this.originaltel = data.response.invoiceInfoList[0].elecMobile;   
-                        };                 
+                        };    
+                        // data.response.useCardList=[
+                        //     {cardType:0,cardAmount:"34.00",cardMobileNo:'13425263521',cardName:'移动蓝卡'},
+                        //     {cardType:1,cardAmount:"134.00",cardMobileNo:'13425263521',cardName:'补贴卡'}, 
+                        // ]             
                         _this.response = data.response;
+                        //判断是不是节能补贴商品
+                        if(_this.response.allowanceRatioAmount && _this.response.allowanceRatioAmount != '0.00'){
+                            _this.allowance =true;
+                        }
                     }else{
                         _this.$message({
                             message: data.respMsg,
@@ -1078,6 +1186,13 @@
                     isTaxpayerNoNull=true;  //同上     
                     isMobileNull=that.invoicePersonel.isMobileNull;
                     isEmailNull=that.invoicePersonel.isEmailNull;
+                    if(head =='个人'){
+                        this.$message({
+                            message: '请联系服务台更改会员姓名解决',
+                            type: 'warning'
+                        });
+                        return false;
+                    }
                 }else if(that.headType=='1'){
                    // alert('单位')
                     if(that.invoiceUnit.invoice.elecMobile == that.originaltel){
@@ -1154,6 +1269,9 @@
                 }else{//单位
                     _this.invoiceUnit.invoice = JSON.parse(JSON.stringify(_this.invoiceOriginal[0]));
                     _this.invoicePersonel.invoice={};
+                    if(_this.response.cardFlag =='0'){//非临时卡将会员姓名展示到个人发票抬头上
+                        _this.invoicePersonel.invoice.invoiceHead = _this.response.invoiceInfoList[0].memberName;
+                    }  
                     
                 }; 
                 
@@ -1210,14 +1328,13 @@
             that.getPageData();
             window.getPayStates = function(val) {
                 that.isPayFor = false;
+                document.getElementById("payFrame").src = "";
                 //val.order_status 00','处理成功''92','取消订单;'93','订单关闭';'94',
                 //'订单退款'95';,'订单部分退款';'03','处理中';'90','订单初始化';01','处理失败                
                 if (val.order_status == '00') {
                     that.getPageData();
                 }
             };
-            
-           
         },
         filters: {
             formatDate(time) {
@@ -1635,6 +1752,9 @@ thead.has-gutter th{
 }
 .el-form-item--small .el-form-item__label,.line32{
     line-height: 32px;
+}
+.fontM{
+    font-family:"Microsoft Yahei";
 }
 </style>
 

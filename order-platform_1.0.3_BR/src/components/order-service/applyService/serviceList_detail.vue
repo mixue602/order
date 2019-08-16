@@ -7,7 +7,7 @@
             <commonServiceListSteps :returnExchangeDetail="returnExchangeDetail"></commonServiceListSteps>
             <!--步骤条 end-->
             <!--退换货信息 start-->
-            <commonServiceListInfo :returnExchangeDetail="returnExchangeDetail"></commonServiceListInfo>
+            <commonServiceListInfo :returnExchangeDetail="returnExchangeDetail" :showclosed="true"></commonServiceListInfo>
             <!--退换货信息 end-->
             <!--促销优惠抵扣明细 start-->
             <commonApplyServicePrice :returnExchangeDetail="returnExchangeDetail"></commonApplyServicePrice>
@@ -66,6 +66,19 @@
                 <p class="txt">温馨提示：退换货申请正在服务台处理或店长审核阶段，请及时提醒服务台/店长处理，处理审核成功后才可以进行商品退货/换货。</p>
             </el-row>
             <!--温馨提示 end-->
+            <!-- 其他信息 start -->
+            <el-row class="common-money-group cmg__applyservice" data-before="其他信息" v-if="returnExchangeDetail.returnRequestBaseInfoDto.shipId || returnExchangeDetail.returnRequestBaseInfoDto.replShipId">
+                <el-row class="cmg__deduct-money">
+                    <el-row class="cmg__deduct-money-item " data-before="原配送单号：" v-if="returnExchangeDetail.returnRequestBaseInfoDto.shipId">
+                        <el-button  @click="jumpto('/order/orderdetails',{'orderId':returnExchangeDetail.returnRequestBaseInfoDto.orderId,'storeCode':returnExchangeDetail.returnRequestBaseInfoDto.storeId,'shippingGroupId':returnExchangeDetail.returnRequestBaseInfoDto.shipId})" type="text" size="small">{{returnExchangeDetail.returnRequestBaseInfoDto.shipId}}</el-button>
+                    </el-row>
+                    <el-row class="cmg__deduct-money-item " data-before="换货配送单号：" v-if="returnExchangeDetail.returnRequestBaseInfoDto.replShipId">
+                        <el-button v-if="returnExchangeDetail.returnRequestBaseInfoDto.replsplitType ==1"  @click="jumpto('/order/orderdetails',{'orderId':returnExchangeDetail.returnRequestBaseInfoDto.replOrderId,'storeCode':returnExchangeDetail.returnRequestBaseInfoDto.storeId,'shippingGroupId':returnExchangeDetail.returnRequestBaseInfoDto.replShipId})" type="text" size="small">{{returnExchangeDetail.returnRequestBaseInfoDto.replShipId}}</el-button>
+                        <el-button v-if="returnExchangeDetail.returnRequestBaseInfoDto.replsplitType ==0"  @click="jumpto('/order/orderdetailsbeforesplit',{'orderId':returnExchangeDetail.returnRequestBaseInfoDto.replOrderId,'storeCode':returnExchangeDetail.returnRequestBaseInfoDto.storeId})" type="text" size="small">{{returnExchangeDetail.returnRequestBaseInfoDto.replShipId}}</el-button>
+                    </el-row>
+                </el-row>
+            </el-row>
+            <!-- 其他信息 end -->
         </el-main>
         <!--左侧退换货信息 end-->
         <!--右侧商品信息 start-->
@@ -117,6 +130,7 @@
                     isArriveCurrentNode: '',
                     returnRequestBaseInfoDto: {},
                     returnRequestNodeInfoList: [],
+                    returnRequestHistoryList:[],
                     userInfo: {},
                     addressInfo: {},
                     returnRefundAgent: {
@@ -159,6 +173,11 @@
             }
         },
         methods: {
+            jumpto(path, parms) {
+            //跳转页面
+                let routeData = this.$router.resolve({ path: path, query: parms });
+                window.open(routeData.href, "_blank");
+            },
             //查询退换货详情页
             queryReturnRequestDetailInfo () {
                 const params = {
@@ -177,8 +196,9 @@
                                     _this.returnExchangeDetail._steps = index + 1;
                                   }
                                 });
-                            }
-                            if (_this.returnExchangeDetail.returnRequestHistoryList && _this.returnExchangeDetail.returnRequestHistoryList.length > 2) {
+                            };
+                            if ((_this.returnExchangeDetail.returnRequestHistoryList && _this.returnExchangeDetail.returnRequestHistoryList.length > 2) || _this.returnExchangeDetail.returnRequestNodeInfoList[_this.returnExchangeDetail._steps].nodeName == '待审核中心审核') {
+                                
                                 _this.showProcessTip = false;
                             }
 

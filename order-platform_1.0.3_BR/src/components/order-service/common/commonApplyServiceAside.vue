@@ -11,7 +11,7 @@
                 <img class="product-img" :src="asideData.productDto.imageUrl">
               </div>
               <div class="product-txt">
-                <p class="product-txt-title">{{asideData.productDto.prodName}}</p>
+                <p class="product-txt-title"><el-tag type="danger" v-if="asideData.productDto.fullDepositItemFlag ==1" size="mini">全额订金</el-tag>{{asideData.productDto.prodName}}</p>
                 <p class="product-txt-price-num">
                   <span class="product-txt-price">{{(!asideData.productDto.price || asideData.productDto.price < 0) ? 0 : asideData.productDto.price | formatMoney}}</span>
                   <span class="product-txt-num">x{{asideData.productDto.quantity}}</span>

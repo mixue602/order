@@ -93,6 +93,7 @@ export default {
                         "skuNo":item.skuNo, //增值服务skuNo
                         "showGroupId":data.showGroupId.toString(),//增值服务的二级分组
                         "incrementNewPrice":Number(item.newPrice),//改后的价格，如果没改价格，传原价
+                        "canBuyWarrantyQuantity":item.canBuyWarrantyQuantity,//可补购延保数量
                         }
                         paramArray.push(paramInfo);
                     }

@@ -46,10 +46,18 @@
                                         <el-popover trigger="hover" placement="top">
                                             <p style="max-width:520px;word-break: break-all; word-wrap:break-word;">{{list.skuName}}</p>
                                             <div slot="reference" class="name-wrapper">
-                                                <div class="cell" v-if="list.type==0 || list.type==4">{{list.skuName}}</div>
+                                                <!-- <div class="cell" v-if="list.type==0 || list.type==4">{{list.skuName}}</div>
                                                 <div class="cell" v-else-if="list.type==2"><el-tag size="mini">套装</el-tag>{{list.skuName}}</div>
                                                 <div class="cell" v-else-if="list.type==3"><el-tag type="success" size="mini">预售</el-tag>{{list.skuName}}</div>
-                                                <div class="cell" v-else-if="list.type==5"><el-tag type="danger" size="mini">赠品</el-tag>{{list.skuName}}</div>
+                                                <div class="cell" v-else-if="list.type==5"><el-tag type="danger" size="mini">赠品</el-tag>{{list.skuName}}</div> -->
+                                                <el-tag v-if="orderDetail.isFullDeposit" type="danger" size="mini">全额订金</el-tag>
+                                                <div class="cell">
+                                                    
+                                                    <el-tag v-if="list.type==2" size="mini">套装</el-tag>
+                                                    <el-tag v-else-if="list.type==3" type="success" size="mini">预售</el-tag>
+                                                    <el-tag v-else-if="list.type==5" type="danger" size="mini">赠品</el-tag>
+                                                    {{list.skuName}}
+                                                </div>
                                                 <!-- <div class="cell" v-else-if="list.type==4"><el-tag type="info" size="mini">延保</el-tag>{{list.skuName}}</div> -->
                                             </div>
                                         </el-popover>
@@ -113,7 +121,7 @@
                     <span class="mr20">尾款金额：</span><span  style="float:right;font-family:'Microsoft Yahei'">¥{{orderDetail.balanceAmount}}</span>
                 </div>
                 <div v-if="orderDetail.guiderType==3 && orderDetail.balanceAmount==0">
-                    <span class="mr20">全额定金：</span><span  style="float:right;font-family:'Microsoft Yahei'">¥{{orderDetail.depositAmount}}</span>
+                    <span class="mr20">全额订金：</span><span  style="float:right;font-family:'Microsoft Yahei'">¥{{orderDetail.depositAmount}}</span>
                 </div>
                 <div v-if="orderDetail.guiderType==2">
                     <span class="mr20">套装总价：</span><span  style="float:right;font-family:'Microsoft Yahei'">¥{{orderDetail.packageAmount}}</span>
@@ -153,7 +161,7 @@
             </div>
             <div class="item" v-if="orderDetail.memberPhone">
                 <span class="label">会员电话：</span> 
-                <div class="info-rcol">{{orderDetail.memberPhone}}<el-button type="primary" size="mini" class="ml10" v-if="flag || LOGINDATA.orderplatform_orderpurchase_check" @click="seeNumber">查看</el-button></div> 
+                <div class="info-rcol">{{orderDetail.memberPhone}}<el-button type="primary" size="mini" class="ml10" v-if="flag && LOGINDATA.orderplatform_orderpurchase_check" @click="seeNumber">查看</el-button></div> 
             </div>
         </div>
         <div class="orderinfo">
@@ -178,6 +186,10 @@
             <div class="item" v-if="orderDetail.remark">
                 <span class="label" style="width:40px"></span> 
                 <div class="info-rcol" style="width:220px; padding-right:10px">{{orderDetail.remark}}</div> 
+            </div>
+            <div class="item" v-if="orderDetail.intermediaryId">
+                <span class="label" style="width:40px"></span> 
+                <div class="info-rcol" style="width:220px; padding-right:10px">带单导购员：{{orderDetail.intermediaryId}}</div> 
             </div>
         </div>
     </div> 

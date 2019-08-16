@@ -1,13 +1,11 @@
 <template>
-  <el-row class="input-group">
-    <el-form-item label="销售部门：" v-if="positionLevel && positionLevel != 5">
-      <el-button type="text" @click="showDialogTree()">请选择(默认全选)&nbsp;></el-button>
-      <div class="departmentLists" v-if="checkedTreeItems && checkedTreeItems.length > 0">
-          <span v-for="(item, index) in checkedTreeItems" :key="index">
-            ，{{item}}
-          </span>
-      </div>
-    </el-form-item>
+  <el-form-item label="销售部门：" v-if="positionLevel && positionLevel != 5" :style="{width:(treewidth ? settreewidth:'')}">
+    <el-button type="text" @click="showDialogTree()">请选择(默认全选)&nbsp;></el-button>
+    <div class="departmentLists" v-if="checkedTreeItems && checkedTreeItems.length > 0">
+        <span v-for="(item, index) in checkedTreeItems" :key="index">
+          ，{{item}}
+        </span>
+    </div>
     <!--选择全部销售部门弹窗 start-->
     <el-dialog title="销售部门" :visible.sync="dialogTree">
       <!--<el-input-->
@@ -34,15 +32,18 @@
         </span>
     </el-dialog>
     <!--选择全部销售部门弹窗 end-->
-
-  </el-row>
+  </el-form-item>
 </template>
 
 <script>
   import API from '@/api/order-service/salesReport'
   export default {
+    props:{
+      treewidth:false
+    },
     data () {
       return {
+        settreewidth:"451px",
         form: {
           salesOrgCode: '',
           storeCode: '',
@@ -56,12 +57,13 @@
         checkedTreeItems: [],
         checkedTreeKeys: [1],
         defaultProps: {
-          label: 'label',
+          label: 'name',
           children: 'children'
         },
         dialogTree: false,
         positionLevel: 5,
-        hasFilterText: false
+        hasFilterText: false,
+        gomeStoreFull:[],//销售门店数组
       }
     },
     created() {
@@ -81,19 +83,22 @@
       __queryHierarchy() {
         let _this = this;
         //点击弹窗发送请求获取销售部门数据，发送一次请求即可
-        API.queryHierarchy().then(response => {
+        //API.queryHierarchy().then(response => {
+        API.queryHierarchyNew().then(response => {
           if (response) {
             const _res = response.response;
+            this.gomeStoreFull = _res.list;
             this.positionLevel = _res.positionLevel;
             this.treeItems = [{
-              label: '全部选择',
+              name: '全部选择',
               id: 1,
-              children: this.getTreeByOne(_res.gomeStoreFull)
+              //children: this.getTreeByOne(_res.gomeStoreFull)
+              children: this.gomeStoreFull
             }];
           }
         });
       },
-      getTreeByOne(data){
+      /*getTreeByOne(data){
         let tree = this.getTree(data);
         return tree;
       },
@@ -126,7 +131,7 @@
           });
           return this.treeToArray(tree);
         }
-      },
+      },*/
       treeToArray(objs) {
         let arr = Object.getOwnPropertyNames(objs), _this = this;
         return arr.map(function (i) {

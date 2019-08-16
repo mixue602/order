@@ -42,11 +42,29 @@
                                             <div v-if="shippingItem.state=='已出库' && (shippingItem.auditState=='拒收申请待审核' || shippingItem.auditState=='拒收申请审核通过')" class="letterspace">{{shippingItem.auditState}}</div>
                                             <div v-else-if="shippingItem.state=='已拒收' && (shippingItem.auditState=='拒收待入库' || shippingItem.auditState=='商品已返回大库' || shippingItem.auditState=='拒收申请待审核')" class="letterspace">{{shippingItem.auditState}}</div>
                                             <div v-else class="letterspace">{{shippingItem.state}}</div>
-
-                                            <div v-if="shippingItem.state=='取消申请待审核'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip" x-placement="right-end">该订单正在取消待处理阶段，请及时联系服务台进行审核处理！<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
                                             <div v-if="shippingItem.state=='已出库' && shippingItem.auditState=='拒收申请待审核'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip1" x-placement="right-end">该订单促销已发放，需服务台审核处理后才可退款。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div> 
                                             <div v-else-if="shippingItem.state=='已拒收' && shippingItem.auditState=='拒收待入库'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip2" x-placement="right-end">拒收商品返回仓库后才可为您处理退款。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
                                             <div v-else-if="shippingItem.state=='已拒收' && shippingItem.auditState=='拒收申请待审核'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip1" x-placement="right-end">该订单促销已发放，需服务台审核处理后才可退款。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <!-- 支票订单解锁标识 0-未解锁不需要改档、1-已解锁需要修改档案 -->
+                                            
+                                            <!-- 加盟店代收款 -->
+                                            <div v-if="shippingItem.checkOrderNotUpdateArchiveTips ==0 && shippingItem.state=='取消申请待审核' && response.payMethod =='新零售店代收款' && response.payType =='门店付款' && shippingItem.storeFlag =='2'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip" x-placement="right-end">此订单为加盟商代收款类型，待加盟商打款后，财务系统进行校验通过方可自动解锁，订单才可进行改档并继续流转。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <!-- 加盟店代收款 未解锁-->
+                                            <div v-if="shippingItem.checkOrderNotUpdateArchiveTips ==0 && shippingItem.state=='待出库' && response.payMethod =='新零售店代收款' && response.payType =='门店付款' && shippingItem.storeFlag =='2'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip4" x-placement="right-end">此订单为加盟商代收款类型，待加盟商打款后，财务系统进行校验通过方可自动解锁，订单才可进行改档并继续流转。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <!-- 加盟店代收款 拆单后，待出库、有加盟店标识，配送单已解锁 需要改档-->
+                                            <div v-else-if="shippingItem.checkOrderNotUpdateArchiveTips ==1 && shippingItem.checkOrderUpdateArchiveFlag ==1 && shippingItem.state=='待出库' && response.payMethod =='新零售店代收款' && response.payType =='门店付款' && shippingItem.storeFlag =='2'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip4" x-placement="right-end">此订单为加盟商代收款类型，目前加盟商款项已到账，自提商品请联系顾客提货，集中配送商品请改档配送，带安商品请联系厂家送货安装。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <div v-else-if="shippingItem.state=='待出库' && shippingItem.checkOrderNotUpdateArchiveTips ==0" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip3" x-placement="right-end">此订单为支票支付，需财务进行校验，支票到账后系统自动解锁，订单会继续流转。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            
+                                            <!-- 支票订单不允许改档提示展示标识 0-展示  1-不展示-->
+                                            <div v-if="shippingItem.state=='待出库' && shippingItem.checkOrderUpdateArchiveFlag ==1" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip4" x-placement="right-end">此订单为支票支付，目前支票金额已到账，自提商品请联系顾客提货，集中配送商品请改档配送，带安商品请联系厂家送货安装。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <!-- 配送单自动取消标识 0-非自动取消、1-自动取消   -->
+                                            <div v-if="shippingItem.state=='取消申请待审核' && shippingItem.autoCancelFlag ==1" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip5" x-placement="right-end">此订单为支票支付，系统未在15天内收到支票到账信息，已自动取消订单，请联系财务更换支票，重新下单，并及时联系服务台进行审核处理！<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <div v-else-if="shippingItem.state=='已取消' && shippingItem.autoCancelFlag ==1" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip4" x-placement="right-end">此订单为支票支付，系统未在15天内收到支票到账信息，已自动取消订单，请联系财务更换支票，重新下单。<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <div v-else-if="shippingItem.state=='取消申请待审核'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip" x-placement="right-end">该订单正在取消待处理阶段，请及时联系服务台进行审核处理！<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
+                                            <!-- 全额订金订单 -->
+                                            <div v-if="shippingItem.fullDepositShipTips" class="fulldepositbox"><span>{{shippingItem.fullDepositShipTips}}；</span></div>
+                                            <!-- 在库转在途 -->
+                                            <div v-if="shippingItem.state=='在库转在途'" role="tooltip" id="el-tooltip-8106" aria-hidden="false" class="el-tooltip__popper is-light orderstatusTip5" x-placement="right-end">本订单商品已由在库改为在途，将不支持改档操作，待商品到货后方可支持改档<div x-arrow="" class="popper__arrow" style="top: 8px;"></div></div>
                                         </div>
                                         <div class="states_r" v-if="shippingItem.canCancel ==1 && LOGINDATA.orderplatform_orderDetaile_cancel">
                                             <el-button type="primary" v-if="shippingItem.shippingPromotion ==1" @click="shippingItem.dialogVisible = true" size="mini" >退货（取消配送单）</el-button>
@@ -73,15 +91,25 @@
                                             <div v-if="(shippingItem.state=='待出库')||(shippingItem.state=='已出库')">
                                             <el-tooltip placement="bottom" effect="custom">
                                                 <div slot="content" class="line24 ordertipcont">
-                                                    <p>物流派工后就不支持取消配送单了，如用户想退货，有以下两种情况操作：</p>
+                                                    <p>商品出库前支持取消，出库后，如用户想退货，根据大小件商品来确定，使用根据以下哪种情况进行操作：</p>
+                                                    <p class="bold">大件或物流配送：</p>
                                                     <p>1、物流派工后~商品出库前，如用户想退货，可做如下处理：</p>
                                                     <p class="indent20">a、联系物流取消派工后，刷新页面，会展示《退货（取消配送单）》按钮，点击后即可退货退款；</p>
-                                                    <p class="indent20">b、联系物流操作出库后，做拒收处理，即可退货退款</p>
+                                                    <p class="indent20">b、联系物流操作出库后，做拒收处理，即可退货退款;</p>
                                                     <p>2、商品出库后，如用户想退货，可做如下处理：</p>
                                                     <p class="indent20">a、出库后~妥投前，可联系物流做拒收处理；</p>
                                                     <p class="indent20">b、如已送至用户家，可让用户拒收货，或者让用户收货后在申请退货；</p>
+
+                                                    <p class="bold">小件或门店自提：</p>
+                                                    <p>1、商品出库后，如用户想退货，可做如下处理：</p>
+                                                    <p class="indent20">a、出库后~妥投前，联系门店或者用户收货后在申请退货；</p>
+                                                    <p class="indent20">b、如已取到货，可联系门店或者用户申请退货；</p>
+                                                    <p class="bold">厂家带安：</p>
+                                                    <p>1、出库后至妥投前，展示拒收订单按钮，此时需要先跟厂家人员进行确认，商品是否可以做拒收操作。</p>
+                                                    <p class="indent20">（1）如商品不支持拒收，只能等订单妥投后，由门店人员或者顾客自行联系厂家，做退货操作。</p>
+                                                    <p class="indent20">（2）如商品支持拒收，则可操作确认拒收按钮。</p>
+                                                    <p>2、订单妥投后，由门店人员或者顾客自行联系厂家，做退货操作。</p>
                                                     <p class="giftlink"><a :href="pagelink" title="" target="_blank">了解更多退货操作&gt;&gt;</a></p>
-                                                    
                                                 </div>
                                                 <el-button class="orderTipbtn">当前状态下，如何退货？</el-button>
                                             </el-tooltip>
@@ -132,14 +160,59 @@
                                             :data="shippingItem.commerceItemList"
                                             style="width: 100%">
                                             <el-table-column type="expand">
-                                                <template slot-scope="props" class="eeee">
+                                                <template slot-scope="props">
                                                     <el-form label-position="left" inline class="demo-table-expand" >
                                                         <div class="ml40" v-if="props.row.salesPromotionList && props.row.salesPromotionList.length >0 ">
-                                                            <div class="paymentmesg" v-for="(item,index) in (props.row.salesPromotionList)" :key="item.id" v-if="index<2"><span class="mr20">{{item.promotionName}}：{{item.promotionDesc}}</span></div>                            
+                                                            <div class="paymentmesg" v-for="(item,index) in (props.row.salesPromotionList)" :key="item.id">
+                                                                <div class="mr20" v-if="item.promotionCouponType">
+                                                                    {{item.promotionName}}：赠{{item.promotionDesc}}元
+                                                                    <span v-if="item.promotionCouponType =='78'">营销券</span>
+                                                                    <span v-else>美券</span><span v-if="item.giftCouponItemNum"> x {{item.giftCouponItemNum}}</span> 
+                                                                    <span  class="ml20" v-if="item.itemShareAmount">本商品分摊金额 -¥{{item.itemShareAmount}}</span>
+                                                                </div>
+                                                                <div v-else class="mr20">{{item.promotionName}}：{{item.promotionDesc}}          <span v-if="item.giftCouponItemNum">x {{item.giftCouponItemNum}}</span>
+                                                                    <span class="ml20" v-if="item.itemShareAmount">本商品分摊金额 -¥{{item.itemShareAmount}}</span>
+                                                                </div>
+                                                            </div>                            
                                                             <div class="gifttipsmesg">赠美豆在订单收款后发放至顾客的会员账户</div>
                                                             <div class="gifttipsmesg" v-for="(item,index) in (props.row.salesPromotionList)" :key="item.id" v-if="item.giftCouponItemNum>1">{{item.giftCouponItemNum}}件商品共同享受此促销</div>
                                                         </div>
-                                                        <div class="ml40" v-else>
+                                                        <div class="ml40" v-else-if="props.row.invoiceItemCategory && props.row.invoiceState==0"> 
+                                                             <div class="paymentmesg red" >{{props.row.invoiceItemCategory}}类商品不支持开具发票</div>
+                                                        </div>
+                                                        <!-- 运营商 -->
+                                                        <div class="ml40" v-if="props.row.cardList && props.row.cardList.length >0 ">  
+                                                            <div class="paymentmesg1">
+                                                                <span class="title" style="flex:0 0 40px;text-align:left">赠卡：</span>
+                                                                <div>
+                                                                    <p v-for="(carditem,index) in (props.row.cardList)" :key="carditem.id">
+                                                                        <span v-if="carditem.cardType == '0'" class="mr20">蓝卡</span>
+                                                                        <span v-else class="mr20">机价补贴卡</span>
+                                                                        <span class="mr20">价值：{{carditem.cardAmount}}</span> 
+                                                                        <span class="mr20">关联卡号：{{carditem.cardMobileNo}}</span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>                         
+                                                        </div>
+                                                        <!-- 订金翻倍 -->
+                                                        <div class="ml40" v-if="props.row.itemDepositDoubleAmount && props.row.itemDepositAmount && props.row.itemDepositDoubleAmount !='0.00'"> 
+                                                             <div class="paymentmesg" ><span class="mr20">订金抵扣：本商品订金抵扣{{props.row.itemDepositDoubleAmount}}元（实际使用订金{{props.row.itemDepositAmount}}元抵扣{{props.row.itemDepositDoubleAmount}}元）</span></div>
+                                                        </div>
+                                                         <div class="ml40" v-else-if="props.row.itemDepositAmount && props.row.itemDepositAmount !='0.00' "> 
+                                                             <div class="paymentmesg" ><span class="mr20">订金抵扣：本商品订金抵扣{{props.row.itemDepositAmount}}元</span></div>
+                                                        </div>
+                                                        <!-- 订金翻倍 end-->
+                                                        <div class="ml40" v-if="props.row.passCoupon"> 
+                                                             <div class="paymentmesg" ><span class="mr20">入场券：{{props.row.passCoupon}}</span></div>
+                                                        </div>
+                                                        <div class="ml40" v-if="props.row.remark"> 
+                                                             <div class="paymentmesg red" ><span class="mr20">备注：{{props.row.remark}}</span></div>
+                                                        </div>
+                                                        <!-- 带单提奖 -->
+                                                        <div class="ml40" v-if="props.row.storeEmpId"> 
+                                                             <div class="paymentmesg" ><span class="mr20">带单导购员：{{props.row.storeEmpId}}</span></div>
+                                                        </div>
+                                                        <div class="ml40" v-if="props.row.salesPromotionList.length ==0 && props.row.invoiceState !=0 && !props.row.remark && !props.row.passCoupon && props.row.itemDepositDoubleAmount =='0.00' && props.row.itemDepositAmount =='0.00' && !props.row.storeEmpId && !props.row.cardList.length">
                                                             <div class="paymentmesg1">暂无促销信息</div>
                                                         </div>
                                                     </el-form>
@@ -153,6 +226,7 @@
                                                 <template slot-scope="scope">
                                                     <div class="cell ellipsis" :title="scope.row.displayName">
                                                         <div>
+                                                        <el-tag type="danger" v-if="response.fullDepositFlag ==1" size="mini">全额订金</el-tag>
                                                         <el-tag type="danger" v-if="scope.row.type ==2" size="mini">赠品</el-tag>
                                                         <el-tag type="danger" v-if="scope.row.isBarterGoods ==1" size="mini">换购</el-tag>
                                                         <el-tag  v-if="scope.row.packageTab ==1" size="mini">套装</el-tag>
@@ -169,7 +243,7 @@
                                             </el-table-column>
                                             <el-table-column
                                             label="价格"
-                                            width="100"
+                                            width="150"
                                             align="center"
                                             prop="salePrice">
                                                 <template slot-scope="scope">
@@ -177,10 +251,22 @@
                                                         <div>售价：{{scope.row.salePrice}}</div>
                                                         <div>换购价：{{scope.row.promPrice}}</div>
                                                     </div>
+                                                    <!-- 节能补贴 -->
+                                                    <div class="cell" v-else-if="scope.row.itemAllowanceRatio">
+                                                        <div>{{scope.row.salePrice}}</div>
+                                                        <div>节能补贴比例：{{scope.row.itemAllowanceRatio}}</div>
+                                                    </div>
+                                                    <!-- 节能补贴end -->
                                                     <div class="cell" v-else>
                                                         {{scope.row.salePrice}}
                                                     </div>    
                                                 </template>
+                                            </el-table-column>
+                                            <el-table-column
+                                            label="支付金额"
+                                            align="center"
+                                            width="70"
+                                            prop="realPayAmount">
                                             </el-table-column>
                                             <el-table-column
                                             label="数量"
@@ -257,6 +343,8 @@
                                             <el-table-column
                                             label="操作"
                                             fixed="right"
+                                            width="100"
+                                            align="center"
                                             prop="desc">
                                                 <template slot-scope="scope">
                                                     <span v-if="scope.row.refundIdUrl != null"><a class="el-button--text" target="_blank" :href="scope.row.refundIdUrl">{{scope.row.refundId}}</a></span>
@@ -277,14 +365,20 @@
                                                         </div>  
                                                         <el-button  @click.stop="buyInsurance(scope.row,shippingItem)" v-if="LOGINDATA.orderplatform_orderDetaile_buyInsurance && scope.row.canBuyYanbao==1" size="small" type="text">购买延保</el-button>
                                                         <div><el-button size="small" v-if="LOGINDATA.orderplatform_orderDetaile_sendInsurance && scope.row.canSendWarrantyAgreement==1" type="text" @click="sendinsurance(shippingItem,scope.row)">发送协议</el-button></div>
-                                                         <div><el-button size="small" v-if="LOGINDATA.orderplatform_orderDetaile_printInsurance && scope.row.canPrintWarrantyAgreement==1" type="text" @click="jumpto('/order/insuranceContract',{'shippingGroupId':shippingItem.shippingGroupId,'commerceItemId':scope.row.commerceItemId})">打印协议</el-button></div>
+                                                        <div v-if="scope.row.skuType == 'ZJSB'"><el-button size="small" v-if="LOGINDATA.orderplatform_orderDetaile_printInsurance && scope.row.canPrintWarrantyAgreement==1" type="text" @click="jumptoSpburl">打印协议</el-button></div>
+                                                        <div v-else><el-button size="small" v-if="LOGINDATA.orderplatform_orderDetaile_printInsurance && scope.row.canPrintWarrantyAgreement==1" type="text" @click="jumpto('/order/insuranceContract',{'shippingGroupId':shippingItem.shippingGroupId,'commerceItemId':scope.row.commerceItemId})">打印协议</el-button></div>
+                                                        <div><el-button size="small" type="text" v-if="scope.row.canQueryInsuredInformation ==1" @click="showInsured(scope.row)">参保信息</el-button></div>
+                                                        <!-- <div><el-button size="small" type="text" @click="showInsured(scope.row)">参保信息</el-button></div> -->
                                                 </template>
                                             </el-table-column>
                                         </el-table>
                                     </div>
                                     <!-- 发票信息 -->
-                                    <div class="content_title" v-if="shippingItem.invoiceInfoList.length && response.storeFlag==0">发票信息</div>
-                                    <div v-if="response.storeFlag==0" class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition el-table--small" style="overflow-x:auto;">                          
+                                    <div class="content_title" v-if="shippingItem.invoiceInfoList.length && response.storeFlag==0">
+                                        发票信息
+                                        <span class="fulldepositbox1" v-if="shippingItem.fullDepositTurnSalesFlag==0 && shippingItem.fullDepositTurnSalesDate">{{shippingItem.fullDepositTurnSalesDate | formatDate1}} 转销售后可开具发票</span>
+                                    </div>
+                                    <div v-if="response.storeFlag==0 && shippingItem.invoiceInfoList.length" class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition el-table--small" style="overflow-x:auto;">                          
                                         <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" width="100%">
                                             <thead class="has-gutter">
                                                 <tr class="el-table__row">
@@ -525,6 +619,96 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- 改档记录 -->
+                                    <div class="content_title cursor" @click="showchangelist(shippingItem)"><span class="fl">改档记录</span><span class="fr changeicon"><i :class="shippingItem.showchange ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i></span></div>
+                                    <div v-if="shippingItem.showchange" class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition el-table--small">
+                                        <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" width="100%">
+                                            <thead class="has-gutter">
+                                                <tr class="">
+                                                    <th width="50"></th>
+                                                    <th  class="is-center">
+                                                        <div class="cell" width="120">商品编号</div>
+                                                    </th>
+                                                    <th class="is-center">
+                                                        <div class="cell">商品名称</div>
+                                                    </th>
+                                                    <th class="is-center">
+                                                        <div class="cell">改档记录</div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="el-table__body" v-for="(changeItem,index) in shippingItem.commerceItemList" :key="changeItem.id">
+                                                <tr class="el-table__row">
+                                                    <td class="is-center">
+                                                        <i class="shippingbtn_icon" @click="changeResume(changeItem,shippingItem)" v-bind:class="changeItem.show ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline'"></i>
+                                                    </td>
+                                                    <td class="is-center">
+                                                        <div class="cell">{{changeItem.skuNo}}</div>
+                                                    </td>
+                                                    <td class="is-center">
+                                                        <div class="cell ellipsis" :title="changeItem.displayName"><div>{{changeItem.displayName}}</div></div>
+                                                    </td>
+                                                    <td class="is-center">
+                                                        <div class="cell">
+                                                            <span class="mr20">{{changeItem.archiveDate | formatDate}}</span>
+                                                            <span class="mr20">{{changeItem.archiveSellerName}}导购员</span>
+                                                            <span v-if="changeItem.archiveState ==0">提交了建档</span>
+                                                            <span v-else-if="changeItem.archiveState ==1">操作了改档</span>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="el-table__row" style="background:#EBEEF5;" v-if="changeItem.show">
+                                                    <td colspan="4">
+                                                        <!-- 改档记录履历 -->
+                                                        <div class="dispatching_box1">
+                                                            <div v-for="Item in changeItem.cscArchiveResumes" :key="Item.id" class="changewarp">
+                                                                <div class="changetitle">
+                                                                    <i class="el-icon-success"></i>
+                                                                    <span class="mr20">{{Item.operateTime | formatDate}}</span>
+                                                                    <span class="mr20">{{Item.operatorName}}导购员</span>
+                                                                    <span v-if="Item.archiveState ==0">提交了建档</span>
+                                                                    <span v-else>操作了改档</span>
+                                                                </div>
+                                                                <ul class="changelist">
+                                                                    <li class="item" v-if="Item.userName">
+                                                                        <span class="item_time">用户姓名：</span><span class="item_cont">{{Item.userName}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.phoneNumber">
+                                                                        <span class="item_time">手机号：</span><span class="item_cont">{{Item.phoneNumber}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.deliveryAddress">
+                                                                        <span class="item_time">送货地址：</span><span class="item_cont">{{Item.deliveryAddress}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.address">
+                                                                        <span class="item_time">详细地址：</span><span class="item_cont">{{Item.address}}</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="changelist">
+                                                                    <li class="item" v-if="Item.deliveryMethod">
+                                                                        <span>送货方式：{{Item.deliveryMethodDesc}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.deliveryDate">
+                                                                        <span>送货时间：{{Item.deliveryDate}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.installMethod">
+                                                                        <span>安装方式：{{Item.installMethodDesc}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.installDate">
+                                                                        <span>安装时间：{{Item.installDate}}</span>
+                                                                    </li>
+                                                                    <li class="item" v-if="Item.notInstallReason">
+                                                                        <span>不安装原因：{{Item.notInstallReason}}</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="dispatching_box" v-if="!changeItem.cscArchiveResumes">暂无信息</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <!-- 退款信息 -->
                                     <div class="content_title" v-if="shippingItem.refundInfoList != null && shippingItem.refundInfoList.length != 0 && shippingItem.refundFlag==1">退款信息</div>
                                     <div class="ordercont_box" v-if="shippingItem.refundInfoList != null && shippingItem.refundInfoList.length != 0 && shippingItem.refundFlag==1">
@@ -542,6 +726,24 @@
                                             <el-table-column prop="refundState" label="退款状态" align="center"></el-table-column>
                                         </el-table>
                                     </div>
+                                    <!-- 运营商试用卡明细 -->
+                                    <div class="content_title" v-if="shippingItem.useCardList != null && shippingItem.useCardList.length">运营商使用卡明细</div>
+                                    <div class="ordercont_box" v-if="shippingItem.useCardList != null && shippingItem.useCardList.length">
+                                        <el-table :data="shippingItem.useCardList" border :show-header="true" size="small ">
+                                            <el-table-column prop="cardMobileNo" label="关联手机号" align="center"></el-table-column>
+                                            <el-table-column prop="cardType" label="卡类型" align="center">
+                                                <template slot-scope="scope">
+                                                    <span v-if="scope.row.cardType == '0'">运营商蓝卡</span>
+                                                    <span v-else>运营商机价补贴卡</span>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column prop="cardAmount" label="价值" align="center">
+                                                <template slot-scope="scope">
+                                                    <span class="fontM">￥{{scope.row.cardAmount}}</span>
+                                                </template>
+                                            </el-table-column>
+                                        </el-table>
+                                    </div>
                                 </div>
                             </el-collapse-item>
                     </el-collapse>
@@ -549,14 +751,14 @@
             </el-collapse-item>
             <el-collapse-item title="订单履历" name="2">
                 <!-- 订单履历 -->
-                <div class="ordercont_box" v-if="response.orderHistoryList.length">
+                <div class="ordercont_box" v-if="response.orderHistoryList && response.orderHistoryList.length">
                     <ul>
                         <li class="item" v-for="item in response.orderHistoryList" :key="item.id">
                             <span class="item_time">{{item.stateDate | formatDate}}</span><span class="item_cont">{{item.description}}</span>
                         </li>
                     </ul>
-                    <div class="ordercont_box" v-if="!response.orderHistoryList">暂无信息</div>
                 </div>
+                 <div class="ordercont_box" v-else>暂无信息</div>
             </el-collapse-item>
             <el-collapse-item title="支付信息" name="3" v-if="response.paymentGroupInfoList">
                 <!-- 支付信息 -->
@@ -585,8 +787,14 @@
             </el-collapse-item>
             <el-collapse-item title="退货信息" name="4">
                 <!-- 退货信息 -->
-                <div class="ordercont_box" v-if="response.returnRequestList">
-                    <el-table :data="response.returnRequestList" border :show-header="true" size="small ">
+                <div class="ordercont_box" v-if="response.returnRequestList.returnRequests">
+                    <div class="paymentmesg" v-if="response.returnRequestList.originReturnQuestId">
+                        <span class="mr20">原退换货单号：<el-button  @click="jumpto('/order/serviceList_detail',{'returnRequestId':response.returnRequestList.originReturnQuestId})" type="text" size="small">{{response.returnRequestList.originReturnQuestId}}</el-button></span>
+                    </div>
+                    <div class="paymentmesg" v-if="response.returnRequestList.originShippingGroupId">
+                        <span class="mr20">原配送单号：<el-button  @click="jumpto('/order/orderdetails',{'orderId':response.returnRequestList.originOrderId,'storeCode':response.returnRequestList.originStoreCodeId,'shippingGroupId':response.returnRequestList.originShippingGroupId})" type="text" size="small">{{response.returnRequestList.originShippingGroupId}}</el-button></span>
+                    </div>
+                    <el-table v-if="response.returnRequestList.returnRequests.length!=0" :data="response.returnRequestList.returnRequests" border :show-header="true" size="small ">
                         <el-table-column prop="returnRequestId" label="退换货单号" align="center">
                             <template slot-scope="scope"><el-button  @click="jumpto('/order/serviceList_detail',{'returnRequestId':scope.row.returnRequestId})" type="text" size="small">{{scope.row.returnRequestId}}</el-button>
                             </template>
@@ -599,9 +807,15 @@
                         <el-table-column prop="state" label="退换货状态" align="center"></el-table-column>
                         <el-table-column prop="refundId" label="退款单号" align="center"></el-table-column>
                         <el-table-column prop="refundState" label="退款单状态" align="center"></el-table-column>
+                        <el-table-column prop="replaceShippingGroupId" label="新换货配送单号" align="center">
+                            <template slot-scope="scope">
+                                <el-button v-if="scope.row.replaceSplitFlag == '1'"  @click="jumpto('/order/orderdetails',{'orderId':scope.row.replaceOrderId,'storeCode':scope.row.replaceStoreCode,'shippingGroupId':scope.row.replaceShippingGroupId})" type="text" size="small">{{scope.row.replaceShippingGroupId}}</el-button>
+                                <el-button v-else-if="scope.row.replaceSplitFlag == '0'"  @click="jumpto('/order/orderdetailsbeforesplit',{'orderId':scope.row.replaceOrderId,'storeCode':scope.row.replaceStoreCode})" type="text" size="small">{{scope.row.replaceShippingGroupId}}</el-button>
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </div>
-                <div class="ordercont_box" v-if="!response.returnRequestList">暂无信息</div>
+                <div class="ordercont_box" v-if="!response.returnRequestList.returnRequests">暂无信息</div>
             </el-collapse-item>
         </el-collapse>
     </div>
@@ -654,18 +868,34 @@
                 <span class="label">商品总价：</span> 
                 <div class="info-rcol">¥{{response.orderAmount}}</div> 
             </div>
+            <div class="item mb10" v-if="response.storeJoinDisAmount">
+                <span class="label">新零售店折扣券：</span> 
+                <div class="info-rcol">¥{{response.storeJoinDisAmount}}</div> 
+            </div>
             <div class="item mb10" v-if="response.discountAmount">
                 <span class="label">折扣优惠：</span> 
                 <div class="info-rcol">- ¥{{response.discountAmount}}</div> 
             </div>
             <div class="item" v-if="response.gomeCouponAmount">
-                <span class="label">使用美券：</span> 
+                <span class="label">使用券：</span> 
                 <div class="info-rcol">- ¥{{response.gomeCouponAmount}}</div> 
             </div>
             <div class="item mb10" v-if="response.gomeBeansAmount">
                 <span class="label">美豆金额：</span> 
                 <div class="info-rcol">- ¥{{response.gomeBeansAmount}}</div> 
             </div>
+            <!-- 订金翻倍 -->
+            <div class="item mb10" v-if="response.useDepositAmount && response.useDepositAmount != '0.00'">
+                <span class="label">使用订金：</span> 
+                <div class="info-rcol">- ¥{{response.useDepositAmount}}</div> 
+            </div>
+            <!-- 订金翻倍end -->
+            <!-- 节能补贴 -->
+            <div class="item mb10" v-if="response.allowanceRatioAmount && response.allowanceRatioAmount != '0.00'">
+                <span class="label">节能补贴：</span> 
+                <div class="info-rcol">- ¥{{response.allowanceRatioAmount}}</div> 
+            </div>
+            <!-- 节能补贴end -->
             <div v-if="response.depositExpandAmount">
                 <div class="item" v-if="response.depositAmount">
                     <span class="label">定金金额：</span> 
@@ -742,6 +972,16 @@
                     </el-popover>
                 </div> 
             </div>
+            <!-- 运营商 -->
+            <div class="item mb10" v-if="response.useBuleCardAmount && response.useBuleCardAmount !='0.00'">
+                <span class="label">使用蓝卡：</span> 
+                <div class="info-rcol">- ¥{{response.useBuleCardAmount}}</div> 
+            </div>
+            <div class="item mb10" v-if="response.useAllowanceCardAmount && response.useAllowanceCardAmount !='0.00'">
+                <span class="label">使用补贴卡：</span> 
+                <div class="info-rcol">- ¥{{response.useAllowanceCardAmount}}</div> 
+            </div>
+             <!-- 运营商 end-->
             <div class="item mt10" v-if="response.promItemShareAmount">
                 <span class="label">加价换购分摊：</span> 
                 <div class="info-rcol">- ¥{{response.promItemShareAmount}} 
@@ -893,6 +1133,62 @@
             <el-button type="primary" @click="applyRefundDialog = false">确定</el-button>
         </span>
     </el-dialog>  -->
+    <!--参保信息 -->
+    <el-dialog
+        title="查看参保信息"
+        :visible.sync="applyRefundDialog"
+        :lock-scroll="false"
+        width="450px">
+        <div class="insuredbox">
+            <div class="title">参保用户信息</div>
+            <div class="conentmesg">
+                <div class="item">
+                    <span class="mr20">{{insuredInformation.name}}</span>
+                    <span>{{insuredInformation.mobileNumber}}</span>
+                </div>
+                <div class="item">{{insuredInformation.address}}</div>
+            </div>
+            <div class="conent" v-if="insuredInformation.idCard">
+                <div class="name">身份证号：</div>
+                <div class="mesg">{{insuredInformation.idCard}}</div>
+            </div>
+            <div class="title">参保商品凭证</div>
+            <div class="conent" v-if="insuredInformation.categoryName">
+                <div class="name">参保商品：</div>
+                <div class="mesg">{{insuredInformation.categoryName}}</div>
+            </div>
+            <div class="conent" v-if="insuredInformation.purchasePrice && insuredInformation.purchasePrice !='0.00'">
+                <div class="name">商品价格：</div>
+                <div class="mesg">￥{{insuredInformation.purchasePrice}}</div>
+            </div>
+            <div class="conent" v-if="insuredInformation.skuPpid">
+                <div class="name">商品唯一标识：</div>
+                <div class="mesg">{{insuredInformation.skuPpid}}</div>
+            </div>
+            <div class="conent" v-if="insuredInformation.purchaseDate">
+                <div class="name">商品购买时间：</div>
+                <div class="mesg">{{insuredInformation.purchaseDate | formatDate1}}</div>
+            </div>
+            <div class="conentmesg" v-if="insuredInformation.skuImageList && insuredInformation.skuImageList.length">
+                <div class="item">商品图片：</div>
+                <div class="imgitem" v-for="(imgitem,index) in insuredInformation.skuImageList" :key="imgitem.skuPpid">
+                    <img width="80%" :src="imgitem" alt="" title="" />
+                </div>
+            </div>
+            <div class="conentmesg" v-if="insuredInformation.proofImageList && insuredInformation.proofImageList.length">
+                <div class="item">购物凭证：</div>
+                <div class="imgitem" v-for="(imgitem,index) in insuredInformation.proofImageList" :key="index">
+                    <img width="80%" :src="imgitem" alt="" title="" />
+                </div>
+            </div>
+            <div class="conentmesg" v-if="insuredInformation.invoiceImageList && insuredInformation.invoiceImageList.length">
+                <div class="item">发票图片：</div>
+                <div class="imgitem" v-for="(imgitem,index) in insuredInformation.invoiceImageList" :key="index">
+                    <img width="80%" :src="imgitem" alt="" title="" />
+                </div>
+            </div>
+        </div>
+    </el-dialog> 
 </div>
 </template>
 <script>
@@ -948,6 +1244,7 @@ export default {
             orderId: this.$route.query.orderId,
             storeCode: this.$route.query.storeCode,
             shippingGroupId:this.$route.query.shippingGroupId,
+            directorSearchType:this.$route.query.directorSearchType,
             dispatchingmesg: true,
             dialogVisible: false, //取消配送单弹层变量
             i: -1, //商品列表收起展开变量
@@ -965,8 +1262,12 @@ export default {
             pageactiveNames: ["1"], //页面左侧第一个展开
             response: {
             //页面信息
-            paymentGroupInfo: {},
-            orderHistoryList: []
+                paymentGroupInfo: {},
+                orderHistoryList: [],
+                returnRequestList:{
+                    returnRequests:[]
+                },
+                shippingGroupList:[]
             },
             delateForm: {
                 //发送延保邮箱form
@@ -1007,6 +1308,7 @@ export default {
             receiptDialog:false,//确认收货弹层
             applyRefundDialog:false,//导购员权限的申请退还货弹层提示
             vatAuditState:'',//增票提醒
+            insuredInformation:{},//参保信息
         };
     },
     methods: {
@@ -1024,15 +1326,19 @@ export default {
         var _this = this;
         var parms={
             orderId: this.orderId,
-            storeCode: this.storeCode
+            storeCode: this.storeCode,
         };
         if(this.LOGINDATA.storeStaffId != null){//导购员
             parms.sellerId=this.LOGINDATA.storeStaffId
-        }
+        };
+        if(this.directorSearchType){
+            parms.directorSearchType=this.directorSearchType
+        };
         API.orderdetails(parms).then(function(data) {
             if (data.success && data.response != null) {
                 data.response.shippingGroupList[0].cur = "1";
                 data.response.shippingGroupList.forEach(function(item,index) {
+                    item.showchange = false;//改档记录展开收起
                     item.shippingisopen = false; //配送信息增加展开收起标示
                     item.dialogVisible = false; //取消配送单弹层
                     item.showbtn = false; //查看收货人电话
@@ -1040,7 +1346,7 @@ export default {
                     item.codingtext = ""; //自提码或签收码内容
                     item.commerceItemList.forEach(function(prditem) {
                     //商品信息增加展开收起标示
-                    prditem.show = false;
+                        prditem.show = false;
                     });
                     item.shippingInstallList.forEach(function(prditem) {
                     //商品安装信息增加展开收起标示
@@ -1190,6 +1496,29 @@ export default {
                     type: "error"
                     });
                 }
+                });
+            }
+        },
+        changeResume: function(Item, shippingItem) {
+            var _this =this;
+        //改档记录
+            if (Item.show) {
+                Item.show = !Item.show;
+            } else {
+                API.queryArchiveResumeList({
+                    shippingGroupId: shippingItem.shippingGroupId, //配送单号
+                    commerceItemId: Item.commerceItemId, //商品唯一号    
+                }).then(function(data) {
+                    if (data.success) {
+                        Item.show = !Item.show;
+                        Item.cscArchiveResumes = data.resultObj.cscArchiveResumes;
+                        console.log(Item)
+                    } else {
+                        _this.$message({
+                        message: data.errMsg,
+                        type: "error"
+                        });
+                    }
                 });
             }
         },
@@ -1424,7 +1753,8 @@ export default {
                 organCode:this.response.salesOrganization,//销售组织
                 shippingGroupId:shippingItem.shippingGroupId,//配送单号
                 commerceItemId:item.commerceItemId,//商品ID
-                storeId:this.response.storeCode//销售门店
+                storeId:this.response.storeCode,//销售门店
+                siteType:3,//固定写死站点
             };
             let addIncrement={
                 commerceItemId:item.commerceItemId,//商品ID
@@ -1526,6 +1856,17 @@ export default {
             })
             // this.$router.push('/order/refuseDelivery_detail/?orderId='+this.orderId+'&shippingGroupId='+this.rejectionMesg.shippingGroupId+'&storeCode='+this.storeCode);
         },
+        
+        showchangelist(Item){//显示隐藏改档记录
+                Item.showchange = Item.showchange ? false :true;
+        },
+        showInsured(item){//查看参保信息
+            this.applyRefundDialog = true;
+            this.insuredInformation = item.warrantyInsuredInfo;
+        },
+        jumptoSpburl(){//碎屏保打印协议地址
+            window.open('//gfs.ec.api/e8c2ae49c3a3af1e3c8a4333a0da39d0.pdf', "_blank");
+        }
     },
     mounted() {
         this.getPageData();
@@ -1536,6 +1877,12 @@ export default {
             if (time != null) {
                 let date = new Date(time);
                 return formatDate(date, "yyyy-MM-dd hh:mm:ss");
+            }
+        },
+        formatDate1(time) {
+            if (time != null) {
+                let date = new Date(time);
+                return formatDate(date, "yyyy-MM-dd");
             }
         },
         formatInvoiceType(cellValue){
@@ -1604,7 +1951,7 @@ export default {
             }else{
                 return "状态异常";
             }
-        }
+        },
     },
     watch: {
         queryorder: function() {
@@ -1631,17 +1978,19 @@ export default {
             let _this = this;
             if (this.returninfo) {
                 API.queryreturninfo({
-                storeCode: this.response.storeCode, //销售门店
-                orderId: this.response.orderId //订单号
+                    storeCode: this.response.storeCode, //销售门店
+                    orderId: this.response.orderId //订单号
                 }).then(function(data) {
-                if (data.success) {
-                    _this.response.returnRequestList = data.response;
-                } else {
-                    _this.$message({
-                    message: data.respMsg,
-                    type: "error"
-                    });
-                }
+                    if (data.success) {
+                        if(data.response){
+                            _this.response.returnRequestList = data.response;
+                        };
+                    } else {
+                        _this.$message({
+                        message: data.respMsg,
+                        type: "error"
+                        });
+                    }
                 });
             }
         },
@@ -1656,7 +2005,7 @@ export default {
                 this.prarentinsuranceDialogVisible = this.insuranceDialogVisible;
             },
             deep: true
-        }
+        },
     },
     computed: {
         ...mapState({
@@ -1673,6 +2022,12 @@ export default {
 };
 </script>
 <style>
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
 .red{
     color:#F56C6C;
 }
@@ -1811,6 +2166,7 @@ thead.has-gutter th,.el-table th.is-leaf {
   padding: 10px;
 }
 .dispatching_box .item,
+.dispatching_box1 .item,
 .ordercont_box .item {
   line-height: 30px;
   display: flex;
@@ -1824,7 +2180,11 @@ thead.has-gutter th,.el-table th.is-leaf {
   flex: 0 0 180px;
   margin-left: 50px;
 }
+.dispatching_box1 .item .item_time {
+  flex: 0 0 60px;
+}
 .dispatching_box .item .item_cont,
+.dispatching_box1 .item .item_cont,
 .ordercont_box .item .item_cont {
   flex: 1;
 }
@@ -1970,6 +2330,30 @@ thead.has-gutter th,.el-table th.is-leaf {
     width:230px;
     top: 5px;
 }
+.orderstatusTip3{
+    transform-origin: left center 0px;
+    z-index: 2087; 
+    position: absolute; 
+    left: 40px;
+    width:460px;
+    top: 5px;
+}
+.orderstatusTip4{
+    transform-origin: left center 0px;
+    z-index: 2087; 
+    position: absolute; 
+    left: 40px;
+    width:450px;
+    top: 5px;
+}
+.orderstatusTip5{
+    transform-origin: left center 0px;
+    z-index: 2087; 
+    position: absolute; 
+    left: 90px;
+    width:450px;
+    top: 5px;
+}
 .giftbox_cont{
     padding:0px 10px 20px;
     font-family: 12px/1.5 arial,"\65B0\5B8B\4F53"
@@ -2004,6 +2388,9 @@ thead.has-gutter th,.el-table th.is-leaf {
     font:12px/30px "Microsoft Yahei";
     text-align:right;
     color:#409eff;
+}
+.fontM{
+    font-family:"Microsoft Yahei";
 }
 .el-icon-question,.cursor{
     cursor: pointer;
@@ -2069,6 +2456,90 @@ thead.has-gutter th,.el-table th.is-leaf {
 }
 .el-table__expand-icon--expanded>.el-icon{
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkVGRDcxNkUzMTU3RTExRTk5QkUxODkyMTExMkE2RUM4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkVGRDcxNkU0MTU3RTExRTk5QkUxODkyMTExMkE2RUM4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RUZENzE2RTExNTdFMTFFOTlCRTE4OTIxMTEyQTZFQzgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RUZENzE2RTIxNTdFMTFFOTlCRTE4OTIxMTEyQTZFQzgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4a0wOWAAABFFBMVEWTlZiveWb19+Lw9/qvfWbd9/pgfbRgebRgYmaOyPptZnP18t7Z8vr1yJT19/Vth7lgldDLlWb137SFsdXB5PWJw/VgZn3r6d7w5Mdga51yo96htdCFuudpYoHLmW/Z6fDwzZjrv4/nw5jn28Liuovww4/17cKXa2bL3/Xn9/rw5NlpZma4gmaTw+xgdKazh293ZmaJv/W92+yJv/Bph7ndsX3GsZTPsYtpldDU5PXLtaav3/rw26vP9/rw39D19+yJYn1ygqKTzfVpmdBkeZ2cgnhgZm9ggr3LlW97i5il2/X199XZ9/qXeWp3seJkYmZgYmp7Ym+zh3P1w5TZo3iTi4GOscu46fp3YoZtb3PBw8f19/of7bF8AAAAq0lEQVR42kyPhQ6DQAxAy5gwYMzd3d3d3V3u//9jd4MMXtKmfU3TFBAh0wHwtn8l4HDtF2uAe3ZmE0WEtabJbNhk80SE/Bsk0TtPEGyTVfQn7O5DvLCThYqyg/mAFNRNQOnR4CORQgYdEbG3hI+IXFm5cl3CbaoUAQ9YXk+5T4y6IKy0mv9VdYsGnGu82HNFPMO/cBfHI0gLzkbJyIvfouj8yDCncYXUXwEGAAiCRD0akPSeAAAAAElFTkSuQmCC")
+}
+.bold{
+    font-weight: bold;
+}
+.changetitle{
+    clear: both;
+    font:14px/24px "Microsoft Yahei";
+}
+.changetitle  .el-icon-success{
+    color:#67c23a;
+}
+.changelist{
+    padding-left:20px;
+    width:30%;
+    float:left;
+    margin-right:30px;
+    overflow: hidden;
+}
+.changewarp{
+    overflow: hidden;
+    padding:20px 0px 20px 40px;
+    border-bottom:1px solid #dedede
+}
+.changeicon{
+    margin-top:5px;
+}
+.changeicon i{
+    font-weight:bold
+}
+.changelist .item .item_cont{
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.fulldepositbox{
+    position:absolute;
+    top:0;
+    left:50px;
+    font-size:12px;
+    color:red;
+    font-weight:normal;
+    width:400px;
+}
+.fulldepositbox1{
+    font-size:12px;
+    color:red;
+    font-weight:normal;
+    margin-left:20px;
+}
+/* 参保信息 */
+.insuredbox{
+    margin-top:-40px;
+    height:600px;
+    overflow-y: auto;
+    font-family: "Microsoft Yahei";
+}
+.insuredbox .title{
+    font:bold 14px/40px "Microsoft Yahei";
+    color: #5e5e5e;
+    border-bottom:1px solid #dedede;
+    margin-top:10px;
+}
+.insuredbox .conent{
+    display:flex;
+    height: 30px;
+    line-height:30px;
+    border-bottom:1px solid #dedede;
+    font-size:12px;
+}
+.insuredbox .conentmesg{
+    line-height:30px;
+    border-bottom:1px solid #dedede;
+    font-size:12px;
+}
+.insuredbox .conentmesg .imgitem{
+    text-align: center;
+    margin-bottom:10px;
+}
+.insuredbox .conent .name{
+    flex:0 0 150px;
+    text-align:left;
+}
+.insuredbox .conent .mesg{
+    flex: 1;
+    text-align:right
 }
 </style>
 

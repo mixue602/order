@@ -11,6 +11,16 @@ exports.formatDate = function (time) {
         return year + month + date;
     }
 };
+exports.formatDatedouble = function (time) {
+    "use strict";
+    let year, month, date;
+    if (time && time > 0) {
+        year = new Date(time).getFullYear() + '-';
+        month = (new Date(time).getMonth() + 1 < 10 ? '0' + (new Date(time).getMonth() + 1) : new Date(time).getMonth() + 1) + '-';
+        date = new Date(time).getDate() < 10 ? '0' +new Date(time).getDate() : new Date(time).getDate();
+        return year + month + date;
+    }
+};
 /**
  * 格式化日期，返回年-月-日 时:分:秒
  * timeFlag:显示时间标识，如果不传值或者传second显示到秒，传minute显示到分，hour显示到小时，day显示到天

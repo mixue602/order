@@ -10,9 +10,15 @@
              data-before="查询条件">
       <!--表单查询 start-->
       <!--销售部门 start-->
-      <commonSalesReportTree @getSaleDepartmentsId="getSaleDepartmentsId" ref="salesReportTree"></commonSalesReportTree>
+      <el-row class="input-group">
+        <commonSalesReportTree @getSaleDepartmentsId="getSaleDepartmentsId" ref="salesReportTree"></commonSalesReportTree>
+      </el-row>
       <!--销售部门 end-->
-
+      <!--品类 start-->
+      <el-row class="input-group">
+        <commonSalesReportCategoryTree @getBrandId="getBrandId" ref="salesReportTreebrand"></commonSalesReportCategoryTree>
+      </el-row>
+      <!--品类 end-->
       <el-row class="input-group">
         <!-- <el-form-item label="所属分部：">
             <el-select v-model="form.department" placeholder="请选择">
@@ -24,15 +30,15 @@
                 <el-option value="所属门店"></el-option>
             </el-select>
         </el-form-item> -->
-        <el-form-item label="事业部门名称：">
+        <!-- <el-form-item label="事业部门名称：">
           <el-select v-model="form.kinds" placeholder="请选择">
             <el-option v-for="(item, index) in config.kinds"
                        :label="item.label" :value="item.value"
                        :key="index">
             </el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="品牌编码：">
+        </el-form-item> -->
+        <el-form-item label="品牌编码：" style="width:426px;">
           <el-input style="width:200px" placeholder="请输入品牌编码" v-model="form.brand"></el-input>
           <el-button type="text" @click="showDialog('dialogGetBrandCode')">查看品牌编码</el-button>
         </el-form-item>
@@ -61,7 +67,7 @@
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="供应商编码：">
+        <el-form-item label="供应商编码：" style="width:426px;">
           <el-input style="width:188px" placeholder="请输入供应商编码" v-model="form.supplierCode"></el-input>
           <el-button type="text" @click="showDialog('dialogGetSupplierCode')">查看供应商编码</el-button>
         </el-form-item>
@@ -106,14 +112,13 @@
           <el-table-column property="brandCode" label="品牌编码" width="200"></el-table-column>
           <el-table-column property="brandName" label="品牌" width="200"></el-table-column>
         </el-table>
-        <el-pagination
-          @current-change="handleCurrentChangeByBrandCode"
+        <el-pagination @current-change="handleCurrentChangeByBrandCode"
           background
-          :current-page=formBrand.page.currentPage
-          :page-size=formBrand.page.pageSize
+          :current-page="formBrand.page.currentPage"
+          :page-size="formBrand.page.pageSize"
           v-if="formBrand.page.totalPage>1"
           layout="total, prev, pager, next"
-          :total=formBrand.page.totalPage>
+          :total="formBrand.page.totalPage">
         </el-pagination>
       </el-dialog>
       <!--查询品牌编码弹窗 end-->
@@ -138,11 +143,11 @@
         <el-pagination
           @current-change="handleCurrentChangeByBrandCode"
           background
-          :current-page=formBrand.page.currentPage
-          :page-size=formBrand.page.pageSize
+          :current-page="formBrand.page.currentPage"
+          :page-size="formBrand.page.pageSize"
           v-if="formBrand.page.totalPage>1"
           layout="total, prev, pager, next"
-          :total=formBrand.page.totalPage>
+          :total="formBrand.page.totalPage">
         </el-pagination>
       </el-dialog>
       <!--查询供应商编码弹窗 end-->
@@ -152,6 +157,7 @@
       <el-row class="sales-time">
         <span data-before="销售统计：" class="txt">{{show.showTime.start}}-{{show.showTime.end}}</span>
         <span v-if="dataSalesItemList && dataSalesItemList.length > 0">
+        <!-- <el-button v-if="LOGINDATA.salesReport_list_down1" size="mini" @click="handleExport()" title="只能导出30天内数据">导出</el-button> -->
         <el-button size="mini" @click="handleExport()" title="只能导出30天内数据">导出</el-button>
         <a size="mini" href="javascript:void(0)" class="btn-download" v-show="showDownloadLink" @click="handleDownload">下载</a>
         </span>
@@ -196,11 +202,11 @@
       <el-pagination
         @current-change="handleCurrentChange"
         background
-        :current-page=page.currentPage
-        :page-size=page.pageSize
+        :current-page="page.currentPage"
+        :page-size="page.pageSize"
         v-if="page.totalPage>1"
         layout="total, prev, pager, next"
-        :total=page.totalPage>
+        :total="page.totalPage">
       </el-pagination>
     </div>
     <!--数据表 end-->
@@ -216,7 +222,8 @@
   import {mapState} from "vuex";
   import API from "@/api/order-service/salesReport";
   import commonSalesReportTree from "@/components/order-service/common/commonSalesReportTree";
-  import commonSalesReportColumnSetting from '@/components/order-service/common/commonSalesReportColumnSetting'
+  import commonSalesReportColumnSetting from '@/components/order-service/common/commonSalesReportColumnSetting';
+  import commonSalesReportCategoryTree from "@/components/order-service/common/commonSalesReportCategoryTree";
   import Env from '@/api/env'
 
   /**
@@ -288,7 +295,7 @@
     const times = getParseTime(content.form.times).type1;
     return {
       currentStoreCode: content.form.userId, //登录门店id
-      mainCategoryCode: content.form.kinds == "-1" ? "" : content.form.kinds, //
+      //mainCategoryCode: content.form.kinds == "-1" ? "" : content.form.kinds, //原事业部门
       brandCode: content.form.brand, //
       skuNo: content.form.skuNo, //
       orderType: content.form.status, //
@@ -304,7 +311,9 @@
       currentPage: content.page.currentPage, //
       pageSize: content.page.pageSize,
       beginTime: times.start,
-      endTime: times.end
+      endTime: times.end,
+      mainCategoryCode:content.form.mainCategoryCode,//品类编码
+      category2Code:content.form.category2Code//二级分类编码
     }
   }
 
@@ -341,7 +350,9 @@
           storeCodes: [], //门店代码
           times: [],
           sellerCode: '',//促销员编码
-          deliveryId: ''//配送单号
+          deliveryId: '',//配送单号
+          mainCategoryCode:"",//品类编码
+          category2Code:""//二级分类编码
         },
 
         formBrand: {},
@@ -370,8 +381,7 @@
             {value: 0, label: "全部"},
             {value: 16, label: "来购"},
             {value: 13, label: "美店分享"},
-            {value: 10, label: "金力零售"},
-            // {value: 20, label: "金力对公"}
+            {value: 10, label: "金力零售"}
           ], //渠道
           _channel: {},
           times: [new Date(), new Date()]
@@ -379,10 +389,16 @@
         configItmesAll: [
           {label: "分部代码", prop: "salesOrgCode", className: 'hide', width: 100, disabled: false},
           {label: "分部名称", prop: "salesOrgName", className: 'show', width: 150, disabled: false},
+          // {label: "公司代码", prop: "salesOrgCode", className: 'hide', width: 100, disabled: false},
+          // {label: "公司名称", prop: "salesOrgName", className: 'show', width: 150, disabled: false},
           {label: "销售门店代码", prop: "storeCode", className: 'hide', width: 120, disabled: false},
           {label: "销售门店", prop: "storeName", className: 'show', width: 150, disabled: false},
+          {label: "原销售门店代码", prop: "closedShopCode", className: 'hide', width: 150, disabled: false},
+          {label: "原销售门店", prop: "closedShopName", className: 'hide', width: 150, disabled: false},
           {label: "事业部门代码", prop: "mainCategoryCode", className: 'hide', width: 120, disabled: false},
           {label: "事业部门名称", prop: "mainCategoryName", className: 'show', width: 120, disabled: false},//原十大品类
+          {label: "二级品类编码", prop: "category2Code", className: 'hide', width: 120, disabled: false},//二级品类编码
+          {label: "二级品类名称", prop: "category2Name", className: 'show', width: 120, disabled: false},//二级品类名称
           {label: "品类代码", prop: "categoryCode", className: 'hide', width: 100, disabled: false},
           {label: "品类名称", prop: "categoryName", className: 'show', width: 100, disabled: false},//四级品类
           {label: "品牌代码", prop: "brandCode", className: 'hide', width: 100, disabled: false},
@@ -395,9 +411,13 @@
           {label: "商品原价", prop: "_retailPrice", className: 'hide', width: 80, disabled: false},
           {label: "订单金额", prop: "_salesAmount", className: 'show', width: 80, disabled: false},
           {label: "实收金额", prop: "_payAmount", className: 'show', width: 80, disabled: false},
-          {label: "促销金额", prop: "_amount", className: 'show', width: 200, disabled: false},
+          //{label: "促销金额", prop: "_amount", className: 'show', width: 200, disabled: false},//拆分美豆美券
+          {label: "使用美券（无预算、领券）", prop: "_meiQuan", className: 'show', width: 120, disabled: false},
+          {label: "使用美豆", prop: "_meiDou", className: 'show', width: 120, disabled: false},
           {label: "店长券", prop: "_dianZhang", className: 'show', width: 80, disabled: false},
-          {label: "赠豆", prop: "_zengDou", className: 'show', width: 120, disabled: false},//(合计美豆)
+          //{label: "赠豆", prop: "_zengDou", className: 'show', width: 120, disabled: false},//(合计美豆)
+          {label: "赠促销美豆", prop: "_zengDou", className: 'show', width: 120, disabled: false},
+          {label: "赠基础美豆", prop: "_jichuzengDou", className: 'show', width: 120, disabled: false},
           {label: "订单号", prop: "orderId", className: 'hide', width: 120, disabled: false},
           {label: "配送单号", prop: "deliveryId", className: 'show', width: 120, disabled: false},
           {label: "退货原单号", prop: "refundOrderId", className: 'hide', width: 120, disabled: false},
@@ -488,7 +508,7 @@
         },
         showDownloadLink: false,
         cookieDomain: '',
-
+        downloadUrl:''
       };
     },
     filters: {
@@ -508,7 +528,8 @@
     }),
     components: {
       commonSalesReportTree,
-      commonSalesReportColumnSetting
+      commonSalesReportColumnSetting,
+      commonSalesReportCategoryTree,
     },
     mounted() {
     },
@@ -526,10 +547,14 @@
         this.form.storeCodes = [];
         this.form.sellerCode = "";
         this.form.deliveryId = "";
+        this.form.mainCategoryCode = "";//品类编码
+        this.form.category2Code = "";//二级分类编码
         //重置操作需要清空分部列表和部门树勾选状态，因为通过获取dom元素来更新数据，所以放在this.$nextTick()中
         this.$nextTick(() => {
           _this.$refs.salesReportTree.checkedTreeItems = [];
+          _this.$refs.salesReportTreebrand.checkedTreeItems = [];
           _this.$refs.salesReportTree.setCheckedKeys();
+          _this.$refs.salesReportTreebrand.setCheckedKeys();
         });
         this.__queryReturnRequestList();
         this._initFormBrand();
@@ -598,7 +623,7 @@
           _this.loading = false;
           _this.show.totalSalesQty = "--";
           if (response.respMsg) {
-            _this.$message.error("接口querySalesItemListNew：" + response.respMsg);
+            _this.$message.error("接口querySalesItemList：" + response.respMsg);
           }
         }
 
@@ -640,6 +665,7 @@
                   let meiQuan = 0, //美店
                     meiDou = 0, //美豆
                     dianZhang = 0, //店长券
+                    jichuzengDou = 0, //基础美豆
                     zengDou = 0; //赠豆
                   if (items.length > 0) {
                     items.forEach(item => {
@@ -649,8 +675,10 @@
                         meiDou = (item.amount / 100).toFixed(2) || "0.00"; //美豆
                       if (item.typeCode === "ZD42")
                         dianZhang = (item.amount / 100).toFixed(2) || "0.00"; //店长券
-                      if (item.typeCode === "ZD20") zengDou += item.amount;
+                     // if (item.typeCode === "ZD20") zengDou += item.amount;
+                      if (item.typeCode === "ZD20") jichuzengDou += item.amount;//基础美豆
                       if (item.typeCode === "ZD11") zengDou += item.amount; //赠豆
+
                     });
                   }
 
@@ -765,11 +793,14 @@
                       return cur.value === current.orderType;
                     }).label,
                     _salesAmount: (current.salesAmount != '--' && (current.salesAmount / 100).toFixed(2)) || "0.00",//实付金额
-                    _amount: (!meiQuan && !meiDou) ? "--" : ("美券" + meiQuan + "元，" + "美豆" + meiDou + "元"), //促销金额
-                    // _meiQuan: meiQuan && "美券" + meiQuan + "元", //美券
+                    //_amount: (!meiQuan && !meiDou) ? "--" : ("美券" + meiQuan + "元，" + "美豆" + meiDou + "元"), //促销金额
+                    _meiQuan: (!meiQuan) ? "--" : ("美券" + meiQuan + "元"), //美券
+                    _meiDou: (!meiDou) ? "--" : ("美豆" + meiDou + "元"), //美豆
                     _dianZhang: (!dianZhang) ? "--" : (dianZhang + "元"), //店长券
                     _ticketNum: (!current.ticketNum) ? '--' : current.ticketNum,//入场券号
-                    _zengDou: (!zengDou) ? "--" : ((zengDou / 100).toFixed(2) + "元"), //赠豆
+                    //_zengDou: (!zengDou) ? "--" : ((zengDou / 100).toFixed(2) + "元"), //赠豆
+                    _jichuzengDou: (!jichuzengDou) ? "--" : ((jichuzengDou / 100).toFixed(2) + "元"), //基础美豆
+                    _zengDou: (!zengDou) ? "--" : ((zengDou / 100).toFixed(2) + "元"), //赠促销美豆
                     _salesChannel: _this.config._channel[current.salesChannel], //渠道
                     _payAmount: (current.payAmount != '--' && (current.payAmount / 100).toFixed(2)) || "0.00",//实付金额
                     _retailPrice: (current.retailPrice1 != '--' && (current.retailPrice1 / 1).toFixed(2)) || "0.00",//商品原价
@@ -900,7 +931,7 @@
 
         function __errorhandle(response) {
           if (response.respMsg) {
-            _this.$message.error("接口querySalesItemListNew", response.respMsg);
+            _this.$message.error("接口querySalesItemList", response.respMsg);
           }
         }
 
@@ -925,7 +956,7 @@
               __down(response.data);
               _this.showProgerssBar = false;
               _this.percentage = 0;
-
+              _this.downloadUrl = response.data.response;
             } else {
               __errorhandle(response.respMsg);
             }
@@ -947,7 +978,9 @@
             if (response) {
               if (response.respCode && response.respCode == 1) {
                 _this.showDownloadLink = false;
-                window.open('//' + _this.form.cookieDomain + '/down?storeCode=' + _this.form.userId,'_self');
+                //window.open('//' + _this.form.cookieDomain + '/down?storeCode=' + _this.form.userId,'_self');
+                window.open( _this.downloadUrl+'/downloadSalesItemReportZipRebuild?storeCode=' + _this.form.userId,'_self');
+
                 return false;
               } else {
                 if (response.respMsg) {
@@ -972,6 +1005,11 @@
       getSaleDepartmentsId (data) {
         this.form.storeCodes = data.storeCodes;
       },
+      //调用子组件的方法获得id值
+      getBrandId(data){
+        this.form.mainCategoryCode = data.mainCategoryCode;
+        this.form.category2Code = data.category2Code;
+      }
     }
   };
 </script>

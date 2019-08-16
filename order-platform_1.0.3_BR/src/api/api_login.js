@@ -9,6 +9,6 @@ export default {
   //登录
   login: params => {
 
-    return API.POST(Env.pcatpview+'/queryUserAuthorityList', params)
+    return API.POST(Env.pcorderview+'/queryUserAuthorityList', params)
   }
 }

@@ -6,6 +6,10 @@
             <h2 class="as-processing__tip"
                 v-if="serviceData.productDto.hasFreeGiftRemindMsg && serviceData.productDto.hasFreeGiftRemindMsg == 'Y'">
                 购买商品中含有赠品，赠品会分摊部分商品金额，故发生退货时退款金额会与商品售价金额不一致。</h2>
+             <!-- 提示 -->
+            <div class="as-processing__tipred" v-if="serviceData.productDto.fullDepositItemFlag && serviceData.productDto.fullDepositReturnRemindDesc">
+                {{serviceData.productDto.fullDepositReturnRemindDesc}}
+            </div>
             <el-form class="as-processing__form" id="as-processing__form"
                      :rules="rules"
                      ref="ruleForm"
@@ -28,9 +32,9 @@
                     <el-form-item label="原因：">
                         <el-select v-model="form.returnReason" placeholder="请选择">
                             <el-option v-for="(item, index) in serviceData.returnReasonList"
-                                       :label=item.desc
-                                       :value=item.code
-                                       :key=index>
+                                       :label="item.desc"
+                                       :value="item.code"
+                                       :key="index">
                                 {{item.desc}}
                             </el-option>
                         </el-select>
@@ -84,14 +88,14 @@
                     <el-row class="refundExchangeAddress">
                         <!--自提(退回到门店的地址) start-->
                         <el-row class="rea__item rea__store" v-show="form.tabShow == 0">
-                            <el-form-item label="退货地址：">
+                            <el-form-item label="退货地址：" v-if="serviceData.addressInfoDto && serviceData.addressInfoDto.pickUpInStoreDetailAddress">
                                 <span class="form__span">{{serviceData.addressInfoDto.pickUpInStoreDetailAddress}}</span>
                             </el-form-item>
                         </el-row>
                         <!--自提(退回到门店的地址) end-->
                         <!--物流上门取件地址 start-->
                         <el-row class="rea__item rea__ogistics" v-show="form.tabShow == 1">
-                            <el-form-item label="取件地址：" prop="waitModifyContactDetailAddress">
+                            <el-form-item label="取件地址：" prop="waitModifyContactDetailAddress"  v-if="serviceData.addressInfoDto && serviceData.addressInfoDto.contactAddress">
                                 <span class="form__span">{{serviceData.addressInfoDto.contactAddress}}</span>
                                 <br>
                                 <el-input class="form__input-wrap"
@@ -128,12 +132,66 @@
                             <!--预约取货时间 end-->
                         </el-row>
                         <!--物流上门取件地址 end-->
+                        <!-- 当前退货地址下支持安装 start-->
+                        <!-- 换货状态下并且支持安装 -->
+                        <!-- <el-row class="exchanger__info" v-if="(serviceData.returnType == '2' || form.returnType =='2' || form.returnType =='4')  && form.installFlag ==1"> -->
+                        <el-row class="rea__item rea__ogistics">
+                            <el-row class="exchanger__info" v-if="(serviceData.returnType == '2' || form.returnType =='2' || form.returnType =='4') && form.installFlag ==1">
+                                <el-form-item label="新安装方式：" prop="installation" ref="installDateForm">
+                                    <el-select v-model="form.installation" placeholder="请选择" @change="installationmodechange">
+                                        <el-option v-for="(item, index) in installMethods"
+                                                :label="item.name"
+                                                :value="item.code"
+                                                :key="index">
+                                            {{item.name}}
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="不安装原因：" v-if="form.installation == 2" prop="notinstallreason">
+                                    <el-select v-model="form.notinstallreason" placeholder="请选择">
+                                        <el-option v-for="(item, index) in notInstallMethods"
+                                                :label="item.name"
+                                                :value="item.name"
+                                                :key="index">
+                                            {{item.name}}
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="新安装时间：" prop="installDate" v-show="form.operFlag == 2 || form.deliveryToInstallFlag ==1 || form.operFlag == 1 || form.operFlag == 3">
+                                    <div class="block">
+                                        <el-date-picker
+                                                v-model="form.installDate"
+                                                type="date"
+                                                placeholder="请选择安装时间"
+                                                @change="changeInstallDate"
+                                                :picker-options="installpickerOptions"
+                                                :disabled="newinstallDate"
+                                                >
+                                        </el-date-picker>
+                                        <div class="exchanger__timeslot" v-if="form.installStartDateTime">
+                                            <span class="start">{{form.installStartDateTime}}</span>-<span class="end">{{form.installEndDateTime}}</span>
+                                        </div>
+                                    </div>
+                                </el-form-item>
+                                <!-- 厂家安装 -->
+                                <!-- <el-form-item label="新安装时间：" v-if="form.installation == 3">
+                                    <div class="block">
+                                        <el-date-picker
+                                                v-model="form.pickupDate"
+                                                type="date"
+                                                placeholder="请选择安装时间">
+                                        </el-date-picker>
+                                    </div>
+                                </el-form-item> -->
+                            </el-row>
+                        </el-row>
+                        <!-- 当前退货地址下支持安装 end-->
                     </el-row>
                     <!--退换货地址切换 end-->
                 </el-row>
                 <!--退换货信息 end-->
-                <!--促销信息 只有退货有促销信息 start-->
-                <commonApplyServicePrice v-if="form.returnType == 1" :returnExchangeDetail="serviceData"></commonApplyServicePrice>
+                <!--促销信息 只有退货有促销信息1是退，3是换转退 start-->
+                <commonApplyServicePrice v-if="form.returnType ==1" :returnExchangeDetail="serviceData"></commonApplyServicePrice>
                 <!--促销信息 只有退货有促销信息 end-->
                 <!--问题描述 start-->
                 <el-row class="as-discription as-processing__caption" data-before="问题描述">
@@ -175,6 +233,9 @@
         <!--送货能 start-->
         <g-delivery v-model="form.installEnergy" @changed="changePickupDateSlot"></g-delivery>
         <!--送货能 end-->
+        <!--安装能 start-->
+        <g-delivery v-model="form.newinstallEnergy" @changed="changeInstallDateSlot"></g-delivery>
+        <!--安装能 end-->
         <!--是否确认提交退换货申请/处理 start-->
         <el-dialog
                 title="提示"
@@ -209,37 +270,43 @@
                 :visible.sync="dialogHasFreeGiftVisible"
                 :before-close="handleFreeGiftClose">
             <el-row class="el-dialog__body_module1" v-if="serviceData.returnRefundAgentDto">
-                <span data-before="预计退款总额：" class="dialog_span dialog_em" v-if="serviceData.returnRefundAgentDto.suggestRefundAmount">
-                  {{serviceData.returnRefundAgentDto.suggestRefundAmount | formatMoney}}
+                <span data-before="预计退款金额：" class="dialog_span dialog_em"  v-if="serviceData.returnRefundAgentDto.returnDepositAmount && serviceData.returnRefundAgentDto.returnDepositAmount > 0">
+                    {{serviceData.returnRefundAgentDto.validRefundDetailAmount | formatMoney}}
                 </span>
-                <span data-before="预计退款总额：" class="dialog_span dialog_em" v-else>暂无金额</span>
+                <span data-before="预计退款金额："   v-else-if="serviceData.returnRefundAgentDto.suggestRefundAmount || serviceData.returnRefundAgentDto.suggestRefundAmount==0.00" class="dialog_span dialog_em">{{serviceData.returnRefundAgentDto.suggestRefundAmount | formatMoney}}</span>
+                <span data-before="预计退款金额：" class="dialog_span dialog_em" v-else>暂无金额</span>
+                <span data-before="退还订金" class="dialog_span dialog_em" v-if="serviceData.returnRefundAgentDto.returnDepositAmount && serviceData.returnRefundAgentDto.returnDepositAmount !='0.00'">
+                  {{serviceData.returnRefundAgentDto.returnDepositAmount | formatMoney}}
+                </span>
+                <span data-before="退还美豆：" v-if="serviceData.returnRefundAgentDto.returnGomeBeanAgentDto.sharePayGomeBeanNumber" class="dialog_span dialog_em">+{{serviceData.returnRefundAgentDto.returnGomeBeanAgentDto.sharePayGomeBeanNumber}}美豆</span>
                 <!--预计扣款总额显示条件：有美豆信息并且有赠品信息并且displayAllDeductAmount字段存在-->
-                <span data-before="预计扣款总额：" class="dialog_span" v-if="
+                <!-- <span data-before="预计扣款总额：" class="dialog_span" v-if="
                           (serviceData.returnRefundAgentDto.returnGomeBeanAgentDto &&
                           JSON.stringify(serviceData.returnRefundAgentDto.returnGomeBeanAgentDto) != '{}') ||
                       (serviceData.returnRefundAgentDto.shareFreeGifts &&
                       serviceData.returnRefundAgentDto.shareFreeGifts.length > 0) &&
-                      serviceData.returnRefundAgentDto.displayAllDeductAmount">-{{serviceData.returnRefundAgentDto.displayAllDeductAmount | formatMoney}}</span>
+                      serviceData.returnRefundAgentDto.displayAllDeductAmount">-{{serviceData.returnRefundAgentDto.displayAllDeductAmount | formatMoney}}</span> -->
             </el-row>
             <el-row class="el-dialog__body_module2" v-if="serviceData.returnRefundAgentDto">
-                <el-row v-if="serviceData.returnRefundAgentDto.returnGomeBeanAgentDto">
-                    <span data-before="退还美豆：" class="dialog_span">+{{serviceData.returnRefundAgentDto.returnGomeBeanAgentDto.sharePayGomeBeanNumber}}美豆</span>
-                    <span data-before="已扣美豆：" class="dialog_span">-{{serviceData.returnRefundAgentDto.returnGomeBeanAgentDto.needReturnGomeBeanNumber}}美豆</span>
+                <el-row v-if="serviceData.returnRefundAgentDto.returnGomeBeanAgentDto && addCount">
+                    <span data-before="已扣美豆：" class="dialog_span">-{{addCount}}美豆</span>
                 </el-row>
                 <el-row>
                     <span data-before="美豆扣款：" class="dialog_span"
                       v-if="serviceData.returnRefundAgentDto &&
-                      serviceData.returnRefundAgentDto.returnGomeBeanAgentDto">
-                      -{{serviceData.returnRefundAgentDto.deductGomeBeanAmount | formatMoney}}
+                      serviceData.returnRefundAgentDto.allDeductAmount && serviceData.returnRefundAgentDto.allDeductAmount !='0.00'">
+                      -{{serviceData.returnRefundAgentDto.allDeductAmount | formatMoney}}
                     </span>
-                    <span data-before="赠品分摊：" class="dialog_span"
+                    <!-- <span data-before="券扣减：" class="dialog_span"
+                      v-if="serviceData.returnRefundAgentDto &&
+                      serviceData.returnRefundAgentDto.finalDeductCouponAmount && serviceData.returnRefundAgentDto.finalDeductCouponAmount !='0.00'">
+                      -{{serviceData.returnRefundAgentDto.finalDeductCouponAmount | formatMoney}}
+                    </span> -->
+                    <span data-before="赠品等分摊金额：" class="dialog_span"
 		                v-if="(serviceData.productDto &&
-                    serviceData.productDto.skuType &&
                     serviceData.productDto.skuType != 1) &&
-                    (serviceData.returnRefundAgentDto.freeGiftShareAmountSum &&
-                    serviceData.returnRefundAgentDto.freeGiftShareAmountSum > 0) &&
                     (serviceData.returnRefundAgentDto.shareFreeGifts &&
-                    serviceData.returnRefundAgentDto.shareFreeGifts.length > 0)">-{{serviceData.returnRefundAgentDto.freeGiftShareAmountSum | formatMoney}}</span>
+                    serviceData.returnRefundAgentDto.shareFreeGifts.length > 0) && zengpinCount">-{{zengpinCount | formatMoney}}</span>
                 </el-row>
             </el-row>
             <span slot="footer" class="dialog-footer">
@@ -248,6 +315,22 @@
             </span>
         </el-dialog>
         <!--有赠品分摊时提交申请/处理确认退款明细 end-->
+        <!--运营商卡被使用 start-->
+        <el-dialog
+        title="运营商商品退货提示"
+        width="30%"
+        :visible.sync="dialogCardrespMsgVisible"
+        :before-close="handleBeanNumberClose">
+          <el-row class="el-dialog__body_bean">
+            <el-row>
+                <p class="dialog_p">{{cardrespMsg}}</p>
+            </el-row>
+          </el-row>
+          <span slot="footer" class="dialog-footer">
+              <el-button size="mini" @click="handleBeanNumberClose">知道了</el-button>
+          </span>
+        </el-dialog>
+        <!--运营商卡被使用 end-->
     </el-container>
 </template>
 
@@ -365,6 +448,35 @@
                     callback();
                 }
             };
+            var checkInstallDate = (rule, value, callback) => {
+                //换货且支持安装，并且可以是售后安装和厂家安装的时候校验，否则不校验
+                if((this.serviceData.returnType == '2' || this.form.returnType =='2' || this.form.returnType =='4') && this.form.installFlag ==1){//换货且支持安装的时候
+                    if(this.form.operFlag == 0 || this.form.operFlag == 1){//日期时间不可选和日期可为空的时候不验证
+                        callback();
+                    }else{
+                        if (value =='') {
+                            callback(new Error("安装时间不能为空"));
+                            return;
+                        } else {
+                            if(this.form.operFlag == 2){//选日期调安能
+                                if(new Date(this.form.installDate).getTime() == new Date(this.form.pickupDate).getTime()){
+                                    if(this.form.installEndDateTime !='' && (this.form.installEndDateTime < this.form.pickupEndDateTime)){
+                                        callback(new Error("安装时间必须晚于取货时间，请重新选择"));
+                                    }else{
+                                        callback();
+                                    }
+                                }else{
+                                    callback();
+                                }
+                            }else{
+                                callback();
+                            }   
+                        } 
+                    }
+                }else {
+                    callback();
+                };    
+            };
             var checkProblemDesc = (rule, value, callback) => {
                 let len = 0;
                 if (!value || value.length <= 0) {
@@ -385,6 +497,15 @@
                 } else {
                     callback();
                 }
+            };
+            var checknotinstallreason =(rule, value, callback) => {
+                if (!value) {
+                    callback(new Error("不安装原因不能为空"));
+                    return;
+                }else {
+                    callback();
+                }
+
             };
             return {
                 header: {
@@ -409,12 +530,28 @@
                         returnMethodName: '',
                         returnMethod: ''
                     }],
-                    returnRefundAgentDto: {
+                    returnRefundAgentDto: {//returnRefundAgentDto
                         shareFreeGifts:[],
-                        returnGomeBeanAgentDto: {}
+                        returnGomeBeanAgentDto: {
+                            jjhgShareTotalAmountSum:0,
+                            freeGiftShareAmountSum:0,
+                        },
+                        shareFreeGifts:[],
+                        shareJjhgItemList:[],
+                        displayAllDeductAmount:'',
                     },
                     returnReasonList: [],
-                    returnRequestImageList: []
+                    returnRequestImageList: [],
+                    installMethods:[]
+                },
+                installMethods:[
+                    
+                ],
+                notInstallMethods:[
+                   
+                ],
+                returnInstallInfo:{
+                    installMethod:2,
                 },
                 agreeDeductFlag: true,
                 returnReason: '',
@@ -458,6 +595,22 @@
                     returnRequestImageList: [],                                                         //初始化获得的图片列表
                     imageList: [],                                                                      //图片列表
                     roUploadImageUrls: '',                                                              //上传图片
+                    originalStoreCode:'',                                                               //闭店门店
+                    installation:1,                                                                    //安装方式code
+                    notinstallreason:'',                                                                 //不安装原因
+                    installDate:'',                                                                     //安装日期
+                    installStartDateTime:'',                                                             //预约安装时间开始时间段   
+                    installEndDateTime:'',                                                               //预约安装时间结束时间段   
+                    installSlot:'',                                                                      //运能波次
+                    newinstallEnergy: {},                                                                //安装能
+                    installSegmentCode:'',                                                                //售后公司代码
+                    installSite:'',                                                                      //安装网点
+                    installArea:'',                                                                      //安装区域
+                    installationName:'',                                                                   //安装方式中文
+                    operFlag:'',                                                                          //是否可以调安装能0:日期时间不可选 1:日期可选可空 2:选日期调接口 3:必选安装时间，但是不掉安装能
+                    installFlag:'',                                                                       //是否支持安装
+                    installFlag:'',                                                                       //是否支持安装
+                    salesOrganization:'',                                                                 //销售组织
                 },
                 rules: {
                     returnProdConsignee: [
@@ -477,6 +630,15 @@
                     ],
                     problemDesc: [
                         {required: true, validator: checkProblemDesc, trigger: 'blur'}
+                    ],
+                    installDate:[
+                        {required: true, validator: checkInstallDate, trigger: 'blur'},
+                    ],
+                    installation:[
+                        {required: true}
+                    ],
+                    notinstallreason:[
+                        {required: true,validator: checknotinstallreason, trigger: 'blur'}
                     ]
                 },
                 //时间限制30天之内
@@ -489,8 +651,13 @@
                         return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
                     }
                 },
+                //时间从预约送货日期算起53天
+                installpickerOptions: {},
                 imageName: '',
-                imageData: ''
+                imageData: '',
+                returnCoupons:[],
+                cardrespMsg:"",//运营商商品退货提示
+                dialogCardrespMsgVisible:false,//运营商商品退货提示弹层
             }
         },
         //局部过滤器，格式化金额
@@ -506,6 +673,38 @@
             //计算图片大小
             uploadDisabled () {
                 return this.form.imageList.length > 5;
+            },
+            addCount(){ //计算金额已扣美豆
+                return this.serviceData.returnRefundAgentDto.returnGomeBeanAgentDto.needReturnGomeBeanNumber+this.serviceData.returnRefundAgentDto.returnGomeBeanAgentDto.deductCouponGomeBeanNumber
+            },
+            zengpinCount(){ //计算赠品等分摊金额=赠品促销分摊总额+换购促销分摊总额
+                if(this.serviceData.returnRefundAgentDto.jjhgShareTotalAmountSum && this.serviceData.returnRefundAgentDto.jjhgShareTotalAmountSum !='0.00'){
+                    var jjhgShareTotalAmountSum = this.serviceData.returnRefundAgentDto.jjhgShareTotalAmountSum;
+                }else{
+                    var jjhgShareTotalAmountSum =0;
+                };
+                if(this.serviceData.returnRefundAgentDto.freeGiftShareAmountSum && this.serviceData.returnRefundAgentDto.freeGiftShareAmountSum !='0.00'){
+                    var freeGiftShareAmountSum = this.serviceData.returnRefundAgentDto.freeGiftShareAmountSum;
+                }else{
+                    var freeGiftShareAmountSum =0;
+                };
+                return Number(jjhgShareTotalAmountSum)+Number(freeGiftShareAmountSum);
+            },
+            newinstallDate(){
+                if(this.form.showSelectPickupDateTimeFlag == 'Y'){
+                    if(this.form.pickupDate =='' || this.form.operFlag == 0){
+                        return true;
+                    }else{
+                        return false
+                    }
+                }else{
+                    if(this.form.operFlag == 0){
+                        return true;
+                    }else{
+                        return false
+                    }
+                }
+                
             }
         },
         components: {
@@ -513,7 +712,7 @@
             commonApplyServicePrice
         },
         created () {
-          this.cookieDomain = Env.cookieDomain;
+            this.cookieDomain = Env.cookieDomain;
             this.initReturnRequest();
             //退换货处理和申请的入口不同，提示文案不同
             if (this.$route.query.returnRequestId && this.$route.query.returnRequestId != '') {
@@ -522,11 +721,102 @@
             } else {
                 this.confirmContent = '您确定要提交退换货申请？';
                 this.header.content = '申请退换货';
-            }
+            };
         },
         methods: {
+            installationmodechange(val){//安装方式更改回调
+                var that =  this;
+                this.form.installDate = "";
+                this.form.installStartDateTime = "";
+                this.form.installEndDateTime = "";
+                this.form.installSlot = '';
+                this.form.installSegmentCode = '';//售后公司代码
+                this.form.installSite = '';//安装网点
+                this.form.installArea = '';//安装区域
+                that.initInstall('code',val);
+                this.$refs.ruleForm.validateField('installDate');
+            },
+            initInstall(name,val){
+                var that =  this;
+                for(let i=0; i<that.installMethods.length;i++){
+                    if(that.installMethods[i][name]==val){//选取当前选中值对应的数据
+
+                        that.form.installationName = that.installMethods[i]['name'];//安装方式名称
+                        that.form.operFlag = that.installMethods[i]['operFlag'];//操作类型
+                        that.form.installation = that.installMethods[i]['code'];//安装方式编码
+                        that.form.deliveryToInstallFlag = that.installMethods[i]['deliveryToInstallFlag'];//是否运能赋值安装能
+                    }
+                };
+               // if(that.form.deliveryToInstallFlag =='1' || that.form.installationName =='座装' || that.form.installationName =='挂装'){//运能赋值安装能
+                if(that.form.deliveryToInstallFlag == 1){//运能赋值安装能
+                    if(that.form.showSelectPickupDateTimeFlag == 'Y'){//可以选取货时间
+                        that.form.installDate = that.form.pickupDate;
+                    };  
+                };
+                if(that.form.showSelectPickupDateTimeFlag == 'Y'){//有预约取货时间
+                    if(that.form.pickupDate){//有预约时间
+                        if(that.form.operFlag == 1 || that.form.operFlag == 3){//厂家安装
+                            that.installpickerOptions = {
+                                disabledDate(time) {
+                                    let startTime = new Date(that.form.pickupDate);
+                                    let endTime = new Date(startTime);
+                                    endTime.setDate(startTime.getDate() + 365);
+                                    startTime.setDate(startTime.getDate() - 1);
+                                    return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
+                                }
+                            }
+                        }else{
+                            that.installpickerOptions = {
+                                disabledDate(time) {
+                                    let startTime = new Date(that.form.pickupDate);
+                                    let endTime = new Date(startTime);
+                                    endTime.setDate(startTime.getDate() + 52);
+                                    startTime.setDate(startTime.getDate() - 1);
+                                    return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
+                                }
+                            }
+                        }
+                    };   
+                }else{//没有预约取货时间
+                    if(that.form.operFlag == 1 || that.form.operFlag == 3){//厂家安装并且是有预约时间
+                        that.installpickerOptions = {
+                            disabledDate(time) {
+                                let startTime = new Date();
+                                let endTime = new Date(startTime);
+                                endTime.setDate(startTime.getDate() + 365);
+                                //startTime.setDate(startTime.getDate() - 1);
+                                return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
+                            }
+                        }
+                    }else{
+                        that.installpickerOptions = {
+                            disabledDate(time) {
+                                let startTime = new Date();
+                                let endTime = new Date(startTime);
+                                endTime.setDate(startTime.getDate() + 52);
+                               // startTime.setDate(startTime.getDate() - 1);
+                                return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
+                            }
+                        }
+                    }
+                }   
+            },
+            blurinstallDaterules(){
+                if(this.form.pickupDate =='' || this.form.operFlag == 0){
+                    callback();
+                }else{
+                    if (value =='') {
+                        callback(new Error("安装时间不能为空"));
+                        return;
+                    } else {
+                        callback();
+                    } 
+                }
+                    
+                //form.installDate
+            },
             //退换货申请/处理公共初始化
-            commonInit (response) {
+            commonInit (response,type) {
                 if (response.success) {
                     if (response.response) {
                         this.serviceData = response.response;
@@ -538,7 +828,8 @@
                         //退换货方式
                         if (this.serviceData.returnType == 1 || this.serviceData.returnType == 2) {
                             this.form.returnType = this.serviceData.returnType;
-                        }
+                        };
+                        
                         //原因列表
                         if (_reasonList && _reasonList.length > 0) {
                             _reasonList.forEach((item, index) => {
@@ -589,7 +880,9 @@
                             if (_addressInfo.showSelectPickupDateTimeFlag && _addressInfo.showSelectPickupDateTimeFlag == 'Y') {
                                 this.form.showSelectPickupDateTimeFlag = _addressInfo.showSelectPickupDateTimeFlag;                                                     //是否需要选择预约取货时间
                             }
-                            this.form.storeCode = _addressInfo.storeCode || '';                                                                                         //门店代码
+                            //申请退换货的门店编码需要更换
+                            this.form.originalStoreCode = _addressInfo.originalStoreCode || '';    
+                            this.form.storeCode = _addressInfo.storeCode || '';                                                                                       //门店代码
                             this.form.masloc = _addressInfo.masloc || '';                                                                                               //商品的逻辑仓库代码
                             this.form.townCode = _addressInfo.town || '';                                                                                               //原单配送的四级区域代码
                         }
@@ -607,12 +900,35 @@
                             this.form.imageList = [];
                         }
                         this.form.quantity = this.serviceData.productDto.quantity || 0;                                                                                  //商品数量
+                        this.form.brandCode = this.serviceData.productDto.brandCode; //品牌代码
+                        this.form.categoryCode = this.serviceData.productDto.categoryCode; //线下四级品类代码
+                        this.form.commerceItemId = this.serviceData.commerceItemId; //商品唯一号
+                        this.form.skuNo = this.serviceData.productDto.skuNo; //商品编码
+                        this.form.installFlag = this.serviceData.productDto.installFlag; //是否支持安装标记
+                        this.form.salesOrganization = this.serviceData.productDto.salesOrganization; //是否支持安装标记
+                        //美券
+                        if(this.serviceData.returnRefundAgentDto.returnCoupons){
+                            this.serviceData.returnRefundAgentDto.returnCoupons.forEach((item, index) => {
+                                let newitem = {couponId:item.couponId,ticketNo:item.ticketNo,state:item.state,processType:item.processType,expirationDate:item.expirationDate,couponShareAmount:item.couponShareAmount,couponGomebeanDeductAmount:item.couponGomebeanDeductAmount};
+                                this.returnCoupons.push(newitem);
+                            });    
+                        };  
                         //右侧订单信息
                         this.asideData = Object.assign({},
                                 {commerceItemId: this.serviceData.commerceItemId},                                                                                       //商品项Id
                                 {shippingGroupId: this.serviceData.shippingGroupId},                                                                                     //配送单号
                                 {productDto: this.serviceData.productDto},                                                                                               //商品信息
-                                {userInfoDto: this.serviceData.userInfoDto});                                                                                            //顾客信息
+                                {userInfoDto: this.serviceData.userInfoDto});   
+                        this.installMethods = this.serviceData.installMethods;
+                        this.notInstallMethods = this.serviceData.notInstallMethods;
+                        //安装方式列表
+                        this.initInstall('isSelected',1);   
+                        //不安装原因列表 
+                        this.notInstallMethods.forEach((item, index) => {
+                            if (item.isSelected && item.isSelected == '1') {
+                            this.form.notinstallreason = item.name;
+                            }
+                        });                                                                                 //顾客信息
                     } else {
                         this.loading = false;
                     }
@@ -633,21 +949,36 @@
                     this.dialogVisible = false;
                     this.dialogHasFreeGiftVisible = false;
                     if (response.respCode) {
-                      //如果美豆数发生变化，toast提示文案写在前端
-                      if (response.respCode == '510') {
-                        this.$message.error("由于顾客账户内余额发生变化，页面将进行刷新操作！");
-                        clearTimeout(timer);
-                        timer = setTimeout(function () {
-                          _this.$router.go(0);
-                        }, 2000)
-                      }
-                      //其他异常，toast根据后端返回文案展示
-                      else if (response.respCode == '500') {
-                        if (response.respMsg) {
-                          this.$message.error(response.respMsg);
-                          this.$router.go(0);
+                        //如果美豆数发生变化，toast提示文案写在前端
+                        if (response.respCode == '510') {
+                            this.$message.error("由于顾客账户内余额发生变化，页面将进行刷新操作！");
+                            clearTimeout(timer);
+                            timer = setTimeout(function () {
+                            _this.$router.go(0);
+                            }, 2000)
                         }
-                      }
+                        //其他异常，toast根据后端返回文案展示
+                        else if (response.respCode == '500') {
+                            if (response.respMsg) {
+                            this.$message.error(response.respMsg);
+                            this.$router.go(0);
+                            }
+                        }else if (response.respCode == '502') {
+                            if (response.respMsg) {
+                                this.cardrespMsg = response.respMsg;
+                                this.dialogCardrespMsgVisible = true;
+                            }
+                        }else{
+                            if (response.respMsg) {
+                                _this.$message({
+                                    message: response.respMsg,
+                                    type: 'error',
+                                    onClose:function(){
+                                        _this.$router.go(0);
+                                    }
+                                });
+                            }
+                        }
                     }
                 }
             },
@@ -731,17 +1062,19 @@
             },
             //选择取货时间
             changePickupDate () {
+                var _this =this;
                 let installEnergy = {
                     "val": {
                         "storeCode": this.form.storeCode,                                                       //门店代码
                         "storageCode": this.form.masloc,                                                         //仓库代码
                         "townCode": this.form.townCode,                                                         //乡镇/街道代码
                         "deliveryCount": this.form.quantity,                                                    //送货数量
-                        "deliveryDate": this.form.pickupDate * 1                                               //预约取货时间
+                        "deliveryDate": this.form.pickupDate * 1,                                             //预约取货时间
+                        "commerceItemId": this.serviceData.commerceItemId                                     //商品唯一号
                     },
                     "type": "delivery"                                                                          // 必填 送货能（运能）delivery
                 };
-                this.form.installEnergy = installEnergy;                                                        //重新赋值 触发组件的watch
+                this.form.installEnergy = installEnergy;
             },
             //选择送货能时间段
             changePickupDateSlot(obj){
@@ -753,10 +1086,115 @@
                         this.form.pickupSlot = '';
                         return false;
                     }
+
                     this.form.pickupDate = Utils.formatDate(obj.time);
                     this.form.pickupStartDateTime = obj.st;
                     this.form.pickupEndDateTime = obj.et;
                     this.form.pickupSlot = obj.code;
+                    //安装时间计算
+                    if((this.form.operFlag == 1 && this.form.pickupDate) || (this.form.operFlag == 3 && this.form.pickupDate)){//厂家安装并且是有预约时间
+                        var _this =this;
+                        this.installpickerOptions = {
+                            disabledDate(time) {
+                                let startTime = new Date(_this.form.pickupDate);
+                                let endTime = new Date(startTime);
+                                endTime.setDate(startTime.getDate() + 365);
+                                startTime.setDate(startTime.getDate() - 1);
+                                return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
+                            }
+                        }
+                    }else{//售后安装
+                        this.installpickerOptions = {
+                            disabledDate(time) {
+                                let startTime = new Date(obj.time);
+                                let endTime = new Date(startTime);
+                                endTime.setDate(startTime.getDate() + 52);
+                                return time.getTime() < startTime.getTime() || time.getTime() > endTime.getTime();
+                            }
+                        }
+                    };
+                    //重新选择了预约取货时间，安装时间要变
+                    this.form.installDate = "";
+                    this.form.installStartDateTime = "";
+                    this.form.installEndDateTime = "";
+                    
+                };
+                //if(this.form.deliveryToInstallFlag =='1'  || this.form.installationName =='座装' || this.form.installationName =='挂装'){//运能赋值安装能
+                if(this.form.deliveryToInstallFlag =='1'){//运能赋值安装能
+                    if(this.form.showSelectPickupDateTimeFlag == 'Y'){//可以选取货时间
+                         this.form.installDate = this.form.pickupDate;
+                    };   
+                }
+            },
+            //选择安装时间
+            changeInstallDate () {
+                var _this =this;
+                // let newinstallEnergy = {
+                //     "val": {
+                //         "brandCode":this.form.brandCode,  //brandCode
+                //         "categoryCode":this.form.categoryCode, // 线下四级品类代码
+                //         "commerceItemId":this.serviceData.commerceItemId,//商品唯一号
+                //         "installCount": this.form.quantity,//安装数量
+                //         "installDate":this.form.pickupDate * 1,//安装日期
+                //         "saleOrgCode":this.form.salesOrganization,//销售组织代码
+                //         "skuNo":this.form.skuNo,//商品编码
+                //         "townCode":this.form.townCode,//四级区域
+                //         "queryType":0 //0：首次查询  1：修改查询    当修改建档查询返回的安装方式为安装时，传1，其余时候传0
+                        
+                //     },
+                //     "type": "installAbility"                                                                          // 必填 送货能（运能）delivery
+                // };
+                _this.initInstall('code',_this.form.installation);
+                // console.log(this.form.installationName);
+                // console.log(this.form.operFlag);
+                
+
+                if(this.form.operFlag == 2){//只有售后安装才只能选安装能
+                    let newinstallEnergy = {
+                        "val": {
+                            // "brandCode":"00004",  //brandCode
+                            // "categoryCode":"R0501002", // 线下四级品类代码
+                            // "commerceItemId":"46857812",//商品唯一号
+                            // "installCount": "1",//安装数量
+                            // "installDate":this.form.installDate * 1,//安装日期
+                            // "saleOrgCode":"1001",//销售组织代码
+                            // "skuNo":"100253545",//商品编码
+                            // "townCode":"110102002",//四级区域
+                            "brandCode":this.form.brandCode,  //brandCode
+                            "categoryCode":this.form.categoryCode, // 线下四级品类代码
+                            "commerceItemId":this.serviceData.commerceItemId,//商品唯一号
+                            "installCount": this.form.quantity,//安装数量
+                            "installDate":this.form.installDate * 1,//安装日期
+                            "saleOrgCode":this.form.salesOrganization,//销售组织代码
+                            "skuNo":this.form.skuNo,//商品编码
+                            "townCode":this.form.townCode,//四级区域
+                        },
+                        "type": "installAbility"                                                                          // 必填 送货能（运能）delivery
+                    };
+                    this.form.newinstallEnergy = newinstallEnergy;                                                        //重新赋值 触发组件的watch
+                }
+            },
+            //选择安装时间段
+            changeInstallDateSlot(obj){
+                if (obj.type == "installAbility") {//送货能返回
+                    if (obj.st == "close") {
+                        this.form.installDate = "";
+                        this.form.installStartDateTime = "";
+                        this.form.installEndDateTime = "";
+                        this.form.installSlot = '';
+                        this.form.installSegmentCode = '';//售后公司代码
+                        this.form.installSite = '';//安装网点
+                        this.form.installArea = '';//安装区域
+                        return false;
+                    };
+                    this.form.installDate = Utils.formatDate(obj.time);//日期
+                    this.form.installStartDateTime = obj.st;//安装时段描述开始
+                    this.form.installEndDateTime = obj.et;//安装时段描述结束
+                    this.form.installSlot = obj.code;//安装时段代码
+                    this.form.installSegmentCode = obj.installCompanyCode;//售后公司代码
+                    this.form.installSite = obj.installSite;//安装网点
+                    this.form.installArea = obj.installArea;//安装区域
+                    this.$refs.ruleForm.validateField('installDate');
                 }
             },
             //保存
@@ -784,7 +1222,7 @@
                         returnProdPostCode: '',                                                                                                                                                         //上门取货邮编
                         returnProdConsignee: this.form.returnProdConsignee,                                                                                                                             //上门取货联系人
                         returnProdPhone: this.form.returnProdPhone,                                                                                                                                     //上门取货联系电话
-                        mailToMasLocCode: this.serviceData.addressInfoDto.mailToMasLocCode,                                                                                                              //客户邮寄code
+                       // mailToMasLocCode: this.serviceData.addressInfoDto.mailToMasLocCode,                                                                                                              //客户邮寄code
                         roUploadImageUrls: this.form.roUploadImageUrls.substring(this.form.roUploadImageUrls.indexOf(",") + 1),                                                                          //上传图片Url
                         replShipDetailAddress: this.form.waitModifyReplShipDetailAddress,                                                                                                                //换货收货详细地址
                         replShipPostCode: '',                                                                                                                                                            //换货收货邮编
@@ -800,7 +1238,8 @@
                             returnGomeBeanAgentDto: {
                                 accountAvailableGomeBeanNumber:this.accountAvailableGomeBeanNumber || 0,
                                 agreeDeductFlag: this.form.agreeDeductFlag || this.agreeDeductFlag,
-                            }
+                            },
+                            returnCoupons:this.returnCoupons,//美券信息
                         },
                         returnRequestId: this.$route.query.returnRequestId || '',                                                                                 //退换货id
                         repeatCommitStr: this.serviceData.md5str,
@@ -808,10 +1247,42 @@
                         pickupStartDateTime: this.form.pickupStartDateTime,                                                                                                                             //预约取货时间开始时间段
                         pickupEndDateTime: this.form.pickupEndDateTime,                                                                                                                                 //预约取货时间结束时间段
                         pickupSlot: this.form.pickupSlot,                                                                                                                                                //运能波次
-                        memberCardNo: this.serviceData.userInfoDto.memberCardNo,                                                                                                                         //会员卡号
+                        memberCardNo: this.serviceData.userInfoDto.memberCardNo,                                                                                                                                       //会员卡号
                     }
                 };
                 let url = window.location.href.split('?')[1];
+                if(this.serviceData.addressInfoDto && this.serviceData.addressInfoDto.mailToMasLocCode){
+                    params.returnRequestAgentDto.mailToMasLocCode = this.serviceData.addressInfoDto.mailToMasLocCode;
+                }else{
+                    params.returnRequestAgentDto.mailToMasLocCode = null;
+                };
+                //换货增加参数
+                // if(_this.form.operFlag == 1){//厂家安装
+                //     alert(this.form.installDate)
+                //     this.form.installDate = Utils.formatDate(this.form.installDate.getTime());//转换时间格式
+                // };
+                if((_this.serviceData.returnType == '2' || _this.form.returnType =='2' || _this.form.returnType =='4') && _this.form.installFlag ==1){
+                    params.returnRequestAgentDto.dtoArchiveInstall ={//安装运能信息
+                         installMethod:this.form.installation,//安装方式
+                         installSite:this.form.installSite,//安装网点 
+                         installArea:this.form.installArea,//安装区域
+                         installCompanyCode:this.form.installSegmentCode,//售后公司代码installCompanyCode
+                         installDate:this.form.installDate,//安装日期
+                         installSegmentCode:this.form.installSlot,//安装时段编号
+                         installStartTime:this.form.installStartDateTime,//开始时间
+                         installEndTime:this.form.installEndDateTime,//结束时间
+                    };
+                    if(_this.form.installationName =='不安装'){
+                        params.returnRequestAgentDto.dtoArchiveInstall.notInstallReasonName=this.form.notinstallreason;//不安装原因中文描述   
+                    }
+                    //换货增加参数
+                    //if(_this.form.operFlag == 1 || _this.form.operFlag == 3){//厂家安装
+                    if(this.form.installDate){
+                        params.returnRequestAgentDto.dtoArchiveInstall.installDate = Utils.formatDatedouble(new Date(this.form.installDate).getTime());//转换时间格式 
+                    }
+                        
+                    //};
+                }
                 //退换货处理保存
                 if (url && url.indexOf('returnRequestId') != -1) {
                     API.dealReturnRequest(params).then(response => {
@@ -822,7 +1293,7 @@
                 //退换货提交保存
                 else {
                     API.submitReturnRequest(params).then(response => {
-                        let storeCode = _this.form.storeCode;
+                        let storeCode = _this.form.originalStoreCode;
                         let url = '/order/orderdetails?orderId=' + this.$route.query.orderId + '&storeCode=' + storeCode + '&shippingGroupId=' + this.$route.query.shipId;
                         _this.commonSave(response, url);
                     })
@@ -902,37 +1373,39 @@
             //关闭美豆不足弹窗
             handleBeanNumberClose() {
                 this.dialogBeanNumberVisible = false;
+                this.dialogCardrespMsgVisible = false;
                 this.$router.go(0);
             },
             //显示弹窗
             handleShowDialog (ruleForm) {
+                var _this = this;
                 this.$refs[ruleForm].validate((valid) => {
                     if (valid) {
-                        if (this.form.returnType == 1) {
+                        if (_this.form.returnType == 1) {
                           // 如果是退货
                             // 如果需补购美豆数大于0，展示美豆不足弹窗，
                             // 如果有促销信息，弹出退款明细确认框，否则弹出普通确认框
-                          if (this.pendingBuyGomeBeanNumber && this.pendingBuyGomeBeanNumber > 0) {
-                            this.dialogBeanNumberVisible = true;
+                          if (_this.pendingBuyGomeBeanNumber && _this.pendingBuyGomeBeanNumber > 0) {
+                            _this.dialogBeanNumberVisible = true;
                           } else {
-                            if (this.serviceData.returnRefundAgentDto) {
-                                this.dialogHasFreeGiftVisible = true;
+                            if (_this.serviceData.returnRefundAgentDto) {
+                                _this.dialogHasFreeGiftVisible = true;
                             } else {
-                                this.dialogVisible = true;
+                                _this.dialogVisible = true;
                             }
                           }
                         } else {
                           // 如果是换货，先判断是否选择了完整的取件时间，
                           // 如果选择了弹出普通确认框，反之展示toast提示'请选择完整的预约取货时间'，并且不发送提交请求
-                            if (this.form.returnMethod == 1 && (this.form.pickupStartDateTime == '' || this.form.pickupEndDateTime == '')) {
-                                this.$message.error(`请选择完整的预约取货时间！`);
+                            if (_this.form.returnMethod == 1 && (_this.form.pickupStartDateTime == '' || _this.form.pickupEndDateTime == '')) {
+                                _this.$message.error(`请选择完整的预约取货时间！`);
                                 return;
                             }
-                            this.dialogVisible = true;
+                            _this.dialogVisible = true;
                         }
                     }
                 })
             }
-        }
+        },
     }
 </script>

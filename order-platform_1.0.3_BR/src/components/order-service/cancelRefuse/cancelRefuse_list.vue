@@ -2,11 +2,16 @@
     <el-container class="cancelDelivery_list">
         <el-form class="cd-list__form" ref="cd-list__form" :rules="rules" :inline="true" :model="form" size="mini">
             <el-row class="input-group">
+                <el-form-item label="商品品类："  class="categorybox">
+                    <g-category v-model="categoryprop"></g-category>
+                </el-form-item>
+            </el-row>
+            <el-row class="input-group">
                 <el-form-item label="配送单号：" prop="shippingGroupId">
                     <el-input v-model="form.shippingGroupId" placeholder="请输入配送单号"></el-input>
                 </el-form-item>
-                <el-form-item label="订单编号：" prop="orderId">
-                    <el-input v-model="form.orderId" placeholder="请输入订单编号"></el-input>
+                <el-form-item label="订单号：" prop="orderId">
+                    <el-input v-model="form.orderId" placeholder="请输入订单号"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="商品编码：" prop="skuNo">-->
                 <!--<el-input v-model="form.skuNo" placeholder="请输入商品编码"></el-input>-->
@@ -14,13 +19,13 @@
                 <el-form-item label="会员卡号：" prop="memberCardId">
                     <el-input v-model="form.memberCardId" placeholder="请输入会员卡号"></el-input>
                 </el-form-item>
-                <el-form-item label="下单时间：">
+                <el-form-item label="下单时间：" style="margin-right:0px;margin-bottom:0px;">
                     <el-form-item prop="startSubmittedDate">
                         <el-date-picker
                                 class="input-mini"
                                 v-model="form.startSubmittedDate"
                                 type="date"
-                                placeholder="请输入开始日期"
+                                placeholder="选择开始日期"
                                 @blur="pickerTime"
                                 :picker-options="pickerStart">
                         </el-date-picker>
@@ -31,12 +36,15 @@
                                 class="input-mini"
                                 v-model="form.endSubmittedDate"
                                 type="date"
-                                placeholder="请输入结束日期"
+                                placeholder="选择结束日期"
                                 @blur="pickerTime"
                                 :picker-options="pickerEnd">
                         </el-date-picker>
                     </el-form-item>
                     <div class="el-form__time_error" v-show="showTimeError">请选择30天内的时间范围！</div>
+                </el-form-item>
+                <el-form-item label="选择门店：" v-show="closeshop.isdata==1" v-if="LOGINDATA.orderplatform_cancelRefuse_closeshop">
+                    <g-closeshop class="demo-gcs" v-model="closeshop" placeholder="请选择"></g-closeshop>
                 </el-form-item>
             </el-row>
             <el-row class="btn-group">
@@ -87,7 +95,7 @@
             </el-table>
             <el-pagination
                     background
-                    v-if="deliveryOrderInfo.list && deliveryOrderInfo.list.legnth > 0 && deliveryOrderInfo.pager"
+                    v-if="deliveryOrderInfo.list && deliveryOrderInfo.list.length > 0 && deliveryOrderInfo.pager"
                     @current-change="handleCurrentChange"
                     :current-page="deliveryOrderInfo.pager.currentPage"
                     :page-size="deliveryOrderInfo.pager.pageSize"
@@ -180,7 +188,7 @@
           //        skuNo: "", //商品编码
                     memberCardId: "", //会员卡号
                     startSubmittedDate: "", //开始时间
-                    endSubmittedDate: "" //结束时间
+                    endSubmittedDate: "", //结束时间
                 },
                 formParams: {},
                 //判断前一个日历的日期不能大于后面的日历日期，且没有到的日期，不能选择
@@ -213,7 +221,15 @@
                     orderId: [{validator: orderId, trigger: "blur"}],
 //        skuNo: [{ validator: skuNo, trigger: "blur" }],
                     memberCardId: [{validator: memberCardId, trigger: "blur"}]
-                }
+                },
+                closeshop:{//选择门店
+                    value:"",
+                    isdata:""
+                },
+                categoryprop:{//选择品类
+                    categoryCode:[],
+                    isDirector:false,//是否是主任
+                },
             };
         },
         /*
@@ -233,7 +249,7 @@
 
         created() {
             this.getPageStatus(this.$route.path);
-          this.__setConfigItems();
+            this.__setConfigItems();
         },
         //vuex取值
         computed: mapState({
@@ -353,7 +369,9 @@
 //        skuNo: this.form.skuNo ? this.form.skuNo : null, //商品编码
                     memberCardId: this.form.memberCardId ? this.form.memberCardId : null, //会员卡号
                     startSubmittedDate: _startSubmittedDate, //开始时间
-                    endSubmittedDate: _endSubmittedDate //结束时间
+                    endSubmittedDate: _endSubmittedDate, //结束时间
+                    storeCode:this.closeshop.value ? this.closeshop.value : null,       //门店
+                    skuCategoryIds:this.categoryprop.categoryCode,    //商品品类
                 };
 
                 this.formParams = JSON.parse(JSON.stringify(form));
@@ -367,11 +385,16 @@
                 let _this = this;
                 //如果输入框为空，展示提示信息
                 for (let value of Object.values(form)) {
-                    if (value) {
+                    if(Array.prototype.isPrototypeOf(value)){
+                        if(value.length !=0){
+                            this.isEmpty = false;
+                            break;
+                        }
+                    }else if (value) {
                         this.isEmpty = false;
                         break;
                     }
-                }
+                };
                 function _isNotDateGroups (start, end) {
                     if ((start && !end) || (!start && end)) {
                         return true;
@@ -403,7 +426,10 @@
             resetForm(formName) {
                 this.isEmpty = true;
                 this.showTimeError = false;
-                this.$refs[formName].resetFields();
+                this.$refs[formName].resetFields();            
+                this.closeshop.value="";
+                this.closeshop.isdata="";
+                this.categoryprop.categoryCode = "reset";//品类编码
             },
             //当前页点击操作
             handleCurrentChange(val) {

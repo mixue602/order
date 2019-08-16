@@ -1,41 +1,43 @@
 <template>
-  <el-row class="input-group">
-    <el-form-item label="品类：">
+    <el-form-item label="品类：" :style="{width:(treewidth ? settreewidth :'')}">
       <el-button type="text" @click="showDialogTree()">请选择(默认全选)&nbsp;></el-button>
       <div class="departmentLists" v-if="checkedTreeItems && checkedTreeItems.length > 0">
           <span v-for="(item, index) in checkedTreeItems" :key="index">
             ，{{item}}
           </span>
       </div>
-    </el-form-item>
-    <!--选择全部销售部门弹窗 start-->
-    <el-dialog title="品类" :visible.sync="dialogTree">
-      <div class="el-dialog__tree">
-        <el-tree
-          ref="tree"
-          class="tree-group__item"
-          :data="treeItems"
-          show-checkbox
-          :props="defaultProps"
-          node-key="id"
-          :default-expanded-keys="[1, 2]"
-          :default-checked-keys="checkedTreeKeys">
-        </el-tree>
-      </div>
-      <span slot="footer" class="dialog-footer">
-            <el-button size="mini" type="primary" @click="hideDialogTree">确 定</el-button>
-        </span>
-    </el-dialog>
+      <!--选择全部销售部门弹窗 start-->
+      <el-dialog title="品类" :visible.sync="dialogTree">
+        <div class="el-dialog__tree">
+          <el-tree
+            ref="tree"
+            class="tree-group__item"
+            :data="treeItems"
+            show-checkbox
+            :props="defaultProps"
+            node-key="id"
+            :default-expanded-keys="[1, 2]"
+            :default-checked-keys="checkedTreeKeys"
+            >
+          </el-tree>
+        </div>
+        <span slot="footer" class="dialog-footer">
+              <el-button size="mini" type="primary" @click="hideDialogTree">确 定</el-button>
+          </span>
+      </el-dialog>
     <!--选择全部销售部门弹窗 end-->
-
-  </el-row>
+    </el-form-item>
 </template>
 
 <script>
   import API from '@/api/order-service/salesReport'
   export default {
+    props:{
+      treewidth:false
+    },
     data () {
       return {
+        settreewidth:"451px",
         form: {
           salesOrgCode: '',
           storeCode: '',
@@ -56,29 +58,7 @@
         dialogTree: false,
         positionLevel: 5,
         hasFilterText: false,
-        brandList:[
-          {
-            id: '001',
-            name: '空调',
-            children:[{
-              id: '0002',
-              name: ' 格力'
-            },{
-              id: '0003',
-                name: '美的'
-            }]
-          },{
-              id: '002',
-              name: '彩电',
-              children:[{
-                id: '0002',
-                name: ' TCL'
-              },{
-                id: '0003',
-                name: '海尔'
-              }]
-          }
-        ]
+        brandList:[]
       }
     },
     created() {
@@ -119,13 +99,26 @@
         this.form.childStoreCodes = [];
         this.form.category2Code = [];
         let nodes = [];
+        let halfNode =[];
+        let newnode =[];
+
+        //如果存在只选一个二级品类的时候，将对应的一级品类也返回
+        
+
         if (this.$refs.tree !== undefined) {
           nodes = this.$refs.tree.getCheckedNodes();
+
+          halfNode = this.$refs.tree.getHalfCheckedNodes();
+          if(halfNode.length != 0){
+            newnode=nodes.concat(halfNode);
+          }else{
+            newnode=nodes;
+          };
         }
         let oThis = this;
         let checkedNodes = [];
        
-        nodes.forEach((v) => {
+        newnode.forEach((v) => {
           if(v.level && v.level =='1'){
             if (v.id && v.id != null) {
               oThis.form.childStoreCodes.push(v.id);
@@ -135,7 +128,7 @@
               oThis.form.category2Code.push(v.id);
             }
           };
-          if (v.name && v.name != undefined && v.name !="全部选择") {
+          if (v.name && v.name != undefined && v.name !="全部选择" && v.level && v.level =='1') {
             checkedNodes.push(v.name)
           }
         });

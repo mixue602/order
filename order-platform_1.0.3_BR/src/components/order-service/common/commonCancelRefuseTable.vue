@@ -37,19 +37,19 @@
           <template slot-scope="scope">
             <div class="productInfo">
               <div class="img-group" :data-after="scope.row.type == 2 ? '赠品' : ''">
-                <img :src=scope.row.imageUrl :alt=scope.row.displayName>
+                <img :src="scope.row.imageUrl" :alt="scope.row.displayName">
               </div>
               <div class="txt-group">
-                <span class="txt-title" :title="scope.row.displayName">{{ scope.row.displayName }}</span>
+                <span class="txt-title" :title="scope.row.displayName"><el-tag v-if="scope.row.fullDepositItemFlag == 1" type="danger" size="mini">全额订金</el-tag>{{ scope.row.displayName }}</span>
               </div>
             </div>
           </template>
         </el-table-column>
         <el-table-column
           v-for="(item, index) in configItmes"
-          :key=index
-          :prop=item.prop
-          :label=item.label>
+          :key="index"
+          :prop="item.prop"
+          :label="item.label">
         </el-table-column>
       </el-table>
     </el-row>

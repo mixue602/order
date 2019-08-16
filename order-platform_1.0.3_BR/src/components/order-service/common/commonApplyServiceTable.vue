@@ -5,9 +5,21 @@
             <el-table-column
                     v-for="(item, index) in configItmes"
                     :key="item.id"
-                    :type=item.type
-                    :prop=item.prop
-                    :label=item.label>
+                    :type="item.type"
+                    :prop="item.prop"
+                    :label="item.label">
+            </el-table-column>
+            <el-table-column prop="prodName" label="商品名称">
+			<template slot-scope="scope">
+				<el-tag  v-if="scope.row.fullDepositItemFlag ==1"  type="danger" size="mini">全额订金</el-tag>{{scope.row.prodName}}
+			</template>
+        </el-table-column>
+            <el-table-column
+                    v-for="(item, index) in configItmes1"
+                    :key="item.id"
+                    :type="item.type"
+                    :prop="item.prop"
+                    :label="item.label">
             </el-table-column>
             <el-table-column
                     fixed="right"
@@ -71,11 +83,13 @@
                 dialogVisible: false,
                 configItmes: [
                     {label:"序号", type: "index"},
-                    {label:"退换货号", prop: "returnRequestId"},
+                    {label:"退换货单号", prop: "returnRequestId"},
                     {label:"订单号", prop: "orderId"},
                     {label:"配送单号", prop: "shipId"},
                     {label:"商品编码", prop: "skuNo"},
-                    {label:"商品名称", prop: "prodName"},
+                ],
+                configItmes1: [
+                    // {label:"商品名称", prop: "prodName"},
                     {label:"会员卡号", prop: "memberCardNo"},
                     {label:"商品实付金额", prop: "prodPayAmount"},
                     {label:"商品退回方式", prop: "returnShipMethodDesc"},

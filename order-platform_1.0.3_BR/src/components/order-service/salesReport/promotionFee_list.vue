@@ -11,7 +11,9 @@
       <!--表单查询 start-->
 
       <!--销售部门 start-->
-      <commonSalesReportTree @getSaleDepartmentsId="getSaleDepartmentsId" ref="salesReportTree"></commonSalesReportTree>
+      <el-row class="input-group">
+        <commonSalesReportTree @getSaleDepartmentsId="getSaleDepartmentsId" ref="salesReportTree"></commonSalesReportTree>
+      </el-row>
       <!--销售部门 end-->
 
       <el-row class="input-group">
@@ -28,10 +30,10 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="品牌编码：">
-          <el-input style="width:200px" placeholder="请输入品牌编码" v-model="form.brand"></el-input>
-          <el-button type="text" @click="showDialog('dialogGetBrandCode')">查看品牌编码</el-button>
-        </el-form-item>
+        <!-- <el-form-item label="品牌代码：">
+          <el-input style="width:200px" placeholder="请输入品牌代码" v-model="form.brand"></el-input>
+          <el-button type="text" @click="showDialog('dialogGetBrandCode')">查看品牌代码</el-button>
+        </el-form-item> -->
 
         <el-form-item label="商品名称：">
           <el-input placeholder="请输入商品名称" v-model="form.skuName"></el-input>
@@ -53,7 +55,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="供应商编码：">
-          <el-input style="width:188px" placeholder="请输入供应商编码" v-model="form.supplierCode"></el-input>
+          <el-input style="width:200px" placeholder="请输入供应商编码" v-model="form.supplierCode"></el-input>
           <el-button type="text" @click="showDialog('dialogGetSupplierCode')">查看供应商编码</el-button>
         </el-form-item>
         <el-form-item label="渠道：">
@@ -93,10 +95,10 @@
       </el-row>
       <!--表单查询 end-->
 
-      <!--查询品牌编码弹窗 start-->
-      <el-dialog title="查询品牌编码" :visible.sync="dialogGetBrandCode">
+      <!--查询品牌代码弹窗 start-->
+      <!-- <el-dialog title="查询品牌代码" :visible.sync="dialogGetBrandCode">
         <el-form :model="formBrand" ref="formBrand" :rules="rulesFormBrand" size="mini" @submit.native.prevent>
-          <el-form-item label="品牌编码或名称" prop="brandCodeOrName">
+          <el-form-item label="品牌代码或名称" prop="brandCodeOrName">
             <el-input v-model="formBrand.brandCodeOrName"></el-input>
           </el-form-item>
           <el-form-item>
@@ -107,7 +109,7 @@
           </el-form-item>
         </el-form>
         <el-table :data="BrandCodeLists" v-loading="formBrand.loading" @row-click="checkedFormBrand">
-          <el-table-column property="brandCode" label="品牌编码" width="200"></el-table-column>
+          <el-table-column property="brandCode" label="品牌代码" width="200"></el-table-column>
           <el-table-column property="brandName" label="品牌" width="200"></el-table-column>
         </el-table>
         <el-pagination
@@ -119,8 +121,8 @@
           layout="total, prev, pager, next"
           :total=formBrand.page.totalPage>
         </el-pagination>
-      </el-dialog>
-      <!--查询品牌编码弹窗 end-->
+      </el-dialog> -->
+      <!--查询品牌代码弹窗 end-->
 
       <!--查询供应商编码弹窗 start-->
       <el-dialog title="查询供应商编码" :visible.sync="dialogGetSupplierCode">
@@ -183,11 +185,11 @@
       <el-pagination
         @current-change="handleCurrentChange"
         background
-        :current-page=page.currentPage
-        :page-size=page.pageSize
+        :current-page="page.currentPage"
+        :page-size="page.pageSize"
         v-if="page.totalPage>1"
         layout="total, prev, pager, next"
-        :total=page.totalPage>
+        :total="page.totalPage">
       </el-pagination>
     </div>
     <!--报表信息 end-->
@@ -282,7 +284,7 @@
       beginTime: times.start,//日期----
       endTime: times.end,//日期----
       mainCategoryCode: content.form.kinds == "-1" ? "" : content.form.kinds, //品类----
-      brandCode: content.form.brand, //品牌编码----
+      //brandCode: content.form.brand, //品牌代码----
       supplierCode: content.form.supplierCode, //供应商编码----
       sellerCode: content.form.sellerCode, //促销员编码----
       currentPage: content.page.currentPage, //
@@ -314,7 +316,7 @@
           salesOrgCode: "", //销售组织代码
           storeCodes: [], //门店代码
           kinds: "", //种类
-          brand: "", //品牌
+          //brand: "", //品牌
           skuName: "", //商品名称
           supplierCode: "", //供货商代码
           sellerCode: "", //促销员编码
@@ -447,7 +449,8 @@
           this.config._channel[item.value] = item.label
         });
         this.form.times = [new Date(), new Date()];
-        (this.form.brand = ""), (this.form.skuName = ""), (this.form.kinds = -1); //默认是全选
+        //(this.form.brand = ""), (this.form.skuName = ""), (this.form.kinds = -1); //默认是全选
+        (this.form.skuName = ""), (this.form.kinds = -1); //默认是全选
         this.form.status = 0;
         this.form.supplierCode = "";
         this.form.salesChannel = 0;
@@ -527,11 +530,21 @@
           _this.loading = false;
           _this.show.totalSalesQty = "--";
           if (response.respMsg) {
-            _this.$message.error("接口queryPromotionFeeList：" + response.respMsg);
+            _this.$message.error("接口queryPromotionFeeListRebuild：" + response.respMsg);
           }
         }
 
         _this.loading = true;
+        if(requestPara.storeCodes.length > 1000){
+          
+          this.$message({
+            message: '所选择的销售部门门店超过了1000家，请修改后重试',
+            type: 'warning',
+          });
+          _this.loading = false;
+          _this.dataSalesItemList=[];
+          return false;
+        };  
         API.queryPromotionFeeList(requestPara).then(
           response => {
             _this.loading = false;
@@ -604,7 +617,7 @@
         );
       },
 
-      //获取品牌编码信息
+      //获取品牌代码信息
       getBrandCodeLists(formBrand) {
         this.$refs[formBrand].validate(valid => {
           if (valid) {
@@ -614,7 +627,7 @@
         });
       },
 
-      //获取品牌编码信息
+      //获取品牌代码信息
       __getBrandCodeLists() {
         let requestPara = {};
 
@@ -667,7 +680,7 @@
         }
       },
 
-      //关闭品牌编码弹窗
+      //关闭品牌代码弹窗
       checkedFormBrand(row) {
         this.form.brand = row.brandCode;
         this.dialogGetBrandCode = false;
@@ -706,7 +719,7 @@
 
         function __errorhandle(response) {
           if (response.respMsg) {
-            _this.$message.error("接口queryPromotionFeeList：" + response.respMsg);
+            _this.$message.error("接口queryPromotionFeeListRebuild：" + response.respMsg);
           }
         }
 

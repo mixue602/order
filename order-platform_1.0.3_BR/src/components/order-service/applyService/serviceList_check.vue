@@ -143,7 +143,9 @@
                     returnRefundAgent: {
                         returnCoupons: [],
                         returnGomeBeanAgentDto: {}
-                    }
+                    },
+                    returnRequestHistoryList:[],
+                    dtoArchiveInstall:{},
                 },
                 expressCompanyList: [], //快递公司列表
                 asideData: {} //右侧数据

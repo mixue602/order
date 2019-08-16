@@ -16,7 +16,7 @@
                 <span class="aside__span">{{cancelRefuseAsideData.consigneeAddress}}</span>
             </el-row>
         </el-row>
-        <el-row class="aside__totalPrice">
+        <!-- <el-row class="aside__totalPrice">
             <el-row data-before="小计：">
                 <span class="aside__span">{{(!cancelRefuseAsideData.orderAmount || cancelRefuseAsideData.orderAmount < 0) ? 0 : cancelRefuseAsideData.orderAmount | formatMoney}}</span>
             </el-row>
@@ -29,7 +29,7 @@
             <el-row data-before="实付总金额：">
                 <span class="aside__span">{{(!cancelRefuseAsideData.realPayAmount || cancelRefuseAsideData.realPayAmount < 0) ? 0 : cancelRefuseAsideData.realPayAmount | formatMoney}}</span>
             </el-row>
-        </el-row>
+        </el-row> -->
     </el-aside>
 </template>
 <style lang="scss">

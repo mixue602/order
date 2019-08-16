@@ -76,4 +76,9 @@ export default {
   confirmOrder:params => {
     return API.POST(Env.pcorderview+'/confirm', params)
   },
+  //改档记录
+  queryArchiveResumeList:params => {
+    return API.POST(Env.pcorderview+'/queryArchiveResumeList', params)
+    //return API.POST('https://www.easy-mock.com/mock/5addabc90ab25a3530febe1b/orderindex/queryArchiveResumeList', params)
+  },
 }

@@ -14,7 +14,7 @@
                                 <el-option v-for="(item, index) in orderDetail.reasonList"
                                            :label="item.name"
                                            :value="item.code"
-                                           :key=index>{{item.name}}
+                                           :key='index'>{{item.name}}
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -29,7 +29,9 @@
                     <commonCancelRefusePrice :orderDetail="orderDetail"
                                              :deductGomeBeanAmount="deductGomeBeanAmount"
                                              :realDeductAmount="realDeductAmount"
-                                             :suggestRefundAmount="suggestRefundAmount">
+                                             :suggestRefundAmount="suggestRefundAmount"
+                                             :cancelDeliveryOrderDetail="cancelDeliveryOrderDetail"
+                                             >
                     </commonCancelRefusePrice>
                     <!--促销信息(包含赠豆，赠卷，退/扣款金额信息) end-->
                 </el-row>
@@ -94,6 +96,45 @@
           </span>
       </el-dialog>
       <!--需补购美豆 end-->
+      <!--退款明细 start-->
+        <el-dialog
+                title="退款明细"
+                width="30%"
+                :visible.sync="dialogHasFreeGiftVisible"
+                :before-close="handleFreeGiftClose">
+            <el-row class="el-dialog__body_module1" v-if="suggestRefundAmount || suggestRefundAmount==0.00">
+                <span data-before="预计退款金额：" class="dialog_span dialog_em" v-if="suggestRefundAmount || suggestRefundAmount==0.00">
+                  {{suggestRefundAmount | formatMoney}}
+                </span>
+                <span data-before="预计退款金额：" class="dialog_span dialog_em" v-else>暂无金额</span>
+                <span data-before="退还订金" class="dialog_span dialog_em" v-if="orderDetail.useDepositAmount && orderDetail.useDepositAmount !='0.00'">
+                  {{orderDetail.useDepositAmount | formatMoney}}
+                </span>
+                <span data-before="退还美豆：" v-if="orderDetail.gomeBeansCount" class="dialog_span dialog_em">+{{orderDetail.gomeBeansCount}}美豆</span>
+            </el-row>
+            <el-row class="el-dialog__body_module2" v-if="orderDetail.returnRefundSummary">
+                <el-row v-if="(orderDetail.giftGomeBean || orderDetail.giftCouponShare) && addCount">
+                    <span data-before="已扣美豆：" class="dialog_span">-{{addCount}}美豆</span>
+                </el-row>
+                <el-row>
+                    <span data-before="美豆扣款：" class="dialog_span"
+                      v-if="orderDetail.returnRefundSummary &&
+                      orderDetail.returnRefundSummary.deductGomeBeanAmount">
+                      -{{orderDetail.returnRefundSummary.deductGomeBeanAmount | formatMoney}}
+                    </span>
+                    <!-- <span data-before="券扣减：" class="dialog_span"
+                      v-if="orderDetail.giftCouponShare &&
+                      orderDetail.giftCouponShare.deductAmount">
+                      -{{orderDetail.giftCouponShare.deductAmount | formatMoney}}
+                    </span> -->
+                </el-row> 
+            </el-row>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="dialogHasFreeGiftVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="commitCancelDeliveryOrder(1)">确 定</el-button>
+            </span>
+        </el-dialog>
+        <!--退款明细 end-->
     </el-container>
 </template>
 <style lang="scss">
@@ -133,9 +174,13 @@
                     shippingGroup: {},
                     giftCouponList: [],
                     giftGomeBean: {},
-                    returnRefundSummary: {}
+                    returnRefundSummary: {},
+                    reasonList:[]
                 },
-                cancelRefuseAsideData: {}
+                cancelRefuseAsideData: {},
+                giftCouponList:[],
+                cancelDeliveryOrderDetail:false,
+                dialogHasFreeGiftVisible: false,      //有赠品分摊时的退款明细确认弹窗
             }
         },
         mounted () {
@@ -145,7 +190,13 @@
         filters: {
             formatMoney (value) {
                 "use strict";
-                return '￥' + value.toFixed(2);
+                var value = Number(value);
+                if(value) {
+                    return '￥' + value.toFixed(2);
+                }else{
+                    return '￥0.00';
+                }
+                
             }
         },
         //vuex取值
@@ -155,7 +206,20 @@
             showAccount () {
                 let agent = this.orderDetail;
                 return agent.giftGomeBean && agent.giftGomeBean != null;
-            }
+            },
+            addCount(){ //计算金额已扣美豆
+                if(this.orderDetail.giftGomeBean && this.orderDetail.giftGomeBean.needReturnGomeBeanNum){
+                    var needReturnGomeBeanNum = this.orderDetail.giftGomeBean.needReturnGomeBeanNum;
+                }else{
+                    var needReturnGomeBeanNum = 0;
+                };
+                if(this.orderDetail.giftCouponShare && this.orderDetail.giftCouponShare.deductionGomeBeanNum){
+                    var deductionGomeBeanNum = this.orderDetail.giftCouponShare.deductionGomeBeanNum;
+                }else{
+                    var deductionGomeBeanNum = 0;
+                };
+                return needReturnGomeBeanNum+deductionGomeBeanNum;
+            },
         },
         components: {
           commonCancelRefuseTable,
@@ -228,13 +292,17 @@
                               _this.orderDetail.submittedDate = Utils.formatDateTime(_this.orderDetail.submittedDate, 'minute');
                             }
                             if (_this.orderDetail.returnRefundSummary) {
-                                _this.deductGomeBeanAmount = _this.orderDetail.returnRefundSummary.deductGomeBeanAmount;        //美豆还需要扣的金额
+                                //_this.deductGomeBeanAmount = _this.orderDetail.returnRefundSummary.deductGomeBeanAmount;        //美豆还需要扣的金额
+                                //不足美豆现金抵扣值
+                                _this.deductGomeBeanAmount = _this.orderDetail.returnRefundSummary.realDeductAmount;
                                 _this.deductCouponAmount = _this.orderDetail.returnRefundSummary.deductCouponAmount;            //美券还需要扣的金额
 //                                _this.realDeductAmount = parseFloat(_this.deductGomeBeanAmount) + parseFloat(_this.deductCouponAmount);                 //实扣总金额 = 美豆扣款（未勾选不同意扣款）+美券扣款（未勾选不同意扣款）；(来源PRD)
 //                                _this.suggestRefundAmount = parseFloat(_this.orderDetail.realPayAmount) - parseFloat(_this.realDeductAmount);           //实退款总金额 = 商品支付实付款总金额 - 实扣款总金额；(来源PRD)
                                 //一期没有促销券信息，计算时去掉券的金额值
                                 _this.realDeductAmount = parseFloat(_this.deductGomeBeanAmount);                                                        //实扣总金额 = 美豆扣款（未勾选不同意扣款）+美券扣款（未勾选不同意扣款）；(来源PRD)
-                                _this.suggestRefundAmount = parseFloat(_this.orderDetail.realPayAmount) - parseFloat(_this.realDeductAmount);           //实退款总金额 = 商品支付实付款总金额 - 实扣款总金额；(来源PRD)
+                               // _this.suggestRefundAmount = parseFloat(_this.orderDetail.realPayAmount) - parseFloat(_this.realDeductAmount);           //实退款总金额 = 商品支付实付款总金额 - 实扣款总金额；(来源PRD)
+                                _this.suggestRefundAmount = _this.orderDetail.returnRefundSummary.suggestRefundAmount; 
+                                
                             }
                             if (_this.orderDetail.shippingGroup && _this.orderDetail.shippingGroup.commerceItems && _this.orderDetail.shippingGroup.commerceItems.length > 0) {
                                 _this.orderDetail.shippingGroup.commerceItems = _this.orderDetail.shippingGroup.commerceItems.map((item, index) => {
@@ -258,6 +326,13 @@
                                     memberInfo,
                                     orderPriceInfo,
                                     _this.orderDetail.shippingGroup);
+                            //美券
+                            if(this.orderDetail.giftCouponList){
+                                this.orderDetail.giftCouponList.forEach((item, index) => {
+                                    let newitem = {couponId:item.couponId,ticketNo:item.ticketNo,state:item.state,processType:item.processType,expirationDate:item.expirationDate,couponShareAmount:item.couponShareAmount,couponGomebeanDeductAmount:item.couponGomebeanDeductAmount};
+                                    this.giftCouponList.push(newitem);
+                                });    
+                            };     
                         } else {
                             _this.loading = false;
                         }
@@ -302,9 +377,12 @@
                             deductCouponAmount: this.deductCouponAmount,
                             realDeductAmount: this.realDeductAmount,
                             maxRefundAmount: this.orderDetail.returnRefundSummary.realDeductAmount,
-                            suggestRefundAmount: this.suggestRefundAmount < 0 ? 0 : this.suggestRefundAmount
+                            //suggestRefundAmount: this.suggestRefundAmount < 0 ? 0 : this.suggestRefundAmount,
+                            suggestRefundAmount: this.suggestRefundAmount,
+                            returnDepositAmount:this.orderDetail.useDepositAmount,//定金退款金额
                         },
-                        handleMethod: handleMethod
+                        handleMethod: handleMethod,
+                        giftCouponList:this.giftCouponList,
                     };
                 }
                 //撤消取消
@@ -313,7 +391,7 @@
                         storeCode: this.orderDetail.storeCode,                                  //销售门店代码
                         orderId: this.orderDetail.orderId,                                      //订单号
                         shippingGroupId: this.orderDetail.shippingGroup.shippingGroupId,        //配送单号
-                        handleMethod: handleMethod
+                        handleMethod: handleMethod,
                     };
                 }
                 API.commitCancelDeliveryOrder(params).then(response => {
@@ -336,15 +414,20 @@
              * 0撤消取消
              */
             handleShowDialog(handleMethod) {
-              if (handleMethod && handleMethod == 1) {
-                if (this.supplyGomeBeanNum && this.supplyGomeBeanNum > 0) {
-                  this.dialogBeanNumberVisible = true;
+                if (handleMethod && handleMethod == 1) {
+                    if (this.supplyGomeBeanNum && this.supplyGomeBeanNum > 0) {
+                        this.dialogBeanNumberVisible = true;
+                    } else {
+                        
+                        if (this.suggestRefundAmount || this.orderDetail.gomeBeansCount || this.orderDetail.returnRefundSummary) {
+                            this.dialogHasFreeGiftVisible = true;
+                        } else {
+                            this.dialogAgreeVisible = true;
+                        }
+                    }
                 } else {
-                  this.dialogAgreeVisible = true;
+                    this.dialogNotAgreeVisible = true;
                 }
-              } else {
-                this.dialogNotAgreeVisible = true;
-              }
             },
             //关闭撤销取消弹窗
             handleNotAgreeClose() {
@@ -358,6 +441,10 @@
             handleBeanNumberClose() {
               this.dialogBeanNumberVisible = false;
               this.$router.go(0);//页面刷新
+            },
+             //关闭二次确认弹窗
+            handleFreeGiftClose() {
+                this.dialogHasFreeGiftVisible = false;
             },
         }
     }

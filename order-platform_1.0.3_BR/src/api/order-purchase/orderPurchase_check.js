@@ -7,12 +7,12 @@ export default {
  // http://pcorderview.atguat.com.cn/queryGuiderOrderList
   //商品列表查询
   queryGuiderOrderList: params => {
-    return API.POST(Env.pcorderview+'/queryGuiderOrderList', params)
+    return API.POST(Env.pcsgpview+'/queryGuiderOrderList', params,'application/json;charset=UTF-8')
   },
   //http://pcorderview.atguat.com.cn/queryMemberInfo
   //会员卡号或手机号
   cardNumber: params => {
-    return API.POST(Env.pcorderview+'/queryMemberInfo', params)
+    return API.POST(Env.pcsgpview+'/queryMemberInfo', params,'application/json;charset=UTF-8')
   },
   //http://pcorderview.atguat.com.cn/queryEmployeeInfoByAccount
   //导购员编号
@@ -31,6 +31,6 @@ export default {
   },
   //删除导购单
   deleteGuiderOrder: params => {
-    return API.POST(Env.pcorderview+'/deleteGuiderOrder', params)
+    return API.POST(Env.pcsgpview+'/deleteSGP', params,'application/json;charset=UTF-8')
   }
 }

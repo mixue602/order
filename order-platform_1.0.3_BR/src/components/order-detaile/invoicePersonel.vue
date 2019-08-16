@@ -2,7 +2,8 @@
 <div class="invoice">
     <el-form :model="invoiceInfo" :rules="rules" ref="invoiceInfo" label-width="100px">
         <el-form-item label="抬头内容：" prop="invoiceHead" class="mt15">
-            <el-input v-model="invoiceInfo.invoiceHead" placeholder="请输入抬头内容" style="width:400px;" @blur="getData" maxlength="50"></el-input>
+            <el-input :disabled="(cardFlag=='1') ? false : true" v-model="invoiceInfo.invoiceHead" placeholder="请输入抬头内容" style="width:400px;" @blur="getData" maxlength="50"></el-input>
+            <!-- <el-input v-else v-model="invoiceInfo.invoiceHead" placeholder="请输入抬头内容" style="width:400px;" @blur="getData" maxlength="50"></el-input> -->
         </el-form-item>
         <el-form-item label="收票手机：" prop="elecMobile" class="mt15">
             <el-input type="tel" v-model="invoiceInfo.elecMobile" placeholder="请输入手机号码" style="width:400px;" @blur="getData"></el-input>
@@ -19,7 +20,9 @@ export default {
   props: {
     invoiceInfo: {},
     originaltel:'',
-    invoiceInfo2:{}
+    invoiceInfo2:{},
+    allowance:false,
+    cardFlag:0,
   },
   data() {
     //检查抬头内容
@@ -98,25 +101,25 @@ export default {
     };
     //检查邮箱
     var checkEmail = (rule, value, callback) => {
-      var that = this;
-      if (value != "" && value != null) {
-        var reg = /^[a-zA-Z0-9_]+[a-zA-Z0-9_\-\.]+[a-zA-Z0-9_]+@[\w-]+\.[\w-]+$|^[a-zA-Z0-9_]+[a-zA-Z0-9_\-\.]+[a-zA-Z0-9_]+@[\w-]+\.[\w-]+\.[\w-]+$/;
-        if (!reg.test(value)) {
-          that.invoicePersonel.isEmailNull = false;
-          callback(new Error("请输入正确的邮箱地址"));
-        } else {
-          callback();
-          that.invoicePersonel.isEmailNull = true;
-        }
-      }else if(value == "" || value == null){
-           if(that.invoicePersoneloriginal.elecMail==''){//如果有默认数据取默认数据
+        var that = this;
+        if (value != "" && value != null) {
+            var reg = /^[a-zA-Z0-9_]+[a-zA-Z0-9_\-\.]+[a-zA-Z0-9_]+@[\w-]+\.[\w-]+$|^[a-zA-Z0-9_]+[a-zA-Z0-9_\-\.]+[a-zA-Z0-9_]+@[\w-]+\.[\w-]+\.[\w-]+$/;
+            if (!reg.test(value)) {
             that.invoicePersonel.isEmailNull = false;
-            return callback(new Error("请输入正确的邮箱地址"));
-          }else{
-              that.invoicePersonel.isEmailNull = true;
-              that.invoiceInfo.elecMail =that.invoicePersoneloriginal.elecMail;
-          }  
-      }
+            callback(new Error("请输入正确的邮箱地址"));
+            } else {
+            callback();
+            that.invoicePersonel.isEmailNull = true;
+            }
+        }else if(value == "" || value == null){
+            if(that.invoicePersoneloriginal.elecMail==''){//如果有默认数据取默认数据
+                that.invoicePersonel.isEmailNull = false;
+                return callback(new Error("请输入正确的邮箱地址"));
+            }else{
+                that.invoicePersonel.isEmailNull = true;
+                that.invoiceInfo.elecMail =that.invoicePersoneloriginal.elecMail;
+            }  
+        }
     };
     var checkEmail2 = (rule, value, callback) => {
         var that = this;
@@ -133,31 +136,32 @@ export default {
         }
     };
     return {
-      rules: {
-        invoiceHead: [
-            { required: true, validator: checkHead, trigger: "blur" },
-            { validator: checkHead2, trigger: "change" }
-        ],
-        elecMobile: [
-          { required: true, validator: checkmMobile, trigger: "blur" },
-          { validator: validateNumber, trigger: "change" }
-        ],
-        elecMail: [{ validator: checkEmail, trigger: "blur" },
-        { validator: checkEmail2, trigger: "change" }
-        ]
-      },
-      //invoiceInfo: JSON.parse(JSON.stringify(this.invoiceInfoP)),
-     // invoiceInfo: this.invoiceInfoP,
-      invoicePersonel: {
-        invoice: {       
+        rules: {
+            invoiceHead: [
+                { required: true, validator: checkHead, trigger: "blur" },
+                { validator: checkHead2, trigger: "change" }
+            ],
+            elecMobile: [
+            { required: true, validator: checkmMobile, trigger: "blur" },
+            { validator: validateNumber, trigger: "change" }
+            ],
+            elecMail: [{ validator: checkEmail, trigger: "blur" },
+            { validator: checkEmail2, trigger: "change" }
+            ]
         },
-        headType: "0",
-        isHeadNull: true,
-        isTaxpayerNoNull: true,
-        isMobileNull: true,
-        isEmailNull: true
-      },
-      invoicePersoneloriginal:JSON.parse(JSON.stringify(this.invoiceInfo2)),
+        //invoiceInfo: JSON.parse(JSON.stringify(this.invoiceInfoP)),
+        // invoiceInfo: this.invoiceInfoP,
+        invoicePersonel: {
+            invoice: {       
+            },
+            headType: "0",
+            isHeadNull: true,
+            isTaxpayerNoNull: true,
+            isMobileNull: true,
+            isEmailNull: true
+        },
+        invoicePersoneloriginal:JSON.parse(JSON.stringify(this.invoiceInfo2)),       
+        //defaultHead:this.invoiceInfo.invoiceHead == undefined ? '' :JSON.parse(JSON.stringify(this.invoiceInfo.invoiceHead)),
     };
   },
   methods: {

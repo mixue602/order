@@ -4,6 +4,11 @@
       <el-row class="order_search_box">
         <el-form  :inline="true" :model="form" ref="form" :rules="rules" label-width="150px" size="mini" >
             <el-row>
+                <el-form-item label="商品品类：" class="categorybox">
+                    <g-category v-model="categoryprop"></g-category>
+                </el-form-item>
+            </el-row>
+            <el-row>
                 <el-col :span="24">
                     <el-form-item label="订单号："  prop="orderId">
                         <el-input  v-model.trim="form.orderId" placeholder="请输入订单号" ></el-input>
@@ -26,22 +31,22 @@
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="开单时间：" v-bind:class="{iserror:timeError}">
-                        <el-date-picker type="date" placeholder="选择日期" :picker-options="pickerStart" v-model="form.beginTime" @change="timeLimit" style="width: 125px;" :editable="false"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择开始日期" :picker-options="pickerStart" v-model="form.beginTime" @change="timeLimit" style="width: 135px;" :editable="false"></el-date-picker>
                         <div class="el-form-item__error" v-if="timeError">{{errorTime}}</div>
                         <span>-</span>
-                        <el-date-picker type="date" placeholder="选择日期" :picker-options="pickerEnd" v-model="form.endTime" @change="timeLimit" style="width: 125px;" :editable="false"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择结束日期" :picker-options="pickerEnd" v-model="form.endTime" @change="timeLimit" style="width: 135px;" :editable="false"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="24">
-                    <el-form-item label="导购员编号：" v-bind:class="{iserror:guiderCodeError}" prop="guiderCode">
-                        <el-col :span="14" v-if="LOGINDATA.storeStaffId==null">
-                            <el-input v-model.trim="form.guiderCode" placeholder="请输入导购员编号"    @keyup.enter.native="guiderCodeEvent"><i slot="suffix" class="el-input__icon icon iconfont" @click="guiderCodeEvent">&#xe61c;</i></el-input>
+                    <el-form-item label="员工编号：" v-bind:class="{iserror:guiderCodeError}" prop="guiderCode">
+                        <el-col :span="14" v-if="LOGINDATA.storeStaffId==null && !categoryprop.isCheckMyself">
+                            <el-input v-model.trim="form.guiderCode" placeholder="请输入员工编号"    @keyup.enter.native="guiderCodeEvent"><i slot="suffix" class="el-input__icon icon iconfont" @click="guiderCodeEvent">&#xe61c;</i></el-input>
                             <div class="el-form-item__error"  v-if="guiderCodeError">{{errorGuiderCode}}</div>
                         </el-col>
                         <el-col :span="14" v-else>
-                            <el-input v-model.trim="form.guiderCode" placeholder="请输入导购员编号"  disabled   @keyup.enter.native="guiderCodeEvent"><i slot="suffix" class="el-input__icon icon iconfont">&#xe61c;</i></el-input>
+                            <el-input v-model.trim="form.guiderCode" placeholder="请输入员工编号"  disabled   @keyup.enter.native="guiderCodeEvent"><i slot="suffix" class="el-input__icon icon iconfont">&#xe61c;</i></el-input>
                             <div class="el-form-item__error" v-if="guiderCodeError">{{errorGuiderCode}}</div>
                         </el-col>
                         <el-col :span="10">
@@ -121,13 +126,6 @@
                     <!-- 商品编码搜索框弹窗  结束-->
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col :span="24">
-                    <el-form-item label="选择门店：">
-                        <g-closeshop class="demo-gcs" v-model="closeshop" @changeend="changeend" placeholder="请选择"></g-closeshop>
-                    </el-form-item>                     
-                </el-col>
-            </el-row>
             <el-row class="clearfix controlbox aligncenter">
                 <el-col :span="24">
                     <el-form-item>
@@ -143,7 +141,7 @@
         
         <el-table :data="tableData" border style="width: 100%" :show-header="true">
             <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
-            <el-table-column prop="storeName" label="销售部门" align="center" ></el-table-column>
+            <el-table-column prop="storeName" label="销售门店" align="center" ></el-table-column>
             <el-table-column prop="orderId" label="订单号" align="center" ></el-table-column>
             <el-table-column prop="shippingGroupId" label="配送单号" align="center" ></el-table-column>
             <el-table-column prop="memberCardNo" label="会员卡号" align="center" ></el-table-column>
@@ -200,7 +198,6 @@
   import {mapState,mapActions} from  'vuex';
   import API from '@/api/order-purchase/orderPurchase_delate';
    import { formatDate } from "@/common/time";
-   import { Message } from 'element-ui';
   export  default {
     data() {
         var validatorOderid = (rule, value, callback) => {
@@ -237,7 +234,7 @@
         var validateGuiderCode = (rule, value, callback) => {
             var newRegex = /^[0-9a-zA-Z]*$/g;
             if (!newRegex.test(value)) {
-                callback(new Error('导购员编号只能是数字和字母'));
+                callback(new Error('员工编号只能是数字和字母'));
                 this.guiderCodeError=false;
                 this.guider=true
             }else if (value ==''){
@@ -308,7 +305,6 @@
             guiderName:'',
             skuNo:'', //商品编号
             skuNoName:'',
-            storeCode:''//门店
         },
         pager:{
             currentPage:1,
@@ -375,9 +371,9 @@
                 
             }
         },
-        closeshop:{//门店
-          value:"",
-          options:[{"storeCode":1,storeName:"sss"},{"storeCode":2,storeName:"ddd"}]
+        categoryprop:{//选择品类
+            categoryCode:null,
+            isDirector:false,//是否是主任
         }
       };
     },
@@ -391,6 +387,10 @@
         if(this.LOGINDATA.storeStaffId != null){
             this.form.guiderCode =this.LOGINDATA.storeStaffId;
             this.guiderCode2=this.LOGINDATA.storeStaffId;
+        };
+        //判断是不是主任
+        if(this.LOGINDATA.isDirector == 1){
+            this.categoryprop.isDirector = true;
         }
     },
     methods:{
@@ -425,8 +425,7 @@
             this.searchData=[];
             this.skuNo2='';
             this.memberCardNoPamas='';
-            this.form.storeCode="";               
-            this.closeshop.value="";
+            this.categoryprop.categoryCode = "reset";//品类编码
         },
         //点击查询按钮
       searchEvent(val){
@@ -444,7 +443,7 @@
         var timeError=that.timeError;
         var beginTime=that.form.beginTime;
         var endTime=that.form.endTime;
-        var storeCode=that.form.storeCode;
+        var categoryCode=that.categoryprop.categoryCode;
         var reg=/^[A-Za-z0-9]+$/;
         if(!reg.test(memberCardNo) || cardName==''){
             memberCardNo='';  
@@ -472,6 +471,9 @@
             beginTime=null;
             endTime=null;
         }
+        if(that.categoryprop.isCheckMyself){
+            guiderCode=that.LOGINDATA.employeeId;
+        };
           var data={
                 "orderId":orderId,     
                 "startSubmittedDate":beginTime,
@@ -481,7 +483,7 @@
                 "skuNo":skuNo,
                 "currentPage":currentPage,
                 "pageSize":pageSize,
-                "storeCode":storeCode
+                "skuCategoryIds":categoryCode,
               }
             if(val){
                 //点击翻页按钮
@@ -491,12 +493,16 @@
                this.data2=data;
                data.currentPage=1;
                if(!this.orderIds && !this.timeError && !this.card && !this.guider && !this.skuNo && !this.cardNumError && !this.guiderCodeError && !this.skuNoError){
-                   if((beginTime!=null && endTime!=null) || orderId!='' || memberCardNo!='' || skuNo!='' || guiderCode!='' || storeCode !=''){
+                   if((beginTime!=null && endTime!=null) || orderId!='' || memberCardNo!='' || skuNo!='' || guiderCode!='' || categoryCode!=null){
                          that.orderlist(data)
                     }else{
                         if(this.orderIds  || this.timeError || this.card){
                         }else{
-                            Message.warning('请至少输入一个查询条件');
+                           // Message.warning('请至少输入一个查询条件');
+                            that.$message({
+                                message: '请至少输入一个查询条件',
+                                type: 'warning'
+                            });
                         }
                         
                     }
@@ -512,7 +518,11 @@
                 that.pager=data.response.pager;
             }else{
                 if(data.respMsg){
-                    Message.warning(data.respMsg);
+                   // Message.warning(data.respMsg);
+                    that.$message({
+                        message: data.respMsg,
+                        type: 'warning'
+                    });
                 }
                 that.tableData=[];
             }
@@ -630,7 +640,11 @@
                     that.skuNoNameError=false;
                 }else{
                     if(data.respMsg){
-                        Message.warning(data.respMsg);
+                        //Message.warning(data.respMsg);
+                        that.$message({
+                            message: data.respMsg,
+                            type: 'warning'
+                        });
                     }else{
                         that.skuNoNameError=true;
                     }
@@ -719,7 +733,11 @@
       delateFormEvent(){
           var that=this;
           if(this.delateForm.deleteReason==''){
-              Message.warning('请选择删单原因');
+             // Message.warning('请选择删单原因');
+                that.$message({
+                    message: '请选择删单原因',
+                    type: 'warning'
+                });
               return false;
           }else{
               var data={
@@ -729,15 +747,27 @@
                 }
                 API.deleteOrder(data).then(function(val){
                         if(val.success){
-                            Message.success({
-                                message: '删除成功',
+                            // Message.success({
+                            //     message: '删除成功',
+                            //     duration:5000,
+                            //     onClose:function(){
+                            //         that.searchEvent(that.data2);
+                            //     }
+                            // });
+                            that.$message({
+                                message:'删除成功',
                                 duration:5000,
+                                type: 'success',
                                 onClose:function(){
                                     that.searchEvent(that.data2);
                                 }
                             });
                         }else{
-                            Message.error(val.respMsg);
+                           // Message.error(val.respMsg);
+                            that.$message({
+                                message: val.respMsg,
+                                type: 'error'
+                            });
                         }
                         that.delateForm.deleteReason='';
                 });
@@ -752,9 +782,6 @@
           this.data2.currentPage = val; 
           this.searchEvent(this.data2);
       },
-      changeend(l1,l2){ //选择门店选择完之后的回调函数l1:storeName,l2:storeCode
-        this.form.storeCode =l2;
-      }
      
     },
      //转换日期格式
@@ -831,13 +858,14 @@ thead.has-gutter th{
      overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
      text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 }
-/* 门店 */
-.gcloseshop{
-    width:180px;
-    z-index:200;
+.categorybox .el-form-item__label,.categorybox .el-form-item__content{
+    float:left;
 }
-.gcs-body{
-    min-width:180px;
+.categorybox {
+    width:100%
+}
+.categorybox .el-form-item__content{
+    width:60%
 }
 </style>
 

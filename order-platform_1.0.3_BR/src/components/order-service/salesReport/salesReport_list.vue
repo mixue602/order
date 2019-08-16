@@ -10,10 +10,14 @@
              data-before="查询条件">
       <!--表单查询 start-->
       <!--销售部门 start-->
-      <commonSalesReportTree @getSaleDepartmentsId="getSaleDepartmentsId" ref="salesReportTree"></commonSalesReportTree>
+      <el-row class="input-group">
+        <commonSalesReportTree @getSaleDepartmentsId="getSaleDepartmentsId" ref="salesReportTree"></commonSalesReportTree>
+      </el-row>
       <!--销售部门 end-->
       <!--品类 start-->
-      <commonSalesReportCategoryTree @getBrandId="getBrandId" ref="salesReportTree"></commonSalesReportCategoryTree>
+      <el-row class="input-group">
+        <commonSalesReportCategoryTree @getBrandId="getBrandId" ref="salesReportTreebrand"></commonSalesReportCategoryTree>
+      </el-row>
       <!--品类 end-->
       <el-row class="input-group">
         <!-- <el-form-item label="所属分部：">
@@ -34,7 +38,7 @@
             </el-option>
           </el-select>
         </el-form-item> -->
-        <el-form-item label="品牌编码：">
+        <el-form-item label="品牌编码：" style="width:426px;">
           <el-input style="width:200px" placeholder="请输入品牌编码" v-model="form.brand"></el-input>
           <el-button type="text" @click="showDialog('dialogGetBrandCode')">查看品牌编码</el-button>
         </el-form-item>
@@ -63,7 +67,7 @@
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="供应商编码：">
+        <el-form-item label="供应商编码：" style="width:426px;">
           <el-input style="width:188px" placeholder="请输入供应商编码" v-model="form.supplierCode"></el-input>
           <el-button type="text" @click="showDialog('dialogGetSupplierCode')">查看供应商编码</el-button>
         </el-form-item>
@@ -384,16 +388,20 @@
         configItmesAll: [
           {label: "分部代码", prop: "salesOrgCode", className: 'hide', width: 100, disabled: false},
           {label: "分部名称", prop: "salesOrgName", className: 'show', width: 150, disabled: false},
+          // {label: "公司代码", prop: "salesOrgCode", className: 'hide', width: 100, disabled: false},
+          // {label: "公司名称", prop: "salesOrgName", className: 'show', width: 150, disabled: false},
           {label: "销售门店代码", prop: "storeCode", className: 'hide', width: 120, disabled: false},
           {label: "销售门店", prop: "storeName", className: 'show', width: 150, disabled: false},
+          {label: "原销售门店代码", prop: "closedShopCode", className: 'hide', width: 150, disabled: false},
+          {label: "原销售门店", prop: "closedShopName", className: 'hide', width: 150, disabled: false},
           {label: "事业部门代码", prop: "mainCategoryCode", className: 'hide', width: 120, disabled: false},
           {label: "事业部门名称", prop: "mainCategoryName", className: 'show', width: 120, disabled: false},//原十大品类
+          {label: "二级品类编码", prop: "category2Code", className: 'hide', width: 120, disabled: false},//二级品类编码
+          {label: "二级品类名称", prop: "category2Name", className: 'show', width: 120, disabled: false},//二级品类名称
           {label: "品类代码", prop: "categoryCode", className: 'hide', width: 100, disabled: false},
           {label: "品类名称", prop: "categoryName", className: 'show', width: 100, disabled: false},//四级品类
           {label: "品牌代码", prop: "brandCode", className: 'hide', width: 100, disabled: false},
           {label: "品牌名称", prop: "brandName", className: 'show', width: 100, disabled: false},
-          {label: "二级品类编码", prop: "category2Code", className: 'hide', width: 120, disabled: false},//二级品类编码
-          {label: "二级品类名称", prop: "category2Name", className: 'show', width: 120, disabled: false},//二级品类名称
           {label: "业务机型代码", prop: "bizType", className: 'hide', width: 120, disabled: false},
           {label: "业务机型名称", prop: "bizTypeName", className: 'hide', width: 120, disabled: false},
           {label: "商品编码", prop: "skuNo", className: 'show', width: 100, disabled: false},
@@ -499,6 +507,7 @@
         },
         showDownloadLink: false,
         cookieDomain: '',
+        downloadUrl:''
 
       };
     },
@@ -538,10 +547,14 @@
         this.form.storeCodes = [];
         this.form.sellerCode = "";
         this.form.deliveryId = "";
+        this.form.mainCategoryCode = "";//品类编码
+        this.form.category2Code = "";//二级分类编码
         //重置操作需要清空分部列表和部门树勾选状态，因为通过获取dom元素来更新数据，所以放在this.$nextTick()中
         this.$nextTick(() => {
           _this.$refs.salesReportTree.checkedTreeItems = [];
+          _this.$refs.salesReportTreebrand.checkedTreeItems = [];
           _this.$refs.salesReportTree.setCheckedKeys();
+          _this.$refs.salesReportTreebrand.setCheckedKeys();
         });
         this.__queryReturnRequestList();
         this._initFormBrand();
@@ -943,6 +956,7 @@
               __down(response.data);
               _this.showProgerssBar = false;
               _this.percentage = 0;
+              _this.downloadUrl = response.data.response;
 
             } else {
               __errorhandle(response.respMsg);
@@ -965,7 +979,8 @@
             if (response) {
               if (response.respCode && response.respCode == 1) {
                 _this.showDownloadLink = false;
-                window.open('//' + _this.form.cookieDomain + '/down?storeCode=' + _this.form.userId,'_self');
+                //window.open('//' + _this.form.cookieDomain + '/down?storeCode=' + _this.form.userId,'_self');
+                window.open( _this.downloadUrl+'/downloadSalesItemReportZipRebuild?storeCode=' + _this.form.userId,'_self');
                 return false;
               } else {
                 if (response.respMsg) {

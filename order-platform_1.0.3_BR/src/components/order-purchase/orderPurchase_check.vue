@@ -5,6 +5,11 @@
       <el-row class="order_search_box">
         <el-form  :inline="true" :model="form" :rules="rules" ref="form"  label-width="180px" size="mini" >
             <el-row>
+                <el-form-item label="商品品类：" class="categorybox">
+                    <g-category v-model="categoryprop"></g-category>
+                </el-form-item>
+            </el-row>
+            <el-row>
                 <el-col  :span="24">
                     <el-form-item label="会员卡号或手机号：" v-bind:class="{iserror:cardNumError}" prop="memberCardNo">
                         <el-col :span="14">
@@ -20,18 +25,18 @@
             </el-row>
             <el-row>
                 <el-col :span="24" >
-                    <el-form-item label="导购员编号：" v-bind:class="{iserror:guiderCodeError}" prop="guiderCode" v-if="LOGINDATA.storeStaffId==null">
+                    <el-form-item label="员工编号：" v-bind:class="{iserror:guiderCodeError}" prop="guiderCode" v-if="LOGINDATA.storeStaffId==null && !categoryprop.isCheckMyself">
                         <el-col :span="14" >
-                            <el-input v-model.trim="form.guiderCode" placeholder="请输入导购员编号"  @keyup.enter.native="guiderCodeEvent"><i slot="suffix" class="el-input__icon icon iconfont" @click="guiderCodeEvent">&#xe61c;</i></el-input>
+                            <el-input v-model.trim="form.guiderCode" placeholder="请输入员工编号"  @keyup.enter.native="guiderCodeEvent"><i slot="suffix" class="el-input__icon icon iconfont" @click="guiderCodeEvent">&#xe61c;</i></el-input>
                             <div class="el-form-item__error" v-if="guiderCodeError">{{errorGuiderCode}}</div>
                         </el-col>
                         <el-col :span="10">
                             <el-input :value="form.guiderName" readonly="true" class="bg"></el-input>
                         </el-col>
                     </el-form-item>
-                    <el-form-item label="导购员编号：" v-else>
+                    <el-form-item label="员工编号：" prop="guiderCode" v-else>
                         <el-col :span="14">
-                            <el-input v-model.trim="form.guiderCode" placeholder="请输入导购员编号" disabled><i slot="suffix" class="el-input__icon icon iconfont">&#xe61c;</i></el-input>
+                            <el-input v-model.trim="form.guiderCode" placeholder="请输入员工编号" disabled><i slot="suffix" class="el-input__icon icon iconfont">&#xe61c;</i></el-input>
                             <div class="el-form-item__error" v-if="guiderCodeError">{{errorGuiderCode}}</div>
                         </el-col>
                         <el-col :span="10">
@@ -138,12 +143,12 @@
             
         <el-table :data="tableData" border  style="width:100%" :show-header="true" >
             <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
-            <el-table-column prop="storeName" label="销售部门" align="center"></el-table-column>
+            <el-table-column prop="storeName" label="销售门店" align="center"></el-table-column>
             <el-table-column prop="memberCardNo" label="会员卡号" align="center"></el-table-column>
             <el-table-column prop="guiderOrderQuantity" label="商品数量" align="center"></el-table-column>
             <el-table-column prop="guiderOrderMoney" label="销售金额" align="center"></el-table-column>
             <el-table-column prop="guiderCode" label="导购员编号" align="center"></el-table-column>
-            <el-table-column prop="guiderName" label="导购员" align="center"></el-table-column>
+            <el-table-column prop="guiderName" label="导购员姓名" align="center"></el-table-column>
             <el-table-column prop="guiderOrderTime" label="加购时间" align="center" >
                 <template slot-scope="scope">{{scope.row.guiderOrderTime | formatDate}}</template>
             </el-table-column>
@@ -188,7 +193,6 @@
   import API from '@/api/order-purchase/orderPurchase_check';
   import product_check from '@/api/order-purchase/product_check';
   import { formatDate } from "@/common/time";
-  import { Message } from 'element-ui';
   export  default {
     data() {
         var validateMemberCardNo = (rule, value, callback) => {
@@ -215,7 +219,7 @@
         var validateGuiderCode = (rule, value, callback) => {
             var newRegex = /^[0-9a-zA-Z]*$/g;
             if (!newRegex.test(value)) {
-                callback(new Error('导购员编号只能是数字和字母'));
+                callback(new Error('员工编号只能是数字和字母'));
                 this.guiderCodeError=false;
                 this.guider=true;
             }else if (value ==''){
@@ -328,6 +332,10 @@
                return time.getTime() > Date.now() || time.getTime() + 86400000*2 < Date.now() || time.getTime() < d
             }    
         },
+        categoryprop:{//选择品类
+            categoryCode:null,
+            isDirector:false,//是否是主任
+        }
         
       };
     },
@@ -341,7 +349,11 @@
         if(this.LOGINDATA.storeStaffId != null){
             this.form.guiderCode =this.LOGINDATA.storeStaffId;
             this.guiderCode2=this.LOGINDATA.storeStaffId;
-        } 
+        };
+         //判断是不是主任
+        if(this.LOGINDATA.isDirector == 1){
+            this.categoryprop.isDirector = true;
+        }
     },
     methods:{
       //查询会员卡 手机号
@@ -503,7 +515,11 @@
                     that.skuNoNameError=false;
                 }else{
                         if(data.respMsg){
-                            Message.warning(data.respMsg);
+                            //Message.warning(data.respMsg);
+                            that.$message({
+                                message: data.respMsg,
+                                type: 'warning'
+                            });
                         }else{
                             that.skuNoNameError=true;
                         }
@@ -559,6 +575,7 @@
         this.searchData=[];
         this.memberCardNoPamas='';        
         this.skuNo2='';
+        this.categoryprop.categoryCode = "reset";//品类编码
       },
       //查询按钮
       searchEvent(val){
@@ -574,6 +591,7 @@
           var timeError=that.timeError;
           var beginTime=that.form.beginTime;
           var endTime=that.form.endTime;
+          var categoryCode=that.categoryprop.categoryCode;
           var reg=/^[A-Za-z0-9]+$/;
           if(!reg.test(memberCardNo) || cardName==''){
               memberCardNo='';  
@@ -600,6 +618,9 @@
               beginTime='';
               endTime='';
           }
+           if(that.categoryprop.isCheckMyself){
+               guiderCode=that.LOGINDATA.employeeId;
+            };
           var data={
                 "beginTime":beginTime,
                 "endTime":endTime,
@@ -607,7 +628,8 @@
                 "guiderCode":guiderCode,
                 "skuNo":skuNo,
                 "currentPage":currentPage,
-                "pageSize":pageSize
+                "pageSize":pageSize,
+                "skuCategoryIds":categoryCode,
               }
 
             if(val){
@@ -617,10 +639,14 @@
                 this.data2=data;
                 data.currentPage=1;
                 if(!this.card && !this.timeError && !this.guider && !this.skuNo){
-                    if(memberCardNo!='' || guiderCode!='' ||  (beginTime!='' && endTime!='') || skuNo!=''){
+                    if(memberCardNo!='' || guiderCode!='' ||  (beginTime!='' && endTime!='') || skuNo!='' || categoryCode!=null){
                         that.orderlist(data)
                     }else{
-                        Message.warning('请至少输入一个查询条件');
+                        //Message.warning('请至少输入一个查询条件');
+                        that.$message({
+                            message: '请至少输入一个查询条件',
+                            type: 'warning'
+                        });
                     }
                 }
             } 
@@ -633,7 +659,11 @@
                     that.pager=data.response.pager;
             }else{
                 if(data.respMsg){
-                    Message.warning(data.respMsg);
+                    //Message.warning(data.respMsg);
+                    that.$message({
+                        message: data.respMsg,
+                        type: 'warning'
+                    });
                 }
                 that.tableData=[];
             } 
@@ -651,15 +681,28 @@
           this.dialogFormVisible = false;
           API.deleteGuiderOrder({"guiderOrderId":guiderOrderId,"guiderCode":guiderCode,"storeCode":storeCode,"siteId":siteId}).then(function(data){
             if(data.success){
-                Message.success({
-                    message: '删除成功',
+                // Message.success({
+                //     message: '删除成功',
+                //     duration:5000,
+                //     onClose:function(){
+                //         that.searchEvent(that.data2);
+                //     }
+                // });
+                that.$message({
+                    message:'删除成功',
                     duration:5000,
+                    type: 'success',
                     onClose:function(){
                         that.searchEvent(that.data2);
                     }
                 });
+
             }else{
-                Message.error(data.respMsg);
+               // Message.error(data.respMsg);
+                that.$message({
+                    message: data.respMsg,
+                    type: 'error'
+                });
             }
           });
       },
@@ -741,6 +784,15 @@ thead.has-gutter th{
      white-space:nowrap;          /* 不换行 */
      overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
      text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.categorybox .el-form-item__label,.categorybox .el-form-item__content{
+    float:left;
+}
+.categorybox {
+    width:100%
+}
+.categorybox .el-form-item__content{
+    width:60%
 }
 </style>
 

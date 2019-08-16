@@ -8,11 +8,16 @@
                  size="mini"
                  data-before="查询条件">
             <el-row class="input-group">
+                <el-form-item label="商品品类："  class="categorybox">
+                    <g-category v-model="categoryprop"></g-category>
+                </el-form-item>
+            </el-row>
+            <el-row class="input-group">
                 <el-form-item label="退换货单号：" prop="returnRequestId">
                     <el-input v-model="form.returnRequestId" placeholder="请输入退换货单号"></el-input>
                 </el-form-item>
-                <el-form-item label="订单编号：" prop="orderId">
-                    <el-input v-model="form.orderId" placeholder="请输入订单编号"></el-input>
+                <el-form-item label="订单号：" prop="orderId">
+                    <el-input v-model="form.orderId" placeholder="请输入订单号"></el-input>
                 </el-form-item>
                 <el-form-item label="配送单号：" prop="shipId">
                     <el-input v-model="form.shipId" placeholder="请输入配送单号"></el-input>
@@ -42,7 +47,7 @@
                                 class="input-mini"
                                 v-model="form.startDateTime"
                                 type="date"
-                                placeholder="请输入开始日期"
+                                placeholder="选择开始日期"
                                 @blur="pickerTime"
                                 :picker-options="pickerStart">
                         </el-date-picker>
@@ -53,7 +58,7 @@
                                 class="input-mini"
                                 v-model="form.endDateTime"
                                 type="date"
-                                placeholder="请输入结束日期"
+                                placeholder="选择结束日期"
                                 @blur="pickerTime"
                                 :picker-options="pickerEnd">
                         </el-date-picker>
@@ -63,10 +68,10 @@
                 <el-form-item label="会员卡号：" prop="memberCardNo">
                     <el-input v-model="form.memberCardNo" placeholder="请输入会员卡号"></el-input>
                 </el-form-item>
-                <el-form-item label="导购员编号：" prop="employeeId" v-show="showEmployeeInfo">
+                <el-form-item label="员工编号：" prop="employeeId" v-show="showEmployeeInfo">
                     <el-row class="input-mini">
                         <el-input v-model.trim="form.employeeId" :class="{error:showEmployeeNameError}"
-                                  :disabled="disabledEmployeeId" placeholder=" 请输入导购员编号"
+                                  :disabled="disabledEmployeeId" placeholder=" 请输入员工编号"
                                   @keyup.enter.native="queryEmployeeInfoByAccount">
                             <i slot="suffix" class="el-input__icon icon iconfont" @click="queryEmployeeInfoByAccount">&#xe61c;</i>
                         </el-input>
@@ -74,8 +79,8 @@
                     </el-row>
                     <p v-if="showEmployeeNameError" class="employeeNameError">未查询到导购员信息</p>
                 </el-form-item>
-                <el-form-item label="选择门店：">
-                    <g-closeshop class="demo-gcs" v-model="closeshop" @changeend="changeend" placeholder="请选择"></g-closeshop>
+                <el-form-item label="选择门店：" v-show="closeshop.isdata==1" v-if="LOGINDATA.orderplatform_applyService_closeshop">
+                    <g-closeshop class="demo-gcs" v-model="closeshop" placeholder="请选择"></g-closeshop>
                 </el-form-item>
             </el-row>
             <el-row class="btn-group">
@@ -227,7 +232,6 @@
                     employeeId: '',                             //导购员编号
                     employeeName: '',                           //导购员名称
                     guiderCode: '',                             //导购员名称
-                    storeCode:"",                               //门店
                 },
                 formParams: {},
                 rules: {
@@ -274,8 +278,12 @@
                 },
                 closeshop:{//选择门店
                     value:"",
-                    options:[{"storeCode":1,storeName:"sss"}]
+                    isdata:""
                 },
+                categoryprop:{//选择品类
+                    categoryCode:null,
+                    isDirector:false,//是否是主任
+                }
             }
         },
         components: {
@@ -296,7 +304,7 @@
         },
         //vuex取值
         computed: {
-            ...mapState(['LOGINDATA'])
+            ...mapState(['LOGINDATA']),//|| categoryprop.isCheckMyself
         },
         created () {
             this.getReturnRequestInitList();
@@ -319,7 +327,13 @@
             } else {
                 this.showEmployeeInfo = false;
                 this.disabledEmployeeId = false;
-            }
+            };
+            if(this.$route.params.id == 1){
+                //判断是不是主任
+                if(this.LOGINDATA.isDirector == 1){
+                    this.categoryprop.isDirector = true;
+                }
+            };            
         },
         mounted (){
         },
@@ -394,7 +408,7 @@
             },
             //查询服务单列表信息
             queryReturnRequestList (form, currentPage) {
-                let _employeeId = '';
+                let _employeeId = null;
                 if (this.form.employeeName == '') {
                     this.isEmpty = true;
                 }
@@ -411,6 +425,9 @@
                         _employeeId = null;
                     }
                 };
+                if(this.categoryprop.isCheckMyself){//如果是主任仅查看自己开的单
+                    _employeeId=this.LOGINDATA.employeeId;
+                };
                 form = {
                     returnRequestId: this.form.returnRequestId ? this.form.returnRequestId : null,                            //退换货单号
                     orderId: this.form.orderId ? this.form.orderId : null,                                                    //订单编号
@@ -422,7 +439,8 @@
                     endDateTime: this.form.endDateTime ? this.form.endDateTime * 1 + 24 * 60 * 60 * 1000 : null,                                        //申请退换货结束时间
                     memberCardNo: this.form.memberCardNo ? this.form.memberCardNo : null,                                       //会员卡号
                     employeeId: _employeeId,                                                                                     //导购员编号
-                    storeCode:this.form.storeCode ? this.form.storeCode : null,                                                  //门店
+                    storeCode:this.closeshop.value ? this.closeshop.value : null,                                                  //门店
+                    skuCategoryIds:this.categoryprop.categoryCode,                                                              //商品品类
                 };
                 this.formParams = JSON.parse(JSON.stringify(form));
                 const params = Object.assign({},
@@ -491,18 +509,25 @@
                 this.showTimeError = false;
                 this.showEmployeeNameError = false;
                 this.form.employeeName = '';
-                this.$refs[formName].resetFields();
-                this.form.storeCode="";               
+                this.$refs[formName].resetFields();             
                 this.closeshop.value="";
+                this.closeshop.isdata="";
+                this.categoryprop.categoryCode = "reset";//品类编码
             },
             handleSearchByPage (val) {
                 this.isEmpty = false;
                 let form = this.formParams;
                 this.queryReturnRequestList(form, val)
-            },
-            changeend(l1,l2){ //选择门店选择完之后的回调函数l1:storeName,l2:storeCode
-                this.form.storeCode =l2;
             }
-        }
+        },
+        watch: {
+            categoryprop:function(val){
+                if(val.isCheckMyself){//仅查看自己的品类
+                    this.disabledEmployeeId =true
+                }else{
+                    this.disabledEmployeeId =false
+                }
+            }
+        },
     }
 </script>

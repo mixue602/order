@@ -32,7 +32,8 @@ export default {
  pcpayview:"/pcpayview",
  selectfileURL:"//mpf"+url+"/order/creatfileselect", //建档页面url
  selectListURL:"//pcorderview"+url+"/queryArchiveGoodsItemList",//建档查询列表
- pcBilling: "/pccartview"//开单
- // baseURL: '自己模拟地址 或者uat测试地址',
+ pcBilling: "/pccartview",//开单
+ pcsgpview: '/pcsgpview',//导购单换成购物车的接口
+ visualorder:"/visualorder" // 定金翻倍
  
 }

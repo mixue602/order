@@ -3,22 +3,46 @@
       <!-- 检索条件 -->
         <div class="order_search_box clearfix"> 
             <!-- <div class="c_grey mb20">注：带<span class="red">*</span>号的查询条件，必须填写一项</div>       -->
-            <el-form :inline="true" ref="form" :rules="rules" :model="form" label-width="150px" size="mini">
+            <el-form  ref="form" :rules="rules" :model="form" label-width="150px" size="mini">
+                <el-row>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="10" :xl="12">
+                        <el-form-item label="销售门店：" v-show="storeCodes.isdata == 1">
+                            <g-branch v-model="storeCodes"></g-branch>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="14" :xl="12">
+                        <el-form-item label="商品品类：">
+                            <g-category v-model="categoryprop"></g-category>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="10" :xl="12">
+                        <el-form-item label="商品编码：" prop="skuNo" >
+                            <el-input v-model.trim="form.skuNo" placeholder="请输入商品编码" style="width:297px;"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="14" :xl="12">
+                        <el-form-item label="品牌编码：">
+                            <g-brandcode v-model="brandcode"></g-brandcode>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 <el-row>
                     <el-col :xs="24" :sm="24" :md="12" :lg="10" :xl="12">
                         <el-form-item label="订单号：" prop="orderId">
-                            <el-input v-model.trim="form.orderId" placeholder="请输入订单号"></el-input>
+                            <el-input v-model.trim="form.orderId" placeholder="请输入订单号" style="width:296px;"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="12" :lg="14" :xl="12">
                         <el-form-item label="配送单号：" prop="shippingGroupId">
-                            <el-input placeholder="请输入配送单号" v-model.trim="form.shippingGroupId"></el-input>
+                            <el-input placeholder="请输入配送单号" v-model.trim="form.shippingGroupId" style="width:296px;"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>                                                  
                     <el-col :xs="24" :sm="24" :md="12" :lg="10" :xl="12" class="ctrolbox">
-                        <el-form-item label="会员卡或手机号：" prop="memberCarandTeldNo" v-bind:class="{iserror:memberisError}">
+                        <el-form-item label="会员卡号或手机号：" prop="memberCarandTeldNo" v-bind:class="{iserror:memberisError}">
                             <el-col>
                                 <el-input placeholder="请输入会员卡或手机号：" style="width:176px;float:left;" v-model.trim="form.memberCarandTeldNo" size="mini" @keyup.enter.native="memberCarandTeldNofn" class="memberCar_input"><i slot="suffix" class="el-input__icon icon iconfont" @click="memberCarandTeldNofn">&#xe61c;</i></el-input>
                                 <el-input v-model="form.membername" disabled  style="width:120px;float:left"></el-input>
@@ -28,16 +52,16 @@
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="12" :lg="14" :xl="12">
                         <el-form-item label="收货人手机号：" prop="consigneePhone">
-                            <el-input placeholder="请输入手机号"  v-model.trim="form.consigneePhone"></el-input>
+                            <el-input placeholder="请输入收货人手机号"  v-model.trim="form.consigneePhone" style="width:296px;"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :xs="24" :sm="24" :md="12" :lg="10" :xl="12">
                         <el-form-item label="开单时间：" v-bind:class="{iserror:dateerror}">
-                                <el-date-picker placeholder="开始日期" value-format="timestamp" :picker-options="pickerStart" v-model="form.startTime" style="width: 142px;" @change="endtimeblur" class="memberCar_input" :editable="false"></el-date-picker>                    
+                                <el-date-picker placeholder="选择开始日期" value-format="timestamp" :picker-options="pickerStart" v-model="form.startTime" style="width: 142px;" @change="endtimeblur" class="memberCar_input" :editable="false"></el-date-picker>                    
                                 <span>-</span>
-                                <el-date-picker type="date" placeholder="结束日期" value-format="timestamp" :picker-options="pickerEnd" v-model="form.endTime" style="width: 142px;" @change="endtimeblur" class="memberCar_input" :editable="false"></el-date-picker> 
+                                <el-date-picker type="date" placeholder="选择结束日期" value-format="timestamp" :picker-options="pickerEnd" v-model="form.endTime" style="width: 142px;" @change="endtimeblur" class="memberCar_input" :editable="false"></el-date-picker> 
                                 <div class="el-form-item__error" v-if="dateerrorMesg !=''">{{dateerrorMesg}}</div>
                         </el-form-item>
                     </el-col> 
@@ -51,23 +75,23 @@
                 </el-row>  
                 <el-row>
                     <el-col :xs="24" :sm="24" :md="12" :lg="10" :xl="12">
-                        <el-form-item label="导购员编号：" prop="sellerNo" v-bind:class="{iserror:sellerNoisError}" v-if="LOGINDATA.storeStaffId==null">
+                        <el-form-item label="员工编号：" prop="sellerNo" v-bind:class="{iserror:sellerNoisError}" v-if="LOGINDATA.storeStaffId==null && !categoryprop.isCheckMyself">
                             <el-col :span="24">
-                                <el-input placeholder="请输入导购员编号" style="width:176px;float:left;" v-model.trim="form.sellerNo" size="mini" @keyup.enter.native="sellerNofn" class="memberCar_input"><i slot="suffix" class="el-input__icon icon iconfont"  @click="sellerNofn">&#xe61c;</i></el-input>
+                                <el-input placeholder="请输入员工编号" style="width:176px;float:left;" v-model.trim="form.sellerNo" size="mini" @keyup.enter.native="sellerNofn" class="memberCar_input"><i slot="suffix" class="el-input__icon icon iconfont"  @click="sellerNofn">&#xe61c;</i></el-input>
                                 <el-input v-model="form.sellername" disabled style="width:120px;float:left;"></el-input>
                             </el-col>
                             <div class="el-form-item__error" v-if="sellerNoisError">未查询到导购员信息</div>
                         </el-form-item>
-                        <el-form-item label="导购员编号：" v-else>
+                        <el-form-item label="员工编号："  prop="sellerNo"  v-else>
                             <el-col :span="24">
-                                <el-input placeholder="请输入导购员编号" disabled style="width:176px;float:left;" v-model.trim="form.sellerNo" size="mini"  class="memberCar_input"><i slot="suffix" class="el-input__icon icon iconfont">&#xe61c;</i></el-input>
+                                <el-input placeholder="请输入员工编号" disabled style="width:176px;float:left;" v-model.trim="form.sellerNo" size="mini"  class="memberCar_input"><i slot="suffix" class="el-input__icon icon iconfont">&#xe61c;</i></el-input>
                                 <el-input v-model="form.sellername" disabled style="width:120px;float:left;"></el-input>
                             </el-col>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="14" :xl="12">
-                        <el-form-item label="选择门店：">
-                            <g-closeshop class="demo-gcs" v-model="closeshop" @changeend="changeend" placeholder="请选择"></g-closeshop>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="14" :xl="12" v-if="LOGINDATA.orderplatform_orderindex_closeshop">
+                        <el-form-item label="选择门店：" v-show="closeshop.isdata==1">
+                            <g-closeshop class="demo-gcs" v-model="closeshop" placeholder="请选择" style="width:180px;margin-top:-6px;"></g-closeshop>
                         </el-form-item>
                     </el-col>  
                 </el-row>
@@ -82,13 +106,13 @@
         <div>
             <el-table :data="response.list" border style="width: 100%" :show-header="true">
                 <el-table-column type="index" label="序号" width="100" align="center"></el-table-column>
-                <el-table-column prop="storeName" label="销售部门" align="center"></el-table-column>
+                <el-table-column prop="storeName" label="销售门店" align="center"></el-table-column>
                 <el-table-column prop="orderId" label="订单号" align="center"></el-table-column>
                 <el-table-column prop="state" label="订单状态" align="center"></el-table-column>
                 <el-table-column prop="shippingGroupId" label="配送单号" align="center"></el-table-column>
                 <el-table-column prop="shippingGroupState" label="配送单状态" align="center"></el-table-column>
                 <el-table-column prop="memberCardNo" label="会员卡号" align="center"></el-table-column>
-                <el-table-column prop="splitType" label="订单金额" align="center">orderAmount
+                <el-table-column prop="splitType" label="订单金额" align="center">
                     <template slot-scope="scope">
                         <div v-if="scope.row.splitType == 0">
                             {{scope.row.orderAmount}}
@@ -100,11 +124,11 @@
                 </el-table-column>
                 <el-table-column prop="splitType" label="操作" align="center" fixed="right">                   
                     <template slot-scope="scope">
-                        <div v-if="scope.row.splitType == 0">
-                            <router-link  :to="{path:'/order/orderdetailsbeforesplit',query:{orderId:scope.row.orderId,storeCode:scope.row.storeCode}}" target="_blank"><el-button v-if="LOGINDATA.orderplatform_orderList_check || LOGINDATA.orderplatform_orderList_checkbefore" type="text" size="small">查看详情</el-button></router-link>
+                        <div v-if="scope.row.splitType == 0">   
+                            <router-link :to="{path:'/order/orderdetailsbeforesplit',query:{orderId:scope.row.orderId,storeCode:scope.row.storeCode,directorSearchType:directorSearchType}}" target="_blank"><el-button v-if="LOGINDATA.orderplatform_orderList_check || LOGINDATA.orderplatform_orderList_checkbefore" type="text" size="small">查看详情</el-button></router-link>
                         </div>
                         <div v-else-if="scope.row.splitType == 1">
-                            <router-link :to="{path:'/order/orderdetails',query:{orderId:scope.row.orderId,storeCode:scope.row.storeCode,shippingGroupId:scope.row.shippingGroupId}}" target="_blank"><el-button type="text" size="small" v-if="LOGINDATA.orderplatform_orderList_check || LOGINDATA.orderplatform_orderList_checkafter">查看详情</el-button></router-link>
+                            <router-link :to="{path:'/order/orderdetails',query:{orderId:scope.row.orderId,storeCode:scope.row.storeCode,shippingGroupId:scope.row.shippingGroupId,directorSearchType:directorSearchType}}" target="_blank"><el-button type="text" size="small" v-if="LOGINDATA.orderplatform_orderList_check || LOGINDATA.orderplatform_orderList_checkafter">查看详情</el-button></router-link>
                         </div>
                     </template>
                     <!-- <template slot-scope="scope">
@@ -149,7 +173,9 @@
             };
              var validateNumber = (rule, value, callback) => {
                 var orderRegex = /^[0-9]+$/;
-                if (!orderRegex.test(value)) {
+                if(value == ""){
+                    this.consigneePhone=true;
+                }else if (!orderRegex.test(value)) {
                     callback(new Error('填写信息错误，请输入数字'));
                      this.consigneePhone=false;
                 } else {
@@ -222,6 +248,18 @@
                     this.shippingGroupId=true;
                 }
             };
+            var validataNumber1 = (rule, value, callback) => {
+                var orderRegex = /^[0-9]+$/;
+                if (value !=''){
+                    if (!orderRegex.test(value)) {
+                        callback(new Error('填写信息错误，请输入数字'));
+                        this.skuNo=false;
+                    }else {
+                        callback();
+                        this.skuNo=true;
+                    }
+                }
+            };
             return {
                 //isErrorTxt:false,
                 ismember:false,
@@ -256,7 +294,9 @@
                     startEnd:"",
                     memberCardNo:"",//会员卡号
                     guiderCode:"",//请求成功的导购员编号
-                    storeCode:"",//门店
+                    skuNo:"",//商品编码
+                    employeeID:'',//员工编号
+                    isStoreStaff:'0',//销售门店只有总部和大区帐号才会传,门店帐号登录的时候需要传isStoreStaff参数，后端用来做区分：门店传1，非门店传0
                 },
                 formsubmitdata:{},
                 rules: {//校验规则
@@ -275,7 +315,11 @@
                     ],//sellerNo
                     sellerNo:[//导购员编号
                         { validator: validatesellerNo, trigger: 'change' }
-                    ]
+                    ],
+                    //商品编码
+                    skuNo:[
+                        {validator: validataNumber1, trigger: 'blur' }
+                    ],
                 },
                 /** 判断前一个日历的日期不能大于后面的日历日期，且没有到的日期，不能选择 */  
                 pickerStart: {
@@ -314,8 +358,21 @@
                 orderStateList:[],
                 closeshop:{//选择门店
                     value:"",
-                    options:[{"storeCode":1,storeName:"sss"}]
-                }
+                    isdata:""
+                },
+                categoryprop:{//选择品类
+                    categoryCode:null,
+                    isDirector:false,//是否是主任
+                    isCheckMyself:false,//是否仅查看自己开的单
+                },
+                storeCodes:{//销售门店
+                    storeCodes:"",
+                },
+                brandcode:{//品牌编码
+                    value:"",
+                    isError:false
+                },
+                skuNo:true,
             }
         }, 
         methods: {
@@ -345,16 +402,24 @@
                     this.form.sellerNo = "";
                     this.form.guiderCode="";//导购员编号
                 };
-                this.form.storeCode="";               
+                this.closeshop.isdata="";               
                 this.closeshop.value="";
+                this.categoryprop.categoryCode = "reset";//品类编码
+                this.storeCodes.storeCodes = "reset";//销售门店
+                this.form.skuNo="";//商品编码
+                this.brandcode.value = "reset";
                 
             },
             gettableData(){//查询  memberisError:false, sellerNoisError:false,
                 var _this = this;
-                //alert(_this.memberisError)
-                if(_this.orderId && _this.shippingGroupId && _this.consigneePhone && !_this.dateerror && !_this.memberisError && !_this.sellerNoisError && _this.memberError && _this.sellerNoError){//有报错信息不能查询
-                    if (this.form.orderId || this.form.shippingGroupId || (this.form.startTime && this.form.endTime) || this.form.consigneePhone || this.form.memberCardNo || this.form.guiderCode || this.form.orderState || this.form.storeCode) {    
-                        //alert('you')               
+                if(this.categoryprop.isCheckMyself){
+                    this.form.employeeID=this.LOGINDATA.employeeId;
+                }else{
+                    this.form.employeeID='';
+                };
+                if(_this.orderId && _this.shippingGroupId && _this.consigneePhone && !_this.dateerror && !_this.memberisError && !_this.sellerNoisError && _this.memberError && _this.sellerNoError && _this.skuNo && !_this.brandcode.isError){//有报错信息不能查询
+                    if (this.form.orderId || this.form.shippingGroupId || (this.form.startTime && this.form.endTime) || this.form.consigneePhone || this.form.memberCardNo || this.form.guiderCode || this.form.orderState || this.closeshop.value !="" || this.categoryprop.categoryCode !=null || this.form.employeeID || this.form.skuNo || this.brandcode.value) {   
+                        var endTime =  this.form.endTime ? this.form.endTime+86400000-1 : "";           
                         var formData={
                             orderId:this.form.orderId,
                             shippingGroupId:this.form.shippingGroupId,
@@ -363,22 +428,39 @@
                             consigneePhone:this.form.consigneePhone,
                             guiderCode:this.form.guiderCode,
                             startSubmittedDate:this.form.startTime,
-                            endSubmittedDate:this.form.endTime+86400000-1,//结束时间默认加24小时
+                            endSubmittedDate:endTime,//结束时间默认加24小时
                             currentPage:1,
                             pageSize:15,
-                            storeCode:this.form.storeCode
-                        }
+                            storeCode:this.closeshop.value,
+                            skuCategoryIds:this.categoryprop.categoryCode,
+                            skuNo:this.form.skuNo,
+                            brandCode:this.brandcode.value,
+                        };
+                        if(this.categoryprop.isCheckMyself){
+                            formData.guiderCode=this.LOGINDATA.employeeId;
+                        };
+                        if(this.storeCodes.isdata){//有权限
+                            if(this.storeCodes.istotal){//总部的
+                                if(this.storeCodes.isall){//全选将storeNums改成null
+                                    formData.storeNums = null;
+                                }else{
+                                    formData.storeNums = this.storeCodes.storeCodes;
+                                }
+                            }else{
+                                formData.storeNums = this.storeCodes.storeCodes;
+                            }; 
+                            formData.isStoreStaff ='0';
+                        };
                         _this.formsubmitdata =formData;
                         _this.manageInit(formData);
                     
                     } else {
-                        //alert('meiyou')
                         this.$message({
                             message: '请至少输入一个查询条件',
                             type: 'warning'
                         });
                     }
-                } 
+                }
             },
             manageInit(data){//数据请求
                 var _this = this;
@@ -454,6 +536,7 @@
                              _this.isseller=true;
                             _this.sellerNoisError=true;
                             _this.form.sellername='';
+                            _this.form.guiderCode="";
                         }else{
                             _this.sellerNoisError=false;
                             if(data.response.name=='' || data.response.name==null){
@@ -469,7 +552,7 @@
             endtimeblur(){//时间校验 不能超过30天 // startTime1:"",
                    // endTime1:""
                 let _this =this;
-                 if (this.form.endTime !== '' && this.form.endTime !== null && this.form.startTime !== '' && this.form.endTime !== null) {
+                 if (this.form.endTime !== '' && this.form.endTime !== null && this.form.startTime !== '' && this.form.startTime !== null) {
                    // if (this.form.startTime !== '' && this.form.endTime !== null) {
                     let endDay = new Date(this.form.endTime).getTime();
                     let startDay = new Date(this.form.startTime).getTime();
@@ -508,8 +591,9 @@
                     }
                 }
             },
-            orderState(){//订单状态数据请求
+            orderState(){
                 var _this = this;
+                //订单状态数据请求
                 API.queryOrderStateList().then(function(data){
                     _this.orderStateList = data.response;
                 });
@@ -518,12 +602,16 @@
                     _this.form.sellerNo =_this.LOGINDATA.storeStaffId;
                     _this.form.guiderCode=_this.LOGINDATA.storeStaffId;
                 }
-            },
-            changeend(l1,l2){ //选择门店选择完之后的回调函数l1:storeName,l2:storeCode
-                this.form.storeCode =l2;
             }
         },
         mounted(){
+           // this.orderState();
+        },
+        created(){
+            //判断是不是主任
+            if(this.LOGINDATA.isDirector == 1){
+                this.categoryprop.isDirector = true;
+            };
             this.orderState();
         },
         computed:{
@@ -550,8 +638,17 @@
             },
             time1:function(){
                 return new Date().getTime();  
+            },
+            directorSearchType:function(){
+                if(this.LOGINDATA.isDirector){
+                   if(this.categoryprop.isCheckMyself){//仅查看自己开的单
+                        return '2';
+                    }else{
+                        return '1';
+                    }
+                }                
             }
-        }
+        },
     }
 </script>
 <style>
@@ -625,9 +722,10 @@ thead.has-gutter th,.el-table th.is-leaf{
     border-color:#f56c6c;
 }
 .gcloseshop{
-    width:180px;
+    z-index:10;
 }
-.gcs-body{
-    min-width:180px;
+.gcs-body {
+    width:auto;
+    min-width: 180px;
 }
 </style>
