@@ -1,0 +1,11 @@
+.floorNavBox{display:none;position: fixed; left: 50%; top: 50%; margin-left: -690px; width: 68px;border: 1px solid #e0e0e0; background-color: #fff; overflow: hidden;}
+.floorNavBox .navHd{font:700 11px/30px "microsoft yahei";text-align: center; border-bottom: 1px solid #e0e0e0;}
+.floorNavBox dd{position:relative;border-bottom: 1px solid #e0e0e0; margin-bottom: -1px; height: 42px; text-align: center; font:400 11px/42px "microsoft yahei";overflow: hidden;}
+.floorNavBox dd:hover{ color: #2f94ea; cursor: pointer;}
+.floorNavBox dd.cur{color: #2f94ea;}
+.floorNavBox dd.cur:before{content:" ";left:0;top:0;position: absolute;border-bottom: 10px solid #FFF; border-left:10px solid #2f94ea; background-color: #06c; font-size: 0; overflow: hidden; line-height: 0;}
+.floorNavBox .navToTop span,.floorNavBox .navToBot span{width: 17px; height: 9px; display: inline-block; margin-top: 15px; background: url(gmlib/unit/gomecity/1.0.0/css/i/floorbar-bg.png) no-repeat;}
+.floorNavBox .navToBot span{background-position: 0 -19px;}
+.floorNavBox .navToTop:hover span{background-position: 0 -58px;}
+.floorNavBox .navToBot:hover span{background-position: 0 -77px;}
+.w1000 .floorNavBox{margin-left: -650px;}

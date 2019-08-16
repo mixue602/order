@@ -1,0 +1,48 @@
+/***/
+.scroll-recBox{
+    width: 200px;
+    float: right;
+    height: 40px;
+    overflow: hidden;
+    *position: relative;
+}
+.scroll-recInner{
+    position: relative;
+    width: 180px
+}
+.scroll-recInner a{
+    display: block;
+    height: 40px;
+    width: 180px;
+    overflow: hidden;
+    text-align: right;
+}
+.scroll-recInner img{
+    width: 170px;
+    height: 40px;
+}
+.scroll-recBtn{
+    width: 20px;
+    height: 28px;
+    padding: 6px 0;
+    float: right;
+    line-height: 14px;
+    text-align: center;
+}
+.scroll-recBtn b{
+    background: url(gmlib/unit/gomecity/1.0.0/css/i/recBtn.png) 4px 3px no-repeat;
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.scroll-recBtn b:hover{
+    background-color: #efefef;
+}
+.scroll-recBtn b.down{
+    background-position: -11px 3px;
+}
+.w1000 .scroll-recBox{
+    display: none;
+}
