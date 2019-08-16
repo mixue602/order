@@ -1,0 +1,35 @@
+{
+    "groupManage":{				
+        "endRow":1,				
+        "firstPage":1,				
+        "lastPage":1,				
+        "list":[				
+            {				
+                "userCount":"15426",				
+                "createDate":"1516861653000",		
+                "phoneCount":"15426",		
+                "id":"5568548",		
+                "name":"促销群组",		
+                "updateDate":1516861653000,		
+                "updateUser":"zhangsan"		
+            },
+            {				
+                "userCount":"55555",				
+                "createDate":"1516861653000",		
+                "phoneCount":"15426",		
+                "id":"5568549",		
+                "name":"很舒服洛杉矶",		
+                "updateDate":1516861653000,		
+                "updateUser":"zhangsan"		
+            }				
+        ],				
+        "pageNum":1,				
+        "pageSize":10,				
+        "pages":1,				
+        "prePage":0,				
+        "startRow":1,				
+        "total":14				
+    },				
+    "success":true,				
+    "remark":"操作成功"     
+}

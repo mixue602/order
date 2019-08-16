@@ -1,0 +1,282 @@
+{
+    "chartList": {
+        "totalUser": "10000",
+        "newTotalUser": "1000",
+        "poQuantityAll": "100",
+        "salesAmount": "2000.00",
+        "salesQuantity": "2",
+        "unitPrice": "1000.00",
+        "statisticalChart": {
+            "totalUserTime": "2018-06-01——2018-06-29",
+            "totalUserChart": [
+                {
+                    "potentialUser": "1000",
+                    "registerUser": "2000",
+                    "createDate": "2018-07-00"
+                },
+                {
+                    "potentialUser": "1001",
+                    "registerUser": "2001",
+                    "createDate": "2018-07-01"
+                }
+            ],
+            "newUserChartTime": "2018-06-01——2018-06-29",
+            "newUserChart": [
+                {
+                    "newPotentialUser": "1000",
+                    "newRegisterUser": "2000",
+                    "createDate": "2018-07-00"
+                },
+                {
+                    "newPotentialUser": "1003",
+                    "newRegisterUser": "2004",
+                    "createDate": "2018-07-01"
+                }
+            ],
+            "saleTime": "2018-06-01——2018-06-29",
+            "saleChart": [
+                {
+                    "salesAmount": "100.000",
+                    "salesQuantity": "200",
+                    "createDate": "2018-07-00"
+                },
+                {
+                    "salesAmount": "100.001",
+                    "salesQuantity": "201",
+                    "createDate": "2018-07-01"
+                }
+            ],
+            "totalUserRatioChart": {
+                "potentialUserRatio": "1000",
+                "registerUserRatio": "4000"
+            },
+            "totalUserRanking": [
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第3名",
+                    "storeName": "西坝河3店",
+                    "currentStore": true,
+                    "salesAmount": "2000.003"
+                },
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                }
+            ],
+            "newUserRanking": [
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "newUserQuantity": "20001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": true,
+                    "newUserQuantity": "20002"
+                },
+                {
+                    "ranking": "第3名",
+                    "storeName": "西坝河3店",
+                    "currentStore": true,
+                    "newUserQuantity": "20003"
+                }
+            ],
+            "saleAmountRanking": [
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第3名",
+                    "storeName": "西坝河3店",
+                    "currentStore": true,
+                    "salesAmount": "2000.003"
+                },
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                },
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": false,
+                    "salesAmount": "2000.001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesAmount": "2000.002"
+                }
+            ],
+            "salesQuantityRanking": [
+                {
+                    "ranking": "第1名",
+                    "storeName": "西坝河1店",
+                    "currentStore": true,
+                    "salesQuantity": "20001"
+                },
+                {
+                    "ranking": "第2名",
+                    "storeName": "西坝河2店",
+                    "currentStore": false,
+                    "salesQuantity": "20002"
+                },
+                {
+                    "ranking": "第3名",
+                    "storeName": "西坝河3店",
+                    "currentStore": true,
+                    "salesQuantity": "20003"
+                }
+            ]
+        }
+    },
+    "area": [
+        {
+            "regionalId": "1",
+            "regionalName": "华北1区"
+        },
+        {
+            "regionalId": "2",
+            "regionalName": "华北2区"
+        }
+    ],
+    "city": [
+        {
+            "divisionId": "001",
+            "divisionName": "华北1部"
+        },
+        {
+            "divisionId": "002",
+            "divisionName": "华北2部"
+        }
+    ],
+    "store": [
+        {
+            "storeId": "0001",
+            "storeName": "西坝河1店"
+        },
+        {
+            "storeId": "0002",
+            "storeName": "西坝河2店"
+        }
+    ],
+    "person": {
+        "currentStoreId": "10001",
+        "currentStoreName": "西坝河",
+        "currentDivisionName": "一部",
+        "employDetails": [
+            {
+                "employId": "00001",
+                "employName": "张1"
+            },
+            {
+                "employId": "00002",
+                "employName": "张2"
+            }
+        ]
+    },
+    "power": {
+        "mccr_statistical_page": true,
+        "mccr_statistical_regional_button": true,
+        "mccr_statistical_division_button": true,
+        "mccr_statistical_store_button": true,
+        "mccr_statistical_employ_button": true,
+        "mccr_statistical_search_button": true,
+        "mccr_coupon_activity_effect_page": true,
+        "mccr_coupon_activity_employ_button": true,
+        "mccr_coupon_activity_search_button": true,
+        "mccr_coupon_activity_list_button": true
+    }
+}

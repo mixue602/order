@@ -1,0 +1,150 @@
+.el-main{
+    overflow: unset;
+}
+.brand_select{
+    width: 470px;
+    position: relative;
+    font-size: 14px;
+}
+.brand_toggle{
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-width: 50px;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #c0ccda;
+    color: #1f2d3d;
+    font-size: inherit;
+    min-height: 36px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 3px 15px 3px 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.brand_toggle .placeholder{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: none;
+    background-color: #ffffff!important;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #1f2d3d;
+    font-size: inherit;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 1;
+    padding: 3px 15px 3px 0px;
+    width: 100%;
+}
+.brand_select .brand_all{
+    z-index: 1000;
+    position: absolute;
+    left: 117px;
+    margin-top: 5px;
+    background-color: #fff;
+    border: 1px solid #e0e6ed;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 0px 6px 0px rgba(0,0,0,0.04);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 0px 6px 0px rgba(0,0,0,0.04);
+}
+.brand_select .brand_all .brand_search{
+    width: 350px;
+}
+.brand_select .brand_all .brand_search .el-input__inner{
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 4px;
+    border: 1px solid #c0ccda;
+    color: #1f2d3d;
+    font-size: inherit;
+    height: 36px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 1;
+    padding: 3px 15px 3px 10px;
+    width: 95%;
+    margin: 10px;
+}
+.scroll-option{
+    height: 252px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+}
+.scroll-option li {
+    line-height: 36px;
+    cursor: pointer;
+    position: relative;
+    padding: 0 10px;
+    white-space: nowrap;
+}
+.picker-opertaions{
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.el-main .picker-opertaions .el-button{
+    padding: 7px 9px;
+    font-size: 12px;
+}
+.brand_select .selected-label{
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 3px 3px;
+    background-color: #8391a5;
+    padding: 5px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    background-color: rgba(32,160,255,0.1);
+    border-color: rgba(32,160,255,0.2);
+    color: #20a0ff;
+    margin-left: 0;
+}
+.brand_all .tips {
+    color: #999;
+    text-align: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,465 @@
+{   "catIdistdata":{
+        "name": "全部品类",
+        "adcode": "100000",
+        "districts": [					
+            {
+                "name":"手机-品类",					
+                "adcode":"cat10000012",					
+                "districts":[					
+                    {					
+                        "name":"GSM手机-品类",					
+                        "adcode":"cat10000071"					
+                    },					
+                    {					
+                        "name":"联通3G手机-品类",					
+                        "adcode":"cat10000072"					
+                    }					
+                ]  					
+            },
+            {
+                "name":"电视-品类",					
+                "adcode":"cat10000013",					
+                "districts":[					
+                    {					
+                        "name":"康佳-品类",					
+                        "adcode":"cat10000073"					
+                    },					
+                    {					
+                        "name":"索尼-品类",					
+                        "adcode":"cat10000074"					
+                    },
+                    {					
+                        "name":"aaaaa-品类",					
+                        "adcode":"cat10000075"					
+                    },					
+                    {					
+                        "name":"bbbbb-品类",					
+                        "adcode":"cat10000076"					
+                    }					
+                ]  					
+            }					
+        ]     
+    },
+    "brandlistdata":{
+        "name": "全部品牌",
+        "adcode": "100000",
+        "districts": [					
+            {
+                "name":"手机-品牌",					
+                "adcode":"cat10000012",					
+                "districts":[					
+                    {					
+                        "name":"GSM手机-品牌",					
+                        "adcode":"cat10000071"					
+                    },					
+                    {					
+                        "name":"联通3G手机-品牌",					
+                        "adcode":"cat10000072"					
+                    }					
+                ]  					
+            },
+            {
+                "name":"电视-品牌",					
+                "adcode":"cat10000013",					
+                "districts":[					
+                    {					
+                        "name":"康佳-品牌",					
+                        "adcode":"cat10000073"					
+                    },					
+                    {					
+                        "name":"索尼-品牌",					
+                        "adcode":"cat10000074"					
+                    },
+                    {					
+                        "name":"aaaaa-品牌",					
+                        "adcode":"cat10000075"					
+                    },					
+                    {					
+                        "name":"bbbbb-品牌",					
+                        "adcode":"cat10000076"					
+                    }					
+                ]  					
+            }					
+        ]     
+    }, 
+    "citylistdata":{
+        "name": "全国",
+        "adcode": "100000",
+        "districts": [					
+            {
+                "name":"河南",					
+                "adcode":"11111",					
+                "districts":[					
+                    {					
+                        "name":"濮阳",					
+                        "adcode":"22222"					
+                    },					
+                    {					
+                        "name":"南阳",					
+                        "adcode":"3333"					
+                    }					
+                ]  					
+            },
+            {
+                "name":"山东",					
+                "adcode":"44444",					
+                "districts":[					
+                    {					
+                        "name":"济南",					
+                        "adcode":"5555"					
+                    },					
+                    {					
+                        "name":"号交付回合肥",					
+                        "adcode":"66666"					
+                    }				
+                ]  					
+            }					
+        ]     
+    },
+    "usernamecheck": {
+        "data":null,			
+        "success":true,		
+        "remark":"操作成功"				       
+    },
+    "userinfocount": {
+        "data":{ 			
+            "userCount":"152463",		
+            "totalCount":"4589652365"		
+        },			
+        "success":true,		
+        "remark":"操作成功"				       
+    },
+    "userinfosend": {
+        "data":null,
+        "success":true,		
+        "remark":"操作成功"	
+    },
+    "nomalusereditdata":{
+        "baseinfo": {
+            "isVip": "1",
+            "site": [
+                "PC"
+            ],
+            "registerDaysCondition": "0",
+            "registerDaysRelative": "7",
+            "registerDays": ",",
+            "vipLevel": [
+                "G1"
+            ],
+            "grawCondition": "",
+            "graw1": "",
+            "graw2": "",
+            "isEmailValid": 1,
+            "isPhoneValid": 1,
+            "isBindCard": 1,
+            "isInnerStaff": 1,
+            "sex": 1,
+            "birthdayCondition": "1",
+            "birthdayAbsolute": "2018-02-05,2018-02-08",
+            "birthdayRelative": "",
+            "ageCondition": "eq",
+            "age1": "5",
+            "age2": "6",
+            "profession": [
+                "1",
+                "5",
+                "6",
+                "7"
+            ],
+            "province": "",
+            "city": [
+                "11111",
+                "66666"
+            ]
+        },
+        "behavior": {
+          "composite": "add",
+          "list": [
+            {
+              "days": "30天",
+              "userAction": [
+                "0","1","2"
+              ],
+              "brand": [
+                "cat10000012", "cat10000073", "cat10000074", "cat10000076"
+              ],
+              "cat1Id": "",
+              "cat2Id": "",
+              "cat3Id": "",
+              "brandId": "",
+              "relative": ""
+            },
+            {
+              "days": "15",
+              "userAction": [
+                "3","4","5"
+              ],
+              "place": "",
+              "cat1Id": "",
+              "cat2Id": "",
+              "cat3Id": "",
+              "brandId": "",
+              "brand": [
+                "cat10000013"
+              ]
+            }
+          ]
+        },
+        "rfm": {
+          "firstBuyCondition": "1",
+          "firstBuyRelative": "",
+          "firstBuyAbsolute": "2018-02-06,2018-02-07",
+          "lastBuyCondition": "0",
+          "lastBuyDate": "",
+          "lastBuyRelative": "7",
+          "buyAmtCondition": "",
+          "buyAmt": "",
+          "buyAmt2": "",
+          "buyTimesCondition": "",
+          "buyTimes": "",
+          "buyTimes2": "",
+          "buyCycleCondition": "",
+          "buyCycle1": "",
+          "buyCycle2": "",
+          "perAmtCondition": "",
+          "perAmt": "",
+          "perAmt2": "",
+          "perPriceCondition": "",
+          "perPrice1": "",
+          "perPrice2": ""
+        },
+        "userAsset": {
+          "gomeBeanCondition": "",
+          "gomeBean1": "",
+          "gomeBean2": ""
+        },
+        "crowdinfo": {
+            "name": "是开机你发上年就是",
+            "userCount": "222",
+            "totalCount": "3333"
+        }
+    },
+    "usergroupmanagedata":{				
+        "endRow":1,				
+        "firstPage":1,				
+        "isFirstPage":true,				
+        "isLastPage":true,				
+        "lastPage":1,				
+        "list":[				
+            {				
+                "composite":0,				
+                "createDate":1516861653000,				
+                "createUser":"1",				
+                "datasetState":0,				
+                "id":"1",				
+                "name":"1",				
+                "originGroup":"1,3,3,3",
+                "groupType":"0",						
+                "updateDate":1516861646000,				
+                "updateUser":"1",				
+                "userCount":1				
+            },
+            {				
+                "composite":1,				
+                "createDate":1516861653000,				
+                "createUser":"1",				
+                "datasetState":1,				
+                "id":"2",				
+                "name":"1",				
+                "originGroup":"1",
+                "groupType":"1"	,							
+                "updateDate":1516861646000,				
+                "updateUser":"1",				
+                "userCount":1				
+            },
+            {				
+                "composite":2,				
+                "createDate":1516861653000,				
+                "createUser":"2",			
+                "datasetState":2,				
+                "id":"3",				
+                "name":"1",				
+                "originGroup":"1,2,3",
+                "groupType":"2"	,				
+                "updateDate":1516861646000,				
+                "updateUser":"1",				
+                "userCount":1				
+            },
+            {				
+                "composite":2,				
+                "createDate":1516861654000,				
+                "createUser":"2",			
+                "datasetState":3,				
+                "id":"4",				
+                "name":"1",				
+                "originGroup":"1,2,3",
+                "groupType":"1"	,				
+                "updateDate":15168616000,				
+                "updateUser":"1",				
+                "userCount":1				
+            }				
+        ],				
+        "pageNum": 1,
+        "pageSize": 10,
+        "pages": 2,
+        "prePage": 0,
+        "startRow": 1,
+        "total": 23
+    },
+    "targetgroupdata":{
+        "list":[				
+            {			
+                "id": "0",
+                "name": "黄金糕"
+            },
+            {		
+                "id": "1",
+                "name": "黄金糕111"	
+            },
+            {		
+                "id": "2",
+                "name": "黄金糕222"
+            },
+            {		
+                "id": "3",
+                "name": "黄金糕3333"
+            }				
+        ]
+    },
+    "usercountdata":{
+        "data":{ 		
+            "userCount":152463	
+        },		
+        "success":true,		
+        "remark":"操作成功"	
+    },
+    "normaldata":{
+        "test": "1111111111111111111"
+    },
+    "unnormaldata":{
+        "id": "fsfsfsf",
+        "name": "蝈蝈222",
+        "composite": 1,
+        "targetGroup": "1002",
+        "originGroup": ["701", "501"],
+        "userCount": "1515551"
+    },
+    "usergroupmanageedit":{
+        "list":[				
+            {			
+                "composite":0,				
+                "createDate":1516861653000,				
+                "createUser":"1",			
+                "datasetState":0,				
+                "id":"1",				
+                "name":"1",				
+                "originGroup":"1",
+                "groupType":"0"	,							
+                "updateDate":1516861646000,				
+                "updateUser":"1",				
+                "userCount":1				
+            }			
+        ]
+    },
+    "updataserch":{
+        "data":null,
+        "success":true,		
+	    "remark":"操作成功"	
+    },
+    "exportOk":{
+        "data":null,
+        "success":true,		
+	    "remark":"操作成功"	
+    },
+    "exportErr":{
+        "data":null,
+        "success":true,		
+	    "remark":"操作成功"	
+    },
+    "deletemanagelist":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },	
+    "deletuserblacklist":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },	    			
+    "editgroupmanagedata":{				
+        "endRow":1,				
+        "firstPage":1,				
+        "lastPage":1,				
+        "list":[				
+            {				
+                "userId":"154267777",		
+                "createDate":"1516861653000",		
+                "createUser":"zhangsan",		
+                "phone":"1542677",		
+                "id":"556854877",		
+                "name":"促销群组",		
+                "updateDate":"1516861653000",		
+                "source":0		
+            }				
+        ],				
+        "pageNum":1,				
+        "pageSize":10,				
+        "pages":3,				
+        "prePage":0,				
+        "startRow":1,				
+        "total":1				
+    },
+    "userblackdata":{				
+        "endRow":1,				
+        "firstPage":1,				
+        "lastPage":1,				
+        "list":[				
+            {				
+                "userId":"15426",		
+                "createDate":"1516861653000",		
+                "createUser":"zhangsan",		
+                "phone":"15426",		
+                "id":"5568548",		
+                "name":"促销群组",		
+                "updateDate":"1516861653000",		
+                "source":0		
+            }				
+        ],				
+        "pageNum":1,				
+        "pageSize":10,				
+        "pages":3,				
+        "prePage":0,				
+        "startRow":1,				
+        "total":1				
+    },
+    "deleteTestUser":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },
+    "batchupload":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },
+    "handaddblack":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },
+    "deleteTestGroup":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },
+    "saveHandTestGroup":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    },
+    "saveImportTestGroup":{
+        "data": "null",
+        "success": true,
+        "remark": "操作成功"
+    }
+}

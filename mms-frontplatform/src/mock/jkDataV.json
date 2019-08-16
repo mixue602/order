@@ -1,0 +1,382 @@
+{
+    "activedeploydata": {
+        "success": true,
+        "errCode": "0",
+        "errMsg": null,
+        "data": {
+            "activityId": "800001",
+            "activityName": "618内购会领券活动",
+            "activityType": "进行中",
+            "activityTime": "2018-6-13 00:00:00 ~ 2018-6-18 23:59:59",
+            "stores": [
+                {
+                    "storeId": "s1000",
+                    "storeName": "西坝河0"
+                },
+                {
+                    "storeId": "s1001",
+                    "storeName": "西坝河1"
+                }
+            ],
+            "employs": [
+                {
+                    "employId": "e10000",
+                    "employName": "全部员工"
+                },
+                {
+                    "employId": "e1000",
+                    "employName": "张0"
+                },
+                {
+                    "employId": "e1001",
+                    "employName": "张1"
+                }
+            ],
+            "pv": "1000",
+            "uv": "2000",
+            "newTotalUser": "1500",
+            "couponQuantity": "100",
+            "activateCouponQuantity": "52",
+            "usedCouponQuantity": "31",
+            "usedCouponRatio": "12%",
+            "poQuantityActive": "20",
+            "salesAmount": "20000.01",
+            "salesQuantity": "2",
+            "unitPrice": "10000",
+            "couponChart": {
+                "pvuvTime": "2018-06-02——2018-06-30",
+                "pvuvChart": [
+                    {
+                        "pv": "1001",
+                        "uv": "2001",
+                        "createDate": "2018-07-01"
+                    },
+                    {
+                        "pv": "1002",
+                        "uv": "2002",
+                        "createDate": "2018-07-02"
+                    },
+                    {
+                        "pv": "101",
+                        "uv": "201",
+                        "createDate": "2018-07-03"
+                    },
+                    {
+                        "pv": "1002",
+                        "uv": "4002",
+                        "createDate": "2018-07-04"
+                    }
+                ],
+                "newUserTime": "2018-06-02——2018-06-30",
+                "newUserChart": [
+                    {
+                        "newUserQuantity": "10001",
+                        "createDate": "2018-07-01"
+                    },
+                    {
+                        "newUserQuantity": "10002",
+                        "createDate": "2018-07-02"
+                    }
+                ],
+                "saleTime": "2018-06-02——2018-06-30",
+                "saleChart": [
+                    {
+                        "salesAmount": "500.011",
+                        "salesQuantity": "101",
+                        "createDate": "2018-07-01"
+                    },
+                    {
+                        "salesAmount": "200.012",
+                        "salesQuantity": "60",
+                        "createDate": "2018-07-03"
+                    },
+                    {
+                        "salesAmount": "300.011",
+                        "salesQuantity": "11",
+                        "createDate": "2018-07-01"
+                    },
+                    {
+                        "salesAmount": "20.012",
+                        "salesQuantity": "102",
+                        "createDate": "2018-07-04"
+                    }
+                ],
+                "collectCustomerTime": "2018-06-02——2018-06-30",
+                "collectCustomerChart": {
+                    "collectCustomerQuantity": "1000",
+                    "couponQuantity": "500",
+                    "poQuantityActive": "200"
+                },
+                "saleRankingTime": "2018-06-02——2018-06-30",
+                "saleRankingChart": [
+                    {
+                        "employId": "1001",
+                        "employName": "张1",
+                        "salesAmount": "2000.011"
+                    },
+                    {
+                        "employId": "1002",
+                        "employName": "张2",
+                        "salesAmount": "2000.012"
+                    }
+                ],
+                "categoryTime": "2018-06-02——2018-06-30",
+                "categoryChart": [
+                    {
+                        "categoryName": "冰洗1",
+                        "salesAmount": "2000.011"
+                    },
+                    {
+                        "categoryName": "冰洗2",
+                        "salesAmount": "2000.012"
+                    }
+                ]
+            }
+        }
+    },
+    "activedeploytabledata": {
+        "success": true,
+        "errCode": "0",
+        "errMsg": null,
+        "data": {
+            "couponEffect": [
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "dataTime": "2018-07-04",
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "dataTime": "2018-07-04",
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "1000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "2000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                },
+                {
+                    "activityId": null,
+                    "activityName": null,
+                    "activityTime": null,
+                    "stores": null,
+                    "employs": null,
+                    "pv": "2000",
+                    "uv": "2000",
+                    "newTotalUser": "1500",
+                    "couponQuantity": "100",
+                    "activateCouponQuantity": "52",
+                    "usedCouponQuantity": "31",
+                    "usedCouponRatio": "12%",
+                    "poQuantityActive": "20",
+                    "salesAmount": "20000.01",
+                    "salesQuantity": "2",
+                    "unitPrice": "10000",
+                    "couponChart": null
+                }
+            ],
+            "pageNum": 1,
+            "pageSize": 10,
+            "pages": 2,
+            "prePage": 0,
+            "startRow": 1,
+            "total": 23
+        }
+    }
+}
