@@ -1,0 +1,216 @@
+.fl {float: left}
+.fr {float: right}
+.bubble1,.bubble2,.bubble3,.bubble4,.bubble5,.bubble6,.flyIcon,.phoneApp,.icon1,.icon2,.icon3,.icon4
+,.shopIcon,.mshopIcon,.gift2,.gomePhone b.win,.air1,.air2,.air3,.air4,.cartshop,.cartbubble1,.cartbubble2
+,.bankShop,.gomeIcon2,.gomeIcon4,.bankBubble1{background:url(i/listIcon1.png) no-repeat;}
+.mShop,.appHeader .appContent .logo span,.gomeIcon1,.cartPhone,.app_down a,.app_down a:hover,.venus,.saturn,.mars,.mercury
+,.webChatPop .closed,.webChatBtn li .iPhone,.webChatBtn li .Android,.webChatBtn li .iPad,.webChatBtn .cur .iPhone,
+.webChatBtn .cur .Android,.webChatBtn .cur .iPad,.webChatDetail .QR,.webChatDetail a,.webChatDetail a:hover{background:url(i/listIcon2.png) no-repeat;}
+.aslide,.fade{ opacity: 0;filter:Alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;}
+/*顶部*/
+.appHeader{ height: 120px;width: 100%;background: #fafafa;}
+.appHeader .appContent{ width: 1200px; height: 120px;overflow: hidden; margin: 0 auto;}
+.w1000 .appHeader .appContent{ width:1000px;}
+.appHeader .appContent .logo{ float:left;}
+.appHeader .appContent .logo a{display: block;width:210px;height: 76px;margin-top: 32px; float:left; background: url(/gmpro/1.0.0/public/1.0.0/css/i/logo.png)  no-repeat 0 0;}
+.appHeader .appContent .logo span{display: block;width:133px;height: 99px; margin-top: 6px; float:left;background-position:-148px -231px;}
+.appHeader .appContent .appNav{padding-right: 50px; width: 390px;float: right;text-align: right}
+.appHeader .appContent .appNav ul li{display: block;float: left;font-size: 20px; font-family: arial;color: #2b2b2b;line-height: 100px;padding-left: 44px; cursor: pointer;}
+
+/*遮罩层*/
+#goodcover {display: none;position: absolute; top: 0%;left: 0%;width: 100%;height: 100%;background-color: black;z-index: 30;-moz-opacity: 0.8;opacity: 0.8;filter: alpha(opacity=80);}
+#code {width: 530px;height: 450px;position: absolute; display: none; left: 45%; z-index: 30;overflow: hidden;}
+#closebt { display: block; height: 24px; background: url("i/close.png") no-repeat 506px 10px #fff;}
+#code .code_down ul{width: 600px;background: #fff; height: 156px;padding: 20px 0 0 20px;}
+#code .code_down ul li{width: 97px;height: 156px;float: left;margin-right: 32px;text-align: center;font-size: 14px;font-family: "arial";color: #2b2b2b;cursor: pointer;}
+#code .code_down ul li.cur{ background: url("i/cur.png") no-repeat bottom center;}
+#code .code_down ul li i{width: 97px;height: 97px; display: block; border-radius: 50%; border: 1px solid #d7d7d7;}
+#code .code_down ul li .iPhone{background: url("i/iPhone.png") no-repeat center;}
+#code .code_down ul li .Android{ background: url("i/Android.png") no-repeat center;}
+#code .code_down ul li .iPad{background: url("i/iPad.png") no-repeat center;}
+#code .code_down ul li .wap{  background: url("i/wap.png") no-repeat center;}
+#code .code_down ul li.cur i{border: 1px solid #ff445a;}
+#code .code_down ul li span{ display: block;  padding-top: 10px;}
+#code .code_down .code_describe{height: 250px;background: #f7f7f7;}
+.code_down .code_describe .code_left{ width: 236px;}
+.code_down .code_describe .code_left span,.code_down .code_describe .code_left a{ display: block; text-align: center;}
+.code_down .code_describe .code_left span{padding:65px 0 15px 0;font:400 14px "Microsoft Yahei";}
+.code_down .code_describe .code_left a{ width: 176px; height: 48px; line-height: 48px; margin: 0 auto;background: #ff445a;border-radius: 5px;color: #fff;text-decoration: none;font-size: 24px;}
+.code_down .code_describe .code_right{ width: 294px;height: 250px;background-position: url("i/app_down2.png") no-repeat 88px 30px; margin: 0 auto;}
+.code_down .code_describe .code_right .QR{width: 294px;height: 250px; background: url("i/iphoneWebchat.png") no-repeat 97px 38px;}
+.code_down .code_describe .wap_left{ width: 290px;}
+.code_down .code_describe .wap_left span,.code_down .code_describe .wap_left a{ display: block;}
+.code_down .code_describe .wap_left span{ padding: 88px 0 12px 30px;font:400 14px "Microsoft Yahei";}
+.code_down .code_describe .wap_left a{text-decoration: none; width: 214px;height: 34px;line-height: 34px;border: 1px solid #e3e3e3;background: #fff;margin-left: 30px;padding-left: 10px; color: #2b2b2b;}
+.code_down .code_describe .wap_right{width: 240px;height: 250px;background: url("i/app_down2.png") no-repeat 34px 30px;}
+.code_down .code_describe .wap_right .QR{width: 240px; height: 250px;background: url("i/wapWebChat.png") no-repeat 43px 38px;}
+.sliderIcon { width: 38px; height: 42px;position: fixed; left: 48%;bottom: 10px;z-index: 20; background: url("i/down.gif") no-repeat;cursor: pointer;}
+.section{background-position:50% 0;background-repeat:no-repeat;font-size:12px;background-color:#f2f2f2;position:relative;z-index:10}
+.fp-section{position:relative;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.section .fp-tableCell{width:1200px;margin:0 auto;position:relative;z-index: 11;}
+.app_frist{top: 134px;}
+.app_describe{top:144px;position: relative;}
+.app_frist,.app_two,.app_three,.app_four,.app_five,.app_six{width: 600px;position: absolute;left:0;}
+.app_describe,.app_describeTwo,.app_describeThree,.app_describeFour,.app_describeFive,.app_describeSix{width:600px;position: absolute;left: 600px;}
+/*第一屏*/
+.gomePhone{position: relative;margin-left:217px;z-index: 12;width: 280px;height: 563px;}
+.phoneBg{position: absolute;z-index: 12;background: url('i/phoneBg.png') no-repeat;width: 280px;height: 563px;top:0;left:0;}
+.gomePhone b.win{ background-position:-190px -240px;width: 110px;height: 95px;position: absolute;z-index: 12;right: 0px;right: -43px; top: -43px;}
+.gomePhone i.gift{ background: url("i/gift.png") no-repeat;width: 590px;height: 265px;position: absolute;z-index: 14;bottom: -98px;left: -120px;}
+.gomePhone img{width: 240px;height:426px;position: absolute;z-index:13;left: 21px;top: 69px;}
+.bubble1,.bubble2,.bubble3,.bubble4,.bubble5,.bubble6,.cloud1{position: absolute;z-index: 11;}
+.bubble1{left:10px;width: 46px;height: 56px;background-position: -1px 0px;top:0px;}
+.bubble2{background-position:0 -160px;width:150px;height: 152px;left:0px;top:148px;}
+.bubble3{background-position:-67px 0;width:46px;height: 47px;left:0px;top:403px;}
+.bubble4{background-position:-149px 0;width:47px;height: 55px;right:0px;top:115px;}
+.bubble5{background-position:-223px 0;width:70px;height: 70px;right:0px;top:230px;}
+.bubble6{background-position:0px -55px;width:86px;height:99px;right:0px;top:380px;}
+.flyIcon{position: absolute;width: 233px;height: 63px;background-position: 0 -317px;left:590px;top: 99px}
+.app_down{background-color: #fff;width: 226px;height: 311px;margin: 65px auto 0 auto;}
+.app_down .QR{width: 226px;height: 226px; background: url(i/webChat.png) no-repeat 38px 38px;position: relative;}
+.app_down .QR span{font:400 14px/28px "Microsoft Yahei";color:#555555;position: absolute;bottom: 8px;right: 76px;}
+.app_down a{width: 166px;height: 50px;background-position:-334px -426px;display: block;margin: 0 auto;}
+.app_down a:hover{background-position:-334px -495px;}
+.cloudList i{position: absolute;z-index: 11}
+.cloud1{background:url(i/cloud1.png) no-repeat;width:110px;height:42px;left:-1200px;top:10px;}
+.cloud2{background:url(i/cloud2.png) no-repeat;width:79px;height:29px;left: -1644px;top:-12px}
+.cloud3{background:url(i/cloud3.png) no-repeat;width:438px;height:233px;left: -1600px;top: 210px;z-index: 10}
+.section1{z-index: 20;background: url(i/bander.png) no-repeat;height: 782px;width: 100%}
+.section2,.section3,.section4,.section5,.section6{background-color: #ffffd7;height: 800px;}
+
+/*微信扫码*/
+.downloadDetail{width: 380px;margin-left: 130px;padding-top:65px;text-align: center;}
+.downloadDetail h2{font:400 38px/42px "Microsoft Yahei";color:#fff;margin-bottom: 13px;}
+.downloadDetail .txt{font:400 25px/35px "Microsoft Yahei";color:#fff;overflow: hidden;}
+.downloadDetail .txt i{font-family: "Arial";color:#fffc00 }
+.downDetail .downloadDetail{width: 375px;margin-left: 5px;padding-top:180px;}
+.downDetail .downloadDetail h2{color:#dd00a7;font-size: 35px;line-height: 45px;}
+.downDetail .downloadDetail .txt{color:#696188;font-size: 22px;line-height: 26px;}
+.downDetail .downloadDetail .txt i{color:#696188;font-family:"sunsim"}
+.downDetail .app_down{margin-top: 37px;}
+/*第二屏*/
+.app_describeTwo .gomeFly{margin-top:310px;}
+.app_describeTwo .gomeFly,.app_three .gomeFly,.app_describeFour .gomeFly,.app_five .gomeFly {position: relative;}
+.gomeFeature{position: relative;width: 563px;height:186px;z-index: 12 }
+.jupiter{background: url(i/jupiter.png) no-repeat;width: 563px;height:186px;bottom:-300px;left: 0px;}
+.gomeFeature i{position: absolute;z-index: 12}
+.cloud4{width: 430px;height: 160px;background: url('i/cloud4.png') no-repeat;top: -234px;right: -700px;}
+.phoneApp{width: 108px;height: 277px;background-position: -186px -864px;top: -600px;right: 193px;}
+.shopIcon{background-position: 0 -1222px;width: 229px;height: 60px;top: -417px;right: 170px;}
+.bubble{background: url('i/bubble.gif') no-repeat;width: 88px;height: 153px;top: -249px;left: 194px;}
+.track{background: url('i/track.gif') no-repeat;width:435px;height: 140px;top:-600px;left: 0px;}
+.icon1{background-position: -190px -538px;width:111px;height: 132px;top: -151px;left: 108px;}
+.icon2{background-position: -1px -675px;width:103px;height: 146px;top: -38px;left: -114px;}
+.icon3{background-position: -156px -680px;width:109px;height: 166px;top: 150px;left: 100px;}
+.icon4{background-position:-1px -846px;width:102px;height: 135px;top: 147px;right: 81px;}
+/*第三屏*/
+.app_describeThree .downloadDetail{margin-left: 130px;}
+.app_three .gomeFly{margin-top: 350px;}
+.meiShop{width: 481px;height: 269px;position: relative;z-index: 11;}
+.meiShop i{position: absolute;z-index: 11;margin-left: 100px;}
+.mars{background-position: 0 -1137px;width: 481px;height:269px;bottom:-200px;left: 0px;}
+.cloud5{width: 352px;height: 285px;background: url(i/cloud5.png) no-repeat;top:-349px;left: 52px;}
+.mShop{width: 219px;height: 219px;background-position:0px 0px;top: -595px;left: 77px;}
+.mshopIcon{width:259px;height: 53px;background-position: 0 -1160px;top: -654px;left: 56px;}
+.gift2{width: 157px;height: 114px;background-position: 0 -538px;top: -683px;right: -124px;}
+.air1{background-position:-249px -177px ;width: 51px;height: 53px;right:-66px;top:-40px;}
+.air2{background-position:-103px -55px;width: 84px;height: 98px;right: -15px;top: -236px;}
+.air3{background-position:-169px -177px;width: 51px;height: 50px;left: 25px;top: -262px;}
+.air4{background-position:-239px -79px;width: 61px;height: 65px;left: -20px;top: -89px;}
+/*第四屏*/
+.app_describeFour .gomeFly{margin-top: 407px;}
+.appBuy{position: relative;width: 381px;height: 180px;margin-left: 117px;}
+.appBuy i{position: absolute;z-index: 11;}
+.saturn{background-position:0 -901px;width: 481px;height:180px;bottom:-300px;left: 0px;}
+.carts{background: url(i/cart.gif) no-repeat;width: 328px;height:211px;top: -164px; left: -112px;}
+.cartPhone{width: 143px;height: 285px;background-position: -156px -369px;top: -663px;left: 110px;}
+.cartshop{width: 260px;height: 56px;background-position: 0 -1323px;top: -608px;left: 57px;}
+.cartbubble1{width: 91px;height: 88px;background-position:-206px -1411px;top: -694px;left: -18px;}
+.cartbubble2{width: 180px;height: 165px;background-position:0px -987px;top:-700px;right: 0px}
+.cloud6{width: 370px;height: 228px;background: url(i/cloud6.png) no-repeat;top: -342px;right: -631px;}
+/*第五屏*/
+.app_describeFive .downloadDetail{margin-left: 100px;}
+.app_five .gomeFly{margin-top: 400px;}
+.gomePay{position: relative;z-index: 11;width: 382px;height: 182px;margin-left: 87px;}
+.gomePay i{position: absolute;z-index: 11;}
+.venus{background-position:0px -688px;width: 382px;height: 182px;bottom:-200px;left:0px;}
+.phoneBank{width: 340px;height: 320px;background: url(i/phoneBank.gif) no-repeat;top: -279px;left: 16px;}
+.bankShop{width: 183px;height: 67px;background-position:0 -1394px;top:-555px;left: 51px;}
+.bankBubble1{width: 87px;height: 90px;background-position: 0 -381px;top: -350px;left: 360px;}
+.bankBubble2{width: 130px;height: 119px;background:url(i/paopao.png) no-repeat;top: -180px;left: 320px;;}
+.cloud7{width: 353px;height: 113px;background: url(i/cloud7.png) no-repeat;top:-308px;left:-600px;}
+/*第六屏*/
+.app_describeSix .gomeArrive{margin-left: 70px;margin-top: 461px;}
+.gomeArrive{position: relative;z-index: 11;width: 400px;height:219px;}
+.gomeArrive i{position: absolute;z-index: 11;}
+.mercury{background-position:0 -1421px;width:400px;height:219px;bottom:-300px;left:0px;}
+.cloud8{width: 316px;height: 294px;background: url(i/cloud8.png) no-repeat;top:-308px;right: -548px;}
+.phoneOrbit{width:610px;height:350px;background: url(i/phoneOrbit.gif) no-repeat;top: -654px;right: -46px;}
+.gomeIcon1{width: 90px;height: 83px;background-position: 0 -239px;top:-500px;left: 65px;}
+.gomeIcon2{width: 75px;height: 46px;background-position:0 -482px;top: -500px;left: 158px;}
+.gomeIcon3{width: 110px;height: 80px;background:url(i/flys.gif) no-repeat;top: -571px;right: 217px;}
+.gomeIcon4{width: 65px;height: 65px;background-position:-235px -352px;top: -531px;right: 39px;}
+
+/*弹层*/
+.webChatPop{position: fixed;display: none;left: 26%;z-index: 33;overflow: hidden;}
+.webChatPop .closed{display: block;width:15px;height: 15px;background-position: -383px -617px;position:absolute;top:20px;right: 10px}
+.webChatPop .closed:hover{background-position: -339px -617px;}
+.webChatPop{width: 745px;height: 480px;}
+.webChatdown .webChatBtn{width: 260px;float: left;}
+.webChatBtn li{height: 60px;padding:50px 0 50px 60px;clear:both;background-color: #f3f3f3;cursor:pointer;}
+.webChatBtn li.cur{background-color: #fff}
+.webChatBtn li i,.webChatBtn li span{display: block;float: left;}
+.webChatBtn li .iPhone{background-position: -6px -413px;width: 40px;height: 56px;}
+.webChatBtn .cur .iPhone{background-position: -80px -413px;}
+.webChatBtn li .Android{background-position: 0px -517px;width: 40px;height: 56px;}
+.webChatBtn .cur .Android{background-position: -74px -517px;}
+.webChatBtn li .iPad{background-position: -2px -609px;width: 40px;height: 56px;}
+.webChatBtn .cur .iPad{background-position: -76px -609px;}
+.webChatBtn li span{font:500 20px/30px "Airal";color:#999999;margin-left: 25px;margin-top: 10px;}
+.webChatBtn .cur span{color:#dd00b4;}
+.webChatbox{width:485px;float: left; background-color:#fff}
+.webChatDetail{padding: 65px 0 66px 0;display: none}
+.webChatDetail .QR{background-position: -257px -7px;width: 207px;height: 214px;margin: 0 auto;}
+.webChatDetail span{font:400 20px/30px "Microsoft Yahei"; display: block;color:#555555;margin:10px 0 0 0;text-align: center;}
+.webChatDetail a{margin:45px auto 0 auto;width: 200px;height: 50px;background-position:-300px -226px;display:block;font:500 24px/50px "Microsoft Yahei";color:#ffffff; text-decoration: none;text-align: center;}
+.webChatDetail a:hover{background-position:-300px -310px;}
+/*右侧滚动*/
+#fp-nav{position:fixed;z-index:100;margin-top:-32px;top:50%;opacity:1}
+#fp-nav.right{right:60px}
+#fp-nav ul li{display:block;width:14px;height:14px;margin-bottom:15px;position:relative}
+.right ul li a{display:block;position:relative;z-index:25;width:100%;height:100%;cursor:pointer;text-decoration:none}
+.right ul li a span{top:0;left:0;width:18px;height:18px;position:absolute;z-index:25;background:url(i/PB.png) no-repeat;display:block}
+.right ul li a.active span{background:url(i/PA.png) no-repeat}
+/*运动轨迹*/
+.section2{z-index: 19}
+.section3{z-index: 18;}
+.section4{z-index: 17;}
+.section5{z-index: 15;}
+.contrail1,.contrail2,.contrail3,.contrail4{position: absolute;display:none;}
+.contrail1{width:640px;height: 395px;background: url(i/contrail1.png) no-repeat;right: 270px;top: 190px;z-index: 19;}
+.contrail2{width: 617px;height: 370px;background: url(i/contrail2.png)no-repeat;left: 285px; top: 198px;}
+.contrail3{width: 685px;height: 290px;background: url(i/contrail3.png)no-repeat;right: 179px;top: 205px;}
+.contrail4{width: 657px;height: 346px;background: url(i/contrail4.png)no-repeat;left: 252px;top: 205px;}
+.fire{background: url(i/fire.png) no-repeat;width: 106px;height: 34px;position: absolute;z-index: 22;-o-transform: rotate(-90deg);-ms-transform: rotate(-90deg);-moz-transform:rotate(-90deg);-webkit-transform:rotate(-90deg); filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);}
+.app_describeTwo .fire{right: 220px;top: 223px;}
+.app_three .fire{left: 232px;top: 236px;}
+.app_describeFour .fire{right: 131px;top: 240px;}
+.app_five .fire{left: 198px;top: 200px;}
+
+.section7 .fp-tableCell{width: 100%}
+#gome-foot{margin-top:0;}
+.paddingBottom{width: 100%;height: 180px;background: url(i/paddingBottom.png);}
+.gomeHelp{width: 1200px;margin: 0 auto}
+.gomeHelp span{display: block;float:left;background: url(i/bottomIcon.png) no-repeat;width: 180px;height: 80px;margin:58px;}
+.gomeHelp span.bottom1{background-position: 0 0;}
+.gomeHelp span.bottom2{background-position: 0 -112px;}
+.gomeHelp span.bottom3{background-position: 0 -207px;}
+.gomeHelp span.bottom4{background-position: 0 -308px;}
+.topBanner{background-color: #ffffd6}
+/*1000兼容模式*/
+.w1000 .section .fp-tableCell,.w1000 .appHeader .appContent{width: 1000px;}
+.w1000 .app_frist,.w1000 .app_describe,.w1000 .app_two,.w1000 .app_three,.w1000 .app_four,
+.w1000 .app_five,.w1000 .app_six,.w1000 .app_describeTwo,.w1000 .app_describeThree,
+.w1000 .app_describeFour,.w1000 .app_describeFive,.w1000 .app_describeSix{width: 500px;}
+.w1000 .gomeHelp{width: 1000px;}
+.w1000 .gomeHelp span{margin:50px 50px;}

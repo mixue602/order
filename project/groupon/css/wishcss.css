@@ -1,0 +1,558 @@
+@charset "utf-8";
+
+/* 弹出层模块 */
+
+.dialog {
+    position: relative;
+    z-index: 10000;
+}
+
+.dialogBox {
+    width: 450px;
+    height: 335px;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0px 0px 20px #999;
+    z-index: 1;
+    top: -150px;
+    left: 0;
+    border: 1px solid #999\9;
+    display: none;
+}
+
+.dialogBox.FQ {
+    width: 480px;
+    height: 275px;
+    _left: -330px;
+}
+
+.dialogBox.TZ {
+    height: 295px;
+}
+
+.dialogBox.Er {
+    height: 95px;
+}
+
+.dialogBox.Wish {
+    width: auto;
+    height: auto;
+}
+
+.dialogBox .close {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+}
+
+.dialogBox .close a {
+    width: 18px;
+    height: 18px;
+    display: block;
+    color: #999;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "simsun";
+}
+
+.dialogBox .close a:hover {
+    color: #5a5a5a;
+    text-decoration: none;
+}
+
+.dialogInner {
+    display: none;
+}
+
+
+/*心愿单*/
+
+#showWishWrap {
+    height: 36px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    width: 119px;
+    position: relative;
+    float: left;
+    color: #5e5e5e;
+    margin-bottom: 10px;
+}
+
+#showWish {
+    line-height: 12px;
+    height: 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#showWish i {
+    background: url(i/detail/detail.png) -149px -90px;
+    width: 14px;
+    height: 12px;
+    display: inline-block;
+}
+
+#wishHover {
+    display: none;
+    position: absolute;
+    top: -30px;
+    left: -64px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    text-align: center;
+    height: 22px;
+    line-height: 22px;
+    width: 256px;
+    z-index: 10;
+}
+
+.wish_wrap {
+    margin: 24px 30px;
+    width: 448px;
+}
+
+.closeBTN {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    text-decoration: none;
+    color: #999999;
+    font-family: simsun;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.closeBTN:hover {
+    text-decoration: none;
+}
+
+.wish_share {
+    position: relative;
+}
+
+.wish_share a {
+    display: inline-block;
+}
+
+.do {
+    display: none;
+}
+
+.w990 #wish_wrap {
+    left: 730px;
+}
+
+#wish_wrap input,
+#wish_wrap textarea {
+    outline: none;
+}
+
+.wish_header {
+    font: 14px/26px '微软雅黑';
+    font-weight: 700;
+    color: #EC4F21;
+}
+
+.wish_title {
+    font: 12px/22px 700;
+    font-weight: 700;
+    color: #A5A5A5;
+    margin-top: 18px;
+}
+
+.wish_form {
+    margin-top: 14px;
+}
+
+.input_border {
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.oh {
+    overflow: hidden;
+}
+
+.v_r,
+.v_e {
+    display: none;
+}
+
+.verify_e .v_e {
+    display: block;
+    color: #c00;
+}
+
+.verify_r .v_r {
+    display: block;
+    width: 30px;
+    height: 26px;
+    background: url(i/detail/detail.png) -230px -60px;
+}
+
+.v_border {
+    border: 1px solid #ccc;
+}
+
+.verify_e .v_border {
+    border: 1px solid #c00;
+}
+
+.verify_r {}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+._ie6_input {
+    _height: 26px;
+    _line-height: 26px;
+    _margin-left: -28px;
+    _position: relative;
+    _top: 1px;
+    _margin-top: 4px;
+}
+
+.wish_verify_btn {
+    height: 26px;
+    line-height: 26px;
+    display: inline-block;
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    width: 88px;
+    text-align: center;
+    color: #5e5e5e;
+    text-decoration: none;
+    margin-right: 10px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+#wish_verify_btn {
+    color: #5e5e5e;
+}
+
+#wish_verify_btn.wish_verify_btn_disabled {
+    color: #ccc;
+    border: 1px solid #e7e7e7;
+}
+
+.wish_text_presentation {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    color: #ccc;
+}
+
+.pr {
+    position: relative;
+}
+
+.wish_form .item {
+    margin-top: 10px;
+    overflow: hidden;
+    clear: both;
+}
+
+.must_flag {
+    color: #c00;
+    padding: 0 2px;
+}
+
+.item_title {
+    color: #5e5e5e;
+    width: 84px;
+    text-align: right;
+}
+
+.verify_info {}
+
+.item_boder {
+    width: 200px;
+    margin-right: 10px;
+    padding-left: 2px;
+}
+
+.item_v_boder {
+    width: 80px;
+}
+
+.verify_info,
+.item_boder,
+.item_title {
+    line-height: 26px;
+    height: 26px;
+    float: left;
+}
+
+.wish_mobilePhoneNumber {
+    outline: none;
+    width: 198px;
+    border: 0;
+}
+
+.wish_text {
+    height: 74px;
+    width: 350px;
+    line-height: 18px;
+    resize: none;
+    border: 1px solid #CCC;
+    font-family: NSimSun;
+    font-size: 12px;
+}
+
+.wish_text_e {
+    color: #c00;
+    margin-top: 2px;
+    visibility: hidden;
+}
+
+.submit_wish {
+    cursor: pointer;
+    color: #fff;
+    background: #c00;
+    padding: 6px 20px;
+    *padding: 5px 10px;
+    _padding: 5px 10px;
+    border: 0;
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.submit_wish_text {
+    color: #A5A5A5;
+    line-height: 16px;
+    padding-left: 5px;
+}
+
+.v_send {
+    color: #178E22;
+    display: none;
+}
+
+.verify_r .v_send {
+    display: block;
+}
+
+.wish_verifyNum {
+    border: 0;
+    outline: none;
+    width: 80px;
+}
+
+.wish_share_wrap {
+    margin: 20px 0 20px 30px;
+    overflow: hidden;
+}
+
+.c5e {
+    color: #5e5e5e;
+}
+
+.ca5 {
+    color: #a5a5a5;
+}
+
+.bds_tsina:hover {
+    text-decoration: none;
+}
+
+.copy_link {
+    margin: 7px 6px 6px 0;
+    color: #a5a5a5;
+    float: left;
+    text-decoration: none;
+}
+
+.copy_link i {
+    background: url(i/detail/detail.png) -190px -63px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 1px;
+}
+
+#wish_share .copy_link span,
+#wish_share .weixin_saoyisao span {
+    vertical-align: top;
+    color: #a5a5a5;
+}
+
+.copy_link,
+.weixin_saoyisao {
+    cursor: pointer;
+}
+
+.weixin_saoyisao {
+    margin: 7px 6px 6px 10px;
+    display: inline-block;
+    color: #a5a5a5;
+    text-decoration: none;
+}
+
+.weixin_saoyisao i {
+    background: url(i/detail/detail.png) -211px -65px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 1px;
+}
+
+.bdsharebuttonbox {
+    float: left;
+    margin-top: 2px;
+    *margin-top: 4px;
+    _margin-top: -2px;
+    margin-left: 10px;
+}
+
+.wish_text_error textarea {
+    border: 1px solid #c00;
+}
+
+.wish_text_error .wish_text_e {
+    visibility: visible;
+}
+
+.wish_text_error .wish_text {
+    border: 1px solid #c00;
+}
+
+.weixin_text {
+    color: #5e5e5e;
+    margin: 0 70px 0 50px;
+    line-height: 20px;
+    width: 326px;
+}
+
+.tc {
+    text-align: center;
+}
+
+#copy_link_success {
+    display: none;
+    position: absolute;
+    margin: 10px;
+    border: 1px solid #F2DBB9;
+    height: 30px;
+    line-height: 30px;
+    width: 135px;
+    background: #FFFCF2;
+    color: #5e5e5e;
+    font-size: 12px;
+    text-align: center;
+    left: 28px;
+    bottom: 43px;
+    *bottom: 63px;
+    _bottom: 43px;
+}
+
+.c_l_s {
+    height: 9px;
+    width: 6px;
+    background: #FFFCF2 url('i/detail/detail.png') -251px -19px;
+    position: absolute;
+    left: 67px;
+    top: 29px;
+    overflow: hidden;
+}
+
+#send_wish_success {
+    margin: 40px 0 40px 30px;
+    position: relative;
+    display: none;
+}
+
+.c333 {
+    color: #333;
+}
+
+.send_wish_success_flag {
+    float: left;
+    margin-right: 10px;
+    width: 41px;
+    height: 43px;
+    background-image: url('i/detail/detail.png');
+    background-position: -72px -35px;
+}
+
+.send_wish_success_text {
+    color: #178E22;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 500;
+    font-family: 'Microsoft YaHei'
+}
+
+.send_wish_error {
+    margin: 40px 0 40px 30px;
+    position: relative;
+    display: none;
+}
+
+.send_wish_error_flag {
+    float: left;
+    margin-right: 10px;
+    width: 41px;
+    height: 43px;
+    background-image: url('i/detail/detail.png');
+    background-position: -72px -76px;
+}
+
+.send_wish_error_text {
+    color: #c00;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 500;
+    font-family: 'Microsoft YaHei'
+}
+
+.tichu_wish,
+.try_again {
+    color: #069;
+    cursor: pointer;
+}
+
+.verify_double_wrap .v_border {
+    border: 1px solid #CC0000;
+}
+
+.verify_double {
+    display: none;
+}
+
+.verify_double_wrap .verify_double {
+    display: block;
+    color: #c00;
+    float: left;
+    line-height: 26px;
+}
+
+#wish_form .focus,
+#wish_text.wish_text_focus {
+    border: 1px solid #a5a5a5;
+}
+
+
+/*心愿单 End*/
+
+
+/* 价格说明 */
+
+.pricedesc {
+    padding: 30px;
+    color: #5e5e5e;
+    font: 12px/20px 'Microsoft YaHei';
+}
+
+.pricedesc .title {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 24px;
+}

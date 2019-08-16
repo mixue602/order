@@ -1,0 +1,16 @@
+<#macro cheap_web_var screenAuto=false>
+<script type="text/javascript">
+    <#if screenAuto?? && screenAuto>
+        var winWidth = window.screen.width,objb = document.body;if (winWidth<=1024) {objb.className += " " +"w1000"; }else {objb.className=objb.className.replace("w1000", '');};
+    </#if>
+    <#if (config)??>
+        <#assign indexDomain = "${(config.indexDomain)!}" >
+        <#assign tuanSiteAjax = "${(config.tuanSiteAjax)!}" >
+    <#elseif (data)??>
+        <#assign indexDomain = "${(data.storeConfiguration.indexDomain)!}" >
+        <#assign tuanSiteAjax = "${(data.storeConfiguration.tuanSiteAjax)!}" >
+    </#if>
+    var tuanAjax="${tuanSiteAjax!}";
+    var indexDomain="${indexDomain!}";
+</script>
+</#macro>

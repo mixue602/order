@@ -1,0 +1,16 @@
+{
+  "packageDir": "build",
+  "projectPath": "gmpro/2.0.0/cheap/groupon/1.0.50",
+  "projectFolder": "css|js|widget",
+  "appPath": "WEB-INF/template/groupon",
+  "appFolder": "html",
+  "appAppend": "",
+  "build": {
+    "jsPlace": "insertBody"
+  },
+  "output": {
+    "cssMd5": false,
+    "jsMd5": false
+  },
+  "widgetAutoUpdate": true
+}

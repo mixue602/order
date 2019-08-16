@@ -1,0 +1,125 @@
+@charset "utf-8";
+body{font-family: arail,"Microsoft YaHei";overflow-x:hidden;}
+li{ list-style: none}
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;overflow:hidden;}
+.clearfix { display: block; *display: inline-block; _zoom: 1 }
+a{text-decoration:none;color: #333333;}
+img,a{border:none; vertical-align: top;}
+a:hover{text-decoration: none;}
+
+.choice_main a:hover .img_name,.rebate_main a:hover .img_name{color: #e3101e}
+.lazyloading,.err-poster{background: url(/gmlib/ui/loading/3.0.0/loading-sm.png) 50% 50% no-repeat;}
+
+
+.rebate_top{width: 100%;height: 59px;background: url(i/top_bg.png?__sprite)}
+.top_main{position: relative}
+.rebate_help{height: 20px;width: 80px;float: right;margin-top: 17px;}
+.rebate_help span{display: inline-block;width: 13px;height: 13px;background: url(i/wenhao.png?__sprite); margin-top: 3px;}
+.rebate_help a{color: #fff}
+.rebate_help a:hover{color: #ee3b3b}
+
+.searchList{float: right;height: 28px;margin-top:4px;margin-right: 30px;position: relative;}
+.searchList .searchbox{border: 1px solid #e6e6e6;height: 28px;line-height: 30px;background: #fff;}
+.searchList .searchbox label{position: absolute;top: 0;left: 10px;line-height: 30px;height: 30px;overflow: hidden;color: #666;width: 79%;color: #A5A5A5;cursor: text;font-size: 14px;}
+.searchList input{ float: left;padding: 0px 0 8px 10px;width: 205px;height: 26px;border: none;color: #5e5e5e;font-size: 14px;line-height: 20px;font-family: 'microsoft yahei';background-color:transparent;}
+.searchList a{display: inline-block;width: 44px;height: 28px;background: #999;color: #fff;line-height: 28px;text-align: center;cursor: pointer}
+
+/* 焦点图插件样式 */
+.firstseecn .slideBox{ position:relative; width:100%; height:400px; overflow:hidden;}
+.firstseecn .slideBox .hd {position:absolute; left:50%; bottom:13px; z-index:1; height:20px; overflow:hidden; text-align:center;}
+.firstseecn .slideBox .hd ul { overflow:hidden; zoom:1}
+.firstseecn .slideBox .hd ul li { display:inline-block; *float:left; margin-right:10px; width:30px; height:5px; background:#000; opacity:.3; filter:alpha(opacity:30); cursor:pointer;}
+.firstseecn .slideBox .hd ul li.on { background:#f5004b;opacity:1; filter:alpha(opacity:100);}
+.firstseecn .slideBox .bd{ position:relative; z-index:0; height:100%; min-width:1200px;}
+.firstseecn .slideBox .bd li{ display:none; position:absolute; left:0; top:0; width:100%; height:400px; zoom:1; vertical-align:middle;}
+.firstseecn .slideBox .bd li a{ display:block; position:absolute; left:50%; z-index:7; margin-left:-600px; overflow:hidden;}
+/* 后按钮代码，如果不需要删除即可 */
+.firstseecn .slideBox .prev,.firstseecn .slideBox .next{ position:absolute; top:50%; left:50%; z-index:1; margin-top:-52px; margin-left:-600px; width:50px; height:104px; cursor:pointer; }
+.firstseecn .slideBox .next{ position:absolute; top:50%; left:50%; z-index:1; margin-top:-52px; margin-left:560px; width:50px; height:104px; cursor:pointer;}
+.firstseecn .slideBox .prev:hover .btn-bg,.firstseecn .slideBox .next:hover .btn-bg{ opacity:.3;filter:Alpha(opacity=30);}
+.firstseecn .slideBox .btn-bg{ display:inline-block; position:absolute; z-index:2; width:40px; height:80px; cursor:pointer; background:#000; opacity:.1; filter:Alpha(opacity=10);}
+.firstseecn .slideBox .arrow{ display:inline-block; position:absolute; top:0px; left:0px; z-index:3; width:40px; height:80px;
+    background:url(i/firstseecn.png) 0 -112px no-repeat;}
+.firstseecn .slideBox .next .arrow{ background-position:-42px -112px;}
+
+/*首屏窄屏样式*/
+.w1000 .firstseecn{ min-width:1000px;}
+.w1000 .firstseecn .slideBox .bd img{ margin-left:0;}
+.w1000 .firstseecn .leftcate{ margin-left:-500px;}
+.w1000 .firstseecn .slideBox .prev{ margin-left:-500px}
+.w1000 .firstseecn .slideBox .bd{ min-width:1000px;}
+.w1000 .firstseecn .slideBox .bd li a{ width:1000px; height:400px; margin-left:-500px; }
+.w1000 .firstseecn .slideBox .bd li a img{margin-left: -100px;}
+.w1000 .firstseecn .slideBox .next{ margin-left:460px;}
+/*楼层*/
+.rebate_floor{font-family: 'Microsoft Yahei';}
+.rebate_floor h2{color:#000;font-size: 22px;font-family: 'Microsoft Yahei';font-weight: normal;padding:25px 0 10px 0;}
+.rebate_floor .floor_warp{border: 1px solid #e6e6e6;height: 630px;overflow: hidden;}
+.rebate_floor .floor_warp2{height: 315px;}
+.rebate_floor .floor_warp ul{width: 1260px;}
+.rebate_floor .floor_warp ul li{width: 239px;height: 315px;float: left;border-bottom: 1px solid #e6e6e6; border-right: 1px solid #e6e6e6;position: relative;}
+.w1000 .rebate_floor .floor_warp ul li{width: 249px;}
+.rebate_floor .floor_warp ul li .goods_img{display: block;padding: 20px 0 15px 0;text-align: center;}
+.rebate_floor .floor_warp ul li .goods_name{display: block;width: 200px;margin: 0 auto;font-size: 14px;height: 42px;overflow: hidden;}
+.rebate_floor .floor_warp ul li .goods_name:hover{color: #ee3b3b;}
+.rebate_floor .floor_warp ul li .price{display: block;padding-left: 20px;font-size: 17px;color: #EE3B3B;}
+/*.rebate_floor .floor_warp ul li .price i{font-family: Arail;}*/
+.rebate_floor .floor_warp ul li div{width: 200px;margin: 15px auto 0;height: 18px;line-height: 18px;overflow: hidden;}
+.rebate_floor .floor_warp ul li div .rebate_fl{display: block;width: 36px;height: 18px;text-align: center;background: #EE3B3B;color: #fff;float: left;margin-right: 10px;}
+.rebate_floor .floor_warp ul li div .rebate_txt{width: 150px;display: block;float: left;font-size: 14px;}
+.rebate_floor .floor_warp ul li div .rebate_txt i{color: #EE3B3B;font-family: "Arail";}
+.rebate_floor .floor_warp ul li .joinMd{display: block;width: 64px;height: 18px;text-align: center;line-height: 18px;border: 1px solid #EE3B3B;color: #EE3B3B;border-radius: 2px;position: absolute;bottom: 55px;right: 20px;}
+/*楼层 end*/
+.title_wrap{width: 100%;height: 38px;position: relative;z-index: 10;margin-top: 30px;}
+.rebate_title{height: 38px;width: 1198px;border: 1px solid #e6e6e6;background: #f6f6f6;margin-bottom: 15px;position: absolute;top:0;}
+.title_wrap_fixed{position: fixed;}
+.rebate_title .fli_searchbox{margin: 5px 40px;}
+.rebate_title .fli_searchbox button{background: #999}
+.rebate_title ul{height: 40px;position: absolute;left: 0;top:-1px;z-index: 1;}
+.rebate_title ul li{height: 40px;line-height:38px;float: left;padding: 0 30px;font-size: 16px;color: #333;cursor: pointer}
+.rebate_title ul li.cur{color: #ee3b3b;background: #fff;border-top: 3px solid #ee3b3b;line-height: 32px;height: 36px}
+.rebate_title ul li:hover{color: #ee3b3b}
+.rebate_title li span{display: inline-block;width: 9px;height: 10px;margin-left: 5px;}
+.rebate_title ul li .up{background: url(i/up.png?__sprite);}
+.rebate_title ul li .down{background: url(i/down.png?__sprite);}
+.rebate_title ul li.cur .up,.rebate_title ul li:hover .up{background: url(i/redup.png?__sprite);}
+.rebate_title ul li.cur .down,.rebate_title ul li:hover .down{background: url(i/reddown.png?__sprite);}
+.loading{background: url(/gmlib/ui/loading/3.0.0/loading.gif) 50% 50% no-repeat;min-height: 428px;}
+.rebate_main{position: relative;min-height: 428px;padding-top:15px;}
+.rebate_main ul{width: 1212px;display: none}
+.rebate_main ul li{width: 291px;height:428px;margin:0 12px 20px 0;float: left;overflow: hidden}
+.rebate_main ul .choice_inner{width: 289px;height:426px;border: 1px solid #e6e6e6}
+.rebate_main ul li img{margin: 15px  14px 22px 15px;display: inline-block;width: 260px;height: 260px;}
+.rebate_main ul li .img_name{font-size: 14px;color: #555;line-height: 20px;height:40px;width: 260px;margin-left: 15px;overflow: hidden}
+.rebate_main ul li .hot_price{height:43px;width: 260px;font-size: 18px;color: #ee3b3b;margin: 6px 0 0 15px;}
+.rebate_main ul li .hot_price span{font-family: arial,"Microsoft YaHei";}
+.rebate_main ul li .hot_price i{font-family: Arial;}
+.rebate_main .rebate{height:20px;width: 260px;margin-left: 15px;overflow: hidden}
+.rebate_main .rebate span{display:inline-block;height:18px;line-height: 17px;width: 36px;margin-right: 6px;font-size: 12px;text-align: center;color: #fff;background: #ee3b3b}
+.rebate_main .rebate a{font-size: 14px;color: #555;}
+.rebate_main .rebate i{font-size: 14px;color: #ee3b3b;font-family: Arial;padding: 0 4px;}
+
+.w1000 .rebate_title{width: 998px;}
+.w1000 .rebate_main ul li{width: 241px;height: 378px;}
+.w1000 .rebate_main ul .choice_inner{width: 239px;height: 376px;}
+.w1000 .rebate_main ul li img{display:inline-block;width:210px;height:210px;}
+.w1000 .rebate_main ul li .img_name,.w1000 .rebate_main .rebate{width: 210px;}
+/*楼层左侧导航*/
+.elevator {width: 66px;background: #fff;display: none;top: 384px;}
+.elevator .fl_nav{width: 64px;height: 30px;background: #f6f6f6; border:1px solid #e6e6e6;color: #5e5e5e;line-height: 31px;font-size: 13px; text-align: center;font-weight: bold;}
+.elevator ul {width:66px;overflow: hidden}
+.elevator li{position: relative;width: 64px;height: 43px;line-height:5px;border:1px solid #e6e6e6;border-top:none;text-align: center;cursor: pointer;}
+.elevator .fl_goto li{height: 29px;text-align: center}
+.elevator .fl_goto .flTop a,.elevator .fl_goto .fl_bottom a{display:inline-block;width:17px;height:9px;background: url(i/firstseecn.png) -216px -52px no-repeat;margin-top:10px;}
+.elevator .fl_goto .fl_bottom a{background: url(i/firstseecn.png) no-repeat -216px 0;margin-top:10px;}
+.elevator li.current b{display:block;}
+.elevator li.current a,.elevator li.current a span,.elevator li.hover a,.elevator li.hover a span{color: #f5004b}
+.elevator li b{float:left;overflow:hidden;margin-left:-1px;margin-top:-1px;display: block;width: 10px;height: 10px;background: url(i/firstseecn.png) -152px 0 no-repeat;z-index: 2;display:none;}
+.elevator li.current a{width:auto;margin-left:-9px;}
+.elevator li a {overflow: hidden;display:inline-block;width: 64px;height: 43px;font-size: 12px;color: #5e5e5e;}
+.elevator li a span{display:inline-block;height: 12px;line-height: 12px;color:#777;padding-top: 8px;padding-bottom: 1px;cursor: pointer;font-family: "Arial "\9;font-family:"Arial","Microsoft Yahei";}
+.elevator li a p{height: 16px;line-height: 16px;overflow: hidden;cursor: pointer;width: 48px;margin-left: 8px;*margin-left:0px;}
+.elevator li.current a p{margin-left: 0;}
+.elevator .fl_goto .flTop a.hover{background: url(i/firstseecn.png) no-repeat -216px -78px;}
+.elevator .fl_goto .fl_bottom a.hover{background: url(i/firstseecn.png) no-repeat -216px -26px;}
+

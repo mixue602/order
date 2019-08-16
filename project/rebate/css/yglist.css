@@ -1,0 +1,61 @@
+﻿a:hover{text-decoration: none;}
+a:hover img{
+    -webkit-animation: blink 1s;animation: blink 1s;opacity:.9\9;filter:Alpha(opacity=90)\9;
+}
+@-moz-keyframes blink{0%{opacity: 1}50%{opacity: .80}100%{opacity: 1}}
+@-webkit-keyframes blink{0%{opacity: 1}50%{opacity: .80}100%{opacity: 1}}
+@-o-keyframes blink{0%{opacity: 1}50%{opacity: .80}100%{opacity: 1}}
+@keyframes blink{0%{opacity: 1}50%{opacity: .80}100%{opacity: 1}}
+/*首屏样式-start*/
+.firstseecn{ position:relative; z-index:10; width:100%; height:400px; min-width:1200px;}
+/* 焦点图插件样式 */
+.firstseecn .slideBox{ position:relative; width:100%; height:400px; overflow:hidden;}
+.firstseecn .slideBox .hd {position:absolute; left:50%; bottom:13px; z-index:1; height:20px; overflow:hidden; text-align:center;}
+.firstseecn .slideBox .hd ul { overflow:hidden; zoom:1}
+.firstseecn .slideBox .hd ul li { display:inline-block; *float:left; margin-right:10px; width:30px; height:5px; background:#000; opacity:.3; filter:alpha(opacity:30); cursor:pointer;}
+.firstseecn .slideBox .hd ul li.on { background:#f5004b;opacity:1; filter:alpha(opacity:100);}
+.firstseecn .slideBox .bd{ position:relative; z-index:0; height:100%; min-width:1200px;}
+.firstseecn .slideBox .bd li{ display:none; position:absolute; left:0; top:0; width:100%; height:400px; zoom:1; vertical-align:middle;}
+.firstseecn .slideBox .bd li a{ display:block; position:absolute; left:50%; z-index:7; margin-left:-600px; overflow:hidden;}
+/* 后按钮代码，如果不需要删除即可 */
+.firstseecn .slideBox .prev,.firstseecn .slideBox .next{ position:absolute; top:50%; left:50%; z-index:1; margin-top:-52px; margin-left:-600px; width:50px; height:104px; cursor:pointer; }
+.firstseecn .slideBox .next{ position:absolute; top:50%; left:50%; z-index:1; margin-top:-52px; margin-left:560px; width:50px; height:104px; cursor:pointer;}
+.firstseecn .slideBox .prev:hover .btn-bg,.firstseecn .slideBox .next:hover .btn-bg{ opacity:.3;filter:Alpha(opacity=30);}
+.firstseecn .slideBox .btn-bg{ display:inline-block; position:absolute; z-index:2; width:40px; height:80px; cursor:pointer; background:#000; opacity:.1; filter:Alpha(opacity=10);}
+.firstseecn .slideBox .arrow{ display:inline-block; position:absolute; top:0px; left:0px; z-index:3; width:40px; height:80px;
+    background:url(i/firstseecn.png) 0 -112px no-repeat;}
+.firstseecn .slideBox .next .arrow{ background-position:-42px -112px;}
+
+/*首屏窄屏样式*/
+.w1000 .firstseecn{ min-width:1000px;}
+.w1000 .firstseecn .slideBox .bd img{ margin-left:0;}
+.w1000 .firstseecn .leftcate{ margin-left:-500px;}
+.w1000 .firstseecn .slideBox .prev{ margin-left:-500px}
+.w1000 .firstseecn .slideBox .bd{ min-width:1000px;}
+.w1000 .firstseecn .slideBox .bd li a{ width:1000px; height:400px; margin-left:-500px; }
+.w1000 .firstseecn .slideBox .bd li a img{margin-left: -100px;}
+.w1000 .firstseecn .slideBox .next{ margin-left:460px;}
+/*首屏样式-end*/
+.goodsTab{font-family: 'Microsoft Yahei';padding-top: 30px;}
+.goodsTab_box_title{width: 1250px;position: relative;z-index: 2;height: 45px;overflow: hidden;}
+.goodsTab_box_title li{width: 600px;height:45px;line-height: 45px;float: left;font-size: 22px;text-align: center;color:#333;background: #ddd;cursor: pointer;}
+.w1000 .goodsTab_box_title li{width: 500px;}
+.goodsTab_box_title li.cur{color:#fff;background: #ff4c4c;}
+/*楼层*/
+.goodsTab{font-family: 'Microsoft Yahei';}
+.goodsTab .floor_warp .goodsTab_list{border: 1px solid #e6e6e6;height:1895px;overflow: hidden;margin-top: 20px;}
+.goodsTab .floor_warp ul{width: 1260px;}
+.goodsTab .floor_warp ul li{width: 239px;height: 315px;float: left;border-bottom: 1px solid #e6e6e6; border-right: 1px solid #e6e6e6;position: relative;}
+.w1000 .goodsTab .floor_warp ul li{width: 249px;}
+.goodsTab .floor_warp ul li .goods_img{display: block;padding: 20px 0 15px 0;text-align: center;}
+.goodsTab .floor_warp ul li .goods_name{display: block;width: 200px;margin: 0 auto;font-size: 14px;height: 42px;overflow: hidden;color: #333;}
+.goodsTab .floor_warp ul li .goods_name:hover{color: #ee3b3b;}
+.goodsTab .floor_warp ul li .price{display: block;padding-left: 20px;font-size: 17px;color: #EE3B3B;}
+.goodsTab .floor_warp ul li .price i{font-family: "Arail";}
+.goodsTab .floor_warp ul li div{width: 200px;margin: 15px auto 0;height: 18px;line-height: 18px;overflow: hidden;}
+.goodsTab .floor_warp ul li div.rebate_text{color: #ee3b3b;font-size: 14px;}
+.goodsTab .floor_warp ul li div .rebate_fl{display: block;width: 36px;height: 18px;text-align: center;background: #EE3B3B;color: #fff;float: left;margin-right: 10px;}
+.goodsTab .floor_warp ul li div .rebate_txt{width: 150px;display: block;float: left;font-size: 14px;}
+.goodsTab .floor_warp ul li div .rebate_txt i{color: #EE3B3B;font-family: "Arail";}
+.goodsTab .floor_warp ul li .joinMd{display: block;width: 64px;height: 18px;text-align: center;line-height: 18px;border: 1px solid #EE3B3B;color: #EE3B3B;border-radius: 2px;position: absolute;bottom: 55px;right: 20px;}
+/*楼层 end*/

@@ -1,0 +1,120 @@
+<#if (config)??>
+    <#assign cookieDomain="${(config.cookieDomain)!}">
+        <#elseif (data)??>
+            <#assign cookieDomain="${(data.storeConfiguration.cookieDomain)!}">
+</#if>
+<div class="group-category-box ">
+    <div class="group-category wbox">
+        <div class="all-category clearfix">
+            <h2>
+                <span></span> 真划算分类
+            </h2>
+            <#-- <div class="group-cetagory-bg"></div>-->
+        <div class="group-category-list">
+            <ul>
+                <#if model?? && model.categorys?? && model.categorys?size &gt; 0>
+                    <#list model.categorys as cates>
+                        <li data-cateId="${cates.categoryNo!}">
+                            <h3>
+                                <a data-code="8700010001-${(cates_index+1)!}" href="${cates.url!}" target="_blank">${cates.name!}</a>
+                            </h3>
+                        </li>
+                    </#list>
+                </#if>
+            </ul>
+            <span class="gray_opacity"></span>
+        </div>
+    </div>
+    <#if model??&&model.projectName??&&model.projectName=='vipshop'>
+        <#assign projectName=1>
+            <#else>
+                <#assign projectName=0>
+    </#if>
+    <ul class="group-mainnav">
+        <#if projectName==0>
+            <#if model?? && model.navigationBars?? && model.navigationBars?size &gt; 0>
+                <#list model.navigationBars as nav>
+                    <#if nav.checked?? && nav.checked==true>
+                        <li class="cur">
+                            <#else>
+                                <li class="">
+                    </#if>
+                    <a data-code="8700010002-${(nav_index+1)!}" href="${nav.url!}" title="${nav.name!}" target="_blank">
+                                ${nav.name!}
+                            </a>
+                    </li>
+                </#list>
+            </#if>
+            <#else>
+                <li class="cur"><a data-code="8700010002-1" href="//vip${cookieDomain!}" title="首页" target="_blank">首页</a></li>
+                <li><a data-code="8700010002-2" href="//vip${cookieDomain!}/jiadian/" title="家电特卖" target="_blank">家电特卖</a></li>
+                <li><a data-code="8700010002-3" href="//vip${cookieDomain!}/fuzhuang/" title="服饰特卖" target="_blank">服饰特卖</a></li>
+                <li><a data-code="8700010002-4" href="//vip${cookieDomain!}/baihuo/" title="百货特卖" target="_blank">百货特卖</a></li>
+                <li><a data-code="8700010002-5" href="//vip${cookieDomain!}/tomorrow/" title="明日上线" target="_blank">明日上线</a></li>
+        </#if>
+    </ul>
+    <#if projectName==0>
+        <div class="group-assistant">
+            <div class="group-assistant-browse">
+                <div class="icon">&#x201E;</div>
+                <div class="assistant-box assistant-box-b">
+                    <div style="position:relative;">
+                        <span class="arrow-down b-arrow"></span>
+                        <h2>最近浏览</h2>
+                        <ul class="assistant-box-list clearfix" id="browseBox">
+
+                        </ul>
+                        <div class="assistant-bottom assistant-bottom-browse">
+                            <div class="assistant-page">
+
+                            </div>
+                            <a class="remove" href="javascript:void(0)">清空</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="line">|</div>
+            <div class="group-assistant-collection">
+                <div class="icon">&#x2020;</div>
+                <div class="assistant-box assistant-box-c">
+                    <div id="okLogin">
+                        <span class="arrow-down c-arrow"></span>
+                        <div class="collection-status">
+                            <a href="javascript:void(0)" class="cur" rel="nofollow">全部</a>
+                            <a href="javascript:void(0)" rel="nofollow">已开始</a>
+                            <a href="javascript:void(0)" rel="nofollow">未开始</a>
+                        </div>
+                        <h2>真划算收藏</h2>
+                        <ul class="assistant-box-list clearfix" id="assistant-box-c-list">
+
+                        </ul>
+                        <#--<div class="assistant-remove"><a href="#" onclick="tuanCollection.clearCollect()">清空</a></div>-->
+                </div>
+                <div id="noLogin">
+                    <span class="arrow-down c-arrow"></span>
+                    <h2 class="bottomline">真划算收藏</h2>
+                    <p class="gbfav-no-p">请<a href="javascript:void(0)">登录</a>后查看真划算收藏</p>
+                </div>
+                <#if (config)??>
+                    <#assign indexDomain="${(config.indexDomain)!}">
+                        <#elseif (data)??>
+                            <#assign indexDomain="${(data.storeConfiguration.indexDomain)!}">
+                </#if>
+                <div class="gbfav-in-wu">
+                    <div class="gbfav-noitem">
+                        <p class="gbfav-no-p">暂无收藏的真划算商品，快去<a class="look" href="${indexDomain!}" target="_blank">逛逛</a>吧</p>
+                    </div>
+                </div>
+                <div class="pop-pagi-box">
+                    <div class="pop-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="line">|</div>
+        <div class="group-assistant-myhome">
+            <div class="icon" title="我的真划算"><a href="//myhome${cookieDomain!}/member/myOrder?flag=a0" target="_blank">&#x2026;</a></div>
+        </div>
+</div>
+</#if>
+</div>
+</div>

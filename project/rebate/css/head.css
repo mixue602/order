@@ -1,0 +1,376 @@
+﻿@charset "utf-8";
+/* CSS Document */
+html {
+    overflow-x: hidden;
+}
+body{
+    background:#fff;
+}
+#gome-topad-sm,#gome-head{
+    background: #fff;
+}
+/**common**/
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.w1200 {
+    width: 1200px;
+    margin: 0 auto;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.mt10 {
+    margin-top: 10px;
+}
+.pr {
+    position: relative;
+}
+.pabs {
+    position: absolute;
+}
+.none{
+    display:none;
+}
+.lazyloading{background: url(/gmlib/ui/loading/3.0.0/loading-sm.png) 50% 50% no-repeat;}
+.gome_loading_gif{ background: url(/gmlib/ui/loading/3.0.0/loading.gif) 50% 50% no-repeat; }
+.fli_gz .icon,.price-up .icon-up-down,.price-down .icon-up-down,.filter-label-box .iic{
+    background: url("i/list.png") no-repeat;
+    _background: url("i/listIE6.png") no-repeat;}
+/*头部*/
+.fli_box{
+    width:1200px;
+    margin:0 auto;
+    position: relative;
+}
+.w1000 .fli_box{
+    width:1000px;
+}
+.fli_headbox{
+    height:59px;
+    width:100%;
+    background: url(i/top_bg.png) center repeat-x;
+    position: relative;
+    z-index: 10;
+}
+.fli_searchbox{
+    width:330px;
+    height:28px;
+    background: red;
+    float: right;
+    margin:16px 213px 0 0;
+}
+.fli_searchbox form{
+    width:331px;
+    float:left;
+}
+.fli_gz{
+    float: right;
+    height:16px;
+    margin-top:23px;
+}
+.w1000 .fli_gz{
+    margin-right: 100px;
+}
+.fli_gz .icon{
+    float:left;
+    width:13px;
+    height:13px;
+    background-position: 0 0;
+    margin:1px 5px 0 0;
+}
+.fli_gz .link{
+    float:left;
+    color:#fff;
+    font:14px/14px "microsoft yahei";
+}
+.fli_gz .link:hover{
+    color:#ee3b3b;
+}
+.fli_searchbox {
+    position: relative;
+    font-size: 12px;
+    height: 28px;
+    background: #fff
+}
+.fli_searchbox label {
+    font-family: 'microsoft yahei';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    line-height: 28px;
+    height: 28px;
+    overflow: hidden;
+    color: #666;
+    width: 75%;
+    color: #999;
+    cursor: text;
+}
+
+.fli_searchbox input {
+    border:1px solid #e6e6e6;
+    border-right: none;
+    width: 270px;
+    padding: 3px 5px 3px 10px;
+    line-height: 20px;
+    float: left;
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: #999;
+    background-color: transparent;
+}
+
+.fli_searchbox button {
+    width: 44px;
+    height: 28px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    display: inline;
+    background: #EE3B3B;
+    font: 12px/28px 'microsoft yahei';
+    color: #fff;
+    letter-spacing: 2px;
+    text-indent: 0;
+    top:-1px;
+    right:-1px;
+}
+.searchtips {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background: #FFF;
+    width: 328px;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: none
+}
+
+.hisTitle {
+    border-bottom: 1px solid #eee;
+    display: block;
+    line-height: 30px;
+    overflow: hidden;
+    _zoom: 1;
+    color: #a5a5a5;
+    text-decoration: none;
+    width: 100%
+}
+
+.hisTitle a,.hisTitle a:hover {
+    color: #a5a5a5
+}
+
+.hisTitle a {
+    float: right
+}
+
+.hisTitle p {
+    color: #a5a5a5;
+    display: block;
+    padding: 0 10px
+}
+
+.hisTitle span {
+    text-decoration: none;
+    color: #a5a5a5;
+    float: left
+}
+
+.searchabout {
+    width: 100%;
+    line-height: 18px;
+    font-family: Arial
+}
+
+.searchabout li.first {
+    border-bottom: 1px solid #e0e0e0
+}
+
+.searchabout li {
+    float: left;
+    width: 100%;
+    cursor: pointer
+}
+
+.searchabout li.hover {
+    background: #f8f8f8;
+    text-decoration: none
+}
+
+.searchabout li a {
+    clear: both;
+    display: block;
+    padding: 0 0 0 10px;
+    line-height: 30px;
+    overflow: hidden;
+    _zoom: 1;
+    color: #A5A5A5;
+    text-decoration: none
+}
+
+.searchabout li a:hover,.searchabout li a.hover {
+    background: #f8f8f8
+}
+
+.searchabout span {
+    color: #5e5e5e;
+    float: left
+}
+
+.searchabout li span.fl {
+    float: left;
+    cursor: pointer
+}
+
+.searchabout li span.fr {
+    float: right;
+    cursor: pointer
+}
+
+.searchabout li p a {
+    clear: both;
+    padding-left: 2em
+}
+
+.searchabout li strong,.searchabout li .highlight {
+    font-weight: 700
+}
+
+.searchabout li.search-item a {
+    color: #C00;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline;
+    padding: 0;
+    text-decoration: none
+}
+
+.searchabout li.search-item span.fs {
+    width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 20px;
+    line-height: 29px
+}
+
+.searchabout li.search-item span.fs b {
+    color: #C00
+}
+
+.searchabout li.search-item span.fs i {
+    padding: 0 3px;
+    color: #C00
+}
+
+.searchabout li a:hover,.searchabout li a.hover {
+    background: #f8f8f8
+}
+
+.searchabout li .fs a:hover.akeyword,.searchabout li .fs a.akeyword.hover {
+    color: #C00;
+    text-decoration: underline;
+    *vertical-align: baseline
+}
+
+.searchabout li a:hover.akeyword .fl,.searchabout li a.akeyword.hover .fl {
+    color: #C00;
+    *vertical-align: baseline
+}
+
+.searchabout li a.akeyword .fl {
+    color: #5E5E5E
+}
+
+.searchabout li a.akeyword .color-b,.searchabout li a:hover.akeyword .color-b,.searchabout li a.akeyword.hover .color-b {
+    color: #A5A5A5;
+    text-decoration: none;
+    padding-right: 10px
+}
+
+.searchabout li.search-item .color-b {
+    color: #A5A5A5;
+    text-decoration: none;
+    line-height: 29px;
+    padding-right: 10px
+}
+
+.searchabout li a.hisakeyword .fl {
+    color: #069;
+    width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.searchabout li a:hover.hisakeyword .fl,.searchabout li a.hisakeyword.hover .fl {
+    color: #069;
+    text-decoration: none;
+    *vertical-align: baseline
+}
+
+.searchabout li a.hisakeyword .color-b {
+    color: #A5A5A5;
+    text-decoration: none;
+    padding-right: 10px
+}
+
+.searchabout li a:hover.hisakeyword .color-b {
+    color: #e3101e;
+    text-decoration: none;
+    padding-right: 10px
+}
+
+.searchabout li.related-search a.hover {
+    color: #c00
+}
+.searchabout li.related-search a.hover span {
+    color: #c00
+}
+.searchabout li.related-search a.hover .related-keyword {
+    color: #c00
+}
+.searchabout li.related-search span {
+    float: none;
+    display: inline-block;
+    vertical-align: middle
+}
+.searchabout li.related-search .related-keyword {
+    color: #5e5e5e;
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+.searchabout li.related-search a i {
+    display: inline-block;
+    background: url(/gmpro/1.0.0/public/1.0.0/css/i/ui.png);
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle
+}
+.searchabout li.related-shop-search a i {
+    background-position: -64px -1358px
+}
+.searchtips .closeSearch {
+    border-top: 1px solid #f2f2f2;
+    width: 100%;
+    height: 30px;
+    cursor: pointer
+}
+.searchtips .closeSearch span {
+    display: inline-block;
+    float: right;
+    line-height: 30px;
+    padding-right: 10px;
+    color: #595959
+}
+.searchtips .closeSearch:hover span {
+    color: #e3101e
+}

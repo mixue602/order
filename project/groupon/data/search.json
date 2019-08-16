@@ -1,0 +1,266 @@
+{
+    "model": {
+        "categorys": [
+            {
+                "categoryNo": "cat30801453",
+                "name": "测试分类",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801453.html"
+            },
+            {
+                "categoryNo": "cat18601458",
+                "name": "数码电器",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat18601458.html"
+            },
+            {
+                "categoryNo": "cat18601459",
+                "name": "电脑主机",
+                "selected": true,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat18601459.html"
+            },
+            {
+                "categoryNo": "cat30801457",
+                "name": "手机数码",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801457.html"
+            },
+            {
+                "categoryNo": "cat30801458",
+                "name": "个护化妆",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801458.html"
+            },
+            {
+                "categoryNo": "cat30801459",
+                "name": "文化艺术",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801459.html"
+            },
+            {
+                "categoryNo": "cat30801460",
+                "name": "运动户外",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801460.html"
+            },
+            {
+                "categoryNo": "cat30801461",
+                "name": "服饰鞋包",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801461.html"
+            },
+            {
+                "categoryNo": "cat30801494",
+                "name": "汽车用品",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801494.html"
+            },
+            {
+                "categoryNo": "cat30801495",
+                "name": "保健健康 ",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801495.html"
+            },
+            {
+                "categoryNo": "cat30801496",
+                "name": "家具建材",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801496.html"
+            },
+            {
+                "categoryNo": "cat30801497",
+                "name": "厨房小电",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801497.html"
+            },
+            {
+                "categoryNo": "cat30801498",
+                "name": "电视影音",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801498.html"
+            },
+            {
+                "categoryNo": "cat30801499",
+                "name": "冰洗空调",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801499.html"
+            },
+            {
+                "categoryNo": "cat30801500",
+                "name": "家居家纺 ",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801500.html"
+            },
+            {
+                "categoryNo": "cat30801501",
+                "name": "食品酒水",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801501.html"
+            },
+            {
+                "categoryNo": "cat30801502",
+                "name": "家居家纺",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801502.html"
+            },
+            {
+                "categoryNo": "cat30801503",
+                "name": "母婴玩具",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801503.html"
+            },
+            {
+                "categoryNo": "cat30801504",
+                "name": "文化艺术",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801504.html"
+            },
+            {
+                "categoryNo": "cat30801505",
+                "name": "生活电器",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801505.html"
+            },
+            {
+                "categoryNo": "cat30801506",
+                "name": "厨卫大电",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801506.html"
+            },
+            {
+                "categoryNo": "cat31001698",
+                "name": "国美在线",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat31001698.html"
+            },
+            {
+                "categoryNo": "cat31001701",
+                "name": "团购测试",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat31001701.html"
+            }
+        ],
+        "goodsItem": {},
+        "hotKeys": [
+            {
+                "description": "",
+                "name": "畅销手机",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "",
+                "name": "测试1",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "",
+                "name": "测试2测试2测试2测试2测试2测试2测试2测试2测试2",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "测试3",
+                "name": "测试3",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "测试5",
+                "name": "测试5",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            }
+        ],
+        "navigationBars": [
+            {
+                "description": "",
+                "name": "首页",
+                "selected": true,
+                "target": false,
+                "url": "http://tuan.atguat.com.cn"
+            },
+            {
+                "description": "",
+                "name": "限时抢",
+                "target": false,
+                "url": "http://tuan.atguat.com.cn/q"
+            },
+            {
+                "description": "品牌团品牌团",
+                "name": "品牌团",
+                "target": false,
+                "url": "http://tuan.atguat.com.cn/brand.html"
+            },
+            {
+                "description": "",
+                "name": "闪购",
+                "target": false,
+                "url": "http://vip.atguat.com.cn"
+            },
+            {
+                "description": "",
+                "name": "第五个",
+                "target": false,
+                "url": "http://tuan.gome.com.cn/"
+            },
+            {
+                "description": "",
+                "name": "第六个",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            }
+        ],
+        "seo": {
+            "appUrl": "//tuan.m.gome.com.cn/groupon-cat18601459.html",
+            "canonical": "//tuan.atguat.com.cn/groupon/cat18601459.html",
+            "description": "电脑主机团购大全,尽在【国美团购tuan.gome.com.cn】,电脑主机团购点评,电脑主机优惠,电脑主机打折等优惠信息.",
+            "keywords": "电脑主机团购,电脑主机团购大全,电脑主机团购点评,电脑主机优惠打折",
+            "title": "电脑主机团购大全,电脑主机团购点评,电脑主机优惠打折-国美团购"
+        }
+    },
+    "config": {
+        "appDetialSite": "//m.gome.com.cn",
+        "cookieDomain": ".atguat.com.cn",
+        "detailSite": "tuan.atguat.com.cn/deal/",
+        "grouponCategory": "cat18601456",
+        "htmlServer": "//desc.atguat.com.cn/html/",
+        "imageDomain": ".atguat.net.cn/image/",
+        "imageserver": "//img.atguat.net.cn/images",
+        "indexDomain": "//tuan.atguat.com.cn",
+        "isPrice": "1",
+        "itemSite": "//item.atguat.com.cn",
+        "memberSite": "//member.atguat.com.cn",
+        "reviewSite": "//review.atguat.com.cn",
+        "searchBrand": "//search.atguat.com.cn",
+        "searchSite": "api.search.atguat.com.cn/p/asynSearch",
+        "staSite": "//www.atguat.com.cn",
+        "stageCssServer": "//css.atguat.com.cn",
+        "stageJsServer": "//js.atguat.com.cn",
+        "tuanSiteAjax": "//ajax.tuan.atguat.com.cn"
+    }
+}

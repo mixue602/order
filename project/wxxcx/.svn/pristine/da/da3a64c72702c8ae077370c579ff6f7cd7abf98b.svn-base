@@ -1,0 +1,110 @@
+/* 原商品 */
+.similar-goods {
+  border-top: 1rpx solid #E3E4E5;
+  background: #fff;
+  padding: 30rpx;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 50rpx;
+}
+.similar-goods .goods-img {
+  width: 188rpx;
+  height: 188rpx;
+  float: left;
+  border: 1rpx solid #E3E4E5;
+}
+.goods-img image {
+  width: 183rpx;
+  height: 183rpx;
+  display: inline-block;
+}
+.similarGoods-right {
+  margin-left: 210rpx;
+}
+.similarGoods-right h1 {
+  font-size: 26rpx;
+  color: #262C32;
+  line-height: 34rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient: vertical;
+}
+.similarGoods-right p {
+  position: absolute;
+  bottom: 30rpx;
+  left: 240rpx;
+  color: #FF5A5A;
+  font-size: 30rpx; 
+}
+.similar-line {
+  text-align: center;
+}
+/* 相似商品分割线 */
+.similar-line h1 {
+  color: #FF5A5A;
+  font-size: 32rpx;
+  margin: 50rpx 0;
+  overflow: hidden;
+}
+.similar-line h1::before,.similar-line h1::after {
+  content: "";
+  width: 44rpx;
+  height: 2rpx;
+  display: inline-block;
+  line-height: 2rpx;
+  background: #FF5A5A;
+  vertical-align: middle;
+}
+.similar-line h1::before {
+  content: "";
+  margin-right: 10rpx;
+}
+.similar-line h1::after {
+  content: "";
+  margin-left: 10rpx;
+}
+/* 相似商品列表 */
+.similar-list {
+  overflow: hidden;
+  display:flex;
+  flex-flow:row wrap;
+}
+
+.similar-item {
+  width: 320rpx;
+  padding: 14rpx;
+  /* float: left; */
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+.similar-item:nth-child(odd) {
+  margin: 14rpx 14rpx 14rpx 24rpx;
+}
+.similar-item:nth-child(even) {
+  margin: 14rpx 14rpx 14rpx 0rpx;
+}
+.similar-item image {
+  width: 316rpx;
+  height: 298rpx;
+  overflow: hidden;
+  display: block;
+}
+.similar-item p {
+  width:316rpx;
+  height:72rpx;
+  margin: 30rpx 0 50rpx 0rpx;
+  font-size:26rpx;
+  line-height:36rpx;
+  color:#333333;
+  display: block;
+  overflow:hidden; 
+}
+.similar-item span {
+  color: #FF5A5A;
+  font-size: 24rpx;
+  display: block;
+  margin-bottom: 26rpx;
+}

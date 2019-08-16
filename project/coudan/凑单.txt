@@ -1,0 +1,86 @@
+凑单：http://coudan.atguat.com.cn/?1000404014-1000404015-1000404022
+
+  Bug?148217?-?【促销融合二期-去凑单】凑单页多品返券、返豆?(编辑)
+/**
+	 * 蓝券
+	 */
+	BLUE(1),
+	/**
+	 * 红券
+	 */
+	RED(2),
+	/**
+	 * 美券
+	 */
+	GOME(3),
+	/**
+	 * 店铺券
+	 */
+	SHOP(6),
+	/**
+	 * 积分
+	 */
+	@Deprecated
+	POINT(5),
+	/**
+	 * 购物券
+	 */
+	GOU_WU(4),
+	/**
+	 * 实物
+	 */
+	S_W(7),
+	/**
+	 * 国美豆
+	 */
+	DO(8),
+
+
+
+        DPG(0), // 搭配购
+	MJ(1), // 满减
+	ZDZ(2), // 整单折
+	MZ(3), // 满折
+	TZ(8), // 套装
+	POP_MZE(8), // POP满赠
+	POP_MJ(9), // POP满减
+	POP_MF(10), // POP满返
+	POP_MZH(11), // POP满折
+	POP_GWQ(12), // POP购物券
+	KDP_MJ(13), // POP跨店铺满减
+	KDP_MM(14), // POP跨店铺满免
+	/**
+	 * POP单品满折
+	 */
+	POP_I_MZH(15),
+	NO(Integer.MAX_VALUE), // 不使用促销
+	I_ZE_GIFTS(16), // 单品赠实物促销
+	MUL_ZE_GIFTS(17), // 多品满金额赠实物促销
+	I_ZE_COUPONS(18), // 单品赠券促销
+	MUL_ZE_COUPONS(19), // 多品满金额赠券促销
+	I_ZE_DO(20), // 单品赠豆促销
+	MUL_ZE_DO(21), // 多品满金额赠豆促销
+	JJHG(22); // 加价换购
+
+http://item.atguat.com.cn/9200001522-1000088546.html
+
+http://item.atguat.com.cn/9200003602-1000101651.html
+
+http://item.atguat.com.cn/9200000721-1000078546.html
+
+http://item.atguat.com.cn/9200003602-1000078165.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

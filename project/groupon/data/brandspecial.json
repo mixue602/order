@@ -1,0 +1,848 @@
+{
+    "model": {
+        "categorys": [
+            {
+                "categoryNo": "cat30801453",
+                "name": "测试分类",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801453.html"
+            },
+            {
+                "categoryNo": "cat18601458",
+                "name": "数码电器",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat18601458.html"
+            },
+            {
+                "categoryNo": "cat18601459",
+                "name": "电脑主机",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat18601459.html"
+            },
+            {
+                "categoryNo": "cat30801457",
+                "name": "手机数码",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801457.html"
+            },
+            {
+                "categoryNo": "cat30801458",
+                "name": "个护化妆",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801458.html"
+            },
+            {
+                "categoryNo": "cat30801459",
+                "name": "文化艺术",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801459.html"
+            },
+            {
+                "categoryNo": "cat30801460",
+                "name": "运动户外",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801460.html"
+            },
+            {
+                "categoryNo": "cat30801461",
+                "name": "服饰鞋包",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801461.html"
+            },
+            {
+                "categoryNo": "cat30801494",
+                "name": "汽车用品",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801494.html"
+            },
+            {
+                "categoryNo": "cat30801495",
+                "name": "保健健康 ",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801495.html"
+            },
+            {
+                "categoryNo": "cat30801496",
+                "name": "家具建材",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801496.html"
+            },
+            {
+                "categoryNo": "cat30801497",
+                "name": "厨房小电",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801497.html"
+            },
+            {
+                "categoryNo": "cat30801498",
+                "name": "电视影音",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801498.html"
+            },
+            {
+                "categoryNo": "cat30801499",
+                "name": "冰洗空调",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801499.html"
+            },
+            {
+                "categoryNo": "cat30801500",
+                "name": "家居家纺 ",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801500.html"
+            },
+            {
+                "categoryNo": "cat30801501",
+                "name": "食品酒水",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801501.html"
+            },
+            {
+                "categoryNo": "cat30801502",
+                "name": "家居家纺",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801502.html"
+            },
+            {
+                "categoryNo": "cat30801503",
+                "name": "母婴玩具",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801503.html"
+            },
+            {
+                "categoryNo": "cat30801504",
+                "name": "文化艺术",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801504.html"
+            },
+            {
+                "categoryNo": "cat30801505",
+                "name": "生活电器",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801505.html"
+            },
+            {
+                "categoryNo": "cat30801506",
+                "name": "厨卫大电",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat30801506.html"
+            },
+            {
+                "categoryNo": "cat31001698",
+                "name": "国美在线",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat31001698.html"
+            },
+            {
+                "categoryNo": "cat31001701",
+                "name": "团购测试",
+                "selected": false,
+                "target": true,
+                "url": "//tuan.atguat.com.cn/groupon/cat31001701.html"
+            }
+        ],
+        "hotKeys": [
+            {
+                "description": "",
+                "name": "畅销手机",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "",
+                "name": "测试1",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "",
+                "name": "测试2测试2测试2测试2测试2测试2测试2测试2测试2",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "测试3",
+                "name": "测试3",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            },
+            {
+                "description": "测试5",
+                "name": "测试5",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            }
+        ],
+        "imgUrl": "品牌测试",
+        "items": [
+            {
+                "gomePrd": true,
+                "groupPrice": "490.00",
+                "imgUrl": "//img2.atguat.net.cn/image/img/201201/10000070/1000122353/1000222444",
+                "itemId": "Q8800007304",
+                "marketPrice": "500.00",
+                "saleNum": 20,
+                "status": "ending",
+                "title": "qianggou1",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007304.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": true,
+                "groupPrice": "2985.00",
+                "imgUrl": "//img3.atguat.net.cn/image/prodimg/production_image/201606/29/sku20910017/1000002620",
+                "itemId": "Q8800007185",
+                "marketPrice": "5000.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试",
+                "url": "//tuan.atguat.com.cn/deal/Q8800007185.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            },
+            {
+                "gomePrd": false,
+                "groupPrice": "250.00",
+                "imgUrl": "//img4.atguat.net.cn/image/bbcimg/production_image/nimg/201508/25/14/10/2c294b1797832cdb7c",
+                "itemId": "T8800004362",
+                "marketPrice": "299.00",
+                "saleNum": 1,
+                "status": "ending",
+                "title": "测试9-正在进行中",
+                "url": "//tuan.atguat.com.cn/deal/T8800004362.html"
+            }
+        ],
+        "mainAds": [
+            {
+                "description": "测试",
+                "imgUrl": "//img13.atguat.net.cn/image/prodimg/promotion_image/promoImg/201608/20160812/shuiping4.jpg",
+                "name": "测试",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            }
+        ],
+        "navigationBars": [
+            {
+                "description": "",
+                "name": "首页",
+                "target": false,
+                "url": "http://tuan.atguat.com.cn"
+            },
+            {
+                "description": "",
+                "name": "限时抢",
+                "target": false,
+                "url": "http://tuan.atguat.com.cn/q"
+            },
+            {
+                "checked": true,
+                "description": "品牌团品牌团",
+                "name": "品牌团",
+                "target": false,
+                "url": "http://tuan.atguat.com.cn/brand.html"
+            },
+            {
+                "description": "",
+                "name": "闪购",
+                "target": false,
+                "url": "http://vip.atguat.com.cn"
+            },
+            {
+                "description": "",
+                "name": "第五个",
+                "target": false,
+                "url": "http://tuan.gome.com.cn/"
+            },
+            {
+                "description": "",
+                "name": "第六个",
+                "target": false,
+                "url": "http://www.gome.com.cn"
+            }
+        ],
+        "seo": {
+            "canonical": "//tuan.atguat.com.cn/brand/1234.html",
+            "description": "国美在线品牌测试团购提供服品牌测试团购报价及品牌测试抢购服务.有国美,生活美！",
+            "keywords": "品牌测试团购,品牌测试团购报价, 品牌测试抢购",
+            "title": "品牌测试团购_品牌测试团购报价-国美在线 "
+        }
+    },
+    "config": {
+        "appDetialSite": "//m.gome.com.cn",
+        "cookieDomain": ".atguat.com.cn",
+        "detailSite": "tuan.atguat.com.cn/deal/",
+        "grouponCategory": "cat18601456",
+        "htmlServer": "//desc.atguat.com.cn/html/",
+        "imageDomain": ".atguat.net.cn/image/",
+        "imageserver": "//img.atguat.net.cn/images",
+        "indexDomain": "//tuan.atguat.com.cn",
+        "isPrice": "1",
+        "itemSite": "//item.atguat.com.cn",
+        "memberSite": "//member.atguat.com.cn",
+        "reviewSite": "//review.atguat.com.cn",
+        "searchBrand": "//search.atguat.com.cn",
+        "searchSite": "api.search.atguat.com.cn/p/asynSearch",
+        "staSite": "//www.atguat.com.cn",
+        "stageCssServer": "//css.atguat.com.cn",
+        "stageJsServer": "//js.atguat.com.cn",
+        "tuanSiteAjax": "//ajax.tuan.atguat.com.cn"
+    }
+}

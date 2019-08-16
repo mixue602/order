@@ -1,0 +1,278 @@
+<scroll-view class='container' scroll-y bindscrolltolower="scrollEvnet" style='height:{{height}}'>
+
+
+  <block wx:for="{{list}}" wx:for-item="homeItem" wx:key="*this">
+    <view class="banner-box" wx:if="{{homeItem.templetCode=='focusPhotoListTemplet'}}">
+      <swiper class='banner-box' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" current="{{currentSwiper}}" indicator-dots="true" indicator-active-color="#fff" indicator-color="rgba(255,255,255,.5)">
+        <block wx:for="{{homeItem.focusPhotoListTemplet}}" wx:key="*this">
+          <swiper-item class="banner-box" data-productId="{{item.productID}}" data-scheme="{{item.scheme}}" data-promstype="{{item.promsType}}" bindtap="getImgEvent">
+            <image class="banner" src="{{protocol}}{{item.imageUrl}}" mode="aspectFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- <view class="dots">
+        <block wx:for="{{homeItem.focusPhotoListTemplet}}" wx:key>
+          <view class="dot {{index == currentSwiper ? ' active' : ''}}"></view>
+        </block>
+      </view> -->
+      <view class="QR-btn" bindtap="codeClick">
+        <image src="/images/QR_CODE.png" mode='aspectFill'></image>
+        <view>扫一扫</view>
+      </view>
+      <navigator class='search-box' url="/packSearch/pages/list/list" hover-class="none">
+        <view class="search-btn">
+            <image src="/images/search-ico.png" mode='aspectFill'></image>
+            <view>搜索心仪商品</view>
+        </view>
+      </navigator>
+      <view class='active-btn' wx:if="{{activeList.imgList[0]}}" bindtap='getImgEvent' data-promstype="{{activeList.imgList[0].promsType}}" data-scheme="{{activeList.imgList[0].scheme}}">
+        <image src='{{protocol}}{{activeList.imgList[0].imageUrl}}' mode="aspectFill"></image>
+      </view>
+    </view>
+    <!-- 快捷入口 -->
+    <view class='enter-list' wx:if="{{homeItem.templetCode=='tagShortcutTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");color:{{homeItem.templateContentFontColor}} '>
+      <swiper class='enter-box' current="{{currentEnter}}" bindchange="swiperEnter" wx:if="{{homeItem.tagShortcutTemplet.list.length>0}}" style='background:{{homeItem.templateBgColor}};height:{{homeItem.tagShortcutTemplet.shortcutList.length>5 ? "320rpx" : "140rpx"}}'>
+        <swiper-item class="enters-list" wx:for="{{homeItem.tagShortcutTemplet.list}}" wx:for-item="shortItem" wx:key="{{shortItem}}" >
+          <block wx:for="{{shortItem}}" wx:for-item="enterItem" wx:key="*this" wx:for-index="enterIndex">
+            <view class='enters' wx:if="{{enterIndex<10}}" style='width:{{shortItem.length>5 ? (1/shortItem.length*100*2): (1/shortItem.length*100)}}%'>
+              <view class="index-tit" bindtap="getBannerEvent" data-scheme='{{enterItem.scheme}}' data-menucode="{{enterItem.menuCode}}">
+                <image src="{{protocol}}{{enterItem.menuImg}}" mode="aspectFill"></image>
+                <view class="enter-desc" style='color:{{homeItem.templateContentFontColor}}'>{{enterItem.menuName}}</view>
+              </view>
+            </view>
+          </block>
+        </swiper-item>
+      </swiper>
+      <!-- <view class='enter-box' wx:for="{{homeItem.tagShortcutTemplet.shortcutList}}" wx:for-item="enterItem" wx:key="*this">
+          <view class="index-tit">
+            <image src="{{enterItem.menuImg}}"></image>
+            <view class="enter-desc">{{enterItem.menuName}}</view>
+          </view>
+        </view> -->
+      <!-- <view class="daily-dots">
+        <block wx:for="{{homeItem.tagShortcutTemplet.list}}" wx:key="*this">
+          <view class="daily-dot {{index == currentEnter ? ' daily-active' : ''}}"></view>
+        </block>
+      </view> -->
+    </view>
+
+    <!-- 国美秒杀 -->
+    <view class='ms-box' wx:if="{{homeItem.templetCode=='rushBuyTemplet'}}">
+      <view class='ms-container mg-top'  wx:if="{{homeItem.rushBuyTemplet.delayTime!=0}}">
+        <view class='ms-tit rush-tit' style='color:{{homeItem.displayColor}};background-color:{{homeItem.displayBackColor}}'>
+          <view class='tit-left'>
+            <view class='tit-name'>国美秒杀</view>
+            <view class='tit-desc-ms'>{{homeItem.rushBuyTemplet.rondaName}}</view>
+            <view class='tit-time'>
+              <view class='time'>{{h}}</view>
+              <view class='time-span'>:</view>
+              <view class='time'>{{m}}</view>
+              <view class='time-span'>:</view>
+              <view class='time'>{{s}}</view>
+            </view>
+          </view>
+          <view class='tit-right' bindtap='getRushBuyEvent' data-rondaId="{{homeItem.rushBuyTemplet.rondaId}}">
+            <view>{{homeItem.templetPromo}}</view>
+            <image class='go-ico' src='/images/index-go.png' mode='aspectFit'></image>
+          </view>
+        </view>
+        <view class='ms-cont'>
+          <scroll-view class='ms-list' scroll-x="true" scroll-with-animation="true">
+            <view class='ms-item' wx:for="{{homeItem.rushBuyTemplet.goodsList}}" wx:key="{{rushItem}}" wx:for-item="rushItem" bindtap='getRushBuyEvent' data-rondaId="{{homeItem.rushBuyTemplet.rondaId}}">
+              <image class='ms-image' src='{{protocol}}{{rushItem.goodsBean.skuThumbImgUrl}}' mode='aspectFit'></image>
+              <view class='ms-price'>{{rushItem.goodsBean.priceBean.skuRushBuyPriceDesc}}</view>
+              <view class='ms-desc'>{{rushItem.goodsBean.priceBean.remainNumDesc}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 国美头条 -->
+    <!-- <view class='headline-box' wx:if="{{homeItem.templetCode=='promoWordListTemplet'}}">
+      <image class='headline-tit' src='{{protocol}}{{homeItem.logoImgUrl}}' mode="aspectFill"></image>
+      <scroll-view class='headline-list' scroll-y>
+        <view class='headline-item' wx:for="{{homeItem.promoWordListTemplet}}" wx:key="{{homeItem}}" wx:for-item="homeItem">
+          <view class='headline-tags'>
+            <view class='headline-tag'>{{homeItem.tagWord}}</view>
+            <view class='headline-text'>{{homeItem.promoWord}}</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view> -->
+
+    <!-- 多商品轮播 -->
+    <view class='ms-box {{homeItem.dailyGoodsTemplet.templateMargin==1 ? "" :"mg-top" }}' wx:if="{{homeItem.templetCode=='dailyGoodsTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");background-color:{{homeItem.templateBgColor}};color:{{homeItem.templateContentFontColor}} '>
+      <view class='ms-tit' wx:if="{{homeItem.displayName|| homeItem.subTitleName}} " style='color:{{homeItem.displayColor}};background-color:{{homeItem.displayBackColor}}'>
+        <view class='tit-left'>
+          <view class='tit-name'>{{homeItem.displayName}}</view>
+          <view class='tit-desc' style='color:{{homeItem.displayColor}}'>{{homeItem.subTitleName}}</view>
+        </view>
+      </view>
+      <view class='ms-container' wx:if="{{homeItem.dailyGoodsTemplet.goodsList.length>0}}">
+        <view class='ms-cont-many'>
+          <scroll-view class='ms-list' scroll-x="true" scroll-with-animation="true">
+            <view class='daily-item {{bindex==0 ? "m-15":""}}' wx:for="{{homeItem.dailyGoodsTemplet.goodsList}}" wx:key="{{rushItem}}" wx:for-item="dailyItem" bindtap='getDailyProd' data-skuID="{{dailyItem.goodsBean.skuID}}" data-productID="{{dailyItem.goodsBean.productID}}" style="background-color:{{homeItem.goodBackColor}}"  wx:for-index="bindex" >
+              <image class='daily-image' src='{{protocol}}{{dailyItem.goodsBean.skuThumbImgUrl}}' mode='aspectFit'></image>
+              <view class='daily-tags'>
+                <view class='daily-tag' wx:if="{{dailyItem.promoWord}}">{{dailyItem.promoWord}}</view>
+                <view class='daily-tag daily-tag-right' wx:if="{{dailyItem.shortWord}}">{{dailyItem.shortWord}}</view>
+              </view>
+              <view class='daily-price'>{{dailyItem.goodsBean.priceBean.skuPriceDesc}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+    <!-- 拼团团购 -->
+    <view class='floor {{homeItem.dailyPhotosTemplet.templateMargin==1 ? "" :"mg-top" }}' wx:if="{{homeItem.templetCode=='dailyPhotosTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");color:{{homeItem.templateContentFontColor}}'>
+      <swiper class='daily-box' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" current="{{dailySwiper}}" indicator-dots="true" indicator-active-color="rgba(242,12,89,1)" indicator-color="rgba(0,5,10,0.1)">
+        <block wx:for="{{homeItem.dailyPhotosTemplet}}" wx:key="{{items}}" wx:for-item="items">
+          <swiper-item class="daily-box" data-key="{{items.promsType}}" data-type="{{items.type}}" data-url="{{items.scheme}}" bindtap="getBannerEvent">
+            <image class="daily" src="{{protocol}}{{items.imageUrl}}" mode="aspectFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- <view class="daily-dots">
+        <block wx:for="{{homeItem.dailyPhotosTemplet}}" wx:key="*this">
+          <view class=" daily-dot {{index == dailySwiper ? ' daily-active' : ''}}"></view>
+        </block>
+      </view> -->
+    </view>
+    <!-- 单品轮播模块 -->
+    <view class='floor {{homeItem.goodsCarouselTemplet.templateMargin==1 ? "" :"mg-top" }}' wx:if="{{homeItem.templetCode=='goodsCarouselTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");background-color:{{homeItem.templateBgColor}};color:{{homeItem.templateContentFontColor}} '>
+      <view class='ms-tit' wx:if="{{(homeItem.displayName.length>0) || (homeItem.subTitleName.length>0)}}"  style='color:{{homeItem.displayColor}};background-color:{{homeItem.displayBackColor}}'>
+        <view class='tit-left'>
+          <view class='tit-name'>{{homeItem.displayName}}</view>
+          <view class='tit-desc' style='color:{{homeItem.displayColor}}'>{{homeItem.subTitleName}}</view>
+        </view>
+      </view>
+      <swiper class='goods-box' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" indicator-dots="true" indicator-active-color="rgba(242,12,89,1)" indicator-color="rgba(0,5,10,0.1)">
+        <block wx:for="{{homeItem.goodsCarouselTemplet.goodsList}}" wx:key="{{items}}" wx:for-item="items">
+          <swiper-item class="goods-box" data-scheme="{{items.scheme}}" data-promstype="{{items.promsType}}" bindtap="getProdEvent">
+            <view class='prod-box'>
+              <image class="prod-img" src="{{protocol}}{{items.goodsBean.skuThumbImgUrl}}" mode="aspectFill" />
+              <view class='prod-item'>
+                <view class='prod-desc'>{{items.goodsBean.skuName}}</view>
+                <view class='prod-daily-tags'>
+                  <view class='prod-daily-tag' wx:if="{{items.promoWord}}">{{items.promoWord}}</view>
+                  <view class='prod-daily-tag prod-daily-tag-right' wx:if="{{items.shortWord}}">{{items.shortWord}}</view>
+                </view>
+                <view class='prod-price'>{{items.goodsBean.priceBean.skuPriceDesc}}</view>
+              </view>
+            </view>
+
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!-- 楼层 -->
+    <view class='floor {{homeItem.floorPhotoTemplet.templateMargin==1 ? "" :"mg-top" }}' wx:if="{{homeItem.templetCode=='floorPhotoTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");background-color:{{homeItem.templateBgColor}};color:{{homeItem.templateContentFontColor}}'>
+      <view class='ms-tit'  wx:if="{{(homeItem.displayName.length>0) || (homeItem.subTitleName.length>0)}}"  style='color:{{homeItem.displayColor}};background-color:{{homeItem.displayBackColor}}'>
+        <view class='tit-left'>
+          <view class='tit-name'>{{homeItem.displayName}}</view>
+          <view class='tit-desc' style='color:{{homeItem.displayColor}}'>{{homeItem.subTitleName}}</view>
+        </view>
+      </view>
+
+      <view class='fl-list-box ' wx:if="{{homeItem.floorPhotoTemplet.imgList.length>0}}">
+        <view class='fl-list'>
+          <view class='fl-item border_{{homeItem.floorPhotoTemplet.borderDisplay}}' wx:for="{{homeItem.floorPhotoTemplet.imgList}}" wx:for-item="imgItem" wx:key="{{imgItem}}">
+            <image class='fl-img' data-keyProms="{{imgItem.keyProms}}" data-productId="{{imgItem.productID}}" data-scheme="{{imgItem.scheme}}" data-promstype="{{imgItem.promsType}}" src='{{protocol}}{{imgItem.imageUrl}}' mode='widthFix' bindtap='getImgEvent'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 大小图模块 -->
+    <view class='floor {{homeItem.bigSmallTemplet.templateMargin==1 ? "" :"mg-top" }}' wx:if="{{homeItem.templetCode=='bigSmallTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");background-color:{{homeItem.templateBgColor}};color:{{homeItem.templateContentFontColor}}'>
+      <view class='ms-tit' wx:if="{{(homeItem.displayName.length>0) || (homeItem.subTitleName.length>0)}}" style='color:{{homeItem.displayColor}};background-color:{{homeItem.displayBackColor}}'>
+        <view class='tit-left'>
+          <view class='tit-name'>{{homeItem.displayName}}</view>
+          <view class='tit-desc' style='color:{{homeItem.displayColor}}'>{{homeItem.subTitleName}}</view>
+        </view>
+      </view>
+
+      <view class='fl-big-small-box '>
+        <view class='fl-list-left'>
+          <view class='fl-item border_{{homeItem.bigSmallTemplet.borderDisplay}}' wx:for="{{homeItem.bigSmallTemplet.bigImgList}}" wx:for-item="bigItem" wx:key="{{bigItem}}">
+            <image class='fl-img' data-keyProms="{{bigItem.keyProms}}" data-productId="{{bigItem.productID}}" data-scheme="{{bigItem.scheme}}" data-promstype="{{bigItem.promsType}}" src='{{protocol}}{{bigItem.imageUrl}}' mode='widthFix' bindtap='getImgEvent'></image>
+          </view>
+        </view>
+        <view class='fl-list-right'>
+          <view class='fl-list-right-top' wx:if="{{homeItem.bigSmallTemplet.imgList.length>0}}">
+            <view class='fl-item border_{{homeItem.bigSmallTemplet.borderDisplay}}' wx:for="{{homeItem.bigSmallTemplet.imgList}}" wx:for-item="samllItem" wx:key="{{samllItem}}">
+              <image class='fl-img' data-keyProms="{{samllItem.keyProms}}" data-productId="{{samllItem.productID}}" data-scheme="{{samllItem.scheme}}" data-promstype="{{samllItem.promsType}}" src='{{protocol}}{{samllItem.imageUrl}}' mode='widthFix' bindtap='getImgEvent'></image>
+            </view>
+          </view>
+          <view class='fl-list-right-bottom {{homeItem.bigSmallTemplet.imgNum=="3"? "three" :""}}'>
+            <view class='fl-item border_{{homeItem.bigSmallTemplet.borderDisplay}}' wx:for="{{homeItem.bigSmallTemplet.smallImgList}}" wx:for-item="samllItem" wx:key="{{samllItem}}">
+              <image class='fl-img' data-keyProms="{{samllItem.keyProms}}" data-productId="{{samllItem.productID}}" data-scheme="{{samllItem.scheme}}" data-promstype="{{samllItem.promsType}}" src='{{protocol}}{{samllItem.imageUrl}}' mode='widthFix' bindtap='getImgEvent'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 品牌轮播 -->
+    <view class='floor {{homeItem.floorCarouselTemplet.templateMargin==1 ? "" :"mg-top" }}' wx:if="{{homeItem.templetCode=='floorCarouselTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");background-color:{{homeItem.templateBgColor}};color:{{homeItem.templateContentFontColor}}'>
+      <view class='ms-tit' wx:if="{{homeItem.displayName || homeItem.subTitleName}} " style='color:{{homeItem.displayColor}};background-color:{{homeItem.displayBackColor}}'>
+        <view class='tit-left'>
+          <view class='tit-name'>{{homeItem.displayName}}</view>
+          <view class='tit-desc' style='color:{{homeItem.displayColor}}'>{{homeItem.subTitleName}}</view>
+        </view>
+      </view>
+
+      <image class='carouse-tit' src='{{homeItem.floorCarouselTemplet.imgInfo.imageUrl}}' mode='widthFix' data-scheme="{{homeItem.floorCarouselTemplet.imgInfo.scheme}}" data-keyProms="{{homeItem.floorCarouselTemplet.imgInfo.keyProms}}" data-productId="{{homeItem.floorCarouselTemplet.imgInfo.productID}}"
+        data-promstype="{{homeItem.floorCarouselTemplet.imgInfo.promsType}}" bindtap='getImgEvent'></image>
+      <scroll-view class='carouse-list' scroll-x="true" scroll-with-animation="true">
+        <block wx:for="{{homeItem.floorCarouselTemplet.imgList}}" wx:for-item="carItem" wx:key="{{carItem}}">
+          <image class='carouse-item' src='{{protocol}}{{carItem.imageUrl}}' data-scheme="{{carItem.scheme}}" data-keyProms="{{carItem.keyProms}}" data-productId="{{carItem.productID}}" data-promstype="{{carItem.promsType}}" bindtap='getImgEvent' mode='widthFix'></image>
+        </block>
+      </scroll-view>
+    </view>
+  </block>
+
+  <!-- 双列商品 -->
+  <view class='goods {{goodsList.floorPhotoTemplet.templateMargin==1 ? "" : "mg-top" }} ' wx:if="{{goodsList.templetCode=='productTemplet'}}" style='background-image:url("{{homeItem.templetBgImgUrl}}");background-color:{{homeItem.templateBgColor}};color:{{homeItem.templateContentFontColor}}'>
+    <view class="goods-list" wx:if="{{goodsList.goodsTemplet.goodsList.length>0}}">
+      <view class='goods-item border_{{goodsList.goodsTemplet.borderDisplay}}' wx:for="{{goodsList.goodsTemplet.goodsList}}" wx:for-item="goodsItem" wx:key="{{goodsItem}}" data-productId="{{goodsItem.productID}}" data-scheme="{{goodsItem.scheme}}" data-promstype="{{items.promsType}}"
+        bindtap='getProdEvent'>
+        <image class='goods-img ' src='{{protocol}}{{goodsItem.goodsBean.skuThumbImgUrl}}' mode='aspectFit '></image>
+        <view class='goods-desc '>{{goodsItem.goodsBean.skuName}}</view>
+        <view class='goods-price '>{{goodsItem.goodsBean.priceBean.skuPriceDesc}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='no-text' wx:if="{{moreStatus}}">没有更多了</view>
+</scroll-view>
+
+<!-- 侧边栏 -->
+<view class="side-nav" wx:if="{{navList.length==1}}">
+  <view class="side-nav-home" data-index="0" bindtap='getNavEvent'>{{navList[0].remark}}</view>
+</view>
+<view class="side-nav" wx:if="{{navList.length>1}}">
+  <view class="side-nav-home" wx:if="{{navShow}}" bindtap='openSideNav'>快捷导航</view>
+  <view class="side-nav-box " wx:else>
+    <view class='nav-list '>
+      <view class='nav-item {{index==0 ? "nav-item-hover" : "nav-left"}} ' wx:for="{{navList}}" wx:key="{{item}}" data-index="{{index}}" bindtap='getNavEvent'>{{item.remark}}</view>
+    </view>
+    <image class='nav-close-ico ' bindtap='closeSideNav' src='/images/close-nav.png '></image>
+  </view>
+</view>
+
+
+<!--启动图-推荐位  -->
+<view class='ad-list ' wx:if="{{startList  && startStatus}}" style='height:{{height}} '>
+  <view class='ad-list-bg ' style='height:{{height}} ' bindtap='delAdEvent'>
+    <view class='del '>
+      <icon type="cancel" size="32" color='#fff '></icon>
+    </view>
+  </view>
+
+  <view class='ad-box '>
+    <view hover-class='none ' data-productId="{{startList.dataList[0].productId}}" data-scheme="{{startList.dataList[0].scheme}}" bindtap="getStartEvent">
+      <image src='{{startList.dataList[0].imgUrlList[0]}} ' mode="widthFix"></image>
+    </view>
+  </view>
+
+</view>

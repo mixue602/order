@@ -1,0 +1,467 @@
+﻿@charset "utf-8";
+/* CSS Document */
+html {
+    overflow-x: hidden;
+}
+body{
+    background:#fff;
+}
+#gome-topad-sm,#gome-head{
+    background: #fff;
+}
+/**common**/
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.w1200 {
+    width: 1200px;
+    margin: 0 auto;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.mt10 {
+    margin-top: 10px;
+}
+.mt15 {
+    margin-top: 15px;
+}
+.pr {
+    position: relative;
+}
+.pabs {
+    position: absolute;
+}
+.none{
+    display:none;
+}
+.lazyloading{background: url(/gmlib/ui/loading/3.0.0/loading-sm.png) 50% 50% no-repeat;}
+.gome_loading_gif{ background: url(/gmlib/ui/loading/3.0.0/loading.gif) 50% 50% no-repeat; }
+.fli_gz .icon,.price-up .icon-up-down,.price-down .icon-up-down,.filter-label-box .iic{
+    background: url("i/list.png") no-repeat;
+    _background: url("i/listIE6.png") no-repeat;}
+.fli_listtitle{
+    font:bold 24px/24px "Microsoft YaHei";
+    position:absolute;
+    top:-55px;
+    color:#fff;
+    z-index:100;
+}
+.overhide{
+    overflow:hidden;
+}
+/*列表页筛选条件*/
+.fli_current{
+    font:12px/32px "Microsoft YaHei",arial;
+    color:#555;
+    margin-top:14px;
+}
+.fli_current .link{
+    color:#2875cc;
+}
+.fli_current .icon{
+    margin:0px 3px;
+    font-family: simsun;
+}
+.fli_current .cur{
+    color:#EE3B3B;
+}
+.fli_current .num{
+    margin-left:7px;
+}
+.filter-top {
+    height: 26px;
+    background-color: #f3f3f3;
+    padding: 6px 10px;
+    line-height: 24px
+}
+
+.onfixed {
+    box-shadow: 0 1px 5px #ccc;
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    _position: static;
+    width:1200px;
+}
+.w1000 .onfixed{
+    width:1000px;
+}
+.min-pager-box {
+    float: right
+}
+
+.min-pager-next,.min-pager-prev {
+    float: right;
+    height: 24px;
+    width: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-family: simsun;
+    border: 1px solid #ccc;
+    margin-left: -1px;
+    background: #fff;
+    color: #e3101e
+}
+
+.min-pager-next:hover,.min-pager-prev:hover {
+    text-decoration: none
+}
+
+.min-pager-number {
+    float: right;
+    font-size: 14px;
+    padding-right: 11px;
+    color: #888
+}
+
+.mp-disable {
+    background: #f8f8f8;
+    border-color: #ddd;
+    cursor: default;
+    color: #ccc
+}
+
+.mp-disable:hover {
+    color: #ccc
+}
+
+.filter-order-box {
+    float: left;
+    height: 24px;
+    border: 1px solid #ccc;
+    background: #fff
+}
+
+.filter-order-box li {
+    float: left;
+    height: 24px;
+    cursor: pointer
+}
+
+.filter-order-box li.cur {
+    background-color: #EE3B3B
+}
+
+.filter-order-box li.cur,.filter-order-box li:hover {
+    border: 1px solid #EE3B3B;
+    margin: -1px
+}
+
+.filter-order-box li:hover a {
+    color: #EE3B3B
+}
+
+.filter-order-box li.cur a {
+    color: #fff
+}
+
+.filter-order-box a {
+    color:#555;
+    padding: 6px 20px;
+    text-decoration: none;
+    outline: none
+}
+
+.filter-order-box .icon-up-down {
+    position: absolute;
+    width: 11px;
+    height: 12px;
+    margin: 6px -35px 0 -24px;
+    line-height: 0;
+    overflow: hidden
+}
+
+.price-up .icon-up-down {
+    background-position:-18px 0;
+}
+
+.price-down .icon-up-down {
+    background-position: -38px 0;
+}
+
+.filter-order-box .cur.price-down a,.filter-order-box .cur.price-up a {
+    padding: 6px 26px 6px 14px
+}
+
+.filter-resultSearch-box {
+    float: left;
+    height: 24px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    display: none
+}
+
+.filter-resultSearch-box:focus {
+    border-color: #c5c5c5
+}
+
+.filter-resultSearch-input {
+    float: left;
+    width: 96px;
+    height: 24px;
+    border: 0 none;
+    border-right: 1px solid #ccc;
+    background-color: #fff;
+    text-indent: 5px;
+    color: #a5a5a5;
+    *height: 24px;
+    *line-height: 28px;
+    font-family: verdana,\\5B8B\4F53
+}
+
+.filter-resultSearch-btn {
+    float: left;
+    width: 42px;
+    height: 24px;
+    text-align: center;
+    background-color: #f8f8f8;
+    color: #5e5e5e
+}
+
+.filter-priceRange-box,.filter-fli-box {
+    float: left;
+    width: 100px;
+    height: 22px;
+    overflow: hidden;
+    padding: 5px 10px 8px;
+    margin: -6px 0;
+    border: 1px solid #f3f3f3;
+    white-space: nowrap;
+    text-align: center
+}
+
+.filter-priceRange-box li,.filter-fli-box li {
+    float: left
+}
+.priceRange-name,.pricefli-name{
+    float:left;
+    color:#555;
+    margin-left:39px;
+}
+.pricefli-name{
+    margin-left:35px;
+}
+.priceRange-input input,.pricefli-input input {
+    float: left;
+    height: 24px;
+    width: 42px;
+    line-height: 24px;
+    border: 1px solid #ccc;
+    text-indent: 5px;
+    color: #a5a5a5;
+    text-align: left;
+    font-family: arial
+}
+
+.priceRange-input input:focus,.pricefli-input input:focus {
+    border-color: #c5c5c5
+}
+
+.priceRange-link,.pricefli-link{
+    float: left;
+    padding: 0 3px
+}
+
+.priceRange-btn,.pricefli-btn{
+    float: none;
+    display: inline-block;
+    width: 42px;
+    margin: 8px 4px 0 2px
+}
+
+.filter-priceRange-click {
+    height: 59px;
+    margin: -6px -1px -50px;
+    _margin-right: 50px;
+    padding: 5px 11px 7px;
+    border-color: #ccc;
+    background: #fff;
+    position: relative;
+    z-index: 2
+}
+
+.filter-bottom {
+    height: 26px;
+    padding: 4px 10px;
+    border: 1px solid #f3f3f3;
+    background-color: #fff
+}
+
+.filter-adress-box {
+    float: left;
+    height: 26px
+}
+
+.filter-adress-tit {
+    float: left;
+    padding-left: 15px;
+    line-height: 26px
+}
+
+.filter-adress-stock {
+    float: left;
+    height: 24px;
+    padding: 0 6px;
+    line-height: 24px;
+    _height: 18px;
+    _padding-top: 6px;
+    border: 1px solid #ccc
+}
+
+.filter-adress-stock a {
+    color: #5e5e5e
+}
+
+.filter-adress-stock a:hover {
+    text-decoration: none
+}
+
+.filter-adress-icon {
+    display: inline-block;
+    font-size: 0;
+    overflow: hidden;
+    border-top: 4px solid #666;
+    border-left: 4px solid #fff;
+    border-right: 4px solid #fff;
+    vertical-align: middle;
+    line-height: 0
+}
+
+.filter-adress-stock .space {
+    background: #fff none repeat scroll 0 0;
+    display: none;
+    height: 10px;
+    left: 0;
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    z-index: 3;
+    _width: 0
+}
+
+.gctCur .space {
+    display: block
+}
+
+.filter-label-box {
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    _margin-top: 8px;
+    _margin-bottom: -8px
+}
+
+.filter-label-box .gmform-label {
+    padding-left: 15px;
+    cursor: pointer;
+    color:#555;
+}
+
+.filter-label-box .iic {
+    background-position: 0 -111px;
+    display: inline-block;
+    height: 14px;
+    margin-right: 5px;
+    margin-top: -2px;
+    *margin-top: 0;
+    vertical-align: middle;
+    width: 14px
+}
+
+.filter-label-box .gmform-label:hover .iic {
+    background-position: 0 -94px
+}
+
+.filter-label-box .gmform-label:hover {
+    color: #EE3B3B;
+    text-decoration: none;
+}
+
+.filter-label-box .checke .iic,.filter-label-box .checke:hover .iic {
+    background-position: 0 -77px
+}
+
+.filter-label-specialScreening {
+    color: #e3101e;
+    font-weight: 700
+}
+.fc-btn-cancel {
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 9px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    color: #333;
+    background: #fff
+}
+
+.fc-btn-cancel:active,.fc-btn-cancel:hover {
+    color: #ee3b3b;
+    text-decoration: none;
+    border-color: #ccc
+}
+
+.fc-btn-cancel:active {
+    background: #f8f8f8
+}
+.fc-btn-ok {
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 9px;
+    border: 1px solid #ee3b3b;
+    overflow: hidden;
+    color: #fff;
+    background: #ee3b3b;
+    *display: inline;
+    *zoom: 1;
+}
+.fc-btn-ok:hover {
+    background: #d00;
+    border-color: #d00;
+    color: #fff;
+    text-decoration: none
+}
+.filter-label-specialScreening .spIcon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 12px;
+    width: 120px;
+    margin-top: -2px;
+    *margin-top: 1px;
+    background: url(/search/search2017/image/specialScreeningIcon.png) no-repeat
+}
+/*列表*/
+.rebate_goods{font-family: "Microsoft YaHei"}
+.rebate_goods ul{width: 1212px;}
+.rebate_main ul li{width: 291px;height:428px;margin:0 12px 15px 0;float: left;}
+.rebate_main ul .choice_inner{width: 289px;height:426px;border: 1px solid #e6e6e6}
+.rebate_main ul li img{margin: 15px  14px 22px 15px;}
+.rebate_main ul li .img_name{font-size: 14px;color: #555;line-height: 20px;height:40px;width: 260px;margin-left: 15px;overflow: hidden}
+.rebate_main ul li a:hover{text-decoration: none;}
+.rebate_main ul li .hot_price{height:43px;width: 260px;font-size: 18px;color: #ee3b3b;margin: 6px 0 0 15px;}
+.rebate_main ul li .hot_price span{font-family: arial,"Microsoft YaHei";}
+.rebate_main ul li .hot_price i{font-family: Arial;}
+.rebate_main .rebate{height:20px;width: 260px;margin-left: 15px;overflow: hidden}
+.rebate_main .rebate span{display:inline-block;height:18px;line-height: 17px;width: 36px;margin-right: 6px;font-size: 12px;text-align: center;color: #fff;background: #ee3b3b}
+.rebate_main .rebate a{font-size: 14px;color: #555;}
+.rebate_main .rebate i{font-size: 14px;color: #ee3b3b;font-family: Arial;padding: 0 4px;}
+.rebate_noprd{width:155px;margin: 0 auto;padding:20px 0;text-align:left;line-height:22px;display: none;}
+.rebate_noprd h3{color:#ee3b3b}
+/*窄屛*/
+.w1000 .w1200,.w1000 .fli_box{width:1000px;}
+.w1000 .rebate_main ul li{width:241px}
+.w1000 .rebate_main ul .choice_inner{width:239px}
+.w1000 .rebate_main ul li .img_name{width:210px;}
+.w1000 .rebate_main ul li img{width:210px;}
+/*可视化编辑*/
+.deit-floor-out{ position: relative;}
+.deit-floor-area{ background: #39a4ff;filter:alpha(opacity=80);opacity:0.8; width: 100%;height: 100%; position: absolute; top: 0px; left: 0px; z-index: 100;}
+.reload-logo{width: 100px; height: 34px; position: fixed; left: 146px; top: 50px;  border: 1px #e6e6e6 solid; font-size: 23px; color: #000; text-align: center; vertical-align: middle;cursor: pointer; background: #e6e6e6;}

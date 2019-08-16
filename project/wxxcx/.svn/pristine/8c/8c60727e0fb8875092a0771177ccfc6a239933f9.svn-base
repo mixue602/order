@@ -1,0 +1,327 @@
+page {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif, 'Microsoft Yahei';
+}
+
+.coupon_boxs {
+  position: relative;
+}
+
+.coupon_tab {
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.coupon_tab view {
+  border-bottom: #e6e6e6 solid 2rpx;
+  color: #333;
+  font: 30rpx/96rpx 'Microsoft Yahei';
+  flex: 1;
+  text-align: center;
+}
+
+.coupon_tab .cur {
+  border-bottom: #ff5c5c solid 4rpx;
+  color: #e3101e;
+}
+
+.coupon_list_group {
+  position: fixed;
+  top: 100rpx;
+  bottom: 98rpx;
+  left: 0;
+}
+
+/* 去掉滚动条*/
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.coupon_list {
+  width: 710rpx;
+  padding: 0 25rpx 180rpx 25rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.coupon_box {
+  width: 710rpx;
+  height: 200rpx;
+  margin-top: 30rpx;
+  position: relative;
+}
+
+.coupon_type {
+  position: relative;
+  width: 710rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx 8rpx rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+}
+
+.price {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-around;
+  align-items: center;
+  width: 214rpx;
+  height: 200rpx;
+  padding: 20rpx 10rpx;
+  box-sizing: border-box;
+  font-family: PingFangSC-Semibold;
+  border-radius: 12rpx 0 0 12rpx;
+}
+
+.price-box {
+  width: 214rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  line-height: 64rpx;
+  color: #ff5c5c;
+}
+
+.icon {
+  font-size: 32rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.price_over {
+  font-size: 72rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+.blue-limit {
+  font-size: 26rpx;
+  line-height: 30rpx;
+  width: 204rpx;
+  color: #262c32;
+  text-align: center;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.coupon_name {
+  font-size: 22rpx;
+  line-height: 34rpx;
+  border-radius: 17rpx;
+  padding: 0 15rpx;
+  margin: 0 auto;
+}
+
+/* 不同券类型 */
+
+/* 蓝券 */
+
+.blue .coupon_name {
+  background: #d9edff;
+  color: #3897eb;
+}
+
+/* 店铺券 */
+
+.shop .coupon_name {
+  background: #daf8cd;
+  color: #4fb324;
+}
+
+/* 红券 */
+
+.red .coupon_name, .selfred .coupon_name {
+  background: #ffe0e0;
+  color: #ff5c5c;
+}
+
+/* 美券、购物券 */
+
+.offlineBlue .coupon_name, .platform .coupon_name {
+  background: #cc52b8;
+  color: #fddff8;
+}
+
+/* 运费券 */
+
+.freight .coupon_name {
+  background: #ffefc2;
+  color: #f59300;
+}
+
+/*理财券 */
+
+.financial .coupon_name {
+  background: #f5e7ce;
+  color: #bd903e;
+}
+
+.s_top {
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 24rpx;
+  left: 208rpx;
+  top: -12rpx;
+  background-color: #f8f8f8;
+  z-index: 2;
+}
+
+.s_center {
+  width: 0;
+  height: 174rpx;
+  border-right: 4rpx dashed #ebeced;
+  position: absolute;
+  left: 220rpx;
+  top: 13rpx;
+  z-index: 2;
+}
+
+.s_bottom {
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 24rpx;
+  left: 208rpx;
+  background-color: #f8f8f8;
+  bottom: -12rpx;
+  z-index: 2;
+}
+
+.coupon_descript {
+  position: relative;
+  background: #fff;
+  border-radius: 12rpx;
+  width: 490rpx;
+  height: 204rpx;
+  box-sizing: border-box;
+  padding: 24rpx;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+}
+
+.coupon_desc {
+  font-family: PingFangSC-Medium;
+  width: 392rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: #262c32;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.coupon_desc_bottom {
+  width: 100%;
+  height: 52rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time_box {
+  font-size: 22rpx;
+  line-height: 26rpx;
+  color: #5a6066;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.blue_use .time_box {
+  width: 276rpx;
+}
+
+.goget-txt {
+  width: 144rpx;
+  color: #ff5c5c;
+  font-size: 24rpx;
+  border: 1rpx solid #ff5c5c;
+  border-radius: 44rpx;
+  text-align: center;
+}
+
+.errTips {
+  color: #a5a5a5;
+  font: 26rpx/30rpx 'Microsoft Yahei';
+  padding-top: 60rpx;
+  width: 100%;
+  text-align: center;
+}
+
+.nomore, .ismore {
+  color: #a5a5a5;
+  font: 26rpx/30rpx 'Microsoft Yahei';
+  padding: 30rpx 0;
+  width: 100%;
+  text-align: center;
+}
+
+.getOther {
+  width: 750rpx;
+  height: 90rpx;
+  box-sizing: border-box;
+  background: #fff;
+  font-family: 'PingFangSC-Semibold', 'Microsoft Yahei';
+  font-size: 32rpx;
+  color: #ff5c5c;
+  line-height: 90rpx;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/* 已使用 */
+
+.coupon_box_grey, .coupon_box_grey .price-box, .coupon_box_grey .blue-limit,
+.coupon_box_grey .coupon_desc, .coupon_box_grey .time_box {
+  color: #b3b8bd;
+}
+
+.coupon_box_grey .coupon_name {
+  background-color: #f0f2f4;
+  color: #b3b8bd;
+}
+
+.used-icon {
+  width: 106rpx;
+  height: 105rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* 即将过期 */
+
+.past-ico {
+  position: absolute;
+  top: -2rpx;
+  right: -2rpx;
+  width: 102rpx;
+  height: 102rpx;
+}

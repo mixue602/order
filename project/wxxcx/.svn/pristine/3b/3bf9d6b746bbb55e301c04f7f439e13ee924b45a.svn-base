@@ -1,0 +1,210 @@
+page {
+  background: #f3f5f7;
+}
+
+.container {
+  position: relative;
+}
+
+.tit {
+  width: 750rpx;
+  height: 163rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.tit-item {
+  width: 374rpx;
+  text-align: center;
+  font-family: PingFang-SC-Bold;
+}
+
+.tit-item-num {
+  font-size: 46rpx;
+  line-height: 65rpx;
+  color: #333;
+}
+
+.tit-item-text {
+  font-size: 26rpx;
+  line-height: 46rpx;
+  color: #999;
+}
+
+.tit-span {
+  width: 2rpx;
+  height: 62rpx;
+  background: #ddd;
+}
+
+.cont {
+  position: relative;
+  width: 710rpx;
+  padding: 263rpx 20rpx 0 20rpx;
+}
+
+.cont-tit {
+  position: fixed;
+  left: 0;
+  top: 163rpx;
+  padding-left: 36rpx;
+  padding-right: 40rpx;
+  width: 750rpx;
+  box-sizing: border-box;
+  height: 110rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f5f7;
+  z-index: 1;
+}
+
+.my-tit {
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: #262c32;
+  font-family: PingFangSC-Regular;
+  display: flex;
+  align-items: center;
+}
+
+.my-date-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.my-date {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.all-btn {
+  font-size: 26rpx;
+  color: #6aafff;
+  padding-left: 10rpx;
+}
+
+.desc-ico {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 5rpx;
+}
+
+.picker {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.item-box {
+  position: relative;
+  margin-bottom: 20rpx;
+  width: 710rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 4rpx 10rpx 0 rgba(230, 230, 230, 0.50);
+  border-radius: 8rpx;
+}
+
+.invoice-cont {
+  width: 525rpx;
+  padding-right: 145rpx;
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  justify-items: center;
+  font-size: 30rpx;
+  line-height: 46rpx;
+}
+
+.item-cont {
+  width: 360rpx;
+  padding-left: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.red {
+  color: #f20c59;
+}
+
+.add-card {
+  position: absolute;
+  top: 30rpx;
+  right: 40rpx;
+  width: 126rpx;
+  /* height: 50rpx; */
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #f20c59;
+  text-align: center;
+  border: 1rpx solid #f20c59;
+  border-radius: 100rpx;
+}
+
+.card-grey {
+  color: #b3b8bd;
+  border-color: #b3b8bd;
+}
+
+.m-20 {
+  width: 670rpx;
+  flex-direction: column;
+  padding: 20rpx 0;
+  font-family: PingFangSC-Regular;
+}
+
+.item-prod {
+  width: 670rpx;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  font-size: 26rpx;
+  color: #999;
+  line-height: 30rpx;
+}
+
+.item-prod-desc {
+  width: 525rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.list-no {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding-top: 80rpx;
+}
+
+.no-img {
+  width: 220rpx;
+  height: 220rpx;
+  margin: 20rpx auto;
+}
+
+.no-text {
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #7a7f85;
+}
+
+.con-end {
+  text-align: center;
+  padding-bottom: 20rpx;
+}

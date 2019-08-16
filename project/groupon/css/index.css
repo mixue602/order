@@ -1,0 +1,594 @@
+.group_box {
+    background: #ededed;
+    width: 100%;
+}
+
+.group-category-box .group-category-list li {
+    border: none;
+    border-top: 1px solid #5e5e5e;
+}
+
+.group_slider {
+    width: 100%;
+    min-width: 1200px;
+    position: relative;
+}
+
+.group_content {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0 30px;
+    background: #ededed;
+}
+
+.group_slider .group_base {
+    background: #eee none repeat scroll 0 0;
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+
+.group_slider .group_roof {
+    height: 400px;
+    left: 50%;
+    position: absolute;
+    width: 300px;
+    margin-left: 300px;
+    top: 0;
+    background: #ccc;
+    overflow: hidden;
+}
+
+.group_base .group_list li {
+    filter: inherit;
+    height: 400px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.group_base .group_list li a {
+    position: absolute;
+    left: 50%;
+    margin-left: -600px;
+}
+
+.group_base .slider_tab {
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    bottom: 20px;
+    width: 900px;
+    margin-left: -600px;
+}
+
+.group_base .slider_tab li {
+    text-align: center;
+    background: #000 none repeat scroll 0 0;
+    opacity: 0.5;
+    position: relative;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.group_base .slider_tab li .bg {
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font: 400 14px/30px "microsoft yahei";
+    height: 30px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.group_base .slider_tab li.cur {
+    opacity: 0.9;
+}
+
+.group_base .btn_pre,
+.group_base .btn_next {
+    position: absolute;
+    left: 50%;
+    height: 104px;
+    top: 135px;
+    width: 50px;
+    background: #000 none repeat scroll 0 0;
+    opacity: 0.1;
+}
+
+.group_base .btn_pre:hover,
+.group_base .btn_next:hover {
+    opacity: 0.2;
+}
+
+.group_base .btn_pre {
+    margin-left: -600px;
+}
+
+.group_base .btn_next {
+    margin-left: 250px;
+}
+
+.group_base .btn_pre .pre_bg,
+.group_base .btn_next .next_bg {
+    cursor: pointer;
+    height: 104px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    z-index: 99;
+    background: url(i/common/ui.png) no-repeat 0 0;
+}
+
+.group_base .btn_next .next_bg {
+    background-position: -50px 0;
+}
+
+.group_roof .roof_slider {
+    width: 300px;
+    height: 400px;
+    position: relative;
+}
+
+.group_roof .roof_slider .roof_timer {
+    background: #fff scroll no-repeat 0 0;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    color: #333;
+    /*text-align: center;*/
+}
+
+.group_roof .roof_slider .roof_timer h2 {
+    height: 40px;
+    font: 400 16px/40px "microsoft yahei";
+    float: left;
+    padding: 0 20px;
+}
+
+.group_roof .roof_slider .roof_timer div {
+    margin-left: 0px;
+}
+
+.group_roof .roof_slider .roof_timer em {
+    color: red;
+}
+
+.group_roof .roof_slider .roof_timer i {
+    font-style: normal;
+    font: 16px/20px Arial;
+    display: inline-block;
+    padding: 2px 3px;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    margin: 0 3px;
+}
+
+.group_roof .roof_slider .notstart .roof_timer,
+.group_roof .roof_slider .ending .roof_timer,
+.group_roof .roof_slider .soldout .roof_timer {
+    color: #a3a3a3;
+}
+
+.group_roof .roof_slider .notstart p {
+    font: 400 16px/40px "microsoft yahei";
+}
+
+.group_roof .roof_slider .ending i,
+.group_roof .roof_slider .soldout i {
+    background: #a3a3a3;
+}
+
+.group_roof .roof_slider .ending .gray_a_img,
+.group_roof .roof_slider .soldout .gray_a_img {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: progid: DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    filter: gray;
+}
+
+.group_roof .roof_slider .ending .gray_img,
+.group_roof .roof_slider .soldout .gray_img {
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    width: 89px;
+    height: 57px;
+}
+
+.group_roof .roof_slider .soldout .gray_status {
+    background: url("i/common/soldOut.png") no-repeat;
+}
+
+.group_roof .roof_slider .ending .gray_status {
+    background: url("i/common/end.png") no-repeat;
+}
+
+.group_roof .roof_slider .btn {
+    position: absolute;
+    left: 10px;
+    width: 12px;
+    height: 16px;
+    top: 50%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.group_roof .roof_slider .btn.next .arrow:hover {
+    background-position: -288px -448px;
+}
+
+.group_roof .roof_slider .btn.pre .arrow:hover {
+    background-position: -270px -448px;
+}
+
+.group_roof .roof_slider .next {
+    left: auto;
+    right: 10px;
+}
+
+.group_roof .roof_slider .btn .arrow {
+    display: inline-block;
+    width: 12px;
+    left: 0px;
+    height: 16px;
+    background: url(i/common/groupbuy_bg.png) -271px -420px no-repeat;
+    _background: url(i/common/groupbuy_bg.png) -271px -420px no-repeat;
+    z-index: 3;
+}
+
+.group_roof .roof_slider .btn.next .arrow {
+    background-position: -288px -420px;
+}
+
+.group_roof .roof_slider .roof_tab {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+}
+
+.group_roof .roof_slider .roof_tab div {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    cursor: pointer;
+    background: #ccc;
+    margin: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.group_roof .roof_slider .roof_tab div.current {
+    background: #c00;
+}
+
+.group_content .group_slave {
+    width: 1215px;
+}
+
+.group_content .group_slave li {
+    float: left;
+    margin-right: 15px;
+}
+
+.group_content .group_brand {
+    padding-top: 20px;
+}
+
+.group-selectedBrands,
+.group-topic {
+    margin: 20px auto 0;
+}
+
+.group_content .group_brand h2,
+.group_content .pluspc-grouponTopic h3 {
+    font: 500 30px/30px "microsoft yahei";
+    padding-top: 8px;
+    text-align: left;
+    width: 140px;
+    height: 31px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.group_content .group_brand .brand_goods {
+    width: 1220px;
+}
+
+.group_content .group_brand .brand_goods li {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+.group_content .group_classify .classify_title {
+    border-bottom: 3px solid #535353;
+    width: 1200px;
+    height: 32px;
+    position: relative;
+}
+
+.group_content .group_classify .classify_title h2 {
+    color: #333;
+    font: 400 24px/32px "microsoft yahei";
+    width: 100px;
+    position: absolute;
+}
+
+.group_content .group_classify .classify_title .classify_more {
+    float: right;
+    font: 400 14px/32px "microsoft yahei";
+    text-decoration: none;
+}
+
+.group_content .group_classify .classify_title .classify_tab {
+    padding-left: 150px;
+    height: 32px;
+}
+
+.group_content .group_classify .classify_title .classify_tab li {
+    float: left;
+    font: 400 16px/32px "microsoft yahei";
+    width: 130px;
+    text-align: center;
+}
+
+.group_content .group_classify .classify_title .classify_tab .cur,
+.group_content .group_classify .classify_title .classify_tab li:hover {
+    background: #535353 none repeat scroll 0 0;
+    color: #fff;
+}
+
+.group_content .group_classify .classify_title .classify_tab li:hover a {
+    color: #fff;
+}
+
+.group_content .group_classify .classify_title .classify_tab .cur a {
+    color: #fff;
+}
+
+.group_content .group_classify .classify_title .classify_tab li a {
+    text-decoration: none;
+}
+
+.group_content .group_classify .classify_product {
+    padding: 20px 0px 15px;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 30px;
+}
+
+.group_content .group_footads ul {
+    width: 1208px;
+}
+
+.group_content .group_footads ul li {
+    float: left;
+    margin-right: 9px;
+}
+
+.group_classify .classify_product ul {
+    width: 1220px;
+}
+
+.group_classify .classify_product ul li {
+    float: left;
+    margin-right: 10px;
+    width: 291px;
+    margin-bottom: 10px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.group_classify .classify_product li .prod_img {
+    width: 291px;
+    height: 291px;
+    text-align: center;
+}
+
+.group_classify .classify_product li .prod_img img {
+    margin-top: 15px;
+}
+
+.group_classify .classify_product .end .prod_img img,
+.group_classify .classify_product .sold .prod_img img {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: progid: DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    filter: gray;
+}
+
+.group_classify .classify_product .prod_info {
+    display: block;
+    font-weight: 400;
+    overflow: hidden;
+    height: 48px;
+    line-height: 24px;
+    margin: 7px 0;
+    padding: 0 14px;
+    color: #5e5e5e;
+    font-size: 14px;
+    text-align: left;
+    font-family: "Microsoft Yahei";
+}
+
+.group_classify .classify_product .prod_info span {
+    width: 60px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.group_classify .classify_product .prod_info a {
+    text-decoration: none;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.group_classify .classify_product .prod_left {
+    width: 188px;
+    float: left;
+    height: 50px;
+    font: 700 24px/25px Arial;
+    padding-left: 10px;
+}
+
+.group_classify .classify_product .prod_left .price {
+    font-size: 18px;
+    height: 25px;
+    line-height: 25px;
+    color: red;
+    padding-top: 2px;
+}
+
+.group_classify .classify_product .prod_left .price b {
+    margin-right: 1px;
+}
+
+.group_classify .classify_product .prod_price {
+    border: 1px solid red;
+    width: 289px;
+    height: 50px;
+}
+
+.group_classify .classify_product .prod_left .price del {
+    font-size: 12px;
+    margin-left: 10px;
+    color: #999;
+}
+
+.group_classify .classify_product .prod_left .count {
+    font-size: 12px;
+    font-weight: 400;
+    height: 21px;
+    line-height: 21px;
+}
+
+.group_classify .classify_product .prod_left .count .precent {
+    margin-right: 10px;
+    font-size: 12px;
+    color: #5e5e5e;
+    display: inline-block;
+}
+
+.group_classify .classify_product .prod_left .count .sale {
+    width: 100px;
+    height: 7px;
+    background: #ccc;
+    display: inline-block;
+}
+
+.group_classify .classify_product .prod_left .count .sale span {
+    background: red;
+    height: 7px;
+    position: absolute;
+    display: inline-block;
+}
+
+.group_classify .classify_product .prod_right {
+    width: 91px;
+    height: 50px;
+    float: left;
+    background: #c00;
+    color: #fff;
+}
+
+.group_classify .classify_product .prod_right a {
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    width: 90px;
+    color: #fff;
+    font: 400 16px/50px "Microsoft Yahei";
+}
+
+.group_classify .classify_product .gray_img {
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    width: 89px;
+    height: 57px;
+    display: none;
+}
+
+.group_classify .classify_product .end .gray_img {
+    display: block;
+    background: url(i/rushbuy/end.png) no-repeat;
+}
+
+.group_classify .classify_product .end .prod_info span,
+.group_classify .classify_product .end .count .sale span,
+.group_classify .classify_product .end .prod_right,
+.group_classify .classify_product .sold .prod_info span,
+.group_classify .classify_product .sold .count .sale span,
+.group_classify .classify_product .sold .prod_right {
+    background: #888;
+}
+
+.group_classify .classify_product .end .prod_info a,
+.group_classify .classify_product .sold .prod_info a {
+    color: gray;
+}
+
+.group_classify .classify_product .end .prod_price,
+.group_classify .classify_product .sold .prod_price {
+    border: 1px solid #ccc;
+}
+
+.group_classify .classify_product .end .price,
+.group_classify .classify_product .sold .price {
+    color: gray;
+}
+
+.group_classify .classify_product .sold .gray_img {
+    display: block;
+    background: url(i/rushbuy/loot.png) no-repeat;
+}
+
+.group_classify .classify_product .notstarted .prod_right {
+    background: #589c5f;
+}
+
+.group_classify .classify_product .notstarted .prod_price {
+    border: 1px solid #589c5f;
+}
+
+.group_classify .classify_product .errorBox {
+    padding: 100px 0;
+    text-align: center;
+    color: #5e5e5e;
+}
+
+.product-waiting {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.group_classify .classify_product .errorBox .look {
+    color: red;
+}
