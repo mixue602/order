@@ -1,0 +1,40 @@
+akka {
+  loggers = ["akka.event.slf4j.Slf4jLogger"]
+  loglevel = "info"
+  stdout-loglevel = "info"
+  logger-startup-timeout = 10s
+  jvm-exit-on-fatal-error = off
+
+  actor {
+    provider = remote
+    default-mailbox.mailbox-capacity = 65536
+    kryo.manifest-info = "io.totem.invoker.MessageManifestInfo"
+  }
+
+  remote {
+    startup-timeout = 30s
+    log-buffer-size-exceeding = 100000
+    system-message-buffer-size = 10000
+    retry-gate-closed-for = 10s
+    prune-quarantine-marker-after = 5s
+    log-frame-size-exceeding = 128000b
+    handshake-timeout = 30s
+    enabled-transports = ["akka.remote.netty4.tcp"]
+
+    netty4.tcp {
+      port = 0
+      maximum-frame-size = 5MB
+    }
+
+    transport-failure-detector {
+      heartbeat-interval = 4s
+      acceptable-heartbeat-pause = 120s
+    }
+
+    watch-failure-detector {
+      heartbeat-interval = 2s
+      acceptable-heartbeat-pause = 20s
+    }
+
+  }
+}

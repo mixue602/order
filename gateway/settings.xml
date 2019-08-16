@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings>
+    <!-- local setting -->
+    <localRepository>D:\Environment\apache-maven-search\repository</localRepository>
+
+    <pluginGroups>
+    </pluginGroups>
+
+    <proxies>
+    </proxies>
+
+    <servers>
+        <server>
+            <id>nexus</id>
+            <username>admin</username>
+            <password>admin123</password>
+        </server>
+        <server>
+            <id>snapshots</id>
+            <username>admin</username>
+            <password>admin123</password>
+        </server>
+
+        <server>
+            <id>t3-releases</id>
+            <username>admin</username>
+            <password>123.totem</password>
+        </server>
+
+        <server>
+            <id>t3-snapshots</id>
+            <username>admin</username>
+            <password>123.totem</password>
+        </server>
+
+
+
+    </servers>
+
+    <mirrors>
+
+        <mirror>
+            <id>totem</id>
+            <name>Totem Mirror</name>
+            <url>http://10.58.50.26:8082/nexus/content/groups/public/</url>
+            <mirrorOf>central</mirrorOf>
+            <!-- *表示让所有仓库创建使用该镜像 -->
+        </mirror>
+
+        <mirror>
+            <id>gome</id>
+            <name>gome</name>
+            <url>http://maven.ds.gome.com.cn/nexus/content/groups/public</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+
+    </mirrors>
+
+    <profiles>
+
+        <profile>
+            <id>nexus</id>
+            <repositories>
+                <repository>
+                    <id>nexus</id>
+                    <name>local private nexus</name>
+                    <url>${releases.url}</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>nexus</id>
+                    <name>Maven China Mirror</name>
+                    <url>${releases.url}</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+            <properties>
+                <releases.url>http://maven.ds.gome.com.cn/nexus/content/groups/public
+                </releases.url>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>totem</id>
+
+            <repositories>
+
+                <repository>
+                    <id>totem nexus</id>
+                    <!-- -->
+                    <url>http://10.58.50.26:8082/nexus/content/groups/public/</url>
+                    <!-- 判断是否可以从仓库下载相对应的版本 -->
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>totem nexus</id>
+                    <url>http://10.58.50.26:8082/nexus/content/groups/public/</url>
+                    <!-- -->
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+
+
+        </profile>
+    </profiles>
+
+
+    <activeProfiles>
+        <activeProfile>nexus</activeProfile>
+        <activeProfile>totem</activeProfile>
+    </activeProfiles>
+</settings>

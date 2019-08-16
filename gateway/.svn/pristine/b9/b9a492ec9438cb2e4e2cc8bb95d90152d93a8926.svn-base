@@ -1,0 +1,20 @@
+totem {
+
+  name = "gateway"
+
+  registry.client {
+
+    initial-registries = ["akka.tcp://totem@10.112.176.13:2561/system/registry"]
+
+    refresh-registries-interval = 10s
+
+    refresh-services-interval = 10s
+  }
+
+  invoker {
+    routing-logic = "round-robin"
+    timeout = 10000
+    context-name = "system"
+  }
+
+}

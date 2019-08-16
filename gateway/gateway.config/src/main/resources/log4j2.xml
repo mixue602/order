@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="error">
+
+    <properties>
+        <property name="logPath">/server/logs/gateway</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--[%d] %-5p %c - %m%n-->
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%highlight{[%d] %-5p %c - %m%n%throwable}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}"/>
+        </Console>
+
+
+        <RollingFile name="RollingFile" filename="${logPath}/gateway.log" filePattern="${logPath}/gateway-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%highlight{[%d] %-5p %c - %m%n%throwable}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <!-- <SizeBasedTriggeringPolicy size="100MB"/>-->
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+<!--        <Kafka name="kafka" topic="tomcat_access">
+            <filters>
+                <thresholdFilter level="info" onMatch="NEUTRAL" onMismatch="DENY" />
+                <RegexFilter regex="(.*)httpAcc(.*)" onMatch="NEUTRAL" onMismatch="DENY"/>
+            </filters>
+            <patternLayout charset="UTF-8" pattern="%highlight{[%d] %-5p %c - %m%throwable}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}" />
+            <Property name="bootstrap.servers">10.58.72.32:9092,10.58.72.34:9092,10.58.72.35:9092</Property>
+            <Property name="timeout.ms">5000</Property>
+        </Kafka>-->
+
+
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.apache.kafka.streams.processor.internals.StreamThread" level="WARN" />
+        <Root level="debug" >
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+
+            <!--<AppenderRef ref="kafka"/>-->
+        </Root>
+    </Loggers>
+
+</configuration>
