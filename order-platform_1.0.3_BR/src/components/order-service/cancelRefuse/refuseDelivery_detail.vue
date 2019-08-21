@@ -101,9 +101,8 @@
                 </el-row>
                 <el-row>
                     <span data-before="美豆扣款：" class="dialog_span"
-                      v-if="orderDetail.returnRefundSummary &&
-                      orderDetail.returnRefundSummary.deductGomeBeanAmount && orderDetail.returnRefundSummary.deductGomeBeanAmount !='0.00'">
-                      -{{orderDetail.returnRefundSummary.deductGomeBeanAmount | formatMoney}}
+                      v-if="deductGomeBeanAmount && deductGomeBeanAmount !='0.00'">
+                      -{{deductGomeBeanAmount | formatMoney}}
                     </span>
                     <!-- <span data-before="券扣减：" class="dialog_span"
                       v-if="orderDetail.giftCouponShare &&

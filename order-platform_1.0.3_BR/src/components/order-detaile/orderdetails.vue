@@ -368,6 +368,7 @@
                                                         <div v-if="scope.row.skuType == 'ZJSB'"><el-button size="small" v-if="LOGINDATA.orderplatform_orderDetaile_printInsurance && scope.row.canPrintWarrantyAgreement==1" type="text" @click="jumptoSpburl">打印协议</el-button></div>
                                                         <div v-else><el-button size="small" v-if="LOGINDATA.orderplatform_orderDetaile_printInsurance && scope.row.canPrintWarrantyAgreement==1" type="text" @click="jumpto('/order/insuranceContract',{'shippingGroupId':shippingItem.shippingGroupId,'commerceItemId':scope.row.commerceItemId})">打印协议</el-button></div>
                                                         <div><el-button size="small" type="text" v-if="scope.row.canQueryInsuredInformation ==1" @click="showInsured(scope.row)">参保信息</el-button></div>
+                                                        <div><el-button size="small" type="text" v-if="scope.row.isCanUpdateInsuredInformation ==1" @click="copyInsuredmesg(scope.row.updateInsuredInformationURL)">补充信息</el-button></div>
                                                         <!-- <div><el-button size="small" type="text" @click="showInsured(scope.row)">参保信息</el-button></div> -->
                                                 </template>
                                             </el-table-column>
@@ -1866,6 +1867,21 @@ export default {
         },
         jumptoSpburl(){//碎屏保打印协议地址
             window.open('//gfs.ec.api/e8c2ae49c3a3af1e3c8a4333a0da39d0.pdf', "_blank");
+        },
+        //补充延保信息
+        copyInsuredmesg(data){
+            let url = data;
+            let oInput = document.createElement('input');
+            oInput.value = url;
+            document.body.appendChild(oInput);
+            oInput.select(); // 选择对象;
+            console.log(oInput.value)
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            this.$message({
+                message: '链接已复制，请发给顾客补充信息',
+                type: 'success'
+            });
+            oInput.remove()
         }
     },
     mounted() {

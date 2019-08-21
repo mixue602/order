@@ -9,7 +9,12 @@
         <el-collapse-item :title="orderIdname + orderId" name="1">
           <div class="order_details_cont">
             <div class="states">
-              <div class="states_l">{{ response.statusName }}</div>
+              <div class="states_l">{{ response.statusName }}
+                <span class="tips" v-if="response.statusName=='待解锁'">使用支票支付，待财务解锁支票，解锁后才可充值成功</span>
+              </div>
+              <div class="states_r">
+                <el-button type="primary"  @click="delateReasonlist" size="mini" v-if="response.unlockCancelFlag == 1">取消订单</el-button>
+              </div>
             </div>
             <div class="content_title">商品信息</div>
             <div
@@ -154,6 +159,13 @@
                     >
                       -¥{{ scope.row.changeAmount }}
                     </div>
+                    <div
+                      v-if="
+                        scope.row.changeType == 0
+                      "
+                    >
+                      ¥{{ scope.row.changeAmount }}
+                    </div>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -183,6 +195,9 @@
                     <div v-if="scope.row.sceneType == 7">
                       订金退还(成功)
                     </div>
+                    <div v-if="scope.row.sceneType == 8">
+                      订金退还
+                    </div>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -196,7 +211,7 @@
                 </el-table-column>
                 <el-table-column label="备注" align="center">
                   <template slot-scope="scope">
-                    <div v-if="scope.row.sceneType == 1">
+                    <div v-if="scope.row.sceneType == 1 && scope.row.changeType != 0">
                       订金编号：{{ scope.row.businessId }}
                     </div>
                     <div
@@ -233,6 +248,12 @@
                       >
                         {{ scope.row.refundId }}
                       </a>
+                    </div>
+                     <div v-if="scope.row.changeType == 0">
+                      支票待解锁
+                    </div>
+                    <div v-if="scope.row.sceneType == 8">
+                      支票未解锁，订单已取消
                     </div>
                   </template>
                 </el-table-column>
@@ -735,10 +756,14 @@ a {
 }
 .states .states_l {
   position: relative;
-  flex: 0 0 300px;
+  flex: 0 0 500px;
   line-height: 40px;
   text-align: left;
   font-weight: bold;
+}
+.states .states_r {
+  flex: 1;
+  text-align: right;
 }
 .ordercont_box {
   border: none;
@@ -785,5 +810,10 @@ thead.has-gutter th,
 }
 .el-table__expand-icon--expanded > .el-icon {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkVGRDcxNkUzMTU3RTExRTk5QkUxODkyMTExMkE2RUM4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkVGRDcxNkU0MTU3RTExRTk5QkUxODkyMTExMkE2RUM4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RUZENzE2RTExNTdFMTFFOTlCRTE4OTIxMTEyQTZFQzgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RUZENzE2RTIxNTdFMTFFOTlCRTE4OTIxMTEyQTZFQzgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4a0wOWAAABFFBMVEWTlZiveWb19+Lw9/qvfWbd9/pgfbRgebRgYmaOyPptZnP18t7Z8vr1yJT19/Vth7lgldDLlWb137SFsdXB5PWJw/VgZn3r6d7w5Mdga51yo96htdCFuudpYoHLmW/Z6fDwzZjrv4/nw5jn28Liuovww4/17cKXa2bL3/Xn9/rw5NlpZma4gmaTw+xgdKazh293ZmaJv/W92+yJv/Bph7ndsX3GsZTPsYtpldDU5PXLtaav3/rw26vP9/rw39D19+yJYn1ygqKTzfVpmdBkeZ2cgnhgZm9ggr3LlW97i5il2/X199XZ9/qXeWp3seJkYmZgYmp7Ym+zh3P1w5TZo3iTi4GOscu46fp3YoZtb3PBw8f19/of7bF8AAAAq0lEQVR42kyPhQ6DQAxAy5gwYMzd3d3d3V3u//9jd4MMXtKmfU3TFBAh0wHwtn8l4HDtF2uAe3ZmE0WEtabJbNhk80SE/Bsk0TtPEGyTVfQn7O5DvLCThYqyg/mAFNRNQOnR4CORQgYdEbG3hI+IXFm5cl3CbaoUAQ9YXk+5T4y6IKy0mv9VdYsGnGu82HNFPMO/cBfHI0gLzkbJyIvfouj8yDCncYXUXwEGAAiCRD0akPSeAAAAAElFTkSuQmCC");
+}
+.tips{
+  margin-left:20px;
+  color: #FF161A;
+  font-weight: normal;  
 }
 </style>
