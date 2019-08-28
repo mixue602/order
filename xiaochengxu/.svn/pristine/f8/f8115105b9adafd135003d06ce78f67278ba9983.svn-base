@@ -1,0 +1,219 @@
+page {
+  background-color: #f3f5f7;
+}
+
+.box {
+  width: 700rpx;
+  margin: 25rpx auto;
+  padding-bottom: 10rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  position: relative;
+}
+
+.title_img {
+  width: 225rpx;
+  height: 112rpx;
+  position: absolute;
+  left: 238rpx;
+  top: 16rpx;
+}
+
+.title_write {
+  width: 100%;
+  height: 144rpx;
+  text-align: center;
+  line-height: 144rpx;
+  font-family: PingFangTC-Regular;
+  font-size: 36rpx;
+  color: #f20c59;
+  position: relative;
+}
+
+.detail_one {
+  display: flex;
+  justify-content: space-between;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #999;
+  padding-left: 39rpx;
+  box-sizing: border-box;
+  margin-top: 27rpx;
+}
+
+.detail_one_right {
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 45rpx;
+  max-width: 360rpx;
+}
+
+.detail_two {
+  display: flex;
+  justify-content: space-between;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #999;
+  padding-left: 39rpx;
+  box-sizing: border-box;
+  margin-top: 27rpx;
+}
+
+.detail_two_right {
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 45rpx;
+  max-width: 335rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+.detail_three {
+  width: 616rpx;
+  padding: 31rpx 27rpx;
+  margin: 23rpx auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail_three_name {
+  max-width: 376rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.open_close {
+  width: 73rpx;
+  height: 53rpx;
+  margin: 26rpx auto;
+}
+
+.open_close image {
+  width: 100%;
+  height: 100%;
+}
+
+.bill_check, .bill_mail {
+  width: 700rpx;
+  height: 88rpx;
+  margin: 80rpx auto 0;
+  line-height: 88rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #333;
+  background: #fff;
+}
+
+.bill_mail {
+  margin: 25rpx auto ;
+}
+
+.bill_text {
+  width: 750rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/*邮箱弹出层  */
+
+.pop_list {
+  width: 750rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.pop_list_bg {
+  width: 750rpx;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.pop_box {
+  position: absolute;
+  top: 445rpx;
+  left: 110rpx;
+  width: 540rpx;
+  height: 352rpx;
+  z-index: 99;
+  background: #fff;
+  border-radius: 17rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mail_title {
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  color: #333;
+  margin-top: 40rpx;
+  margin-bottom: 24rpx;
+}
+
+.mail_in {
+  width: 470rpx;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+}
+
+.mail_err {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #f80;
+  margin: 15rpx 0;
+  opacity: 1;
+}
+
+.mail_err_show {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #f80;
+  margin: 15rpx 0;
+  opacity: 0;
+}
+
+.mail_btn {
+  height: 89rpx;
+  width: 100%;
+  font-family: PingFang-SC-Medium;
+  font-size: 32rpx;
+  color: #666;
+  display: flex;
+  flex: 1;
+}
+
+.btn_calcel {
+  height: 89rpx;
+  width: 270rpx;
+  line-height: 89rpx;
+  text-align: center;
+  border-top: 1rpx solid #ddd;
+}
+
+.btn_confirm {
+  height: 89rpx;
+  line-height: 89rpx;
+  text-align: center;
+  width: 269rpx;
+  border-left: 1rpx solid #ddd;
+  border-top: 1rpx solid #ddd;
+}

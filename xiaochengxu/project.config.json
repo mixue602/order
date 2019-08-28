@@ -1,0 +1,84 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.5",
+	"appid": "wx1d0aa01dbc6678a4",
+	"projectname": "%E5%9B%BD%E7%BE%8E%E5%95%86%E5%9F%8E%E4%B8%BB%E5%B9%B2",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "埋码详情",
+					"pathName": "pages/prod/prod",
+					"query": "productId=9200002361&skuId=1000089646&_latest_cmpid=11aa_22Bb_33CC",
+					"scene": 1012
+				},
+				{
+					"id": -1,
+					"name": "埋码活动详情",
+					"pathName": "pages/activePage/activePage",
+					"query": "productId=9200002361&skuId=1000089646&_latest_cmpid=11aa_22Bb_33CC",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "埋码活动详情",
+					"pathName": "packSearch/pages/listBlue/listBlue",
+					"query": "data=5b1416f76ce045a9bf84f66ceaa98c7f&_latest_cmpid=11aa_22Bb_33CC",
+					"scene": 1011
+				},
+				{
+					"id": 3,
+					"name": "sss",
+					"pathName": "pages/prod/prod",
+					"query": "productId=9140137202&skuId=1130668103&cmpid=duizhaozu",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "sss",
+					"pathName": "pages/prod/prod",
+					"query": "productId=9140137202&skuId=1130668103&cmpid=duizhaozu",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,141 @@
+<view class="box">
+  <image class="title_img" src="../../../images/oval.png" />
+
+  <view class="title_write">
+    增值税电子普通发票
+  </view>
+
+  <view class="detail_one">
+    销售方:
+    <view class="detail_one_right">
+      {{billInfo.siteName}}
+    </view>
+  </view>
+  <view class="detail_one">
+    发票代码:
+    <view class="detail_one_right">
+      {{invoiceCode}}
+    </view>
+  </view>
+  <view class="detail_one">
+    发票号码:
+    <view class="detail_one_right">
+      {{invoiceNumber}}
+    </view>
+  </view>
+  <view class="detail_one">
+    开票时间:
+    <view class="detail_one_right">
+      {{billInfo.operationDate}}
+    </view>
+  </view>
+  <view class="detail_one">
+    购买方:
+    <view class="detail_one_right">
+      {{billInfo.invoiceHeader}}
+    </view>
+  </view>
+  <view class="detail_one" wx:if="{{billInfo.userAddress!=null}}">
+    注册地址:
+    <view class="detail_one_right">
+      {{billInfo.userAddress}}
+    </view>
+  </view>
+  <view class="detail_one" wx:if="{{billInfo.userTax!=null}}">
+    纳税人识别号:
+    <view class="detail_one_right">
+      {{billInfo.userTax}}
+    </view>
+  </view>
+  <view class="detail_one" wx:if="{{billInfo.userPhoneNum!=null}}">
+    注册电话:
+    <view class="detail_one_right">
+      {{billInfo.userPhoneNum}}
+    </view>
+  </view>
+  <view class="detail_one" wx:if="{{billInfo.userBank!=null}}">
+    开户银行:
+    <view class="detail_one_right">
+      {{billInfo.userBank}}
+    </view>
+  </view>
+  <view class="detail_one" wx:if="{{billInfo.userBankAccount!=null}}">
+    银行账号:
+    <view class="detail_one_right">
+      {{billInfo.userBankAccount}}
+    </view>
+  </view>
+  <view class="detail_one">
+    税价合计:
+    <view class="detail_one_right">
+      {{billInfo.invoiceAmount}}
+    </view>
+  </view>
+
+  <view class="detail_two">
+    商品信息:
+    <view class="detail_two_right">
+      {{shopsName}}
+    </view>
+  </view>
+
+  <view class="detail_three" wx:for="{{shops}}" wx:key="index" wx:if="{{checkShop}}">
+    <view class="detail_three_name">
+      {{item.partDesc}}
+    </view>
+    <view class="detail_three_right">
+      <view class="right_price">
+        ￥{{item.partPrice}}
+      </view>
+      <view class="right_num">
+        ×{{item.qty}}
+      </view>
+    </view>
+  </view>
+
+  <view class="open_close" bindtap="openClose">
+    <image wx:if="{{checkShop}}" src="../../../images/shouqi_1.png" />
+    <image wx:else src="../../../images/zhankai_1.png" />
+  </view>
+
+</view>
+
+
+<!-- <view class="bill_check" bindtap='previewInvoiceEvent'>
+    发票预览
+</view> -->
+
+
+<view class="bill_mail" bindtap="sendMail">
+  发送到邮箱
+</view>
+<view class='bill_text'>发票原件可发送到邮箱或前往国美APP查看</view>
+
+
+
+<!--邮箱弹出层  -->
+<view class='pop_list' wx:if="{{startStatus}}" style='height:{{height}}' catchtouchmove="move">
+  <view class='pop_list_bg' style='height:{{height}}' bindtap='delPop'></view>
+  <view class='pop_box'>
+    <view class="mail_title">
+      发送到邮箱
+    </view>
+
+    <input class="mail_in" type="text" confirm-type="done" bindinput="mailDone" placeholder="请输入邮箱地址">
+
+    </input>
+
+    <view class="{{ eMailSure? 'mail_err_show' : 'mail_err'}}">
+      请输入正确的邮箱地址
+    </view>
+
+    <view class="mail_btn">
+      <view class="btn_calcel" bindtap="mailCancel">
+        取消
+      </view>
+      <view class="btn_confirm" bindtap="mailConfirm">
+        确定
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,69 @@
+<scroll-view class="containers" scroll-y bindscrolltolower="getPageEvent" style='height:{{height}}'>
+  <view class='nav'>
+    <view class='nav-item {{index==selectType ? "select":""}}' data-type="1" wx:for="{{tab}}" wx:key="{{item}}" wx:for-index="index" data-keyProms="{{item.keyProms}}" data-index="{{index}}" bindtap='selectTabEvnet'>
+      <view class='nav-time'>{{item.name}}</view>
+      <view class='nav-tit'>{{item.status}}</view>
+    </view>
+  </view>
+  <view class='cont'>
+    <view class='cont-tit' wx:if="{{tab[selectType].status=='抢购中'}}">
+      <view class='tit-left'>抢购进行时</view>
+      <view class='tit-right' wx:if="{{d>=3}}">
+        <view>距结束 三天以上</view>
+      </view>
+      <view class='tit-right' wx:if="{{d<3}}">
+        <view>距结束</view>
+        <view class='time-box'>
+          <view class='time'>{{h}}</view>
+          <view class='time-span'>:</view>
+          <view class='time'>{{m}}</view>
+          <view class='time-span'>:</view>
+          <view class='time'>{{s}}</view>
+        </view>
+      </view>
+
+    </view>
+    <view class='cont-tit' wx:elif="{{tab[selectType].status=='即将开始'}}">
+      <view class='tit-left'>开抢倒计时</view>
+      <view class='tit-right'>
+        <view>距开始</view>
+        <view class='time-box'>
+          <view class='time'>{{h}}</view>
+          <view class='time-span'>:</view>
+          <view class='time'>{{m}}</view>
+          <view class='time-span'>:</view>
+          <view class='time'>{{s}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='cont-tit' wx:else>
+      <view class='tit-left'>往期精品回顾</view>
+    </view>
+    <view class='list' wx:if="{{list.length>0}}">
+      <view class='item' wx:for="{{list}}" wx:key="{{item}}" data-skuId="{{item.goodsBean.skuID}}" data-productId="{{item.goodsBean.productID}}" bindtap='getProdEvent'>
+        <image class='item-img' src='{{protocol}}{{item.goodsBean.skuThumbImgUrl}}'></image>
+        <view class='item-cont'>
+          <view class='desc'>{{item.goodsBean.skuName}}</view>
+          <view class='price'>
+            <view class='normal-price'>{{item.goodsBean.priceBean.skuRushBuyPriceDesc}}</view>
+            <view class='del-price'>{{item.goodsBean.priceBean.skuOriginalPrice}}</view>
+          </view>
+          <view class='item-btn-box'>
+            <view class='percentage-box'>
+              <view class='percentage-text'>{{item.goodsBean.priceBean.remainNumDesc}}</view>
+              <view class='percentage-span'>
+                <view class='percentage' style='width:{{item.goodsBean.priceBean.remainNum/item.goodsBean.priceBean.totalNum*100}}%'></view>
+              </view>
+            </view>
+            <view class='item-init-btn' wx:if="{{item.goodsBean.priceBean.rushBuyState==0}}" catchtap="noStartEvnet">即将开始</view>
+            <view class='item-btn' wx:elif="{{item.goodsBean.priceBean.rushBuyState==1}}">马上抢</view>
+            <view class='item-init-btn' wx:elif="{{item.goodsBean.priceBean.rushBuyState==2}}" catchtap="noProdEvnet">已抢光</view>
+            <view class='item-init-btn' wx:else>结束了</view>
+          </view>
+        </view>
+      </view>
+      <view class='no-text' wx:if="{{moreStatus}}">没有更多了</view>
+    </view>
+  </view>
+
+</scroll-view>

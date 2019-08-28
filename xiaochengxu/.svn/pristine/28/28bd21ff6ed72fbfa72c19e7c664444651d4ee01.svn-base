@@ -1,0 +1,70 @@
+<scroll-view class='container' style='height:{{height}}' scroll-y="true" scroll-with-animation="true" enable-back-to-top="true" bindscrolltolower="loadMoreEvent">
+  <view class='tit'>
+    <view class='tit-item'>
+      <view class='tit-item-num'>{{num}}</view>
+      <view class='tit-item-text'>累计张数</view>
+    </view>
+    <view class='tit-span'></view>
+    <view class='tit-item'>
+      <view class='tit-item-num'>{{price}}</view>
+      <view class='tit-item-text'>累计金额(元）</view>
+    </view>
+  </view>
+  <view class='cont-tit'>
+    <view class='left-tit'>
+      <view class='my-tit'>
+        <view>我的发票</view>
+        <image bindtap='toInvoiceDesc' class='desc-ico' src='/images/invoice-desc-ico.png' mode='aspectFit'></image>
+      </view>
+      <view class='my-date-box' wx:if="{{dateDesc !=''}}">
+        <view class='my-date'>{{dateDesc}}</view>
+        <view class='all-btn' bindtap='searchAll'>查看全部</view>
+      </view>
+
+    </view>
+    <picker mode="date" value="{{date}}" start="1987-01-01" end="{{today}}" fields="month" bindchange="bindDateChange">
+      <image class="picker" src='/images/date-ico.png' mode='aspectFit'></image>
+    </picker>
+  </view>
+  <view class='cont' scroll-y="true">
+
+    <view class='list' wx:if="{{list.length>0}}">
+      <view class='item-box' wx:for="{{list}}" wx:key="{{index}}">
+        <navigator class='invoice-cont' url="../invoiceDetail/invoiceDetail?invoiceNumber={{item.invoiceNum}}&invoiceCode={{item.invoiceCode}}" hover-class='none'>
+          <view class='item'>
+            <view class='item-tit'>发票类型：</view>
+            <view class='item-cont'>电子发票</view>
+          </view>
+          <view class='item'>
+            <view class='item-tit'>发票抬头：</view>
+            <view class='item-cont'>{{item.invoiceHeader}}</view>
+          </view>
+          <view class='item'>
+            <view class='item-tit'>发票金额：</view>
+            <view class='item-cont red'>¥{{item.invoiceAmount}}</view>
+          </view>
+          <view class='item'>
+            <view class='item-tit'>开票时间：</view>
+            <view class='item-cont'>{{item.operationDate}}</view>
+          </view>
+          <view class='item m-20' wx:if="{{item.partList.length>0}}">
+            <view class='item-prod' wx:for="{{item.partList}}" wx:key="{{partItem}}" wx:for-item="partItem">
+              <view class='item-prod-desc'>{{partItem.partDesc}}</view>
+              <view class='item-prod-num'>×{{partItem.qty}}</view>
+            </view>
+          </view>
+        </navigator>
+        <view class='add-card' wx:if="{{item.inPackage=='N'}}" bindtap='addCardEvent' data-idx="{{index}}">+加卡包</view>
+        <view class='add-card card-grey' wx:if="{{item.inPackage=='I'}}" data-idx="{{index}}">+添加中</view>
+        <view class='add-card card-grey' wx:if="{{item.inPackage=='Y'}}" data-idx="{{index}}">+已添加</view>
+      </view>
+      <view class="con-end" wx:if='{{endFlag}}'>查看更多~</view>
+      <view class="con-end" wx:if='{{!endFlag}}'>没有更多啦~</view>
+    </view>
+    <view class='list-no' wx:if="{{list.length==0}}">
+      <image class='no-img' src='/images/invoice-list-no.png' mode='aspectFit'></image>
+      <view class='no-text'>该月没有发票</view>
+    </view>
+
+  </view>
+</scroll-view>

@@ -1,0 +1,25 @@
+<view>
+  <!-- 原商品 -->
+  <view class="similar-goods">
+    <div class="goods-img">
+    <image src="{{ oldGoodObj.iurl }}" ></image>
+    </div>
+    <view class="similarGoods-right">
+      <h1>{{ oldGoodObj.desc }}</h1>
+      <p>￥{{ oldGoodObj.price }}</p>
+    </view>
+  </view>
+  <!-- 相似商品分割线 -->
+  <view class="similar-line">
+    <h1>相似商品</h1>
+  </view>
+  <!-- 相似商品列表 -->
+  <view class="similar-list">
+    <view class="similar-item" wx:for="{{ similarList }}" wx:for-item="good" wx:key="*this">
+      <image src="{{ good.iurl }}"></image>
+      <p>{{ good.pn }} </p>
+      <span>￥{{ good.price }}</span>
+    </view>
+  </view>
+  
+</view>

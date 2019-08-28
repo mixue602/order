@@ -1,0 +1,160 @@
+<!--pages/joinInGome/joinInGome.wxml-->
+<view class="page_top_line">
+    <!-- 背景 -->
+    <view class="join_bgbox">
+        <image class="join_bg" src="/images/joingome_bg.png"></image>
+    </view>
+    <!-- tab切换 -->
+    <view class="join_tabbox">
+        <view class="swiper_tab" style="background-image: url('{{currentTab==0 ?'https://css.gomein.net.cn/gmpro/1.0.0/minapp/img/join_tableft.png':'http://css.gomein.net.cn/gmpro/1.0.0/minapp/img/join_tabright.png'}}')">
+            
+            <view class="swiper_tab_item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">
+                <text class="hidden">国美零售简介</text>
+            </view>
+            <view class="swiper_tab_item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">
+                <text class="hidden">国美加盟店简介</text>
+            </view>
+        </view>
+        <view class="swiper_tab_cont">
+            <view class = "{{currentTab == 0 ? 'show':'hidden'}}" >
+                <text>国美零售（00493，HK）是中国领先的连锁零售企业，目前在国内600多个城市经营2100多家门店，并形成实体店、国美APP、社交电商—国美美店“三端合一”、线上线下融合的多元化零售渠道，年销售规模超千亿。现阶段，国美实施从家电零售商向”家•生活”整体方案提供商、服务解决商、供应链输出商转型的战略，以家电、家装、家居、家服务为触点，实现与用户全方位深度交互。同时，依托供应链优势和IoT物联网技术，国美全面布局智能家电、智能家居等领域，为用户提供更深度的“智慧家庭整体解决方案”。</text>
+            </view>
+            <view class = "{{currentTab == 1 ? 'show':'hidden'}}" >
+                <text>围绕用户需求， 为在四五线市场给消费者提供更好、更标准化的商品、体验和服务。推出国美加盟店开发计划，国美加盟店按照直营店模式， 对加盟商开放供应链， 共享全品类库存， 统一装修风格，在品牌授权、物流配送、贴心服务和培训管理方面进行赋能， 实现共赢， 更好的为消费者提供服务。</text>
+            </view>
+        </view>
+    </view>
+    <!-- 六大赋能 -->
+    <view class="join_fnbox">
+        <image class="imgbg" src="/images/join_fntitle.png"></image>
+        <view class="join_cont">
+            <view class="item">
+                <image class="imgbg" src="/images/join1.png"></image>
+                <view>轻资运营</view>
+            </view>
+            <view class="item">
+                <image class="imgbg" src="/images/join2.png"></image>
+                <view>共享供应链</view>
+            </view>
+            <view class="item">
+                <image class="imgbg" src="/images/join3.png"></image>
+                <view>管理经验丰富</view>
+            </view>
+            <view class="item">
+                <image class="imgbg" src="/images/join4.png"></image>
+                <view>支付系统优势</view>
+            </view>
+            <view class="item">
+                <image class="imgbg" src="/images/join5.png"></image>
+                <view>物流无忧</view>
+            </view>
+            <view class="item">
+                <image class="imgbg" src="/images/join6.png"></image>
+                <view>多渠道营销</view>
+            </view>
+        </view>        
+    </view>
+    <!-- 加入我们 -->
+    <view class="join_usbox">
+        <image class="imgbg" src="/images/join_ustitle.png"></image>
+        <view class="join_cont">
+            <!-- 姓名 -->
+            <view class="section">
+                <input class="inputtext" placeholder-style="{{nameErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" placeholder="{{nameErrorTip}}" bindblur="checkname" maxlength="15" value="{{name}}" />                
+            </view>
+            <!-- 手机 -->
+            <view class="section">
+                <input class="inputtext" style="{{phoneError ==1 ?'color:#F76260':'color:#00050A'}}" placeholder-style="{{phoneErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" bindblur="checkphone" placeholder="{{phoneErrorTip}}" type="number" maxlength="11" value="{{phoneNum}}" />
+            </view>
+            <!-- 邮箱 -->
+            <view class="section">
+                <input class="inputtext" style="{{emailError ==1 ?'color:#F76260':'color:#00050A'}}" placeholder-style="{{emailErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" bindblur="checkemail" placeholder="{{emailErrorTip}}" value="{{email}}" />
+            </view>
+            <!-- 店铺名 -->
+            <view class="section">
+                <input class="inputtext"  placeholder-style="{{shopnameErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" placeholder="{{shopnameErrorTip}}" maxlength="25" bindblur="checkShopname" value="{{shopname}}" />
+            </view>
+            <!-- 面积 -->
+            <view class="section">
+                <input class="inputtext" placeholder-style="{{shopareaErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" placeholder="{{shopareaErrorTip}}" type="digit" bindblur="checkShoparea" value="{{shoparea}}" />
+            </view>
+            <!-- 销售额 -->
+            <view class="section">
+                <input class="inputtext" type="digit" placeholder-style="{{shopSalesErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" placeholder="{{shopSalesErrorTip}}" bindblur="checkShopSales" value="{{shopSales}}" />
+            </view>
+            <!-- 省 -->
+            <view class="section selectedbox">
+                <picker class="nameInput" bindchange="bindPickerProvince" value="{{provinceIndex}}" range="{{province}}">
+                    <view class="picker" style="{{shopProvinceErrorTip ==1 ?'color:#ee0754':'color:#919599'}}">
+                    <block wx:if="{{provinceJson[provinceIndex].label=='*店铺所属省份地区'}}">
+                        <view>{{provinceJson[provinceIndex].label}}</view>
+                    </block>
+                    <block wx:else>
+                        <view style="color:#00050A">{{provinceJson[provinceIndex].label}}</view>
+                    </block>
+                    <view class="triangleicon"></view>
+                    </view>
+                </picker>
+            </view>
+
+            <view class="section selectedbox">
+                <block wx:if="{{cityFlag}}">
+                    <picker class="nameInput" bindchange="bindPickerCity" value="{{cityIndex}}" range="{{city}}">
+                        <view class="picker" style="{{shopCityErrorTip ==1 ?'color:#ee0754':'color:#919599'}}">
+                            <block wx:if="{{cityJson[cityIndex].label=='*店铺所属市辖地区'}}">
+                                <view>{{cityJson[cityIndex].label}}</view>
+                            </block>
+                            <block wx:else>
+                                <view style="color:#00050A">{{cityJson[cityIndex].label}}</view>
+                            </block>
+                        </view>
+                        <view class="triangleicon"></view>
+                    </picker>
+                </block>
+            </view>
+
+            <view class="section selectedbox">
+                <block wx:if="{{countryFlag}}">
+                    <picker class="nameInput" bindchange="bindPickerCountry" value="{{countryIndex}}" range="{{country}}">
+                        <view class="picker" style="{{shopCountryErrorTip ==1 ?'color:#ee0754':'color:#919599'}}">
+                            <block wx:if="{{countryJson[countryIndex].label=='*店铺所在地区'}}">
+                                <view>{{countryJson[countryIndex].label}}</view>
+                            </block>
+                            <block wx:else>
+                                <view style="color:#00050A">{{countryJson[countryIndex].label}}</view>
+                            </block>
+                        </view>
+                        <view class="triangleicon"></view>
+                    </picker>
+                </block>
+            </view>
+
+            <view class="section selectedbox">
+                <block wx:if="{{streetFlag}}">
+                    <picker class="nameInput" bindchange="bindPickerStreet" value="{{streetIndex}}" range="{{street}}">
+                        <view class="picker" style="{{shopStreetErrorTip ==1 ?'color:#ee0754':'color:#919599'}}">
+                            <block wx:if="{{streetJson[streetIndex].label=='*店铺所在街道'}}">
+                                <view>{{streetJson[streetIndex].label}}</view>
+                            </block>
+                            <block wx:else>
+                                <view style="color:#00050A">{{streetJson[streetIndex].label}}</view>
+                            </block>
+                        </view>
+                        <view class="triangleicon"></view>
+                    </picker>
+                </block>
+            </view>
+            <!-- 详细地址 -->
+            <view class="section">
+                <textarea class="inputarea"  placeholder-style="{{shopaddressErrorTipShow ? 'color:#F76260' : 'color:#919599'}}" bindblur="checkShopaddress" value="{{shopaddress}}" maxlength="50" placeholder="{{shopaddressErrorTip}}" />
+            </view>
+            <view class="section">
+                <textarea class="inputarea" bindblur="checkIntroduce" maxlength="1000" placeholder="{{shopIntroduceTip}}" value="{{shopintroduce}}" />
+            </view>
+        </view>
+    </view>
+     <!-- 提交 -->
+    <view class="join_btnsubmit" bindtap="confirmCheck">
+        <image class="btnimg" src="/images/join_submit.png"></image>
+    </view>
+</view>

@@ -1,0 +1,244 @@
+page {
+	height: 100%;
+	background-color: #fff;
+	color: #333;
+	font-family: "PingFangSC-Regular";
+}
+button::after{
+	border: none;
+}
+
+.authory-phone-wrapper {
+  margin-top: 80rpx;
+  padding: 0 80rpx;
+}
+
+.avatar {
+	display: block;
+	width: 150rpx;
+	height: 150rpx;
+	
+	border-radius: 50%;
+
+	margin: 0 auto 20rpx;
+
+}
+
+.nickname  {
+	text-align: center;
+	font-size: 30rpx;
+	line-height: 50rpx;
+	font-family: "PingFangSC-Medium";
+}
+
+.use-phone-bind {
+  width: 300rpx;
+  padding-right: 30rpx;
+	line-height: 60rpx;
+  text-align: center;
+  margin: 30rpx auto 0;
+  font-size: 28rpx;
+}
+.use-phone-bind .icon {
+  width: 30rpx;
+	height: 34rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+
+.login-wrapper .authory-phone-button {
+  margin-top: 30rpx;
+}
+.authory-phone-wrapper .authory-phone-button {
+  margin-top: 130rpx;
+}
+
+.placeholder-s {
+	color: #ccc;
+	font-family: "STHeitiSC-Light";
+	font-size: 29rpx;
+	color: #bfbfbf;
+}
+
+.login-wrapper {
+	padding: 0 80rpx;
+}
+
+.login-wrapper .logo {
+	display: block;
+	width: 194rpx;
+	height: 91rpx;
+
+	margin: 67rpx auto 41rpx;
+}
+
+.login-wrapper .verify-box {
+	margin-bottom: 34rpx;
+}
+
+.login-wrapper .verify-list {
+	display:-webkit-box;
+	display:-webkit-flex;
+	display:flex; 
+	box-sizing:border-box;
+}
+
+.login-wrapper .input-box {
+	position: relative;
+	-webkit-box-flex:1;
+	-webkit-flex:auto;
+	flex:auto;
+	box-sizing: border-box;
+	border-bottom: 1rpx solid #ddd;
+
+	padding: 10rpx 30rpx 22rpx 62rpx;
+}
+.login-wrapper .phone .input-box {
+	border-color: #ff5c5c;
+}
+.login-wrapper .input-box .icon {
+	position: absolute;
+	left: 12rpx;
+	top: 10rpx;
+	width: 30rpx;
+	height: 34rpx;
+}	
+.login-wrapper .input-box input {
+	display: block;
+	height: 34rpx;
+	font-size: 30rpx;
+	line-height: 34rpx;
+	vertical-align: top;
+	min-height: 34rpx;
+}
+.login-wrapper .input-box .clear {
+	position: absolute;
+	right: 0;
+	top: 13rpx;
+	width: 28rpx;
+	height: 28rpx;
+	display: none;
+}
+.login-wrapper .input-box .show {
+	display: block;
+}
+.login-wrapper .code {
+	width: 200rpx;
+	-webkit-flex: 0 0 200rpx;
+	flex: 0 0 200rpx;
+	height: 64rpx;
+	line-height: 60rpx;
+	margin-left: 20rpx;
+	box-sizing: border-box;
+
+	border: 2rpx solid #f66a6b;
+	border-radius: 100rpx;
+	font-size: 28rpx;
+	color: #f66a6b;
+	background-color: #fff;
+}
+.login-wrapper .code[disabled]:not([type]), .login-wrapper .countdown {
+	color: #bfbfbf;
+	background-color: #fff;
+	border-color: #d8d8d8;
+}
+
+.login-wrapper .error {
+	font-size: 24rpx;
+	color: #ff5c5c;
+	line-height: 40rpx;
+	padding: 20rpx 12rpx 0;
+}
+
+.confirm {
+	width: 100%;
+	height: 88rpx;
+	margin-top: 58rpx;
+
+	line-height: 88rpx;
+	font-size: 32rpx;
+	color: #fff;
+	text-align: center;
+
+	background: #f66a6b;
+	border-radius: 55rpx;
+}
+
+.confirm[disabled]:not([type]) {
+	color: #fff;
+	background-color: #ff9f9f;
+}
+
+
+/* 未选中的 背景样式 */
+checkbox .wx-checkbox-input{
+   border-radius: 50%;/* 圆角 */
+   width: 36rpx; /* 背景的宽 */
+   height: 36rpx; /* 背景的高 */
+}
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+  border-color: #FF5A5A;
+  background: #FF5A5A;
+}
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   border-radius: 50%;/* 圆角 */
+   width: 36rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+   height: 36rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+   line-height: 36rpx;
+   text-align: center;
+   font-size:30rpx; /* 对勾大小 30rpx */
+   color:#fff; /* 对勾颜色 白色 */
+   background: transparent;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+
+
+.authory-phone-button {
+	height: 74rpx;
+	line-height: 74rpx;
+	font-size: 30rpx;
+	color: #fff;
+  width: 100%;
+	text-align: center;
+}
+.authory-phone-button image {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+
+.agreement-box {
+	margin-top: 26rpx;
+	font-size: 26rpx;
+	color: #999;
+	line-height: 42rpx;
+	padding: 0 17rpx;
+  padding-left: 58rpx;
+  position: relative;
+}
+.agreement-box checkbox {
+  position: absolute;
+  left: 0;
+  top: 2rpx;
+  
+}
+.agreement-box navigator {
+	display: inline-block;
+	color: #78bee9;
+}
+
+
+.mask {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10000;
+	width: 100%;
+	background: rgba(0, 0, 0, 0);
+}
