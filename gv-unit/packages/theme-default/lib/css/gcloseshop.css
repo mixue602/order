@@ -1,0 +1,138 @@
+
+.gcloseshop{
+	position: relative;
+}
+.gcs-input{
+	cursor: pointer;
+	line-height: 40px;
+	position: relative;
+}
+.gcs-input-txt{
+	cursor: pointer;
+	-webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 28px;
+    line-height: 28px;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
+.gcs-input-txt::-webkit-input-placeholder {
+	color: #ccc;
+}
+.gcs-arrow{
+	position: absolute;
+	right: 10px;
+	z-index: 22;
+	top: 14px;
+	 border-top: 2px solid;
+    border-right: 2px solid;
+    width: 6px;
+    height: 6px;
+    border-color: #ccc;
+    transform: rotate(135deg);
+}
+
+.gcs-arrow1{
+	animation: arrowup .5s;
+	transform: rotate(135deg);
+	
+}
+.gcs-arrow2{
+	top: 18px;
+	animation: arrowbottom .5s;
+	transform: rotate(-45deg);
+	
+
+}
+
+.gcs-body{
+	 display: inline-block;
+	 position: absolute;
+	 top: 40px;
+	 left: 0;
+	 margin: 0;
+	 padding: 0;
+	 overflow-y: auto;
+	 max-height: 274px;
+	 list-style: none;
+     padding: 6px 0;
+     margin: 0;
+     border: 1px solid #e4e7ed;
+     border-radius: 4px;
+     background-color: #fff;
+     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+     box-sizing: border-box;
+}
+  .gcs-body::-webkit-scrollbar {/*滚动条整体样式*/
+            width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+            height: 4px;
+        }
+
+
+   .gcs-body::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+            border-radius: 5px;
+           
+            background: #e5e5e5;
+        }
+    .gcs-body::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        border-radius: 0;
+        background: #fff;
+    }
+.gcs-body li{
+	font-size: 14px;
+	padding: 0 20px;
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #606266;
+	height: 34px;
+	line-height: 34px;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.gcs-body li:hover{
+	background-color: #f5f7fa;
+}
+
+.gcs-body li.select{
+	 color: #409eff;
+    font-weight: 700;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: max-height .1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  max-height: 0;
+}
+.gcs-body .nodata{
+	text-align: center;
+	color: #999;
+
+}
+.gcs-body .nodata:hover{
+	background:none;
+}
+
+
+@keyframes arrowup
+{
+	from {transform: rotate(-45deg);top: 18px;}
+	to {transform: rotate(135deg);top: 14px;}
+}
+
+@keyframes arrowbottom
+{
+	from {transform: rotate(135deg);top: 14px;}
+	to {transform: rotate(-45deg);top: 18px;}
+}

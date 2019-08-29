@@ -1,0 +1,159 @@
+.clearfix {
+    display: block;
+    _zoom: 1;
+    clear: both;
+}
+.cityinput{
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    line-height: 26px;
+    padding: 0 34px 0 10px;
+    border:1px solid #dcdfe6;
+    border-radius: 4px;
+    height: 26px;
+}
+
+.cityinput .cityinputarrow{
+    position: absolute;
+    right: 10px;
+    top:7px;
+}
+.cityShow{
+    border-bottom: none;
+}
+
+.cityShow .citybox:before{
+    position: absolute;
+    content: '';
+    left: 0px;
+    height: 3px;
+    background-color: #fff;
+    right: 0px;
+    bottom: -1px;
+    z-index: 10;
+}
+.citybox a{
+  text-decoration: none;
+  color: #5e5e5e;
+}
+.citybox a:hover{
+    text-decoration: none;
+}
+.gCity {
+    position: absolute;
+    top: 25px;
+    left: -1px;
+    width: 520px;
+    background: #fff;
+    border: 1px solid #dedede;
+    overflow: hidden;
+    z-index: 9;
+    padding: 10px;
+}
+
+.citycolor{
+    color: red;
+}
+
+
+.cityShow .gCity {
+    display: block;
+}
+ .gCity span a {
+    color: #5e5e5e;
+    background: #fff;
+    text-decoration: none;
+}
+.gCity a:hover {
+    background: 0 0;
+    text-decoration: none;
+}
+.gctSelect {
+    border-bottom: 1px solid #e6e6e6;
+    height: 27px;
+}
+.gctSelect a {
+    float: left;
+    border: 1px solid #fff;
+    border-bottom: 1px solid #e6e6e6;
+    color: #5e5e5e;
+    padding: 0 0 0 10px;
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    bottom: -1px;
+}
+.gctSelect a.cur {
+    border-color: #e6e6e6;
+    border-bottom: 1px solid #fff;
+    color: red;
+}
+.gctSelect a.disable {
+    background:#f5f7fa;
+    color:#ccc;
+    cursor: not-allowed;
+}
+.gctSelect a b, .gctSelect a i {
+    font-weight: 400;
+    float: left;
+}
+.gctSelect a i {
+   
+    display: inline-block;
+    overflow: hidden;
+    margin: 6px 5px 0;
+    -webkit-transition: all .2s ease-in .1s;
+    -moz-transition: all .2s ease-in .1s;
+    -ms-transition: all .2s ease-in .1s;
+    -o-transition: all .2s ease-in .1s;
+    transition: all .2s ease-in .1s;
+}
+
+.gctSelect a.cur i {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.gctSelect a.el-icon-close {
+    
+    float: right;
+    padding: 0;
+    border: 0;
+}
+
+.gctBox {
+    width: 100%;
+    margin: 8px 0 0;
+    line-height: 50px;
+    text-align: center;
+    color: #ccc;
+}
+.gctBox span {
+    width: 95px;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 8px;
+    float: left;
+    overflow: hidden;
+    text-align: left;
+    cursor:pointer;
+}
+.gctBox span:hover{
+  color: red
+}
+.gctBox a {
+    line-height: 26px;
+    padding: 3px 5px;
+    margin:0 !important;
+    display: block;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

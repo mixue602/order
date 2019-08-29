@@ -1,0 +1,19 @@
+.globel-d-header{
+    width:100%;
+    line-height: 36px;
+    background:#409EFF;
+    height: 36px;
+   
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+.globel-d-header span.globeltit{
+    margin-left: 15px;
+}
+.globel-d-header span.closebtn{
+    float: right;
+    margin-right:15px; 
+    cursor: pointer;
+    font-size: 12px;
+}

@@ -1,0 +1,122 @@
+{
+    "开发指南": [{
+            "path": "/",
+            "redirect": "/guide"
+        },
+        {
+            "name": "guide",
+            "path": "/guide",
+            "desc": "介绍"
+        },
+        {
+            "name": "ginstall",
+            "path": "/ginstall",
+            "desc": "安装"
+        },
+        {
+            "name": "gstart",
+            "path": "/gstart",
+            "desc": "快速开始"
+        },
+        {
+            "name": "glogs",
+            "path": "/glogs",
+            "desc": "更新日志"
+        },
+        {
+            "name": "optimization",
+            "path": "/optimization",
+            "desc": "来购优化"
+        }
+    ],
+    "组件": [{
+            "desc": "基础组件",
+            "path": "/",
+            "items": [{
+                    "desc": "Glayout 布局",
+                    "path": "/glayout",
+                    "name": "glayout"
+                },
+                {
+                    "desc": "Gicon 图标",
+                    "path": "/gicon",
+                    "name": "gicon"
+                },
+                {
+                    "desc": "Gbutton 按钮",
+                    "path": "/gbutton",
+                    "name": "gbutton"
+                },
+                {
+                    "desc": "Gtag 标签",
+                    "path": "/gtag",
+                    "name": "gtag"
+                }
+            ]
+        },
+        {
+            "desc": "视图组件",
+            "path": "/",
+            "items": [{
+                "desc": "Gmessage 信息",
+                "path": "/gmessage",
+                "name": "gmessage"
+            }]
+        },
+        {
+            "desc": "业务组件",
+            "path": "/",
+            "items": [{
+                    "desc": "Gheader 信息",
+                    "path": "/gheader",
+                    "name": "gheader"
+                },
+                {
+                    "desc": "Gcity 城市组件",
+                    "path": "/gcity",
+                    "name": "gcity"
+                },
+                {
+                    "desc": "Gdelivery 运能和安能组件",
+                    "path": "/gdelivery",
+                    "name": "gdelivery"
+                },
+                {
+                    "desc": "Gcloseshop 闭店组件",
+                    "path": "/gcloseshop",
+                    "name": "gcloseshop"
+                },
+                {
+                    "desc": "Gcategory 品类组件",
+                    "path": "/gcategory",
+                    "name": "gcategory"
+                },
+                {
+                    "desc": "Gbrandcode 品牌编码",
+                    "path": "/gbrandcode",
+                    "name": "gbrandcode"
+                },
+                {
+                    "desc": "Gsuppliercode 供应商编码",
+                    "path": "/gsuppliercode",
+                    "name": "gsuppliercode"
+                },
+                {
+                    "desc": "Gbranch 销售部门",
+                    "path": "/gbranch",
+                    "name": "gbranch"
+                },
+                {
+                    "desc": "Gcardnumber 会员卡号或手机号",
+                    "path": "/gcardnumber",
+                    "name": "gcardnumber"
+                },
+                {
+                    "desc": "Gsellerno 导购员编号",
+                    "path": "/gsellerno",
+                    "name": "gsellerno"
+                }
+            ]
+        }
+    ]
+}

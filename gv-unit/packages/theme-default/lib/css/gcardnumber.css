@@ -1,0 +1,6 @@
+.bg .el-input__inner{
+    background: #f4f4f5;
+}
+.el-form-item.iserror .el-input__inner,.el-form-item.iserror .el-input__inner:focus{
+    border-color:#f56c6c;
+}

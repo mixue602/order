@@ -1,0 +1,11 @@
+.gbrandcode-dialog .el-dialog {
+    width: 500px;
+}
+
+.gbrandcode-dialog .el-pagination {
+    text-align: right;
+}
+
+.el-input.iserror .el-input__inner {
+    border-color: #f56c6c;
+}

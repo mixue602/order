@@ -1,0 +1,49 @@
+.departmentLists {
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    position: relative;
+}
+
+.departmentLists span {
+    font-family: "Microsoft YaHei";
+    color: #606266;
+}
+
+.departmentLists b {
+    font-weight: normal;
+    position: absolute;
+    background: #fff;
+    font-family: "Microsoft YaHei";
+    color: #606266;
+}
+
+.departmentLists span.first {
+    margin-left: 33px;
+}
+
+.gcategory-dialog .el-dialog {
+    width: 500px;
+}
+
+.gcategory-dialog .el-dialog__tree {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.gcategory-dialog .el-dialog__tree .el-checkbox {
+    width: auto;
+}
+
+.gcategory-dialog .el-dialog__body {
+    position: relative;
+}
+
+.gcategory-dialog .el-radio-group {
+    position: absolute;
+    top: -33px;
+    left: 120px;
+}
