@@ -1,0 +1,23 @@
+<ul class="main_inner">
+    {{if list}}
+    {{each list as li_item li_index}}
+    <li>
+        {{if li_item.goodsImgs[0] != ""}}
+        <a href="{{li_item.detailHref}}" data-code="{{extra.i+'-'}}{{li_index + 1}}" target="_blank" title="{{li_item.name}}">
+            {{if (li_item.manualImg)}}
+            <img class="lazyloading" src="{{li_item.manualImg}}" alt="{{li_item.name}}" width="130" height="130">
+            {{else if (li_item.goodsImgs && li_item.goodsImgs.length>0)}}
+            <img class="lazyloading" src="{{li_item.goodsImgs[0].src}}_130.jpg" alt="{{li_item.name}}" width="130" height="130" >
+            {{/if}}
+            <p class="p_name">{{li_item.name}}</p>
+            {{if (li_item.salesPromotionTitle)}}
+            <p class="p_price">{{li_item.salesPromotionTitle}}</p>
+            {{else}}
+            <p class="p_price" productId="{{li_item.productId}}"  sku="{{li_item.sku}}" priceFlag="true"></p>
+            {{/if}}
+        </a>
+        {{/if}}
+    </li>
+    {{/each}}
+    {{/if}}
+</ul>

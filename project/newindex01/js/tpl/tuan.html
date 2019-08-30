@@ -1,0 +1,34 @@
+﻿{{if goodsList}}
+<div class="list">
+    <div class="lay first">
+        {{each goodsList as list list_index}} {{if list_index
+        <=3}} <div class="list_li {{list_index}}">
+            <a href="{{extra.domain}}/q?itemId={{list.itemId}}" target="_blank" title="{{list.skuName}}" data-code="indextuan{{list_index+1}}">
+                <img class="lazyloading" src="{{list.skuThumbImgUrl" alt="{{list.skuName}}" title="{{list.skuName}}" width="120" height="120" />
+                <div class="p_price">
+                    <span></span><i>{{list.skuRushBuyPriceDesc}}</i> {{if list.skuPriceDesc != null}}
+                    <i class="del">{{list.skuPriceDesc}}</i> {{/if}}
+                </div>
+                <p class="p_name">{{list.skuName}}</p>
+            </a>
+    </div>
+    {{/if}} {{/each}}
+</div>
+{{if goodsList.length>4}}
+<div class="lay two">
+    {{each goodsList as list list_index}} {{if list_index > 3}}
+    <div class="list_li {{list_index}}">
+        <a href="{{extra.domain}}/q?itemId={{list.itemId}}" target="_blank" title="{{list.skuName}}" data-code="indextuan{{list_index+1}}">
+            <img class="lazyloading" src="{{list.skuThumbImgUrl" alt="{{list.skuName}}" title="{{list.skuName}}" width="120" height="120" />
+            <div class="p_price">
+                <span></span><i>{{list.skuRushBuyPriceDesc}}</i> {{if list.skuPriceDesc != null}}
+                <i class="del">{{list.skuPriceDesc}}</i> {{/if}}
+            </div>
+            <p class="p_name">{{list.skuName}}</p>
+        </a>
+    </div>
+    {{/if}} {{/each}}
+</div>
+{{/if}}
+</div>
+{{/if}}

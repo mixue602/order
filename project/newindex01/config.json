@@ -1,0 +1,11 @@
+{
+  "packageDir": "build",
+  "projectPath": "gmpro/2.0.0/channel/newindex/8.5.3",
+  "projectFolder": "css|js",
+  "appPath": "WEB-INF/template/newindex",
+  "appFolder": "html",
+  "appAppend": "",
+  "output": {
+    "cssImagesUrlReplace": true
+  }
+}
